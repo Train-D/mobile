@@ -5,8 +5,8 @@ import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
 import 'package:traind_app/features/app/presentation/components/onboarding.dart';
 
-class Onboarding2Screen extends StatelessWidget {
-  const Onboarding2Screen({super.key});
+class OnboardingTwoScreen extends StatelessWidget {
+  const OnboardingTwoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class Onboarding2Screen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SharedComponents.defaultButton(function: (){}, text: 'Get started', size: 18.sp, width: 35.w, height: 6.h, radius: 8.sp,withIcon: false),
+                  SharedComponents.defaultButton(function: (){}, text: 'Get started', size: 18.sp, width: 40.w, height: 6.h, radius: 8.sp,withIcon: false),
                 ],
               )
             ],

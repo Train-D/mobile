@@ -42,7 +42,7 @@ class Onboarding1Screen extends StatelessWidget {
                   SharedComponents.defaultButton(
                       function: () {
                         SharedComponents.navigateToReplace(
-                            const Onboarding2Screen(), context);
+                            const OnboardingTwoScreen(), context);
                       },
                       text: 'Skip',
                       size: 18.sp,
