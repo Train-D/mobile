@@ -30,23 +30,29 @@ class Onboarding1Screen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              onboarding(title: AppString.onboardingOneTitle, body: AppString.onboardingOneSubtitle, context: context, image: AppConstants.onboardingVectorOne),
-              
+              onboarding(
+                title: AppString.onboardingOneTitle,
+                body: AppString.onboardingOneSubtitle,
+                context: context,
+                image: AppConstants.onboardingVectorOne,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   SharedComponents.defaultButton(
                       function: () {
                         SharedComponents.navigateToReplace(
-                            Onboarding2Screen(), context);
+                            const Onboarding2Screen(), context);
                       },
                       text: 'Skip',
                       size: 18.sp,
                       icon: Icons.arrow_forward_ios,
-                      width: 28.w,
+                      width: 25.w,
                       height: 6.h,
                       radius: 8.sp,
-                      withIcon: true),
+                      withIcon: true,
+                      iconSize: 15,
+                      ),
                 ],
               )
             ],

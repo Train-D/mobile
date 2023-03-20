@@ -9,7 +9,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: SharedComponents.defaultButton(function: (){}, text: 'test', width: 50.w, bgColor: Colors.teal, icon: Icons.abc),
+        child: SharedComponents.defaultButton(
+          function: () {},
+          text: 'test',
+          width: 23.w,
+          bgColor: Colors.teal,
+          icon: Icons.abc,
+        ),
       ),
     );
   }

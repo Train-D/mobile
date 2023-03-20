@@ -2,19 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 
-
-
 class SharedComponents {
   static Widget defaultButton({
     double width = double.infinity,
     double height = 40,
     double size = 20,
     Color bgColor = lightDefualtColor,
+    bool withIcon = false,
     Color iconColor = lightDefualtIconColor,
+    IconData icon = Icons.arrow_back,
+    double iconSize = 10, 
     double radius = 0,
     bool upper = false,
-    bool withIcon = false,
-    IconData icon = Icons.arrow_back,
     required Function function,
     required String text,
   }) =>
@@ -37,14 +36,13 @@ class SharedComponents {
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: size,
-                  fontFamily: 'Inria Serif'
+                  fontFamily: 'Inria Serif',
+                  wordSpacing: 0,
                 ),
                 
               ),
               if(withIcon)
-               SizedBox(width: 5.w,),
-              if(withIcon)
-                Icon(icon, color: iconColor,size: 20,),
+                Icon(icon, color: iconColor,size: iconSize,),
             ],
           ),
         ),
