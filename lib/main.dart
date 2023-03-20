@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/features/app/presentation/screens/home_screen.dart';
 
 void main() {
@@ -10,12 +11,16 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Train D Edit Again',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const HomeScreen(),
+    return ResponsiveSizer(
+      builder: (BuildContext, Orientation, ScreenType) {
+        return MaterialApp(
+          title: 'Train D Edit Again',
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+          home: const HomeScreen(),
+        );
+      },
     );
   }
 }
