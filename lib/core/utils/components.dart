@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 
 
 
@@ -7,9 +8,12 @@ class SharedComponents {
   static Widget defaultButton({
     double width = double.infinity,
     double height = 40,
-    Color bgColor = Colors.blue,
+    double size = 20,
+    Color bgColor = lightDefualtColor,
+    Color iconColor = lightDefualtIconColor,
     double radius = 0,
     bool upper = false,
+    bool withIcon = false,
     IconData icon = Icons.arrow_back,
     required Function function,
     required String text,
@@ -30,13 +34,17 @@ class SharedComponents {
             children: [
               Text(
                 upper ? text.toUpperCase() : text,
-                style: const TextStyle(
+                style: TextStyle(
                   color: Colors.white,
+                  fontSize: size,
+                  fontFamily: 'Inria Serif'
                 ),
                 
               ),
-              SizedBox(width: 5.w,),
-              Icon(icon)
+              if(withIcon)
+               SizedBox(width: 5.w,),
+              if(withIcon)
+                Icon(icon, color: iconColor,size: 20,),
             ],
           ),
         ),
