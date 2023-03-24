@@ -34,6 +34,7 @@ class SharedComponents {
               Text(
                 upper ? text.toUpperCase() : text,
                 style: Theme.of(context).textTheme.displayMedium,
+
               ),
               if (withIcon)
                 Icon(
@@ -45,6 +46,7 @@ class SharedComponents {
           ),
         ),
       );
+
 
   static Widget defaultTextButton({
     required Function function,
@@ -80,6 +82,7 @@ class SharedComponents {
     Navigator.of(context)
         .pushReplacement(MaterialPageRoute(builder: ((context) => page)));
   }
+
 
   static Widget defaultTextField({
     required TextEditingController controller,
@@ -152,4 +155,5 @@ class SharedComponents {
         )),
         child: child,
       );
+
 }

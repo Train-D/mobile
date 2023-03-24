@@ -17,6 +17,7 @@ class AppConstants {
     return MediaQuery.of(context).size.width;
   }
 
+
   static String imagesUrl = 'assets/images/imgs/';
   static String vectorsUrl = '';
   static String fontsUrl = '';

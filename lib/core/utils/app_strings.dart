@@ -6,6 +6,8 @@ class AppString {
   static const String onboardingTwoSubtitle =
       'You can book your tickets online, choose your seats easily and choose the type of your train';
   static const String appName = 'TrainD';
+
   static const String loginTitle = 'LOGIN';
   static const String signUpTitle = 'SIGN UP';
+
 }
