@@ -32,7 +32,7 @@ class OnboardingTwoScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SharedComponents.defaultButton(function: (){}, text: 'Get started', size: 18.sp, width: 40.w, height: 6.h, radius: 8.sp,withIcon: false),
+                  SharedComponents.defaultButton(function: (){}, text: 'Get started', context: context, width: 40.w, height: 6.h, radius: 8.sp,withIcon: false),
                 ],
               )
             ],

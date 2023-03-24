@@ -45,7 +45,8 @@ class Onboarding1Screen extends StatelessWidget {
                             const OnboardingTwoScreen(), context);
                       },
                       text: 'Skip',
-                      size: 18.sp,
+                      //size: 18.sp,
+                      context: context,
                       icon: Icons.arrow_forward_ios,
                       width: 25.w,
                       height: 6.h,

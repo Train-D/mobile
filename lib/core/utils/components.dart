@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 
 class SharedComponents {
@@ -14,6 +13,7 @@ class SharedComponents {
     double iconSize = 10, 
     double radius = 0,
     bool upper = false,
+    required BuildContext context,
     required Function function,
     required String text,
   }) =>
@@ -33,12 +33,7 @@ class SharedComponents {
             children: [
               Text(
                 upper ? text.toUpperCase() : text,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: size,
-                  fontFamily: 'Inria Serif',
-                  wordSpacing: 0,
-                ),
+                style: Theme.of(context).textTheme.displayMedium,
                 
               ),
               if(withIcon)
