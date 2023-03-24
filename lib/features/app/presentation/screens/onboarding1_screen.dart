@@ -52,7 +52,7 @@ class Onboarding1Screen extends StatelessWidget {
                       height: 6.h,
                       radius: 8.sp,
                       withIcon: true,
-                      iconSize: 15,
+                      iconSize: 17.sp,
                       ),
                 ],
               )
