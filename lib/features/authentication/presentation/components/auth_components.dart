@@ -7,7 +7,7 @@ import '../../../../core/utils/app_constants.dart';
 class AuthComponents {
   static Widget rectangleBg() => Image(
         image: AssetImage(
-          'assets/images/imgs/Rectangle 1.png',
+          '${AppConstants.imagesUrl}Rectangle 1.png',
         ),
         fit: BoxFit.fill,
         width: double.infinity,
@@ -36,7 +36,7 @@ class AuthComponents {
             )),
           ),
           child: Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding:  EdgeInsets.all(5.sp),
             child: Image(
               fit: BoxFit.contain,
               image: AssetImage('${AppConstants.imagesUrl}$logoImage'),

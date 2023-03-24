@@ -11,17 +11,20 @@ Widget onboarding(
         Image(
           image: AssetImage(image),
         ),
-        Text(title, style: Theme.of(context).textTheme.displayLarge),
-        const SizedBox(
-          height: 8,
+        Text(
+          title,
+          style: Theme.of(context).textTheme.displayLarge,
+        ),
+        SizedBox(
+          height: 2.h,
         ),
         Text(
           body,
           style: Theme.of(context).textTheme.displayMedium,
           textAlign: TextAlign.center,
         ),
-        const SizedBox(
-          height: 100,
+        SizedBox(
+          height: 15.h,
         ),
       ],
     );
