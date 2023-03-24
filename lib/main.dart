@@ -4,6 +4,7 @@ import 'package:traind_app/core/global/theme/theme_data/theme_data_light.dart';
 import 'package:traind_app/features/app/presentation/screens/home_screen.dart';
 import 'package:traind_app/features/app/presentation/screens/onboarding1_screen.dart';
 import 'package:traind_app/features/app/presentation/screens/splash_screen.dart';
+import 'package:traind_app/features/tickets/presentation/screens/from_to_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Train D Edit Again',
           theme: lightTheme(),
-          home: SplashScreen(),
+          home: FromToScreen(),
         );
       },
     );

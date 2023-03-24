@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
           width: 23.w,
           bgColor: Colors.teal,
           icon: Icons.abc,
+          context: context
         ),
       ),
     );
