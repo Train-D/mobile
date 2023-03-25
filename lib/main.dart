@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Train D Edit Again',
             theme: lightTheme(),
-            home: ProfileScreen(),
+            home: SplashScreen(),
           );
         },
       ),
