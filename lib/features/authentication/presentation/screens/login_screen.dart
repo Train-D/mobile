@@ -130,7 +130,6 @@ class LoginScreen extends StatelessWidget {
                                             .displayMedium!
                                             .copyWith(
                                               fontSize: 16.sp,
-                                              color : Color(0xffE4A286),
                                             ),
                                       ),
                                     ),
