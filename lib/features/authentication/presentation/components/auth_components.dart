@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/utils/app_images.dart';
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 
 class AuthComponents {
-  static Widget rectangleBg() => Image(
+  static Widget rectangleBg({required String image}) => Image(
         image: AssetImage(
-          '${AppConstants.imagesUrl}Rectangle 1.png',
+          '${AppConstants.imagesUrl}$image',
         ),
         fit: BoxFit.fill,
         width: double.infinity,
@@ -36,7 +37,7 @@ class AuthComponents {
             )),
           ),
           child: Padding(
-            padding:  EdgeInsets.all(5.sp),
+            padding: EdgeInsets.all(5.sp),
             child: Image(
               fit: BoxFit.contain,
               image: AssetImage('${AppConstants.imagesUrl}$logoImage'),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/utils/app_constants.dart';
+import 'package:traind_app/core/utils/components.dart';
 
 Widget onboarding(
         {required String title,

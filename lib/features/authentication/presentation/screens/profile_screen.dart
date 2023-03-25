@@ -3,6 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
 import 'package:traind_app/features/authentication/presentation/controller/profile_cubit/profile_cubit.dart';
 
@@ -73,7 +74,7 @@ class ProfileScreen extends StatelessWidget {
                                       validate: (e) {
                                         return null;
                                       },
-                                      label: 'First Name',
+                                      label: AppString.firstName,
                                       radius: 30.sp,
                                       bgColor: textFormBgColor,
                                       textColor: textFormTextColor,
@@ -90,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
                                       validate: (e) {
                                         return null;
                                       },
-                                      label: 'Last Name',
+                                      label: AppString.lasttName,
                                       radius: 30.sp,
                                       bgColor: textFormBgColor,
                                       textColor: textFormTextColor,
@@ -108,7 +109,7 @@ class ProfileScreen extends StatelessWidget {
                                 validate: (e) {
                                   return null;
                                 },
-                                label: 'Username',
+                                label: AppString.userName,
                                 radius: 30.sp,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
@@ -123,7 +124,7 @@ class ProfileScreen extends StatelessWidget {
                                 validate: (e) {
                                   return null;
                                 },
-                                label: 'Email',
+                                label: AppString.email,
                                 radius: 30.sp,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
@@ -138,7 +139,7 @@ class ProfileScreen extends StatelessWidget {
                                 validate: (e) {
                                   return null;
                                 },
-                                label: 'Phone Number',
+                                label: AppString.phoneNumber,
                                 radius: 30.sp,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
@@ -153,7 +154,7 @@ class ProfileScreen extends StatelessWidget {
                                 validate: (e) {
                                   return null;
                                 },
-                                label: 'City',
+                                label: AppString.city,
                                 radius: 30.sp,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
@@ -170,7 +171,7 @@ class ProfileScreen extends StatelessWidget {
                                   //   context,
                                   // );
                                 },
-                                text: 'Save',
+                                text: AppString.save,
                                 width: AppConstants.width(context) / 3,
                                 height: AppConstants.height(context) / 14,
                                 radius: 4,

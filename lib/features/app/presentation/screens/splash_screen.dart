@@ -2,6 +2,9 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
+import 'package:traind_app/core/utils/app_constants.dart';
+import 'package:traind_app/core/utils/app_images.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
 import 'package:traind_app/features/app/presentation/screens/onboarding1_screen.dart';
@@ -28,10 +31,10 @@ class _SplashScreenState extends State<SplashScreen> {
         width: double.infinity,
         height: MediaQuery.of(context).size.height,
         decoration: BoxDecoration(
-          image: DecorationImage(image: AssetImage('assets/images/imgs/splash.png'), fit: BoxFit.cover)
+          image: DecorationImage(image: AssetImage('${AppConstants.imagesUrl}$splashImage'), fit: BoxFit.cover)
         ),
         child: Scaffold(
-          backgroundColor: Color.fromRGBO( 84, 74, 65, 0.66,),
+          backgroundColor: splashBg,
           body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -39,8 +42,8 @@ class _SplashScreenState extends State<SplashScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 Spacer(),
-                Text(AppString.appName, style: TextStyle(fontSize: 30.sp, fontFamily: 'Grechen Fuemen', color: Colors.white), ),
-                Image(image: AssetImage('assets/images/vectors/splash_vector.png')),
+                Text(AppString.appName, style: TextStyle(fontSize: 30.sp, fontFamily: 'Grechen Fuemen', color: lightColor), ),
+                Image(image: AssetImage('${AppConstants.vectorsUrl}$splashVector')),
                 Spacer(),
                 Spacer()
               ],
