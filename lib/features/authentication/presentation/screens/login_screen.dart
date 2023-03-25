@@ -6,7 +6,6 @@ import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/core/utils/app_images.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
-import 'package:traind_app/features/app/presentation/screens/home_screen.dart';
 import 'package:traind_app/features/authentication/presentation/screens/sign_up_screen.dart';
 
 import '../components/auth_components.dart';
@@ -50,14 +49,14 @@ class LoginScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             AuthComponents.signLogo(
-                                raduis: 10.sp,
+                                raduis: 15.sp,
                                 logoImage: google,
                                 function: () {}),
                             SizedBox(
                               width: 3.w,
                             ),
                             AuthComponents.signLogo(
-                                raduis: 10.sp,
+                                raduis: 15.sp,
                                 logoImage: facebook,
                                 function: () {}),
                           ],
@@ -107,10 +106,7 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 SharedComponents.defaultButton(
                                   context: context,
-                                  function: () {
-                                    SharedComponents.navigateToReplace(
-                                        HomeScreen(), context);
-                                  },
+                                  function: () {},
                                   text: 'Login',
                                   width: AppConstants.width(context) / 3,
                                   height: AppConstants.height(context) / 14,

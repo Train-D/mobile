@@ -19,3 +19,10 @@ const List<Color> fromToBottomSheetBg = [
   Color.fromRGBO(78, 64, 57, 1),
   Color.fromRGBO(92, 85, 71, 1)
 ];
+//rgba(64, 66, 50, 0.65)
+const List<Color> profileBg = [
+  Color.fromRGBO(133, 132, 122, 1),
+  Color.fromRGBO(151, 135, 126, 1),
+];
+
+const Color cameraBG = Color.fromRGBO(236, 236, 236, 1);

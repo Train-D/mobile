@@ -132,7 +132,7 @@ class SharedComponents {
             },
           ),
           //border: InputBorder.none,
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(radius),
             borderSide: BorderSide(
               color: (focusedRadius ? lightDefualtColor : bgColor),
