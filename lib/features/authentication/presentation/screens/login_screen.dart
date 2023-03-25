@@ -56,9 +56,10 @@ class LoginScreen extends StatelessWidget {
                               width: 3.w,
                             ),
                             AuthComponents.signLogo(
-                                raduis: 15.sp,
-                                logoImage: facebook,
-                                function: () {}),
+                              raduis: 15.sp,
+                              logoImage: facebook,
+                              function: () {},
+                            ),
                           ],
                         ),
                         SizedBox(
