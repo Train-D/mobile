@@ -163,20 +163,28 @@ class SharedComponents {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: Container(
-            margin: EdgeInsets.only(left: 20, top: 20),
+            margin: EdgeInsets.only(
+              left: 20,
+              top: 20,
+            ),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               color: appBarBg,
             ),
-            width: 30.sp,
-            height: 30.sp,
-            child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.arrow_back_ios,
-                  color: Colors.black,
-                ))),
+            width: 32.sp,
+            height: 32.sp,
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 7.sp,
+              ),
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back_ios,
+                    color: Colors.black,
+                  )),
+            )),
       );
 }

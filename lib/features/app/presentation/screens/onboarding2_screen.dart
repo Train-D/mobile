@@ -24,23 +24,20 @@ class OnboardingTwoScreen extends StatelessWidget {
               end: Alignment.bottomCenter,
             ),
           ),
-          child: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20.sp,
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                onboarding(
-                  title: AppString.onboardingTwoTitle,
-                  body: AppString.onboardingTwoSubtitle,
-                  context: context,
-                  image: AppConstants.onboardingVectorTwo,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+          child: Center(
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 20.sp,
+              ),
+              child: SingleChildScrollView(
+                child: Column(
                   children: [
+                    onboarding(
+                      title: AppString.onboardingTwoTitle,
+                      body: AppString.onboardingTwoSubtitle,
+                      context: context,
+                      image: AppConstants.onboardingVectorTwo,
+                    ),
                     SharedComponents.defaultButton(
                       function: () {
                         SharedComponents.navigateToReplace(
@@ -54,10 +51,10 @@ class OnboardingTwoScreen extends StatelessWidget {
                       height: 6.h,
                       withIcon: false,
                       radius: 8.sp
-                    ),
+                    )
                   ],
-                )
-              ],
+                ),
+              ),
             ),
           ),
         ),
