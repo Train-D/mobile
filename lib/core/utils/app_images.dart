@@ -8,3 +8,6 @@ const String home = 'home.png';
 const String profileCamera = 'camera_vector.png';
 const String splashImage = 'splash.png';
 const String splashVector = 'splash_vector.png';
+const String homeIcon = 'home_icon.png';
+const String profileIcon = 'profile_icon.png';
+const String settingsIcon = 'settings_icon.png';

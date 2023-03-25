@@ -23,6 +23,7 @@ class FromToScreen extends StatelessWidget {
           imageUrl: '${AppConstants.imagesUrl}$fromTo',
           context: context,
           child: Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: SharedComponents.defualtAppBar(context),
             backgroundColor: fromToBgColor,
             body: Center(
@@ -32,7 +33,7 @@ class FromToScreen extends StatelessWidget {
                 child: Card(
                   color: fromToCardBgColor,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(17),
+                    borderRadius: BorderRadius.circular(17.sp),
                   ),
                   child: LayoutBuilder(
                     builder: (ctx, constrains) => SingleChildScrollView(

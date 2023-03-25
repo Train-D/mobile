@@ -3,11 +3,12 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/core/utils/components.dart';
 
-Widget onboarding(
-        {required String title,
-        required String body,
-        required String image,
-        required BuildContext context}) =>
+Widget onboarding({
+  required String title,
+  required String body,
+  required String image,
+  required BuildContext context,
+}) =>
     Column(
       children: [
         Image(

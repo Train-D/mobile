@@ -16,6 +16,7 @@ class Onboarding1Screen extends StatelessWidget {
         child: Scaffold(
       body: Container(
         width: double.infinity,
+        height: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             colors: onBoardingBg,
@@ -23,41 +24,43 @@ class Onboarding1Screen extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: 20.sp,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              onboarding(
-                title: AppString.onboardingOneTitle,
-                body: AppString.onboardingOneSubtitle,
-                context: context,
-                image: AppConstants.onboardingVectorOne,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.end,
+        child: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+              horizontal: 20.sp,
+            ),
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  SharedComponents.defaultButton(
-                      function: () {
-                        SharedComponents.navigateToReplace(
-                            const OnboardingTwoScreen(), context);
-                      },
-                      text: AppString.skip,
-                      //size: 18.sp,
-                      context: context,
-                      icon: Icons.arrow_forward_ios,
-                      width: AppConstants.width(context) * 0.3,
-                      height: 6.h,
-                      radius: 8.sp,
-                      withIcon: true,
-                      iconSize: 17.sp,
-                      ),
+                  onboarding(
+                    title: AppString.onboardingOneTitle,
+                    body: AppString.onboardingOneSubtitle,
+                    context: context,
+                    image: AppConstants.onboardingVectorOne,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      SharedComponents.defaultButton(
+                          function: () {
+                            SharedComponents.navigateToReplace(
+                                const OnboardingTwoScreen(), context);
+                          },
+                          text: AppString.skip,
+                          //size: 18.sp,
+                          context: context,
+                          icon: Icons.arrow_forward_ios,
+                          width: AppConstants.width(context) * 0.3,
+                          height: 6.h,
+                          radius: 8.sp,
+                          withIcon: true,
+                          iconSize: 17.sp,
+                          ),
+                    ],
+                  )
                 ],
-              )
-            ],
+              ),
+            ),
           ),
         ),
       ),
