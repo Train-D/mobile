@@ -49,7 +49,7 @@ class Onboarding1Screen extends StatelessWidget {
                       //size: 18.sp,
                       context: context,
                       icon: Icons.arrow_forward_ios,
-                      width: 25.w,
+                      width: AppConstants.width(context) * 0.3,
                       height: 6.h,
                       radius: 8.sp,
                       withIcon: true,

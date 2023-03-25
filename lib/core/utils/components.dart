@@ -59,7 +59,7 @@ class SharedComponents {
         child: Text(
           text.toUpperCase(),
           style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                color: lightColor,
+                color: textButtonColor,
               ),
         ),
       );
