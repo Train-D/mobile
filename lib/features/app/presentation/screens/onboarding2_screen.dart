@@ -48,7 +48,7 @@ class OnboardingTwoScreen extends StatelessWidget {
                           context,
                         );
                       },
-                      text: 'Get started',
+                      text: AppString.getStarted,
                       context: context,
                       width: AppConstants.width(context) * 0.4,
                       height: 6.h,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+const Color splashBg = Color.fromRGBO(84, 74, 65, 0.66);
+const Color transparent = Colors.transparent;
 const Color lightDefualtColor = Color(0xff41312a);
 const Color lightDefualtIconColor = Colors.white;
 const Color textFormBgColor = Color.fromRGBO(217, 217, 217, 0.91);
@@ -11,6 +13,7 @@ const Color fromToCardBgColor = Color.fromRGBO(255, 255, 255, 0.61);
 const Color dateFieldColor = Color.fromRGBO(235, 234, 234, 1);
 const Color appBarBg = Color.fromRGBO(255, 255, 255, 0.79);
 const List<Color> onBoardingBg = [Color(0xe66f5246), Color(0xe6404232)];
+const Color bottomBarBg = Color.fromRGBO(103, 79, 68, 1);
 const List<Color> homeBg = [
   Color.fromRGBO(64, 66, 50, 0.95),
   Color.fromRGBO(111, 82, 70, 0.95)
@@ -19,7 +22,6 @@ const List<Color> fromToBottomSheetBg = [
   Color.fromRGBO(78, 64, 57, 1),
   Color.fromRGBO(92, 85, 71, 1)
 ];
-//rgba(64, 66, 50, 0.65)
 const List<Color> profileBg = [
   Color.fromRGBO(133, 132, 122, 1),
   Color.fromRGBO(151, 135, 126, 1),

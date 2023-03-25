@@ -6,4 +6,5 @@ const String rectangleTwoBg = 'Rectangle 2.png';
 const String fromTo = 'fromto.png';
 const String home = 'home.png';
 const String profileCamera = 'camera_vector.png';
-
+const String splashImage = 'splash.png';
+const String splashVector = 'splash_vector.png';

@@ -6,6 +6,8 @@ import 'package:traind_app/core/global/theme/theme_data/theme_data_light.dart';
 import 'package:traind_app/features/app/presentation/screens/splash_screen.dart';
 import 'package:traind_app/features/authentication/presentation/controller/profile_cubit/profile_cubit.dart';
 import 'package:traind_app/features/authentication/presentation/screens/profile_screen.dart';
+import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_cubit.dart';
+import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
 import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/screens/from_to_screen.dart';
 
@@ -32,9 +34,12 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => SignUpCubit(),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => ProfileCubit(),
         ),
+        BlocProvider(
+          create: (context) => HomeCubit(),
+        )
       ],
       child: ResponsiveSizer(
         builder: (BuildContext, Orientation, ScreenType) {
@@ -42,7 +47,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Train D Edit Again',
             theme: lightTheme(),
-            home: ProfileScreen(),
+            home: SplashScreen(),
           );
         },
       ),
