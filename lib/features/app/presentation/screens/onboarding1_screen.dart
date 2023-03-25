@@ -45,7 +45,7 @@ class Onboarding1Screen extends StatelessWidget {
                         SharedComponents.navigateToReplace(
                             const OnboardingTwoScreen(), context);
                       },
-                      text: 'Skip',
+                      text: AppString.skip,
                       //size: 18.sp,
                       context: context,
                       icon: Icons.arrow_forward_ios,

@@ -1,3 +1,4 @@
+import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -6,8 +7,8 @@ import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/core/utils/app_images.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
-import 'package:traind_app/features/app/presentation/screens/home_screen.dart';
 import 'package:traind_app/features/authentication/presentation/screens/sign_up_screen.dart';
+import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
 
 import '../components/auth_components.dart';
 import '../controller/login_cubit/login_cubit.dart';
@@ -24,10 +25,10 @@ class LoginScreen extends StatelessWidget {
         context: context,
         child: SafeArea(
           child: Scaffold(
-            backgroundColor: Colors.transparent,
+            backgroundColor: transparent,
             body: Stack(
               children: [
-                AuthComponents.rectangleBg(),
+                AuthComponents.rectangleBg(image: rectangleOneBg),
                 Center(
                   child: SingleChildScrollView(
                     child: Column(
@@ -50,16 +51,17 @@ class LoginScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             AuthComponents.signLogo(
-                                raduis: 10.sp,
+                                raduis: 15.sp,
                                 logoImage: google,
                                 function: () {}),
                             SizedBox(
                               width: 3.w,
                             ),
                             AuthComponents.signLogo(
-                                raduis: 10.sp,
-                                logoImage: facebook,
-                                function: () {}),
+                              raduis: 15.sp,
+                              logoImage: facebook,
+                              function: () {},
+                            ),
                           ],
                         ),
                         SizedBox(
@@ -76,7 +78,7 @@ class LoginScreen extends StatelessWidget {
                                   validate: (e) {
                                     return null;
                                   },
-                                  label: 'Username',
+                                  label: AppString.userName,
                                   radius: 30.sp,
                                   bgColor: textFormBgColor,
                                   textColor: textFormTextColor,
@@ -91,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                                   validate: (e) {
                                     return null;
                                   },
-                                  label: 'Password',
+                                  label: AppString.passowrd,
                                   radius: 30.sp,
                                   bgColor: textFormBgColor,
                                   textColor: textFormTextColor,
@@ -108,10 +110,10 @@ class LoginScreen extends StatelessWidget {
                                 SharedComponents.defaultButton(
                                   context: context,
                                   function: () {
-                                    SharedComponents.navigateToReplace(
+                                    SharedComponents.navigateTo(
                                         HomeScreen(), context);
                                   },
-                                  text: 'Login',
+                                  text: StringUtils.capitalize(AppString.loginTitle),
                                   width: AppConstants.width(context) / 3,
                                   height: AppConstants.height(context) / 14,
                                   radius: 4,
@@ -124,7 +126,7 @@ class LoginScreen extends StatelessWidget {
                                   children: [
                                     Flexible(
                                       child: Text(
-                                        'don\'t have an account ?',
+                                        AppString.haveAccount,
                                         style: Theme.of(context)
                                             .textTheme
                                             .displayMedium!
@@ -140,7 +142,7 @@ class LoginScreen extends StatelessWidget {
                                           context,
                                         );
                                       },
-                                      text: 'Sign up',
+                                      text: AppString.signUpTitle,
                                       context: context,
                                     ),
                                   ],

@@ -101,7 +101,6 @@ class SharedComponents {
     //Color borderCol = Colors.black
   }) =>
       TextFormField(
-        
         controller: controller,
         keyboardType: type,
         validator: validate,
@@ -133,7 +132,7 @@ class SharedComponents {
             },
           ),
           //border: InputBorder.none,
-          focusedBorder: OutlineInputBorder(
+          focusedBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(radius),
             borderSide: BorderSide(
               color: (focusedRadius ? lightDefualtColor : bgColor),
@@ -164,7 +163,7 @@ class SharedComponents {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: Container(
-          margin: EdgeInsets.only(left: 20, top: 20),
+            margin: EdgeInsets.only(left: 20, top: 20),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               color: appBarBg,

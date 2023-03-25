@@ -4,6 +4,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/core/utils/app_images.dart';
+import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
 import 'package:traind_app/features/tickets/presentation/components/tickets_components.dart';
 import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
@@ -46,13 +47,13 @@ class FromToScreen extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 TicketsComponents.labelField(
-                                    text: 'From',
+                                    text: AppString.from,
                                     field:
                                         TicketsComponents.defaultDropDownButton(
                                             context),
                                     context: context),
                                 TicketsComponents.labelField(
-                                    text: 'To',
+                                    text: AppString.to,
                                     field:
                                         TicketsComponents.defaultDropDownButton(
                                             context),
@@ -72,14 +73,14 @@ class FromToScreen extends StatelessWidget {
                               children: [
                                 TicketsComponents.labelField(
                                     context: context,
-                                    text: 'Date',
+                                    text: AppString.date,
                                     field: SizedBox(
                                       width: constrains.maxWidth * 0.77,
                                       child: SharedComponents.defaultTextField(
                                           controller: cubit.fromToDateCon,
                                           type: TextInputType.text,
                                           validate: (e) {},
-                                          label: 'dd/mm/yyyy',
+                                          label: AppString.defaultDatePattern,
                                           radius: 10.sp,
                                           bgColor: dateFieldColor,
                                           preIcon: Icons.calendar_month,
@@ -104,7 +105,7 @@ class FromToScreen extends StatelessWidget {
                                   function: () {
                                     TicketsComponents.bottomModelSheet(context);
                                   },
-                                  text: 'Search',
+                                  text: AppString.search,
                                   //size: 20.sp,
                                   context: context,
                                   width: constrains.maxWidth * 0.8,
