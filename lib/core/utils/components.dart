@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 
 class SharedComponents {
@@ -34,7 +35,6 @@ class SharedComponents {
               Text(
                 upper ? text.toUpperCase() : text,
                 style: Theme.of(context).textTheme.displayMedium,
-
               ),
               if (withIcon)
                 Icon(
@@ -46,7 +46,6 @@ class SharedComponents {
           ),
         ),
       );
-
 
   static Widget defaultTextButton({
     required Function function,
@@ -60,8 +59,8 @@ class SharedComponents {
         child: Text(
           text.toUpperCase(),
           style: Theme.of(context).textTheme.displayMedium!.copyWith(
-            color: textButtonColor,
-          ),
+                color: lightColor,
+              ),
         ),
       );
 
@@ -83,7 +82,6 @@ class SharedComponents {
         .pushReplacement(MaterialPageRoute(builder: ((context) => page)));
   }
 
-
   static Widget defaultTextField({
     required TextEditingController controller,
     required TextInputType type,
@@ -95,6 +93,7 @@ class SharedComponents {
     IconData? preIcon,
     IconData? suffIcon,
     Function? suffPressed,
+    Function? prePressed,
     double radius = 0,
     Color bgColor = Colors.grey,
     Color textColor = Colors.grey,
@@ -102,6 +101,7 @@ class SharedComponents {
     //Color borderCol = Colors.black
   }) =>
       TextFormField(
+        
         controller: controller,
         keyboardType: type,
         validator: validate,
@@ -120,7 +120,12 @@ class SharedComponents {
             fontFamily: 'Inria Serif',
             color: textColor,
           ),
-          prefixIcon: Icon(preIcon),
+          prefixIcon: IconButton(
+            icon: Icon(preIcon),
+            onPressed: () {
+              prePressed!();
+            },
+          ),
           suffixIcon: IconButton(
             icon: Icon(suffIcon),
             onPressed: () {
@@ -155,5 +160,24 @@ class SharedComponents {
         )),
         child: child,
       );
-
+  static defualtAppBar(BuildContext context) => AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: Container(
+          margin: EdgeInsets.only(left: 20, top: 20),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              color: appBarBg,
+            ),
+            width: 30.sp,
+            height: 30.sp,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: Colors.black,
+                ))),
+      );
 }

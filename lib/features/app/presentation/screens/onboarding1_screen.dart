@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
@@ -17,7 +18,7 @@ class Onboarding1Screen extends StatelessWidget {
         width: double.infinity,
         decoration: const BoxDecoration(
           gradient: LinearGradient(
-            colors: [Color(0xe66f5246), Color(0xe6404232)],
+            colors: onBoardingBg,
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
           ),

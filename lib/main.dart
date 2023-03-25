@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/theme_data/theme_data_light.dart';
 import 'package:traind_app/features/app/presentation/screens/splash_screen.dart';
+import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
+import 'package:traind_app/features/tickets/presentation/screens/from_to_screen.dart';
 
 import 'features/authentication/presentation/controller/login_cubit/login_cubit.dart';
 
@@ -21,6 +23,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => LoginCubit(),
         ),
+        BlocProvider(
+          create: (context) => FromToCubit(),
+        )
       ],
       child: ResponsiveSizer(
         builder: (BuildContext, Orientation, ScreenType) {

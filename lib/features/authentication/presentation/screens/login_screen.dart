@@ -6,6 +6,7 @@ import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/core/utils/app_images.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
+import 'package:traind_app/features/app/presentation/screens/home_screen.dart';
 import 'package:traind_app/features/authentication/presentation/screens/sign_up_screen.dart';
 
 import '../components/auth_components.dart';
@@ -106,7 +107,10 @@ class LoginScreen extends StatelessWidget {
                                 ),
                                 SharedComponents.defaultButton(
                                   context: context,
-                                  function: () {},
+                                  function: () {
+                                    SharedComponents.navigateToReplace(
+                                        HomeScreen(), context);
+                                  },
                                   text: 'Login',
                                   width: AppConstants.width(context) / 3,
                                   height: AppConstants.height(context) / 14,
@@ -126,6 +130,7 @@ class LoginScreen extends StatelessWidget {
                                             .displayMedium!
                                             .copyWith(
                                               fontSize: 16.sp,
+                                              color : Color(0xffE4A286),
                                             ),
                                       ),
                                     ),
