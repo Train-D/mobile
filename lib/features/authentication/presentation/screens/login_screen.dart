@@ -25,138 +25,132 @@ class LoginScreen extends StatelessWidget {
           imageUrl: '${AppConstants.imagesUrl}$loginBg',
           context: context,
           child: Scaffold(
-            resizeToAvoidBottomInset: false,
+            //resizeToAvoidBottomInset: false,
             backgroundColor: transparent,
-            body: Stack(
-              children: [
-                AuthComponents.rectangleBg(image: rectangleOneBg),
-                Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          AppString.loginTitle,
-                          style: Theme.of(context)
-                              .textTheme
-                              .displayLarge!
-                              .copyWith(
-                                fontSize: 22.sp,
-                              ),
+            body: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 22.h,),
+                  Text(
+                    AppString.loginTitle,
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayLarge!
+                        .copyWith(
+                          fontSize: 22.sp,
                         ),
-                        SizedBox(
-                          height: 3.h,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            AuthComponents.signLogo(
-                                raduis: 15.sp,
-                                logoImage: google,
-                                function: () {}),
-                            SizedBox(
-                              width: 3.w,
-                            ),
-                            AuthComponents.signLogo(
-                              raduis: 15.sp,
-                              logoImage: facebook,
-                              function: () {},
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 4.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 30.sp),
-                          child: Form(
-                            child: Column(
-                              children: [
-                                SharedComponents.defaultTextField(
-                                  controller: cubit.loginUsernameCon,
-                                  type: TextInputType.text,
-                                  validate: (e) {
-                                    return null;
-                                  },
-                                  label: AppString.userName,
-                                  radius: 30.sp,
-                                  bgColor: textFormBgColor,
-                                  textColor: textFormTextColor,
-                                  focusedRadius: true,
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                SharedComponents.defaultTextField(
-                                  controller: cubit.loginPasswordCon,
-                                  type: TextInputType.visiblePassword,
-                                  validate: (e) {
-                                    return null;
-                                  },
-                                  label: AppString.passowrd,
-                                  radius: 30.sp,
-                                  bgColor: textFormBgColor,
-                                  textColor: textFormTextColor,
-                                  focusedRadius: true,
-                                  password: cubit.loginPasswordShown,
-                                  suffIcon: cubit.loginSuffIcon,
-                                  suffPressed: () {
-                                    cubit.changePasswordVisibility();
-                                  },
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                SharedComponents.defaultButton(
-                                  context: context,
-                                  function: () {
-                                    SharedComponents.navigateTo(
-                                        HomeScreen(), context);
-                                  },
-                                  text: StringUtils.capitalize(AppString.loginTitle),
-                                  width: AppConstants.width(context) / 3,
-                                  height: AppConstants.height(context) / 14,
-                                  radius: 4,
-                                ),
-                                SizedBox(
-                                  height: 1.h,
-                                ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Flexible(
-                                      child: Text(
-                                        AppString.haveAccount,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displayMedium!
-                                            .copyWith(
-                                              fontSize: 16.sp,
-                                            ),
-                                      ),
-                                    ),
-                                    SharedComponents.defaultTextButton(
-                                      function: () {
-                                        SharedComponents.navigateToReplace(
-                                          SignUpScreen(),
-                                          context,
-                                        );
-                                      },
-                                      text: AppString.signUpTitle,
-                                      context: context,
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
+                  ),
+                  SizedBox(
+                    height: 3.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      AuthComponents.signLogo(
+                          raduis: 15.sp,
+                          logoImage: google,
+                          function: () {}),
+                      SizedBox(
+                        width: 3.w,
+                      ),
+                      AuthComponents.signLogo(
+                        raduis: 15.sp,
+                        logoImage: facebook,
+                        function: () {},
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 4.h,
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 30.sp),
+                    child: Form(
+                      child: Column(
+                        children: [
+                          SharedComponents.defaultTextField(
+                            controller: cubit.loginUsernameCon,
+                            type: TextInputType.text,
+                            validate: (e) {
+                              return null;
+                            },
+                            label: AppString.userName,
+                            radius: 30.sp,
+                            bgColor: textFormBgColor,
+                            textColor: textFormTextColor,
+                            focusedRadius: true,
                           ),
-                        ),
-                      ],
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          SharedComponents.defaultTextField(
+                            controller: cubit.loginPasswordCon,
+                            type: TextInputType.visiblePassword,
+                            validate: (e) {
+                              return null;
+                            },
+                            label: AppString.passowrd,
+                            radius: 30.sp,
+                            bgColor: textFormBgColor,
+                            textColor: textFormTextColor,
+                            focusedRadius: true,
+                            password: cubit.loginPasswordShown,
+                            suffIcon: cubit.loginSuffIcon,
+                            suffPressed: () {
+                              cubit.changePasswordVisibility();
+                            },
+                          ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          SharedComponents.defaultButton(
+                            context: context,
+                            function: () {
+                              SharedComponents.navigateTo(
+                                  HomeScreen(), context);
+                            },
+                            text: StringUtils.capitalize(AppString.loginTitle),
+                            width: AppConstants.width(context) / 3,
+                            height: AppConstants.height(context) / 14,
+                            radius: 4,
+                          ),
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Flexible(
+                                child: Text(
+                                  AppString.haveAccount,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium!
+                                      .copyWith(
+                                        fontSize: 16.sp,
+                                      ),
+                                ),
+                              ),
+                              SharedComponents.defaultTextButton(
+                                function: () {
+                                  SharedComponents.navigateToReplace(
+                                    SignUpScreen(),
+                                    context,
+                                  );
+                                },
+                                text: AppString.signUpTitle,
+                                context: context,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             // Colum
           ),
