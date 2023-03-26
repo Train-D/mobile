@@ -140,6 +140,7 @@ class SignUpScreen extends StatelessWidget {
                                     textColor: textFormTextColor,
                                     focusedRadius: true,
                                     password: cubit.signUpPasswordShown,
+                                    suffIconFound: true,
                                     suffIcon: cubit.signUpSuffIcon,
                                     suffPressed: () {
                                       cubit.changePasswordVisibility();

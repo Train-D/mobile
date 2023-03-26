@@ -84,6 +84,7 @@ class FromToScreen extends StatelessWidget {
                                           label: AppString.defaultDatePattern,
                                           radius: 10.sp,
                                           bgColor: dateFieldColor,
+                                          preIconFound: true,
                                           preIcon: Icons.calendar_month,
                                           onChange: (e) {
                                           },
