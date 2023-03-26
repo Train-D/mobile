@@ -19,10 +19,10 @@ class SignUpScreen extends StatelessWidget {
     return BlocBuilder<SignUpCubit, SignUpState>(
       builder: (context, state) {
         SignUpCubit cubit = SignUpCubit.get(context);
-        return SharedComponents.screenBg(
-          imageUrl: '${AppConstants.imagesUrl}$loginBg',
-          context: context,
-          child: SafeArea(
+        return SafeArea(
+          child: SharedComponents.screenBg(
+            imageUrl: '${AppConstants.imagesUrl}$loginBg',
+            context: context,
             child: Scaffold(
               resizeToAvoidBottomInset: false,
               backgroundColor: transparent,
