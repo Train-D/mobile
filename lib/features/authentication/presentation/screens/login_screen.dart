@@ -93,6 +93,7 @@ class LoginScreen extends StatelessWidget {
                             bgColor: textFormBgColor,
                             textColor: textFormTextColor,
                             password: cubit.loginPasswordShown,
+                            suffIconFound: true,
                             suffIcon: cubit.loginSuffIcon,
                             suffPressed: () {
                               cubit.changePasswordVisibility();

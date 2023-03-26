@@ -19,7 +19,7 @@ class AppString {
   static const String haveAccount = 'don\'t have an account ?';
   static const String firstName = 'First Name';
   static const String lasttName = 'Last Name';
-  static const String email = 'Email';
+  static const String email = 'E-mail';
   static const String phoneNumber = 'Phone Number';
   static const String city = 'City';
   static const String save = 'Save';
