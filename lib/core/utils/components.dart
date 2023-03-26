@@ -90,6 +90,8 @@ class SharedComponents {
     Function? onChange,
     bool password = false,
     required String label,
+    bool preIconFound = false,
+    bool suffIconFound = false,
     IconData? preIcon,
     IconData? suffIcon,
     Function? suffPressed,
@@ -119,18 +121,18 @@ class SharedComponents {
             fontFamily: 'Inria Serif',
             color: textColor,
           ),
-          prefixIcon: IconButton(
+          prefixIcon: preIconFound? IconButton(
             icon: Icon(preIcon),
             onPressed: () {
               prePressed!();
             },
-          ),
-          suffixIcon: IconButton(
+          ) : null,
+          suffixIcon: suffIconFound? IconButton(
             icon: Icon(suffIcon),
             onPressed: () {
               suffPressed!();
             },
-          ),
+          ): null,
           //border: InputBorder.none,
           focusedBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(radius),
@@ -138,7 +140,7 @@ class SharedComponents {
               color: (focusedRadius ? lightDefualtColor : bgColor),
             ),
           ),
-          border: OutlineInputBorder(
+          border: UnderlineInputBorder(
               borderRadius: BorderRadius.circular(radius),
               borderSide: BorderSide.none),
         ),
