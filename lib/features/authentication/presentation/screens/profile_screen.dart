@@ -65,115 +65,100 @@ class ProfileScreen extends StatelessWidget {
                         child: Form(
                           child: Column(
                             children: [
-                              SizedBox(
-                                height: 6.h,
-                                child: Row(
-                                  children: [
-                                    Flexible(
-                                      child: SharedComponents.defaultTextField(
-                                        controller: cubit.profileFirstNameCon,
-                                        type: TextInputType.text,
-                                        validate: (e) {
-                                          return null;
-                                        },
-                                        label: AppString.firstName,
-                                        radius: 30.sp,
-                                        bgColor: textFormBgColor,
-                                        textColor: textFormTextColor,
-                                        focusedRadius: true,
-                                      ),
+                              Row(
+                                children: [
+                                  Flexible(
+                                    child: SharedComponents.defaultTextField(
+                                      controller: cubit.profileFirstNameCon,
+                                      type: TextInputType.text,
+                                      validate: (e) {
+                                        return null;
+                                      },
+                                      label: AppString.firstName,
+                                      radius: 30.sp,
+                                      bgColor: textFormBgColor,
+                                      textColor: textFormTextColor,
+                                      focusedRadius: true,
                                     ),
-                                    SizedBox(
-                                      width: 3.w,
+                                  ),
+                                  SizedBox(
+                                    width: 3.w,
+                                  ),
+                                  Flexible(
+                                    child: SharedComponents.defaultTextField(
+                                      controller: cubit.profileLastNameCon,
+                                      type: TextInputType.text,
+                                      validate: (e) {
+                                        return null;
+                                      },
+                                      label: AppString.lasttName,
+                                      radius: 30.sp,
+                                      bgColor: textFormBgColor,
+                                      textColor: textFormTextColor,
+                                      focusedRadius: true,
                                     ),
-                                    Flexible(
-                                      child: SharedComponents.defaultTextField(
-                                        controller: cubit.profileLastNameCon,
-                                        type: TextInputType.text,
-                                        validate: (e) {
-                                          return null;
-                                        },
-                                        label: AppString.lasttName,
-                                        radius: 30.sp,
-                                        bgColor: textFormBgColor,
-                                        textColor: textFormTextColor,
-                                        focusedRadius: true,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                               SizedBox(
                                 height: 2.h,
                               ),
-                              SizedBox(
-                                height: 6.h,
-                                child: SharedComponents.defaultTextField(
-                                  controller: cubit.profileUsernameCon,
-                                  type: TextInputType.text,
-                                  validate: (e) {
-                                    return null;
-                                  },
-                                  label: AppString.userName,
-                                  radius: 30.sp,
-                                  bgColor: textFormBgColor,
-                                  textColor: textFormTextColor,
-                                  focusedRadius: true,
-                                ),
+                              SharedComponents.defaultTextField(
+                                controller: cubit.profileUsernameCon,
+                                type: TextInputType.text,
+                                validate: (e) {
+                                  return null;
+                                },
+                                label: AppString.userName,
+                                radius: 30.sp,
+                                bgColor: textFormBgColor,
+                                textColor: textFormTextColor,
+                                focusedRadius: true,
                               ),
                               SizedBox(
                                 height: 2.h,
                               ),
-                              SizedBox(
-                                height: 6.h,
-                                child: SharedComponents.defaultTextField(
-                                  controller: cubit.profileEmailCon,
-                                  type: TextInputType.emailAddress,
-                                  validate: (e) {
-                                    return null;
-                                  },
-                                  label: AppString.email,
-                                  radius: 30.sp,
-                                  bgColor: textFormBgColor,
-                                  textColor: textFormTextColor,
-                                  focusedRadius: true,
-                                ),
+                              SharedComponents.defaultTextField(
+                                controller: cubit.profileEmailCon,
+                                type: TextInputType.emailAddress,
+                                validate: (e) {
+                                  return null;
+                                },
+                                label: AppString.email,
+                                radius: 30.sp,
+                                bgColor: textFormBgColor,
+                                textColor: textFormTextColor,
+                                focusedRadius: true,
                               ),
                               SizedBox(
                                 height: 2.h,
                               ),
-                              SizedBox(
-                                height: 6.h,
-                                child: SharedComponents.defaultTextField(
-                                  controller: cubit.profilePhoneCon,
-                                  type: TextInputType.phone,
-                                  validate: (e) {
-                                    return null;
-                                  },
-                                  label: AppString.phoneNumber,
-                                  radius: 30.sp,
-                                  bgColor: textFormBgColor,
-                                  textColor: textFormTextColor,
-                                  focusedRadius: true,
-                                ),
+                              SharedComponents.defaultTextField(
+                                controller: cubit.profilePhoneCon,
+                                type: TextInputType.phone,
+                                validate: (e) {
+                                  return null;
+                                },
+                                label: AppString.phoneNumber,
+                                radius: 30.sp,
+                                bgColor: textFormBgColor,
+                                textColor: textFormTextColor,
+                                focusedRadius: true,
                               ),
                               SizedBox(
                                 height: 2.h,
                               ),
-                              SizedBox(
-                                height: 6.h,
-                                child: SharedComponents.defaultTextField(
-                                  controller: cubit.profileCityCon,
-                                  type: TextInputType.text,
-                                  validate: (e) {
-                                    return null;
-                                  },
-                                  label: AppString.city,
-                                  radius: 30.sp,
-                                  bgColor: textFormBgColor,
-                                  textColor: textFormTextColor,
-                                  focusedRadius: true,
-                                ),
+                              SharedComponents.defaultTextField(
+                                controller: cubit.profileCityCon,
+                                type: TextInputType.text,
+                                validate: (e) {
+                                  return null;
+                                },
+                                label: AppString.city,
+                                radius: 30.sp,
+                                bgColor: textFormBgColor,
+                                textColor: textFormTextColor,
+                                focusedRadius: true,
                               ),
                               SizedBox(
                                 height: 4.h,
