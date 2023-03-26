@@ -20,10 +20,10 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
       LoginCubit cubit = LoginCubit.get(context);
-      return SharedComponents.screenBg(
-        imageUrl: '${AppConstants.imagesUrl}$loginBg',
-        context: context,
-        child: SafeArea(
+      return SafeArea(
+        child: SharedComponents.screenBg(
+          imageUrl: '${AppConstants.imagesUrl}$loginBg',
+          context: context,
           child: Scaffold(
             resizeToAvoidBottomInset: false,
             backgroundColor: transparent,
