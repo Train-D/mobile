@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_images.dart';
 import 'package:traind_app/features/authentication/presentation/screens/profile_screen.dart';
@@ -15,7 +14,7 @@ class HomeCubit extends Cubit<HomeState> {
   List<Widget> screens = const [
     ProfileScreen(),
     HomeScreen(),
-    HomeScreen(),
+    ProfileScreen(),
   ];
 
   List<BottomNavigationBarItem> navItems = [

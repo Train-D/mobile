@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/utils/components.dart';
+import 'package:traind_app/core/utils/app_sizes.dart';
+import 'package:traind_app/core/utils/app_strings.dart';
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/global/theme/theme_data/theme_data_light.dart';
-import '../../../../core/utils/app_constants.dart';
 
 class TicketsComponents {
   static Widget defaultDropDownButton(BuildContext context) => Container(
-        width: AppConstants.width(context) * 0.25,
-        height: AppConstants.height(context) * 0.056,
+        width: AppSizes.width(context) * 0.25,
+        height: AppSizes.height(context) * 0.056,
         decoration: BoxDecoration(
             color: const Color.fromRGBO(235, 234, 234, 1),
             borderRadius: BorderRadius.circular(10)),
@@ -18,18 +17,18 @@ class TicketsComponents {
           child: DropdownButton(
             onChanged: (value) {},
             value: "Select",
-            icon: Icon(Icons.keyboard_arrow_down),
+            icon: const Icon(Icons.keyboard_arrow_down),
             items: [
               DropdownMenuItem(
+                value: "Select",
                 child: Text(
-                  "Select",
+                  AppString.select,
                   //style: TextStyle(color: Color.fromRGBO(120, 118, 118, 1), fontSize: 18.sp),
                   style: Theme.of(context)
                       .textTheme
                       .displayMedium!
-                      .copyWith(color: Color.fromRGBO(120, 118, 118, 1)),
+                      .copyWith(color: fromToDropDownBgColor),
                 ),
-                value: "Select",
               ),
             ],
           ),
@@ -69,7 +68,7 @@ class TicketsComponents {
           padding: const EdgeInsets.only(bottom: 30),
           child: Container(
             width: double.infinity,
-            height: AppConstants.height(context) * 0.4,
+            height: AppSizes.height(context) * 0.4,
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(30)),
               gradient: LinearGradient(
@@ -79,7 +78,7 @@ class TicketsComponents {
               ),
             ),
             child: SingleChildScrollView(
-              child: Column(children: []),
+              child: Column(children: const []),
             ),
           ),
         ),

@@ -96,10 +96,10 @@ class SharedComponents {
     IconData? suffIcon,
     Function? suffPressed,
     Function? prePressed,
-    double radius = 0,
+    double radius = 30,
     Color bgColor = Colors.grey,
     Color textColor = Colors.grey,
-    bool focusedRadius = false,
+    bool focusedRadius = true,
     //Color borderCol = Colors.black
   }) =>
       TextFormField(
@@ -114,6 +114,10 @@ class SharedComponents {
         },
         obscureText: password,
         decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 20.sp,
+            vertical: 0.sp,
+          ),
           filled: true,
           fillColor: bgColor,
           labelText: label,
@@ -121,18 +125,22 @@ class SharedComponents {
             fontFamily: 'Inria Serif',
             color: textColor,
           ),
-          prefixIcon: preIconFound? IconButton(
-            icon: Icon(preIcon),
-            onPressed: () {
-              prePressed!();
-            },
-          ) : null,
-          suffixIcon: suffIconFound? IconButton(
-            icon: Icon(suffIcon),
-            onPressed: () {
-              suffPressed!();
-            },
-          ): null,
+          prefixIcon: preIconFound
+              ? IconButton(
+                  icon: Icon(preIcon),
+                  onPressed: () {
+                    prePressed!();
+                  },
+                )
+              : null,
+          suffixIcon: suffIconFound
+              ? IconButton(
+                  icon: Icon(suffIcon),
+                  onPressed: () {
+                    suffPressed!();
+                  },
+                )
+              : null,
           //border: InputBorder.none,
           focusedBorder: UnderlineInputBorder(
             borderRadius: BorderRadius.circular(radius),
@@ -142,7 +150,7 @@ class SharedComponents {
           ),
           border: UnderlineInputBorder(
               borderRadius: BorderRadius.circular(radius),
-              borderSide: BorderSide.none),
+              borderSide: BorderSide.none,),
         ),
       );
 
@@ -165,11 +173,11 @@ class SharedComponents {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: Container(
-            margin: EdgeInsets.only(
+            margin: const EdgeInsets.only(
               left: 20,
               top: 20,
             ),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(Radius.circular(10)),
               color: appBarBg,
             ),
@@ -183,10 +191,27 @@ class SharedComponents {
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  icon: Icon(
+                  icon: const Icon(
                     Icons.arrow_back_ios,
                     color: Colors.black,
                   )),
             )),
+      );
+
+  static linearGradientBg({
+    required List<Color> colors,
+    required Widget child, 
+  }) =>
+      Container(
+        width: double.infinity,
+        height: double.infinity,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: colors,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+        ),
+        child: child,
       );
 }

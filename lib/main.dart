@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_types_as_parameter_names, non_constant_identifier_names
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,7 +46,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Train D Edit Again',
             theme: lightTheme(),
-            home: SplashScreen(),
+            home: const SplashScreen(),
           );
         },
       ),

@@ -28,5 +28,5 @@ class AppString {
   static const String date = 'Date';
   static const String defaultDatePattern = 'dd/mm/yyyy';
   static const String search = 'Search';
-
+  static const String select = 'Select';
 }

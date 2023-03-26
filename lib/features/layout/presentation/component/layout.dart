@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/utils/app_constants.dart';
+import 'package:traind_app/core/utils/app_sizes.dart';
 import 'package:traind_app/core/utils/components.dart';
-Widget homeButton(
-        {required String label,
-        required Widget Screen,
-        required BuildContext context}) =>
+
+Widget homeButton({
+  required String label,
+  required Widget screen,
+  required BuildContext context,
+}) =>
     SharedComponents.defaultButton(
       context: context,
       function: () {
-        SharedComponents.navigateTo(Screen, context);
+        SharedComponents.navigateTo(screen, context);
       },
       text: label,
-      width: AppConstants.width(context) * 0.8,
-      height: AppConstants.height(context) * 0.07,
+      width: AppSizes.width(context) * 0.8,
+      height: AppSizes.height(context) * 0.07,
       radius: 4.sp,
     );
-
-

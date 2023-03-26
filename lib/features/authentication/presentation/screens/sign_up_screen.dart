@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/core/utils/app_images.dart';
+import 'package:traind_app/core/utils/app_sizes.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
 import 'package:traind_app/features/authentication/presentation/screens/login_screen.dart';
@@ -31,13 +32,12 @@ class SignUpScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    SizedBox(height: 22.h,),
+                    SizedBox(
+                      height: 25.h,
+                    ),
                     Text(
                       AppString.signUpTitle,
-                      style: Theme.of(context)
-                          .textTheme
-                          .displayLarge!
-                          .copyWith(
+                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
                             fontSize: 22.sp,
                           ),
                     ),
@@ -48,15 +48,15 @@ class SignUpScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AuthComponents.signLogo(
-                          raduis: 15.sp,
+                          raduis: AppSizes.socialLogoRaduis,
                           logoImage: google,
                           function: () {},
                         ),
                         SizedBox(
-                          width: 3.w,
+                          width: 5.w,
                         ),
                         AuthComponents.signLogo(
-                          raduis: 15.sp,
+                          raduis: AppSizes.socialLogoRaduis,
                           logoImage: facebook,
                           function: () {},
                         ),
@@ -73,42 +73,38 @@ class SignUpScreen extends StatelessWidget {
                             Row(
                               children: [
                                 Flexible(
-                                  child:
-                                      SharedComponents.defaultTextField(
+                                  child: SharedComponents.defaultTextField(
                                     controller: cubit.signUpFirstNameCon,
                                     type: TextInputType.text,
                                     validate: (e) {
                                       return null;
                                     },
                                     label: AppString.firstName,
-                                    radius: 30.sp,
+                                    radius: AppSizes.textFormFieldRadius,
                                     bgColor: textFormBgColor,
                                     textColor: textFormTextColor,
-                                    focusedRadius: true,
                                   ),
                                 ),
                                 SizedBox(
-                                  width: 3.w,
+                                  width: 2.w,
                                 ),
                                 Flexible(
-                                  child:
-                                      SharedComponents.defaultTextField(
+                                  child: SharedComponents.defaultTextField(
                                     controller: cubit.signUpLastNameCon,
                                     type: TextInputType.text,
                                     validate: (e) {
                                       return null;
                                     },
                                     label: AppString.lasttName,
-                                    radius: 30.sp,
+                                    radius: AppSizes.textFormFieldRadius,
                                     bgColor: textFormBgColor,
                                     textColor: textFormTextColor,
-                                    focusedRadius: true,
                                   ),
                                 ),
                               ],
                             ),
                             SizedBox(
-                              height: 2.h,
+                              height: AppSizes.spaceBetweenFields,
                             ),
                             SharedComponents.defaultTextField(
                               controller: cubit.signUpEmailCon,
@@ -117,13 +113,12 @@ class SignUpScreen extends StatelessWidget {
                                 return null;
                               },
                               label: AppString.email,
-                              radius: 30.sp,
+                              radius: AppSizes.textFormFieldRadius,
                               bgColor: textFormBgColor,
                               textColor: textFormTextColor,
-                              focusedRadius: true,
                             ),
                             SizedBox(
-                              height: 2.h,
+                              height: AppSizes.spaceBetweenFields,
                             ),
                             SharedComponents.defaultTextField(
                               controller: cubit.signUpPasswordCon,
@@ -132,10 +127,9 @@ class SignUpScreen extends StatelessWidget {
                                 return null;
                               },
                               label: AppString.passowrd,
-                              radius: 30.sp,
+                              radius: AppSizes.textFormFieldRadius,
                               bgColor: textFormBgColor,
                               textColor: textFormTextColor,
-                              focusedRadius: true,
                               password: cubit.signUpPasswordShown,
                               suffIconFound: true,
                               suffIcon: cubit.signUpSuffIcon,
@@ -144,18 +138,21 @@ class SignUpScreen extends StatelessWidget {
                               },
                             ),
                             SizedBox(
-                              height: 2.h,
+                              height: AppSizes.spaceBetweenFields,
                             ),
                             SharedComponents.defaultButton(
                               context: context,
                               function: () {
                                 SharedComponents.navigateToReplace(
-                                    LoginScreen(), context);
+                                  const LoginScreen(),
+                                  context,
+                                );
                               },
-                              text: StringUtils.capitalize(AppString.signUpTitle),
-                              width: AppConstants.width(context) / 3,
-                              height: AppConstants.height(context) / 14,
-                              radius: 4,
+                              text:
+                                  StringUtils.capitalize(AppString.signUpTitle),
+                              width: AppSizes.width(context) / 3,
+                              height: AppSizes.height(context) / 14,
+                              radius: AppSizes.defaultBottomRadius,
                             ),
                           ],
                         ),

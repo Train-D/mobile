@@ -1,3 +1,5 @@
+const String onboardingVectorOne = 'onboarding_vector1.png';
+const String onboardingVectorTwo = 'onboarding_vector2.png';
 const String google = 'google_logo.png';
 const String facebook = 'facebook_icon.png';
 const String loginBg = 'login-signup.jpg';

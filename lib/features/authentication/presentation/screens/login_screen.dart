@@ -5,6 +5,7 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/core/utils/app_images.dart';
+import 'package:traind_app/core/utils/app_sizes.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
 import 'package:traind_app/features/authentication/presentation/screens/sign_up_screen.dart';
@@ -25,20 +26,16 @@ class LoginScreen extends StatelessWidget {
           imageUrl: '${AppConstants.imagesUrl}$loginBg',
           context: context,
           child: Scaffold(
-            //resizeToAvoidBottomInset: false,
             backgroundColor: transparent,
             body: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  SizedBox(height: 22.h,),
+                  SizedBox(
+                    height: 25.h,
+                  ),
                   Text(
                     AppString.loginTitle,
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayLarge!
-                        .copyWith(
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
                           fontSize: 22.sp,
                         ),
                   ),
@@ -49,14 +46,15 @@ class LoginScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       AuthComponents.signLogo(
-                          raduis: 15.sp,
-                          logoImage: google,
-                          function: () {}),
+                        raduis: AppSizes.socialLogoRaduis,
+                        logoImage: google,
+                        function: () {},
+                      ),
                       SizedBox(
-                        width: 3.w,
+                        width: 5.w,
                       ),
                       AuthComponents.signLogo(
-                        raduis: 15.sp,
+                        raduis: AppSizes.socialLogoRaduis,
                         logoImage: facebook,
                         function: () {},
                       ),
@@ -66,7 +64,7 @@ class LoginScreen extends StatelessWidget {
                     height: 4.h,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30.sp),
+                    padding: EdgeInsets.symmetric(horizontal: 30.sp,),
                     child: Form(
                       child: Column(
                         children: [
@@ -77,13 +75,12 @@ class LoginScreen extends StatelessWidget {
                               return null;
                             },
                             label: AppString.userName,
-                            radius: 30.sp,
+                            radius: AppSizes.textFormFieldRadius,
                             bgColor: textFormBgColor,
                             textColor: textFormTextColor,
-                            focusedRadius: true,
                           ),
                           SizedBox(
-                            height: 2.h,
+                            height: AppSizes.spaceBetweenFields,
                           ),
                           SharedComponents.defaultTextField(
                             controller: cubit.loginPasswordCon,
@@ -92,10 +89,9 @@ class LoginScreen extends StatelessWidget {
                               return null;
                             },
                             label: AppString.passowrd,
-                            radius: 30.sp,
+                            radius: AppSizes.textFormFieldRadius,
                             bgColor: textFormBgColor,
                             textColor: textFormTextColor,
-                            focusedRadius: true,
                             password: cubit.loginPasswordShown,
                             suffIcon: cubit.loginSuffIcon,
                             suffPressed: () {
@@ -109,12 +105,12 @@ class LoginScreen extends StatelessWidget {
                             context: context,
                             function: () {
                               SharedComponents.navigateTo(
-                                  HomeScreen(), context);
+                                  const HomeScreen(), context);
                             },
                             text: StringUtils.capitalize(AppString.loginTitle),
-                            width: AppConstants.width(context) / 3,
-                            height: AppConstants.height(context) / 14,
-                            radius: 4,
+                            width: AppSizes.width(context) / 3,
+                            height: AppSizes.height(context) / 14,
+                            radius: AppSizes.defaultBottomRadius,
                           ),
                           SizedBox(
                             height: 1.h,
@@ -136,7 +132,7 @@ class LoginScreen extends StatelessWidget {
                               SharedComponents.defaultTextButton(
                                 function: () {
                                   SharedComponents.navigateToReplace(
-                                    SignUpScreen(),
+                                    const  SignUpScreen(),
                                     context,
                                   );
                                 },

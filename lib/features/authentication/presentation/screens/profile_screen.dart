@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/utils/app_sizes.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
 import 'package:traind_app/features/authentication/presentation/controller/profile_cubit/profile_cubit.dart';
@@ -10,7 +9,6 @@ import 'package:traind_app/features/authentication/presentation/controller/profi
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
-import 'login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -20,24 +18,14 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(
       child: BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
         ProfileCubit cubit = ProfileCubit.get(context);
-        return Container(
-            width: double.infinity,
-            height: double.infinity,
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: profileBg,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-            ),
+        return SharedComponents.linearGradientBg(
+            colors: profileBg,
             child: Scaffold(
               backgroundColor: Colors.transparent,
               appBar: SharedComponents.defualtAppBar(context),
               body: SingleChildScrollView(
                 child: Center(
                   child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
                         height: 3.h,
@@ -46,7 +34,7 @@ class ProfileScreen extends StatelessWidget {
                         radius: 40.sp,
                         backgroundColor: cameraBG,
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(42.sp),
+                          borderRadius: BorderRadius.circular(40.sp),
                           child: Image(
                             width: 50.w,
                             height: 50.h,
@@ -75,14 +63,13 @@ class ProfileScreen extends StatelessWidget {
                                         return null;
                                       },
                                       label: AppString.firstName,
-                                      radius: 30.sp,
+                                      radius: AppSizes.textFormFieldRadius,
                                       bgColor: textFormBgColor,
                                       textColor: textFormTextColor,
-                                      focusedRadius: true,
                                     ),
                                   ),
                                   SizedBox(
-                                    width: 3.w,
+                                    width: 2.w,
                                   ),
                                   Flexible(
                                     child: SharedComponents.defaultTextField(
@@ -92,16 +79,15 @@ class ProfileScreen extends StatelessWidget {
                                         return null;
                                       },
                                       label: AppString.lasttName,
-                                      radius: 30.sp,
+                                      radius: AppSizes.textFormFieldRadius,
                                       bgColor: textFormBgColor,
                                       textColor: textFormTextColor,
-                                      focusedRadius: true,
                                     ),
                                   ),
                                 ],
                               ),
                               SizedBox(
-                                height: 2.h,
+                                height: AppSizes.spaceBetweenFields,
                               ),
                               SharedComponents.defaultTextField(
                                 controller: cubit.profileUsernameCon,
@@ -110,13 +96,12 @@ class ProfileScreen extends StatelessWidget {
                                   return null;
                                 },
                                 label: AppString.userName,
-                                radius: 30.sp,
+                                radius: AppSizes.textFormFieldRadius,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
-                                focusedRadius: true,
                               ),
                               SizedBox(
-                                height: 2.h,
+                                height: AppSizes.spaceBetweenFields,
                               ),
                               SharedComponents.defaultTextField(
                                 controller: cubit.profileEmailCon,
@@ -125,13 +110,12 @@ class ProfileScreen extends StatelessWidget {
                                   return null;
                                 },
                                 label: AppString.email,
-                                radius: 30.sp,
+                                radius: AppSizes.textFormFieldRadius,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
-                                focusedRadius: true,
                               ),
                               SizedBox(
-                                height: 2.h,
+                                height: AppSizes.spaceBetweenFields,
                               ),
                               SharedComponents.defaultTextField(
                                 controller: cubit.profilePhoneCon,
@@ -140,13 +124,12 @@ class ProfileScreen extends StatelessWidget {
                                   return null;
                                 },
                                 label: AppString.phoneNumber,
-                                radius: 30.sp,
+                                radius: AppSizes.textFormFieldRadius,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
-                                focusedRadius: true,
                               ),
                               SizedBox(
-                                height: 2.h,
+                                height: AppSizes.spaceBetweenFields,
                               ),
                               SharedComponents.defaultTextField(
                                 controller: cubit.profileCityCon,
@@ -155,10 +138,9 @@ class ProfileScreen extends StatelessWidget {
                                   return null;
                                 },
                                 label: AppString.city,
-                                radius: 30.sp,
+                                radius: AppSizes.textFormFieldRadius,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
-                                focusedRadius: true,
                               ),
                               SizedBox(
                                 height: 4.h,
@@ -172,9 +154,9 @@ class ProfileScreen extends StatelessWidget {
                                   // );
                                 },
                                 text: AppString.save,
-                                width: AppConstants.width(context) / 3,
-                                height: AppConstants.height(context) / 14,
-                                radius: 4,
+                                width: AppSizes.width(context) / 3,
+                                height: AppSizes.height(context) / 14,
+                                radius: AppSizes.defaultBottomRadius,
                               ),
                               //SizedBox(height: 20.h,)
                             ],
