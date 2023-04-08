@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
+import 'package:traind_app/core/utils/app_sizes.dart';
 
 class SharedComponents {
   static Widget defaultButton({
@@ -161,7 +162,7 @@ class SharedComponents {
   }) =>
       Container(
         width: double.infinity,
-        height: MediaQuery.of(context).size.height,
+        height: AppSizes.height(context),
         decoration: BoxDecoration(
             image: DecorationImage(
           image: AssetImage(imageUrl),
@@ -169,6 +170,7 @@ class SharedComponents {
         )),
         child: child,
       );
+  
   static defualtAppBar(BuildContext context) => AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,

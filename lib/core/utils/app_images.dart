@@ -13,3 +13,4 @@ const String splashVector = 'splash_vector.png';
 const String homeIcon = 'home_icon.png';
 const String profileIcon = 'profile_icon.png';
 const String settingsIcon = 'settings_icon.png';
+const String station = 'stations.png';

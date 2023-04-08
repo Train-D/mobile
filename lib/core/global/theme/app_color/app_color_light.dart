@@ -33,3 +33,5 @@ const List<Color> profileBg = [
 const Color cameraBG = Color.fromRGBO(236, 236, 236, 1);
 
 const Color fromToDropDownBgColor = Color.fromRGBO(120, 118, 118, 1);
+
+const Color stationDetailsBgColor = Color.fromRGBO(65, 49, 42, 1);
