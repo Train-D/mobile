@@ -11,6 +11,7 @@ import 'package:traind_app/features/layout/presentation/component/layout.dart';
 import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_state.dart';
 import 'package:traind_app/features/stations/presentation/screens/station_details_screen.dart';
+import 'package:traind_app/features/stations/presentation/screens/stations_screen.dart';
 import 'package:traind_app/features/tickets/presentation/screens/from_to_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -62,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         homeButton(
                           label: AppString.stations,
-                          screen: const StationDetailsScreen(),
+                          screen: const StationsScreen(),
                           context: context,
                         ),
                       ],

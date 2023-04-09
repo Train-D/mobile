@@ -25,7 +25,7 @@ class StationDetailsScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height / 2.2,
               fit: BoxFit.cover,
               image: AssetImage(
-                '${AppConstants.imagesUrl}$station',
+                '${AppConstants.imagesUrl}$stationDetails',
               ),
             ),
             Align(
@@ -41,7 +41,7 @@ class StationDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(15.0),
+                  padding: EdgeInsets.all(15.sp),
                   child: SingleChildScrollView(
                     physics: const BouncingScrollPhysics(),
                     child: Column(
