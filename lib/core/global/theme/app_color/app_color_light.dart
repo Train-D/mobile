@@ -35,3 +35,12 @@ const Color cameraBG = Color.fromRGBO(236, 236, 236, 1);
 const Color fromToDropDownBgColor = Color.fromRGBO(120, 118, 118, 1);
 
 const Color stationDetailsBgColor = Color.fromRGBO(65, 49, 42, 1);
+
+const List<Color> stationsBgColor = [
+  Color.fromRGBO(126, 116, 105, 1),
+  Color.fromRGBO(74, 55, 46, 0.5)
+];
+
+const Color searchTextFieldBgColor = Color.fromRGBO(215, 207, 202, 1);
+
+const Color stationsContainerBgColor = Color.fromRGBO(65, 49, 42, 0.72);
