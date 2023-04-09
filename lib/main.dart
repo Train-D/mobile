@@ -12,6 +12,7 @@ import 'package:traind_app/features/tickets/presentation/controller/from_to_cubi
 
 import 'features/authentication/presentation/controller/login_cubit/login_cubit.dart';
 import 'features/authentication/presentation/controller/sign_up_cubit/sign_up_cubit.dart';
+import 'features/track/presentation/controller/tracking_cubit/tracking_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,6 +39,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => HomeCubit(),
+        ),
+        BlocProvider(
+          create: (context) => TrackingCubit(),
         )
       ],
       child: ResponsiveSizer(

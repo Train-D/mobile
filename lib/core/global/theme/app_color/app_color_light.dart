@@ -44,3 +44,12 @@ const List<Color> stationsBgColor = [
 const Color searchTextFieldBgColor = Color.fromRGBO(215, 207, 202, 1);
 
 const Color stationsContainerBgColor = Color.fromRGBO(65, 49, 42, 0.72);
+
+const List<Color> trainIdBottomSheetColor = [
+  Color.fromRGBO(108, 107, 98, 1),
+  Color.fromRGBO(113, 98, 92, 1)
+];
+const Color trainIdCardColor = Color.fromRGBO(136, 118, 110, 0.81);
+const Color trainIdSubTitleColor = Color.fromRGBO(236, 236, 236, 0.96);
+const Color trainIdTextFieldColor = Color.fromRGBO(217, 217, 217, 0.91);
+const Color trainIdTextColor = Color.fromRGBO(69, 69, 69, 0.8);

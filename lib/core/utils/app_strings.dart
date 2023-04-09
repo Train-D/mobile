@@ -29,4 +29,6 @@ class AppString {
   static const String defaultDatePattern = 'dd/mm/yyyy';
   static const String search = 'Search';
   static const String select = 'Select';
+  static const String trainIdTitle = 'Track Your Train';
+  static const String trainIdSubTitle = 'Entre the train id that you got from your ticket';
 }

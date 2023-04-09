@@ -30,26 +30,25 @@ class FromToScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: AppSizes.height(context) * 0.25,
+                    height: 20.h,
                   ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 25.sp),
+                  Center(
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(17.sp),
                         color: fromToCardBgColor,
                       ),
-                      height: h * 0.5,
-                      width: w * 0.8,
-                      child: LayoutBuilder(
-                        builder: (ctx, constrains) => SingleChildScrollView(
+                      height: 40.h,
+                      width: 80.w,
+                      child: SingleChildScrollView(
+                        child: Padding(
+                          padding: EdgeInsets.all(25.sp),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              Container(
-                                //height: constrains.maxHeight * 0.35,
-                                padding: const EdgeInsets.only(
-                                    top: 30, left: 30, right: 30),
+                              SizedBox(
+                                width: 65.w,
+                               // height: 10.h,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -67,65 +66,50 @@ class FromToScreen extends StatelessWidget {
                                   ],
                                 ),
                               ),
+                              SizedBox(height: 2.h),
                               SizedBox(
-                                height: constrains.maxHeight * 0.02,
-                              ),
-                              Container(
-                                //height: constrains.maxHeight * 0.3,
-
-                                padding:
-                                    const EdgeInsets.only(left: 30, right: 30),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    TicketsComponents.labelField(
-                                        context: context,
-                                        text: AppString.date,
-                                        field: SizedBox(
-                                          width: constrains.maxWidth * 0.77,
-                                          child:
-                                              SharedComponents.defaultTextField(
-                                                  controller:
-                                                      cubit.fromToDateCon,
-                                                  type: TextInputType.text,
-                                                  validate: (e) {
-                                                    return null;
-                                                  },
-                                                  label: AppString
-                                                      .defaultDatePattern,
-                                                  radius: 10.sp,
-                                                  bgColor: dateFieldColor,
-                                                  preIconFound: true,
-                                                  preIcon: Icons.calendar_month,
-                                                  onChange: (e) {},
-                                                  prePressed: () =>
-                                                      TicketsComponents.datePicker(
-                                                          context: context,
-                                                          datecontroller: cubit
-                                                              .fromToDateCon)),
-                                        ))
-                                  ],
-                                ),
+                                width: 65.w,
+                                child: TicketsComponents.labelField(
+                                    context: context,
+                                    text: AppString.date,
+                                    field: SizedBox(
+                                      width: 65.w,
+                                      height: 6.h,
+                                      child: SharedComponents.defaultTextField(
+                                          controller: cubit.fromToDateCon,
+                                          type: TextInputType.text,
+                                          validate: (e) {
+                                            return null;
+                                          },
+                                          label: AppString.defaultDatePattern,
+                                          radius: 10.sp,
+                                          bgColor: dateFieldColor,
+                                          preIconFound: true,
+                                          preIcon: Icons.calendar_month,
+                                          onChange: (e) {},
+                                          prePressed: () =>
+                                              TicketsComponents.datePicker(
+                                                  context: context,
+                                                  datecontroller:
+                                                      cubit.fromToDateCon)),
+                                    )),
                               ),
                               SizedBox(
-                                height: constrains.maxHeight * 0.1,
+                                height: 4.h,
                               ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SharedComponents.defaultButton(
-                                      function: () {
-                                        TicketsComponents.bottomModelSheet(
-                                            context);
-                                      },
-                                      text: AppString.search,
-                                      //size: 20.sp,
-                                      context: context,
-                                      width: constrains.maxWidth * 0.8,
-                                      height: constrains.maxHeight * 0.13,
-                                      radius: AppSizes.defaultBottomRadius,
-                                      withIcon: false),
-                                ],
+                              SizedBox(
+                                width: 65.w,
+                                height: 6.h,
+                                child: SharedComponents.defaultButton(
+                                    function: () {
+                                      TicketsComponents.bottomModelSheet(
+                                          context);
+                                    },
+                                    text: AppString.search,
+                                    //size: 20.sp,
+                                    context: context,
+                                    radius: AppSizes.defaultBottomRadius,
+                                    withIcon: false),
                               )
                             ],
                           ),
