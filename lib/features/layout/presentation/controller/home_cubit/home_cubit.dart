@@ -7,6 +7,8 @@ import 'package:traind_app/features/layout/presentation/controller/home_cubit/ho
 import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
 
+import '../../../../settings/presentation/screens/settings_screen.dart';
+
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit() : super(HomeInitial());
   static HomeCubit get(context) => BlocProvider.of(context);
@@ -14,7 +16,7 @@ class HomeCubit extends Cubit<HomeState> {
   List<Widget> screens = const [
     ProfileScreen(),
     HomeScreen(),
-    ProfileScreen(),
+    SettingsScreen(),
   ];
 
   List<BottomNavigationBarItem> navItems = [

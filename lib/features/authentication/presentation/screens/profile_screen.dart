@@ -31,20 +31,11 @@ class ProfileScreen extends StatelessWidget {
                       SizedBox(
                         height: 3.h,
                       ),
-                      CircleAvatar(
+                      SharedComponents.profilePicture(
+                        image: '${AppConstants.vectorsUrl}$profileCamera',
                         radius: 40.sp,
-                        backgroundColor: cameraBG,
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(40.sp),
-                          child: Image(
-                            width: 50.w,
-                            height: 50.h,
-                            //fit: BoxFit.fill,
-                            image: AssetImage(
-                              '${AppConstants.vectorsUrl}$profileCamera',
-                            ),
-                          ),
-                        ),
+                        imgHeigh: 50.sp,
+                        imgWidth: 50.sp,
                       ),
                       SizedBox(
                         height: 3.h,

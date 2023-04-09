@@ -53,3 +53,10 @@ const Color trainIdCardColor = Color.fromRGBO(136, 118, 110, 0.81);
 const Color trainIdSubTitleColor = Color.fromRGBO(236, 236, 236, 0.96);
 const Color trainIdTextFieldColor = Color.fromRGBO(217, 217, 217, 0.91);
 const Color trainIdTextColor = Color.fromRGBO(69, 69, 69, 0.8);
+
+const List<Color> settingsContainerBgColor = [
+  Color.fromRGBO(64, 66, 50, 0.31),
+  Color.fromRGBO(111, 82, 70, 0.14),
+];
+
+const Color settingsTitleTextColor = Color.fromRGBO(218, 199, 182, 0.87);

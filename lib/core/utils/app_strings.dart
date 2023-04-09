@@ -30,5 +30,8 @@ class AppString {
   static const String search = 'Search';
   static const String select = 'Select';
   static const String trainIdTitle = 'Track Your Train';
-  static const String trainIdSubTitle = 'Entre the train id that you got from your ticket';
+  static const String trainIdSubTitle =
+      'Entre the train id that you got from your ticket';
+  static const String editProfile = 'Edit Profile';
+  static const String general = 'General';
 }

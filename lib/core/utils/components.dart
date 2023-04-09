@@ -3,6 +3,9 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_sizes.dart';
 
+import 'app_constants.dart';
+import 'app_images.dart';
+
 class SharedComponents {
   static Widget defaultButton({
     double width = double.infinity,
@@ -38,11 +41,15 @@ class SharedComponents {
                 style: Theme.of(context).textTheme.displayMedium,
               ),
               if (withIcon)
-                Icon(
+              Row(children: [
+                SizedBox(width: 1.w,),
+                      Icon(
                   icon,
                   color: iconColor,
                   size: iconSize,
                 ),
+              ],)
+              
             ],
           ),
         ),
@@ -123,13 +130,10 @@ class SharedComponents {
           fillColor: bgColor,
           labelText: label,
           labelStyle: TextStyle(
-            fontFamily: 'Inria Serif',
-            color: textColor,
-            fontSize: 17.sp
-          ),
+              fontFamily: 'Inria Serif', color: textColor, fontSize: 17.sp),
           prefixIcon: preIconFound
               ? IconButton(
-                iconSize: 20.sp,
+                  iconSize: 20.sp,
                   icon: Icon(preIcon),
                   onPressed: () {
                     prePressed!();
@@ -152,8 +156,9 @@ class SharedComponents {
             ),
           ),
           border: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(radius),
-              borderSide: BorderSide.none,),
+            borderRadius: BorderRadius.circular(radius),
+            borderSide: BorderSide.none,
+          ),
         ),
       );
 
@@ -172,7 +177,7 @@ class SharedComponents {
         )),
         child: child,
       );
-  
+
   static defualtAppBar(BuildContext context) => AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -204,7 +209,7 @@ class SharedComponents {
 
   static linearGradientBg({
     required List<Color> colors,
-    required Widget child, 
+    required Widget child,
   }) =>
       Container(
         width: double.infinity,
@@ -217,5 +222,28 @@ class SharedComponents {
           ),
         ),
         child: child,
+      );
+  
+  static profilePicture({
+    required dynamic image,
+    required double radius,
+    Color bgColor = cameraBG,
+    dynamic fit = BoxFit.none,
+    double? imgHeigh,
+    double? imgWidth,    
+  }) => CircleAvatar(
+        radius: radius,
+        backgroundColor: bgColor,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(radius),
+          child: Image(
+            width: imgHeigh,
+            height: imgWidth,
+            fit: fit,
+            image: AssetImage(
+              '$image',
+            ),
+          ),
+        ),
       );
 }

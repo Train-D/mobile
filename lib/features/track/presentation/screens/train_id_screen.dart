@@ -26,7 +26,8 @@ class TrainIdScreen extends StatelessWidget {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Stack(children: [
+              Stack(
+                children: [
                 Container(
                   width: double.infinity,
                   height: 45.h,
