@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
+import 'package:traind_app/features/authentication/presentation/screens/profile_screen.dart';
 import 'package:traind_app/features/settings/presentation/components/components.dart';
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
@@ -44,14 +45,18 @@ class SettingsScreen extends StatelessWidget {
                       height: 1.h,
                     ),
                     SharedComponents.defaultButton(
+                      bgColor: settingsColor,
                         context: context,
-                        function: () {},
+                        function: () {
+                          SharedComponents.navigateTo(ProfileScreen(), context);
+                        },
                         text: AppString.editProfile,
                         width: 40.w,
                         radius: 8.sp,
                         withIcon: true,
                         icon: Icons.arrow_forward_ios,
                         iconSize: 18.sp),
+                        
                   ],
                 ),
               ),
@@ -77,6 +82,17 @@ class SettingsScreen extends StatelessWidget {
                       SettingsComponents.titleContainer(
                         context: context,
                         title: AppString.general,
+                        
+                      ),
+                      SettingsComponents.settingsDefualtContainer(
+                          preIcon: Icons.language,
+                          title: 'Language',
+                          context: context,
+                          text: 'English'),
+                      SettingsComponents.settingsDefualtContainer(
+                        preIcon: Icons.location_on_outlined,
+                        title: 'Location',
+                        context: context,
                       ),
                     ],
                   ),
