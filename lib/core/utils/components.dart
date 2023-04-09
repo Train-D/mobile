@@ -125,9 +125,11 @@ class SharedComponents {
           labelStyle: TextStyle(
             fontFamily: 'Inria Serif',
             color: textColor,
+            fontSize: 17.sp
           ),
           prefixIcon: preIconFound
               ? IconButton(
+                iconSize: 20.sp,
                   icon: Icon(preIcon),
                   onPressed: () {
                     prePressed!();

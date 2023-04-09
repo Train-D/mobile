@@ -15,3 +15,5 @@ const String profileIcon = 'profile_icon.png';
 const String settingsIcon = 'settings_icon.png';
 const String stationDetails = 'station_details.png';
 const String stations = 'stations.png';
+const String trainIdBg = 'train_id.png';
+const String trainIdArrowVector = 'train_id_arrow.png';
