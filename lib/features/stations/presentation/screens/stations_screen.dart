@@ -71,7 +71,7 @@ class StationsScreen extends StatelessWidget {
                                 ),
                                 onTap: () {
                                   SharedComponents.navigateTo(
-                                      StationDetailsScreen(), context);
+                                      const StationDetailsScreen(), context);
                                 },
                               ),
                               SizedBox(

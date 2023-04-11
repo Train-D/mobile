@@ -48,7 +48,7 @@ class SettingsComponents {
               SizedBox(width: 3.w,),
               Text(title, style: Theme.of(context).textTheme.displayMedium,),
               const Spacer(),
-              Text(text, style: Theme.of(context).textTheme.displayLarge!.copyWith(color: LanguageTextColor, fontSize: 16.sp),),
+              Text(text, style: Theme.of(context).textTheme.displayLarge!.copyWith(color: languageTextColor, fontSize: 16.sp),),
               SizedBox(width: 2.w,),
               Icon(suffIcon, color: lightColor,)
               

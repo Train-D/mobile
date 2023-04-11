@@ -3,8 +3,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_sizes.dart';
 
-import 'app_constants.dart';
-import 'app_images.dart';
 
 class SharedComponents {
   static Widget defaultButton({

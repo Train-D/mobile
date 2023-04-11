@@ -60,5 +60,6 @@ const List<Color> settingsContainerBgColor = [
 ];
 
 const Color settingsTitleTextColor = Color.fromRGBO(218, 199, 182, 0.87);
-const Color LanguageTextColor = Color.fromRGBO(222, 217, 214, 0.81);
+const Color languageTextColor = Color.fromRGBO(222, 217, 214, 0.81);
 const Color settingsColor = Color.fromRGBO(65, 49, 42, 0.84);
+const Color ticketColor = Color.fromRGBO(78, 64, 57, 0.51);

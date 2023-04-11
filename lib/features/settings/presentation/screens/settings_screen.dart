@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
@@ -45,10 +43,13 @@ class SettingsScreen extends StatelessWidget {
                       height: 1.h,
                     ),
                     SharedComponents.defaultButton(
-                      bgColor: settingsColor,
+                        bgColor: settingsColor,
                         context: context,
                         function: () {
-                          SharedComponents.navigateTo(ProfileScreen(), context);
+                          SharedComponents.navigateTo(
+                            const ProfileScreen(),
+                            context,
+                          );
                         },
                         text: AppString.editProfile,
                         width: 40.w,
@@ -56,7 +57,6 @@ class SettingsScreen extends StatelessWidget {
                         withIcon: true,
                         icon: Icons.arrow_forward_ios,
                         iconSize: 18.sp),
-                        
                   ],
                 ),
               ),
@@ -82,7 +82,6 @@ class SettingsScreen extends StatelessWidget {
                       SettingsComponents.titleContainer(
                         context: context,
                         title: AppString.general,
-                        
                       ),
                       SettingsComponents.settingsDefualtContainer(
                           preIcon: Icons.language,

@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         homeButton(
                           label: AppString.track,
-                          screen: TrainIdScreen(),
+                          screen: const TrainIdScreen(),
                           context: context,
                         ),
                         SizedBox(

@@ -9,14 +9,13 @@ import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
 import 'package:traind_app/features/tickets/presentation/components/tickets_components.dart';
 import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
+import 'package:traind_app/features/tickets/presentation/screens/ticket_screen.dart';
 
 class FromToScreen extends StatelessWidget {
   const FromToScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    double h = AppSizes.height(context);
-    double w = AppSizes.width(context);
     return BlocBuilder<FromToCubit, FromToState>(builder: (context, state) {
       FromToCubit cubit = FromToCubit.get(context);
       return SafeArea(
@@ -48,7 +47,7 @@ class FromToScreen extends StatelessWidget {
                             children: [
                               SizedBox(
                                 width: 65.w,
-                               // height: 10.h,
+                                // height: 10.h,
                                 child: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
@@ -104,6 +103,10 @@ class FromToScreen extends StatelessWidget {
                                     function: () {
                                       TicketsComponents.bottomModelSheet(
                                           context);
+                                      SharedComponents.navigateTo(
+                                        const TicketScreen(),
+                                        context,
+                                      );
                                     },
                                     text: AppString.search,
                                     //size: 20.sp,

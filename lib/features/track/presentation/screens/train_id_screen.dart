@@ -4,7 +4,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/core/utils/app_images.dart';
-import 'package:traind_app/core/utils/app_sizes.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
 import 'package:traind_app/features/track/presentation/controller/tracking_cubit/tracking_cubit.dart';
@@ -26,8 +25,7 @@ class TrainIdScreen extends StatelessWidget {
           body: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Stack(
-                children: [
+              Stack(children: [
                 Container(
                   width: double.infinity,
                   height: 45.h,
@@ -94,7 +92,9 @@ class TrainIdScreen extends StatelessWidget {
                                   bgColor: trainIdTextFieldColor,
                                   textColor: trainIdTextColor,
                                   type: TextInputType.text,
-                                  validate: (e) {},
+                                  validate: (e) {
+                                    return null;
+                                  },
                                   label: 'Train ID'),
                             ),
                             SizedBox(
@@ -104,11 +104,11 @@ class TrainIdScreen extends StatelessWidget {
                               onTap: () {},
                               child: Container(
                                 height: 7.h,
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: stationDetailsBgColor
-                                ),
-                                child: Image.asset('${AppConstants.vectorsUrl}$trainIdArrowVector'),
+                                decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: stationDetailsBgColor),
+                                child: Image.asset(
+                                    '${AppConstants.vectorsUrl}$trainIdArrowVector'),
                               ),
                             )
                           ],
