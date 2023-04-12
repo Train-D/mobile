@@ -43,13 +43,34 @@ class TicketScreen extends StatelessWidget {
                                 image: AssetImage(
                                     '${AppConstants.vectorsUrl}$ticketLogo'),
                               ),
-                              Text(
+                              const Text(
                                 AppString.appName,
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontFamily: 'Grechen Fuemen',
                                   color: lightColor,
                                 ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 30,
+                          ),
+                          Stack(
+                            alignment: Alignment.topCenter,
+                            children: [
+                              Image(
+                                image: AssetImage(
+                                    '${AppConstants.vectorsUrl}$ticketTrainVector'),
+                              ),
+                              Image(
+                                image: AssetImage(
+                                    '${AppConstants.vectorsUrl}$ticketCurveVector'),
+                              ),
+                              SizedBox(height: 50,),
+                              Align(
+                                alignment: Alignment.center,
+                                child: Text('2h 20m'),
                               ),
                             ],
                           ),

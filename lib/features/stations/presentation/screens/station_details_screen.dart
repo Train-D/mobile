@@ -14,7 +14,7 @@ class StationDetailsScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         extendBodyBehindAppBar: true,
-        appBar: SharedComponents.defualtAppBar(context),
+        appBar: SharedComponents.defaultAppBar(context),
         body: Stack(
           children: [
             Image(

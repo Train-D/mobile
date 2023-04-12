@@ -15,6 +15,7 @@ Widget onboarding({
         Text(
           title,
           style: Theme.of(context).textTheme.displayLarge,
+          
         ),
         SizedBox(
           height: 2.h,

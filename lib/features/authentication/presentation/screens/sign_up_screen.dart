@@ -22,7 +22,7 @@ class SignUpScreen extends StatelessWidget {
         SignUpCubit cubit = SignUpCubit.get(context);
         return SafeArea(
           child: SharedComponents.screenBg(
-            imageUrl: '${AppConstants.imagesUrl}$loginBg',
+            imageUrl: '${AppConstants.imagesUrl}$signupBg',
             context: context,
             child: Scaffold(
               //resizeToAvoidBottomInset: false,

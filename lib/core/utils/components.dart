@@ -3,7 +3,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_sizes.dart';
 
-
 class SharedComponents {
   static Widget defaultButton({
     double width = double.infinity,
@@ -39,15 +38,18 @@ class SharedComponents {
                 style: Theme.of(context).textTheme.displayMedium,
               ),
               if (withIcon)
-              Row(children: [
-                SizedBox(width: 1.w,),
-                      Icon(
-                  icon,
-                  color: iconColor,
-                  size: iconSize,
-                ),
-              ],)
-              
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 1.w,
+                    ),
+                    Icon(
+                      icon,
+                      color: iconColor,
+                      size: iconSize,
+                    ),
+                  ],
+                )
             ],
           ),
         ),
@@ -98,6 +100,8 @@ class SharedComponents {
     required String label,
     bool preIconFound = false,
     bool suffIconFound = false,
+    bool isSuffIconImage = false,
+    dynamic imageSuffIcon,
     IconData? preIcon,
     IconData? suffIcon,
     Function? suffPressed,
@@ -139,7 +143,7 @@ class SharedComponents {
                 )
               : null,
           suffixIcon: suffIconFound
-              ? IconButton(
+              ? isSuffIconImage?imageSuffIcon : IconButton(
                   icon: Icon(suffIcon),
                   onPressed: () {
                     suffPressed!();
@@ -176,7 +180,7 @@ class SharedComponents {
         child: child,
       );
 
-  static defualtAppBar(BuildContext context) => AppBar(
+  static defaultAppBar(BuildContext context) => AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: Container(
@@ -221,15 +225,16 @@ class SharedComponents {
         ),
         child: child,
       );
-  
+
   static profilePicture({
     required dynamic image,
     required double radius,
     Color bgColor = cameraBG,
     dynamic fit = BoxFit.none,
     double? imgHeigh,
-    double? imgWidth,    
-  }) => CircleAvatar(
+    double? imgWidth,
+  }) =>
+      CircleAvatar(
         radius: radius,
         backgroundColor: bgColor,
         child: ClipRRect(
@@ -244,4 +249,31 @@ class SharedComponents {
           ),
         ),
       );
+  static defaultBgContainer(
+          {double width = double.infinity,
+          required double height,
+          required double topRedius,
+          double bottomRedius = 0,
+          required bool isLinearGradient,
+          List<Color> linearGradientbgColor = const [Colors.black, Colors.black],
+          Color bgColor = Colors.black,
+          Widget child = const Text('')}) =>
+      Container(
+          width: width,
+          height:  height,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(topRedius),
+                topRight: Radius.circular(topRedius),
+                bottomLeft: Radius.circular(bottomRedius),
+                bottomRight: Radius.circular(bottomRedius)),
+            
+            gradient: isLinearGradient? LinearGradient(
+              colors: linearGradientbgColor,
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ) : null,
+            color: isLinearGradient == false ? bgColor : null
+          ),
+          child: child);
 }

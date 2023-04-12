@@ -30,19 +30,11 @@ class HomeScreen extends StatelessWidget {
                 backgroundColor: transparent,
                 body:
                     Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                  Container(
-                    width: double.infinity,
-                    height: AppSizes.height(context) * 0.5,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30.sp),
-                          topRight: Radius.circular(30.sp)),
-                      gradient: const LinearGradient(
-                        colors: homeBg,
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                      ),
-                    ),
+                  SharedComponents.defaultBgContainer(
+                    isLinearGradient: true,
+                    linearGradientbgColor: homeBg,
+                    height: 50.h,
+                    topRedius: 30.sp,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
