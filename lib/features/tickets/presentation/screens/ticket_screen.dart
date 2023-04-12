@@ -16,7 +16,7 @@ class TicketScreen extends StatelessWidget {
       colors: profileBg,
       child: Scaffold(
         backgroundColor: transparent,
-        appBar: SharedComponents.defualtAppBar(context),
+        appBar: SharedComponents.defaultAppBar(context),
         body: SingleChildScrollView(
           child: Column(
             children: [
@@ -56,24 +56,7 @@ class TicketScreen extends StatelessWidget {
                           const SizedBox(
                             height: 30,
                           ),
-                          Stack(
-                            alignment: Alignment.topCenter,
-                            children: [
-                              Image(
-                                image: AssetImage(
-                                    '${AppConstants.vectorsUrl}$ticketTrainVector'),
-                              ),
-                              Image(
-                                image: AssetImage(
-                                    '${AppConstants.vectorsUrl}$ticketCurveVector'),
-                              ),
-                              SizedBox(height: 50,),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Text('2h 20m'),
-                              ),
-                            ],
-                          ),
+                       
                         ],
                       ),
                     ),
