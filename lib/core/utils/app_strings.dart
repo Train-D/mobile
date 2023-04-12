@@ -34,4 +34,11 @@ class AppString {
       'Entre the train id that you got from your ticket';
   static const String editProfile = 'Edit Profile';
   static const String general = 'General';
+  static const String cardNumber = 'Card Number';
+  static const String expiryDate = 'Expiry Date';
+  static const String cardName = 'Your Name and Surname';
+  static const String cvv = 'CVV';
+  static const String cvvDesc = 'The last three digits on the back of the card';
+  static const String savePaymentData = 'Save Card data for future payment';
+  static const String buyTicket = 'Buy Ticket';
 }

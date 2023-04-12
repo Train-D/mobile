@@ -20,37 +20,31 @@ class TrainIdScreen extends StatelessWidget {
         imageUrl: '${AppConstants.imagesUrl}$trainIdBg',
         context: context,
         child: Scaffold(
-          appBar: SharedComponents.defualtAppBar(context),
+          resizeToAvoidBottomInset: false,
+          appBar: SharedComponents.defaultAppBar(context),
           backgroundColor: transparent,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Stack(children: [
-                Container(
-                  width: double.infinity,
-                  height: 45.h,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30.sp),
-                        topRight: Radius.circular(30.sp)),
-                    gradient: const LinearGradient(
-                      colors: trainIdBottomSheetColor,
-                      begin: Alignment.topCenter,
-                      end: Alignment.bottomCenter,
+                SharedComponents.defaultBgContainer(
+                    height: 45.h,
+                    topRedius: 30.sp,
+                    isLinearGradient: true,
+                    linearGradientbgColor: trainIdBottomSheetColor,
                     ),
-                  ),
-                ),
                 Center(
                   child: Column(
                     children: [
                       SizedBox(height: 6.h),
-                      Container(
-                        width: 90.w,
-                        height: 31.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20.sp),
-                            color: trainIdCardColor),
-                      ),
+                      SharedComponents.defaultBgContainer(
+                          width: 90.w,
+                          height: 31.h,
+                          topRedius: 20.sp,
+                          bottomRedius: 20.sp,
+                          isLinearGradient: false,
+                          bgColor: trainIdCardColor,
+                          )
                     ],
                   ),
                 ),

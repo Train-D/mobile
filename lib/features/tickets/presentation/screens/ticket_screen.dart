@@ -12,7 +12,7 @@ class TicketScreen extends StatelessWidget {
       colors: profileBg,
       child: Scaffold(
         backgroundColor: transparent,
-        appBar: SharedComponents.defualtAppBar(context),
+        appBar: SharedComponents.defaultAppBar(context),
         body: Column(
           children: [
             SizedBox(

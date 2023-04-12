@@ -9,6 +9,7 @@ import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
 import 'package:traind_app/features/tickets/presentation/components/tickets_components.dart';
 import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
+import 'package:traind_app/features/tickets/presentation/screens/payment_screen.dart';
 import 'package:traind_app/features/tickets/presentation/screens/ticket_screen.dart';
 
 class FromToScreen extends StatelessWidget {
@@ -23,7 +24,7 @@ class FromToScreen extends StatelessWidget {
           imageUrl: '${AppConstants.imagesUrl}$fromTo',
           context: context,
           child: Scaffold(
-            appBar: SharedComponents.defualtAppBar(context),
+            appBar: SharedComponents.defaultAppBar(context),
             backgroundColor: fromToBgColor,
             body: SingleChildScrollView(
               child: Column(
@@ -32,11 +33,11 @@ class FromToScreen extends StatelessWidget {
                     height: 20.h,
                   ),
                   Center(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(17.sp),
-                        color: fromToCardBgColor,
-                      ),
+                    child: SharedComponents.defaultBgContainer(
+                      isLinearGradient: false,
+                      bgColor: fromToCardBgColor,
+                      topRedius: 17.sp,
+                      bottomRedius: 17.sp,
                       height: 40.h,
                       width: 80.w,
                       child: SingleChildScrollView(
@@ -101,10 +102,10 @@ class FromToScreen extends StatelessWidget {
                                 height: 6.h,
                                 child: SharedComponents.defaultButton(
                                     function: () {
-                                      TicketsComponents.bottomModelSheet(
-                                          context);
+                                      /*TicketsComponents.bottomModelSheet(
+                                          context);*/
                                       SharedComponents.navigateTo(
-                                        const TicketScreen(),
+                                        const PaymentScreen(),
                                         context,
                                       );
                                     },
