@@ -17,3 +17,4 @@ const String stationDetails = 'station_details.png';
 const String stations = 'stations.png';
 const String trainIdBg = 'train_id.png';
 const String trainIdArrowVector = 'train_id_arrow.png';
+const String ticketLogo = 'ticket_logo_vector.png';
