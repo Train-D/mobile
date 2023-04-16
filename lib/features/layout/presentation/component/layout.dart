@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/utils/app_sizes.dart';
-import 'package:traind_app/core/utils/components.dart';
+import '../../../../core/utils/app_sizes.dart';
+import '../../../../core/utils/components.dart';
 
 Widget homeButton({
   required String label,

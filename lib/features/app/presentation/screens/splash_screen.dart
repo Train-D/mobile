@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
-import 'package:traind_app/core/utils/app_constants.dart';
-import 'package:traind_app/core/utils/app_images.dart';
-import 'package:traind_app/core/utils/app_strings.dart';
-import 'package:traind_app/core/utils/components.dart';
-import 'package:traind_app/features/app/presentation/screens/onboarding_one_screen.dart';
+import '../../../../core/global/theme/app_color/app_color_light.dart';
+import '../../../../core/utils/app_constants.dart';
+import '../../../../core/utils/app_images.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/components.dart';
+import 'onboarding_one_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

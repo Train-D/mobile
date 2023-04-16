@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
-import 'package:traind_app/core/utils/app_constants.dart';
-import 'package:traind_app/core/utils/app_images.dart';
-import 'package:traind_app/core/utils/app_sizes.dart';
-import 'package:traind_app/core/utils/app_strings.dart';
-import 'package:traind_app/core/utils/components.dart';
-import 'package:traind_app/features/tickets/presentation/components/tickets_components.dart';
-import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/screens/payment_screen.dart';
-import 'package:traind_app/features/tickets/presentation/screens/ticket_screen.dart';
+import '../../../../core/global/theme/app_color/app_color_light.dart';
+import '../../../../core/utils/app_constants.dart';
+import '../../../../core/utils/app_images.dart';
+import '../../../../core/utils/app_sizes.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/components.dart';
+import '../components/tickets_components.dart';
+import '../controller/from_to_cubit/from_to_cubit.dart';
+import 'payment_screen.dart';
+import 'ticket_screen.dart';
 
 class FromToScreen extends StatelessWidget {
   const FromToScreen({super.key});
