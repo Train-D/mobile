@@ -67,3 +67,7 @@ const Color languageTextColor = Color.fromRGBO(222, 217, 214, 0.81);
 const Color settingsColor = Color.fromRGBO(65, 49, 42, 0.84);
 const Color ticketColor = Color.fromRGBO(78, 64, 57, 0.51);
 const Color cardColor = Color.fromRGBO(66, 50, 43, 1);
+const List<Color> ticketAlertDialog = [
+  Color.fromRGBO(90, 92, 70, 1),
+  Color.fromRGBO(120, 89, 76, 1),
+];

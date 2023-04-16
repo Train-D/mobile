@@ -15,6 +15,7 @@ class SharedComponents {
     double iconSize = 10,
     double radius = 0,
     bool upper = false,
+    double? textSize,
     required BuildContext context,
     required Function function,
     required String text,
@@ -35,7 +36,9 @@ class SharedComponents {
             children: [
               Text(
                 upper ? text.toUpperCase() : text,
-                style: Theme.of(context).textTheme.displayMedium,
+                style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                  fontSize: textSize,
+                ),
               ),
               if (withIcon)
                 Row(
@@ -143,12 +146,14 @@ class SharedComponents {
                 )
               : null,
           suffixIcon: suffIconFound
-              ? isSuffIconImage?imageSuffIcon : IconButton(
-                  icon: Icon(suffIcon),
-                  onPressed: () {
-                    suffPressed!();
-                  },
-                )
+              ? isSuffIconImage
+                  ? imageSuffIcon
+                  : IconButton(
+                      icon: Icon(suffIcon),
+                      onPressed: () {
+                        suffPressed!();
+                      },
+                    )
               : null,
           //border: InputBorder.none,
           focusedBorder: UnderlineInputBorder(
@@ -249,31 +254,35 @@ class SharedComponents {
           ),
         ),
       );
-  static defaultBgContainer(
-          {double width = double.infinity,
-          required double height,
-          required double topRedius,
-          double bottomRedius = 0,
-          required bool isLinearGradient,
-          List<Color> linearGradientbgColor = const [Colors.black, Colors.black],
-          Color bgColor = Colors.black,
-          Widget child = const Text('')}) =>
+
+  static defaultBgContainer({
+    double width = double.infinity,
+    required double height,
+    required double topRedius,
+    double bottomRedius = 0,
+    required bool isLinearGradient,
+    List<Color> linearGradientbgColor = const [Colors.black, Colors.black],
+    Color bgColor = Colors.black,
+    Widget child = const Text(''),
+  }) =>
       Container(
-          width: width,
-          height:  height,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(topRedius),
-                topRight: Radius.circular(topRedius),
-                bottomLeft: Radius.circular(bottomRedius),
-                bottomRight: Radius.circular(bottomRedius)),
-            
-            gradient: isLinearGradient? LinearGradient(
-              colors: linearGradientbgColor,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ) : null,
-            color: isLinearGradient == false ? bgColor : null
-          ),
-          child: child);
+        width: width,
+        height: height,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(topRedius),
+              topRight: Radius.circular(topRedius),
+              bottomLeft: Radius.circular(bottomRedius),
+              bottomRight: Radius.circular(bottomRedius)),
+          gradient: isLinearGradient
+              ? LinearGradient(
+                  colors: linearGradientbgColor,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                )
+              : null,
+          color: isLinearGradient == false ? bgColor : null,
+        ),
+        child: child,
+      );
 }

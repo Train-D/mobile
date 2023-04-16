@@ -14,6 +14,7 @@ import 'package:traind_app/features/tickets/presentation/controller/ticket_cubit
 import 'core/bloc_observer/bloc_observer.dart';
 import 'features/authentication/presentation/controller/login_cubit/login_cubit.dart';
 import 'features/authentication/presentation/controller/sign_up_cubit/sign_up_cubit.dart';
+import 'features/tickets/presentation/screens/ticket_screen.dart';
 import 'features/track/presentation/controller/tracking_cubit/tracking_cubit.dart';
 
 void main() async{
@@ -60,7 +61,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Train D Edit Again',
             theme: lightTheme(),
-            home: const SplashScreen(),
+            home: const TicketScreen(),
           );
         },
       ),

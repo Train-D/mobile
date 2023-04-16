@@ -1,5 +1,3 @@
-import 'package:bloc/bloc.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
@@ -19,7 +17,12 @@ class TicketCubit extends Cubit<TicketState> {
 
     final time = DateTime.now().toString();
     final name = 'ticket $time';
-    final result = await ImageGallerySaver.saveImage(bytes);
+    final result = await ImageGallerySaver.saveImage(
+      bytes,
+      name: name,
+    );
     return result['filePath'];
   }
+
+  bool showDialog = false;
 }
