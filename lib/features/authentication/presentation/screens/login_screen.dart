@@ -8,7 +8,7 @@ import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
-import 'sign_up_screen.dart';
+import 'register_screen.dart';
 import '../../../layout/presentation/screens/home_screen.dart';
 
 import '../components/auth_components.dart';
