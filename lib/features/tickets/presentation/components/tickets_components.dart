@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/utils/app_sizes.dart';
-import 'package:traind_app/core/utils/app_strings.dart';
+import '../../../../core/utils/app_sizes.dart';
+import '../../../../core/utils/app_strings.dart';
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/global/theme/theme_data/theme_data_light.dart';
+import '../../../../core/utils/app_constants.dart';
 
 class TicketsComponents {
   static Widget defaultDropDownButton(BuildContext context) => Container(
@@ -34,17 +35,20 @@ class TicketsComponents {
           ),
         ),
       );
-  static Widget labelField({
-    required String text,
-    required dynamic field,
-    required BuildContext context
-  }) =>
+  static Widget labelField(
+          {required String text,
+          required dynamic field,
+          required BuildContext context}) =>
       Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
             '$text:',
-            style: Theme.of(context).textTheme.displayLarge!.copyWith(fontWeight: FontWeight.w700, color: Colors.black),),
+            style: Theme.of(context)
+                .textTheme
+                .displayLarge!
+                .copyWith(fontWeight: FontWeight.w700, color: Colors.black),
+          ),
           SizedBox(
             height: 1.h,
           ),
@@ -80,6 +84,50 @@ class TicketsComponents {
             child: SingleChildScrollView(
               child: Column(children: const []),
             ),
+          ),
+        ),
+      );
+
+  static twoText({
+    required BuildContext context,
+    required String title,
+    required String label,
+  }) =>
+      Column(
+        children: [
+          Text(
+            title,
+            style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w100,
+                ),
+          ),
+          Text(
+            label,
+            style: Theme.of(context)
+                .textTheme
+                .displayMedium!
+                .copyWith(fontSize: 15, fontWeight: FontWeight.w100),
+          ),
+        ],
+      );
+
+  static idNumberContainer({
+    required BuildContext context,
+    required String idNumber,
+  }) =>
+      Container(
+        width: 328,
+        height: 40,
+        color: lightDefualtColor,
+        child: Align(
+          alignment: Alignment.center,
+          child: Text(
+            idNumber,
+            style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w100,
+                ),
           ),
         ),
       );

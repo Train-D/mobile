@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
-import 'package:traind_app/core/utils/app_constants.dart';
-import 'package:traind_app/core/utils/app_images.dart';
-import 'package:traind_app/core/utils/app_sizes.dart';
-import 'package:traind_app/core/utils/app_strings.dart';
-import 'package:traind_app/core/utils/components.dart';
-import 'package:traind_app/features/app/presentation/components/onboarding.dart';
-import 'package:traind_app/features/app/presentation/screens/onboarding_two_screen.dart';
+import '../../../../core/global/theme/app_color/app_color_light.dart';
+import '../../../../core/utils/app_constants.dart';
+import '../../../../core/utils/app_images.dart';
+import '../../../../core/utils/app_sizes.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/components.dart';
+import '../components/onboarding.dart';
+import 'onboarding_two_screen.dart';
 
 class OnboardingOneScreen extends StatelessWidget {
   const OnboardingOneScreen({super.key});

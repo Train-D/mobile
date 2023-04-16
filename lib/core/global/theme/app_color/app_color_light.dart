@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const Color splashBgColor = Color.fromRGBO(84, 74, 65, 0.66);
 const Color transparent = Colors.transparent;
-const Color lightDefualtColor = Color(0xff41312a);
+const Color lightDefualtColor = Color.fromRGBO(65, 49, 42, 1);
 const Color lightDefualtIconColor = Colors.white;
 const Color textFormBgColor = Color.fromRGBO(217, 217, 217, 0.91);
 const Color textFormTextColor = Color.fromRGBO(69, 69, 69, 1);

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
-import 'package:traind_app/core/utils/app_constants.dart';
-import 'package:traind_app/core/utils/app_sizes.dart';
-import 'package:traind_app/core/utils/app_strings.dart';
-import 'package:traind_app/core/utils/components.dart';
-import 'package:traind_app/core/utils/app_images.dart';
-import 'package:traind_app/features/layout/presentation/component/layout.dart';
-import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_cubit.dart';
-import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_state.dart';
-import 'package:traind_app/features/stations/presentation/screens/stations_screen.dart';
-import 'package:traind_app/features/tickets/presentation/screens/from_to_screen.dart';
+import '../../../../core/global/theme/app_color/app_color_light.dart';
+import '../../../../core/utils/app_constants.dart';
+import '../../../../core/utils/app_sizes.dart';
+import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/components.dart';
+import '../../../../core/utils/app_images.dart';
+import '../component/layout.dart';
+import '../controller/home_cubit/home_cubit.dart';
+import '../controller/home_cubit/home_state.dart';
+import '../../../stations/presentation/screens/stations_screen.dart';
+import '../../../tickets/presentation/screens/from_to_screen.dart';
 
 import '../../../track/presentation/screens/train_id_screen.dart';
 
