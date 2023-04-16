@@ -24,7 +24,7 @@ class AppString {
   static const String city = 'City';
   static const String save = 'Save';
   static const String from = 'From';
-  static const String to = 'Trom';
+  static const String to = 'To';
   static const String date = 'Date';
   static const String defaultDatePattern = 'dd/mm/yyyy';
   static const String search = 'Search';
@@ -41,4 +41,8 @@ class AppString {
   static const String cvvDesc = 'The last three digits on the back of the card';
   static const String savePaymentData = 'Save Card data for future payment';
   static const String buyTicket = 'Buy Ticket';
+  static const String passenger = 'Passenger';
+  static const String seat = 'Seat';
+  static const String price = 'Price : ';
+  static const String download = 'Download';
 }
