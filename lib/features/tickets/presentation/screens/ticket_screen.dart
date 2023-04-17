@@ -58,9 +58,10 @@ class TicketScreen extends StatelessWidget {
                               await cubit.screenshotCon.captureFromWidget(
                             buildTicket(context: context),
                           );
-                          await cubit.saveImage(ticket);
+                          var res = await cubit.saveImage(ticket);
                           cubit.showDialog = true;
-                          //showAlertDialog(context: context);
+                          //print({'resulltttttt $res'});
+                          showAlertDialog(context: context);
                         },
                         text: AppString.download,
                         width: AppSizes.width(context) / 2.5,

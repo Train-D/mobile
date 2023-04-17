@@ -61,7 +61,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Train D Edit Again',
             theme: lightTheme(),
-            home: const TicketScreen(),
+            home: const SplashScreen(),
           );
         },
       ),

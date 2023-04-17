@@ -46,5 +46,5 @@ class AppString {
   static const String price = 'Price : ';
   static const String download = 'Download';
   static const String ticketSuccessDownload = 'Successfully Downloaded';
-  static const backToHome = 'Back To Home';
+  static const String backToHome = 'Back To Home';
 }
