@@ -24,3 +24,4 @@ const String ticketTrainCurveVector = 'ticket_train_curve_vector_2.png';
 const String ticketLeftCut = 'ticket_l_cut.png';
 const String ticketRightCut = 'ticket_right_cut.png';
 const String ticketDivider = 'ticket_devider_vector.png';
+const String ticketSuccessDownload = 'ticket_success_download.png';

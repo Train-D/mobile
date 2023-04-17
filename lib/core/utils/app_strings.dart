@@ -45,4 +45,6 @@ class AppString {
   static const String seat = 'Seat';
   static const String price = 'Price : ';
   static const String download = 'Download';
+  static const String ticketSuccessDownload = 'Successfully Downloaded';
+  static const String backToHome = 'Back To Home';
 }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
@@ -52,9 +53,15 @@ class TicketScreen extends StatelessWidget {
                       SharedComponents.defaultButton(
                         context: context,
                         function: () async {
-                          final ticket = await cubit.screenshotCon.capture();
-                          final ss = await cubit.screenshotCon
-                              .captureFromWidget(buildTicket(context: context),);
+                          //final ticket = await cubit.screenshotCon.capture();
+                          final ticket =
+                              await cubit.screenshotCon.captureFromWidget(
+                            buildTicket(context: context),
+                          );
+                          var res = await cubit.saveImage(ticket);
+                          cubit.showDialog = true;
+                          //print({'resulltttttt $res'});
+                          showAlertDialog(context: context);
                         },
                         text: AppString.download,
                         width: AppSizes.width(context) / 2.5,
@@ -245,3 +252,76 @@ Widget buildTicket({
         ],
       ),
     );
+
+Widget alertDialogTicketContent({
+  required BuildContext context,
+}) =>
+    Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image(
+          image: AssetImage('${AppConstants.vectorsUrl}$ticketSuccessDownload'),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        Text(
+          AppString.ticketSuccessDownload,
+          style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+        ),
+        const SizedBox(
+          height: 20,
+        ),
+        SharedComponents.defaultButton(
+          context: context,
+          function: () {
+            SharedComponents.navigateToRemove(
+              context,
+              const HomeScreen(),
+            );
+          },
+          text: AppString.backToHome,
+          width: 150,
+          radius: AppSizes.defaultBottomRadius,
+          textSize: 16,
+        ),
+      ],
+    );
+
+Widget alertDialogTicketStructure({
+  required BuildContext context,
+}) =>
+    AlertDialog(
+      content: SharedComponents.defaultBgContainer(
+        height: 220,
+        isLinearGradient: true,
+        linearGradientbgColor: ticketAlertDialog,
+        topRedius: 10,
+        bottomRedius: 10,
+        child: alertDialogTicketContent(
+          context: context,
+        ),
+      ),
+      contentPadding: const EdgeInsets.all(0),
+      shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+        Radius.circular(10),
+      )),
+    );
+
+showAlertDialog({
+  required BuildContext context,
+}) {
+  showDialog(
+    barrierDismissible: false,
+    context: context,
+    builder: (BuildContext context) {
+      return alertDialogTicketStructure(
+        context: context,
+      );
+    },
+  );
+}
