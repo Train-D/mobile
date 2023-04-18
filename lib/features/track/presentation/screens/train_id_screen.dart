@@ -21,7 +21,7 @@ class TrainIdScreen extends StatelessWidget {
         context: context,
         child: Scaffold(
           resizeToAvoidBottomInset: false,
-          appBar: SharedComponents.defaultAppBar(context),
+          appBar: SharedComponents.defaultAppBar(context: context),
           backgroundColor: transparent,
           body: Column(
             mainAxisAlignment: MainAxisAlignment.end,

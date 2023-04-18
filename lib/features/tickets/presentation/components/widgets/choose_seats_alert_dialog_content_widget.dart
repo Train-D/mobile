@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_state.dart';
+
 import '../../../../../core/utils/app_sizes.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/components.dart';
-import '../../components/tickets_components.dart';
+import '../../components/reusable_component/tickets_components.dart';
 
-Widget trainFirstCar({
+Widget chooseSeatsAlertDialogContent({
   required BuildContext context,
   required String seatNumber,
 }) =>

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import '../../../../core/utils/app_sizes.dart';
-import '../../../../core/utils/app_strings.dart';
 
-import '../../../../core/global/theme/app_color/app_color_light.dart';
-import '../../../../core/global/theme/theme_data/theme_data_light.dart';
-import '../../../../core/utils/components.dart';
+import '../../../../../core/global/theme/app_color/app_color_light.dart';
+import '../../../../../core/global/theme/theme_data/theme_data_light.dart';
+import '../../../../../core/utils/app_sizes.dart';
+import '../../../../../core/utils/app_strings.dart';
+import '../../../../../core/utils/components.dart';
+
 
 class TicketsComponents {
   static Widget defaultDropDownButton(BuildContext context) => Container(

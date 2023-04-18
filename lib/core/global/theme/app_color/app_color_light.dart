@@ -73,5 +73,5 @@ const List<Color> ticketAlertDialogColor = [
 ];
 const Color trainUnAvailableSeatColor = Color.fromRGBO(78, 64, 57, 1);
 const Color trainAvailableSeatColor = Color.fromRGBO(214, 192, 184, 1);
-
+const Color trainColor = Color.fromRGBO(227, 210, 203, 1);
 

@@ -1,12 +1,13 @@
-
 import 'package:flutter/material.dart';
+
+import '../../../../../core/global/theme/app_color/app_color_light.dart';
 
 class TrainFirstCarShape extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final Paint paint = Paint();
 
-    paint.color = const Color(0xffE3D2CB);
+    paint.color = trainColor;
 
     final path = Path();
 

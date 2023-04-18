@@ -22,7 +22,7 @@ class PaymentScreen extends StatelessWidget {
             child: Scaffold(
               backgroundColor: transparent,
               resizeToAvoidBottomInset: false,
-              appBar: SharedComponents.defaultAppBar(context),
+              appBar: SharedComponents.defaultAppBar(context: context),
               body: Stack(
                 children: [
                   Align(

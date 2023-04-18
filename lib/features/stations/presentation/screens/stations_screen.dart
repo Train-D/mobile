@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
@@ -20,7 +21,7 @@ class StationsScreen extends StatelessWidget {
           colors: stationsBgColor,
           child: Scaffold(
             backgroundColor: transparent,
-            appBar: SharedComponents.defaultAppBar(context),
+            appBar: SharedComponents.defaultAppBar(context: context),
             body: Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.sp),
               child: Column(

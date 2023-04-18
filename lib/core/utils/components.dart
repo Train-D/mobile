@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/features/tickets/presentation/components/reusable_component/choose_seats_screen_components.dart';
+
 import '../global/theme/app_color/app_color_light.dart';
 import 'app_sizes.dart';
 
@@ -37,8 +39,8 @@ class SharedComponents {
               Text(
                 upper ? text.toUpperCase() : text,
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                  fontSize: textSize,
-                ),
+                      fontSize: textSize,
+                    ),
               ),
               if (withIcon)
                 Row(
@@ -185,7 +187,10 @@ class SharedComponents {
         child: child,
       );
 
-  static defaultAppBar(BuildContext context) => AppBar(
+  static defaultAppBar(
+          {required BuildContext context,
+          bool chooseSeatsScreenAppBar = false}) =>
+      AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
         leading: Container(
@@ -212,6 +217,10 @@ class SharedComponents {
                     color: Colors.black,
                   )),
             )),
+        //if(chooseSeatsScreenAppBar){}
+        title: chooseSeatsScreenAppBar
+            ? ChooseSeatsComponents.appBarTitle(context: context)
+            : '',
       );
 
   static linearGradientBg({
