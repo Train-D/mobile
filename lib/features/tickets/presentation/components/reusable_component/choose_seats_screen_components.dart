@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/global/theme/app_color/app_color_light.dart';
-import '../screens/choose_seats_screen.dart';
+import '../../../../../core/global/theme/app_color/app_color_light.dart';
+import '../../screens/choose_seats_screen.dart';
 
 class ChooseSeatsComponents {
   static defaultSeat({

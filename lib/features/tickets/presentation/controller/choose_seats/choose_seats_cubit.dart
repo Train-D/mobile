@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_state.dart';
 
-import '../../components/widgets/classes/seat_details.dart';
+import '../../components/classes/seat_details.dart';
+import 'choose_seats_state.dart';
 
 
 class ChooseSeatsCubit extends Cubit<ChooseSeatsState> {

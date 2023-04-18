@@ -4,16 +4,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/core/utils/components.dart';
-import 'package:traind_app/features/tickets/presentation/components/choose_seats_screen_components.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_state.dart';
 
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../components/tickets_components.dart';
-import '../components/widgets/classes/seat_details.dart';
-import '../components/widgets/classes/train_first_car_custom_paint.dart';
+import '../components/classes/seat_details.dart';
+import '../components/classes/train_first_car_custom_paint.dart';
+import '../components/reusable_component/choose_seats_screen_components.dart';
+import '../components/reusable_component/tickets_components.dart';
 import 'choose_seats/train_first_car.dart';
 
 class ChooseSeatsScreen extends StatelessWidget {
@@ -38,7 +38,8 @@ class ChooseSeatsScreen extends StatelessWidget {
                   SizedBox(
                     width: 220,
                     height: 430,
-                    child: CustomPaint(
+                    child: 
+                    CustomPaint(
                         painter: TrainFirstCarShape(),
                         child: Column(
                           children: [

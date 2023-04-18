@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import '../global/theme/app_color/app_color_light.dart';
 import 'app_sizes.dart';
 

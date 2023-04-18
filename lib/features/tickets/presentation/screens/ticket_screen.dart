@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
+import '../../../layout/presentation/screens/home_screen.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/components.dart';
-import '../components/tickets_components.dart';
-
+import '../components/reusable_component/tickets_components.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../controller/ticket_cubit/cubit/ticket_cubit.dart';
 import '../controller/ticket_cubit/cubit/ticket_state.dart';

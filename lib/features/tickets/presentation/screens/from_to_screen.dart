@@ -7,7 +7,7 @@ import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
-import '../components/tickets_components.dart';
+import '../components/reusable_component/tickets_components.dart';
 import '../controller/from_to_cubit/from_to_cubit.dart';
 import 'payment_screen.dart';
 

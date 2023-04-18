@@ -1,4 +1,4 @@
-import 'package:traind_app/features/authentication/domain/entities/register_entity.dart';
+import '../../domain/entities/register_entity.dart';
 
 class RegisterRequestModel extends RegisterEntity {
   const RegisterRequestModel(

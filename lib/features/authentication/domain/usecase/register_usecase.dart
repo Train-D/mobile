@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-import 'package:traind_app/core/error/failure.dart';
-import 'package:traind_app/features/authentication/domain/repository/register_repository.dart';
+import '../../../../core/error/failure.dart';
+import '../repository/register_repository.dart';
 
 import '../../../../core/usecases/base_usecase.dart';
 
