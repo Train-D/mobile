@@ -4,7 +4,6 @@ import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
-import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
 import '../controller/payment_cubit/payment_cubit.dart';
@@ -42,7 +41,9 @@ class PaymentScreen extends StatelessWidget {
                                 SharedComponents.defaultTextField(
                                     controller: cubit.cardNumber,
                                     type: TextInputType.number,
-                                    validate: (e) {},
+                                    validate: (e) {
+                                      return null;
+                                    },
                                     bgColor: paymentTextFieldColor,
                                     textColor: paymentTextFieldTextColor,
                                     label: AppString.cardNumber,
@@ -64,7 +65,9 @@ class PaymentScreen extends StatelessWidget {
                                 SharedComponents.defaultTextField(
                                   controller: cubit.expiryDate,
                                   type: TextInputType.text,
-                                  validate: (e) {},
+                                  validate: (e) {
+                                    return null;
+                                  },
                                   bgColor: paymentTextFieldColor,
                                   textColor: paymentTextFieldTextColor,
                                   label: AppString.expiryDate,
@@ -76,7 +79,9 @@ class PaymentScreen extends StatelessWidget {
                                 SharedComponents.defaultTextField(
                                   controller: cubit.cardHolderName,
                                   type: TextInputType.text,
-                                  validate: (e) {},
+                                  validate: (e) {
+                                    return null;
+                                  },
                                   bgColor: paymentTextFieldColor,
                                   textColor: paymentTextFieldTextColor,
                                   label: AppString.cardName,
@@ -93,7 +98,9 @@ class PaymentScreen extends StatelessWidget {
                                             SharedComponents.defaultTextField(
                                           controller: cubit.cvvCode,
                                           type: TextInputType.number,
-                                          validate: (e) {},
+                                          validate: (e) {
+                                            return null;
+                                          },
                                           bgColor: paymentTextFieldColor,
                                           textColor: paymentTextFieldTextColor,
                                           label: AppString.cvv,
@@ -110,7 +117,7 @@ class PaymentScreen extends StatelessWidget {
                                           .displayMedium!
                                           .copyWith(
                                               fontSize: 15.sp,
-                                              color: CardTextCvvColor),
+                                              color: cardTextCvvColor),
                                       textAlign: TextAlign.center,
                                     ))
                                   ],
@@ -141,7 +148,7 @@ class PaymentScreen extends StatelessWidget {
                                     context: context,
                                     function: () {
                                       SharedComponents.navigateTo(
-                                          TicketScreen(), context);
+                                          const TicketScreen(), context);
                                     },
                                     text: AppString.buyTicket,
                                     radius: 7.sp,

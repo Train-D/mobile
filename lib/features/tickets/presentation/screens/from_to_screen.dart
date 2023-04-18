@@ -10,7 +10,6 @@ import '../../../../core/utils/components.dart';
 import '../components/tickets_components.dart';
 import '../controller/from_to_cubit/from_to_cubit.dart';
 import 'payment_screen.dart';
-import 'ticket_screen.dart';
 
 class FromToScreen extends StatelessWidget {
   const FromToScreen({super.key});

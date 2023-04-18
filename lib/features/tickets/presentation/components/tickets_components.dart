@@ -5,7 +5,7 @@ import '../../../../core/utils/app_strings.dart';
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/global/theme/theme_data/theme_data_light.dart';
-import '../../../../core/utils/app_constants.dart';
+import '../../../../core/utils/components.dart';
 
 class TicketsComponents {
   static Widget defaultDropDownButton(BuildContext context) => Container(
@@ -35,6 +35,7 @@ class TicketsComponents {
           ),
         ),
       );
+
   static Widget labelField(
           {required String text,
           required dynamic field,
@@ -55,6 +56,7 @@ class TicketsComponents {
           field
         ],
       );
+
   static Future<DateTime?> datePicker(
           {required BuildContext context,
           required TextEditingController datecontroller}) =>
@@ -65,6 +67,7 @@ class TicketsComponents {
         lastDate: DateTime(DateTime.now().year + 1),
         builder: (context, child) => Theme(data: lightTheme(), child: child!),
       );
+
   static Future bottomModelSheet(BuildContext context) => showModalBottomSheet(
         backgroundColor: Colors.transparent,
         context: context,
@@ -130,5 +133,47 @@ class TicketsComponents {
                 ),
           ),
         ),
+      );
+
+  static priceRow({
+    required BuildContext context,
+    required double price,
+  }) =>
+      Row(
+        children: [
+          Text(
+            AppString.price,
+            style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+          ),
+          Text(
+            '$price EGP',
+            style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                  fontWeight: FontWeight.w100,
+                  fontSize: 20,
+                ),
+          ),
+        ],
+      );
+
+  static defaultAlertDialog({
+    required double height,
+    required Widget content,
+  }) =>
+      AlertDialog(
+        content: SharedComponents.defaultBgContainer(
+            height: height,
+            isLinearGradient: true,
+            linearGradientbgColor: ticketAlertDialogColor,
+            topRedius: 10,
+            bottomRedius: 10,
+            child: content),
+        contentPadding: const EdgeInsets.all(0),
+        shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.all(
+          Radius.circular(10),
+        )),
       );
 }
