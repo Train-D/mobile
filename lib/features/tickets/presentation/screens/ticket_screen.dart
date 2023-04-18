@@ -1,4 +1,3 @@
-import 'package:basic_utils/basic_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -58,10 +57,10 @@ class TicketScreen extends StatelessWidget {
                               await cubit.screenshotCon.captureFromWidget(
                             buildTicket(context: context),
                           );
-                          var res = await cubit.saveImage(ticket);
+                          await cubit.saveImage(ticket);
                           cubit.showDialog = true;
                           //print({'resulltttttt $res'});
-                          showAlertDialog(context: context);
+                          showTicketAlertDialog(context: context);
                         },
                         text: AppString.download,
                         width: AppSizes.width(context) / 2.5,
@@ -226,25 +225,9 @@ Widget buildTicket({
             children: [
               Padding(
                 padding: const EdgeInsets.all(40),
-                child: Row(
-                  children: [
-                    Text(
-                      AppString.price,
-                      style:
-                          Theme.of(context).textTheme.displayMedium!.copyWith(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                    ),
-                    Text(
-                      '34.5 EGP',
-                      style:
-                          Theme.of(context).textTheme.displayMedium!.copyWith(
-                                fontWeight: FontWeight.w100,
-                                fontSize: 20,
-                              ),
-                    ),
-                  ],
+                child: TicketsComponents.priceRow(
+                  context: context,
+                  price: 34.5,
                 ),
               ),
             ],
@@ -291,36 +274,16 @@ Widget alertDialogTicketContent({
       ],
     );
 
-Widget alertDialogTicketStructure({
-  required BuildContext context,
-}) =>
-    AlertDialog(
-      content: SharedComponents.defaultBgContainer(
-        height: 220,
-        isLinearGradient: true,
-        linearGradientbgColor: ticketAlertDialog,
-        topRedius: 10,
-        bottomRedius: 10,
-        child: alertDialogTicketContent(
-          context: context,
-        ),
-      ),
-      contentPadding: const EdgeInsets.all(0),
-      shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(
-        Radius.circular(10),
-      )),
-    );
-
-showAlertDialog({
+showTicketAlertDialog({
   required BuildContext context,
 }) {
   showDialog(
     barrierDismissible: false,
     context: context,
     builder: (BuildContext context) {
-      return alertDialogTicketStructure(
-        context: context,
+      return TicketsComponents.defaultAlertDialog(
+        height: 220,
+        content: alertDialogTicketContent(context: context),
       );
     },
   );

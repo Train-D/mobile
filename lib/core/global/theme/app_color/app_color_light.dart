@@ -10,7 +10,7 @@ const Color lightColor = Colors.white;
 const textButtonColor = Color(0xffE4A286);
 const Color fromToBgColor = Color.fromRGBO(111, 82, 70, 0.24);
 const Color fromToCardBgColor = Color.fromRGBO(255, 255, 255, 0.61);
-const Color CardTextCvvColor = Color.fromRGBO(255, 255, 255, 0.83);
+const Color cardTextCvvColor = Color.fromRGBO(255, 255, 255, 0.83);
 const Color dateFieldColor = Color.fromRGBO(235, 234, 234, 1);
 const Color appBarBg = Color.fromRGBO(255, 255, 255, 0.79);
 const List<Color> onBoardingBg = [
@@ -67,7 +67,11 @@ const Color languageTextColor = Color.fromRGBO(222, 217, 214, 0.81);
 const Color settingsColor = Color.fromRGBO(65, 49, 42, 0.84);
 const Color ticketColor = Color.fromRGBO(78, 64, 57, 0.51);
 const Color cardColor = Color.fromRGBO(66, 50, 43, 1);
-const List<Color> ticketAlertDialog = [
+const List<Color> ticketAlertDialogColor = [
   Color.fromRGBO(90, 92, 70, 1),
   Color.fromRGBO(120, 89, 76, 1),
 ];
+const Color trainUnAvailableSeatColor = Color.fromRGBO(78, 64, 57, 1);
+const Color trainAvailableSeatColor = Color.fromRGBO(214, 192, 184, 1);
+
+
