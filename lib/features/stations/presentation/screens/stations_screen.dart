@@ -21,7 +21,7 @@ class StationsScreen extends StatelessWidget {
           colors: stationsBgColor,
           child: Scaffold(
             backgroundColor: transparent,
-            appBar: SharedComponents.defaultAppBar(context),
+            appBar: SharedComponents.defaultAppBar(context: context),
             body: Padding(
               padding: EdgeInsets.symmetric(horizontal: 15.sp),
               child: Column(

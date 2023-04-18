@@ -22,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
             colors: profileBg,
             child: Scaffold(
               backgroundColor: Colors.transparent,
-              appBar: SharedComponents.defaultAppBar(context),
+              appBar: SharedComponents.defaultAppBar(context: context),
               body: SingleChildScrollView(
                 child: Center(
                   child: Column(

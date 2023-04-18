@@ -23,7 +23,7 @@ class FromToScreen extends StatelessWidget {
           imageUrl: '${AppConstants.imagesUrl}$fromTo',
           context: context,
           child: Scaffold(
-            appBar: SharedComponents.defaultAppBar(context),
+            appBar: SharedComponents.defaultAppBar(context: context),
             backgroundColor: fromToBgColor,
             body: SingleChildScrollView(
               child: Column(

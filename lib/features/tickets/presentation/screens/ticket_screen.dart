@@ -28,7 +28,7 @@ class TicketScreen extends StatelessWidget {
               controller: cubit.screenshotCon,
               child: Scaffold(
                 backgroundColor: transparent,
-                appBar: SharedComponents.defaultAppBar(context),
+                appBar: SharedComponents.defaultAppBar(context: context),
                 body: SingleChildScrollView(
                   child: Column(
                     children: [

@@ -9,7 +9,7 @@ import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/components.dart';
 import '../../components/reusable_component/tickets_components.dart';
 
-Widget trainFirstCar({
+Widget chooseSeatsAlertDialogContent({
   required BuildContext context,
   required String seatNumber,
 }) =>

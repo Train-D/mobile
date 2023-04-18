@@ -20,7 +20,7 @@ class SettingsScreen extends StatelessWidget {
         colors: profileBg,
         child: Scaffold(
           backgroundColor: transparent,
-          appBar: SharedComponents.defaultAppBar(context),
+          appBar: SharedComponents.defaultAppBar(context: context),
           body: Column(
             children: [
               Center(
