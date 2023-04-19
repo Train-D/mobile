@@ -25,10 +25,11 @@ class PaymentScreen extends StatelessWidget {
               appBar: SharedComponents.defaultAppBar(context: context),
               body: Stack(
                 children: [
+                  
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: SharedComponents.defaultBgContainer(
-                      height: 70.h,
+                      height: 75.h,
                       topRedius: 35.sp,
                       isLinearGradient: false,
                       bgColor: ticketColor,
@@ -38,6 +39,7 @@ class PaymentScreen extends StatelessWidget {
                           child: Form(
                             child: Column(
                               children: [
+                                SizedBox(height: 10.h,),
                                 SharedComponents.defaultTextField(
                                     controller: cubit.cardNumber,
                                     type: TextInputType.number,
@@ -62,16 +64,42 @@ class PaymentScreen extends StatelessWidget {
                                 SizedBox(
                                   height: 2.h,
                                 ),
-                                SharedComponents.defaultTextField(
-                                  controller: cubit.expiryDate,
-                                  type: TextInputType.text,
-                                  validate: (e) {
-                                    return null;
-                                  },
-                                  bgColor: paymentTextFieldColor,
-                                  textColor: paymentTextFieldTextColor,
-                                  label: AppString.expiryDate,
-                                  radius: 17.sp,
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    SizedBox(
+                                      width: 38.w,
+                                      child: SharedComponents.defaultTextField(
+                                        controller: cubit.expiryYear,
+                                        type: TextInputType.text,
+                                        validate: (e) {
+                                          return null;
+                                        },
+                                        bgColor: paymentTextFieldColor,
+                                        textColor: paymentTextFieldTextColor,
+                                        label: AppString.expiryYear,
+                                        radius: 17.sp,
+                                      ),
+                                    ),
+                                    //SizedBox(width: 5.w,),
+                                    SizedBox(
+                                      width: 38.w,
+                                      child: SharedComponents.defaultTextField(
+                                        controller: cubit.expiryMonth,
+                                        type: TextInputType.text,
+                                        validate: (e) {
+                                          return null;
+                                        },
+                                        bgColor: paymentTextFieldColor,
+                                        textColor: paymentTextFieldTextColor,
+                                        label: AppString.expiryMonth,
+                                        radius: 17.sp,
+                                        suffIconFound: false,
+                                        preIconFound: false,
+                                        
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height: 2.h,
@@ -85,6 +113,20 @@ class PaymentScreen extends StatelessWidget {
                                   bgColor: paymentTextFieldColor,
                                   textColor: paymentTextFieldTextColor,
                                   label: AppString.cardName,
+                                  radius: 17.sp,
+                                ),
+                                SizedBox(
+                                  height: 2.h,
+                                ),
+                                SharedComponents.defaultTextField(
+                                  controller: cubit.email,
+                                  type: TextInputType.text,
+                                  validate: (e) {
+                                    return null;
+                                  },
+                                  bgColor: paymentTextFieldColor,
+                                  textColor: paymentTextFieldTextColor,
+                                  label: AppString.yourEmail,
                                   radius: 17.sp,
                                 ),
                                 SizedBox(
@@ -142,7 +184,7 @@ class PaymentScreen extends StatelessWidget {
                                   ],
                                 ),
                                 SizedBox(
-                                  height: 5.h,
+                                  height: 2.h,
                                 ),
                                 SharedComponents.defaultButton(
                                     context: context,
@@ -158,6 +200,20 @@ class PaymentScreen extends StatelessWidget {
                           ),
                         ),
                       ),
+                    ),
+                  ),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 5.h,),
+                        Align(
+                          alignment: Alignment.topCenter,
+                          child: SizedBox(width: 80.w,
+                          child: Image.asset('${AppConstants.imagesUrl}$card'),
+                          ),
+                        ),
+                       
+                      ],
                     ),
                   ),
                 ],

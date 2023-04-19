@@ -9,12 +9,11 @@ class PaymentCubit extends Cubit<PaymentState> {
   static PaymentCubit get(context) => BlocProvider.of(context);
 
   var cardNumber = TextEditingController();
-  var expiryDate = TextEditingController();
+  var expiryYear = TextEditingController();
+  var expiryMonth = TextEditingController();
+  var email = TextEditingController();
   var cardHolderName = TextEditingController();
   var cvvCode = TextEditingController();
-  bool isCvvFocused = false;
-  bool useGlassMorphism = false;
-  bool useBackgroundImage = false;
   bool saveCardData = false;
   void changeCheckboxValue() {
     saveCardData = !saveCardData;
