@@ -11,6 +11,7 @@ const textButtonColor = Color(0xffE4A286);
 const Color fromToBgColor = Color.fromRGBO(111, 82, 70, 0.24);
 const Color fromToCardBgColor = Color.fromRGBO(255, 255, 255, 0.61);
 const Color cardTextCvvColor = Color.fromRGBO(255, 255, 255, 0.83);
+const Color cardText = Color.fromRGBO(255, 255, 255, 0.9);
 const Color dateFieldColor = Color.fromRGBO(235, 234, 234, 1);
 const Color appBarBg = Color.fromRGBO(255, 255, 255, 0.79);
 const List<Color> onBoardingBg = [

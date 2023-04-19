@@ -37,6 +37,7 @@ class AppString {
   static const String cardNumber = 'Card Number';
   static const String expiryYear = 'Expiry Year';
   static const String expiryMonth = 'Expiry Month';
+  static const String expiryDate = 'Expiry Date';
   static const String yourEmail = 'Your Email';
   static const String cardName = 'Your Name and Surname';
   static const String cvv = 'CVV';
@@ -50,5 +51,7 @@ class AppString {
   static const String ticketSuccessDownload = 'Successfully Downloaded';
   static const String backToHome = 'Back To Home';
   static const String book = 'Book';
+  static const String Name = 'Name';
+  static const String debitCard = 'Debit Card';
   static const String chooseSeatsAppBarTitle = 'Choose Your Seats';
 }
