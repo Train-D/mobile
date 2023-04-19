@@ -75,4 +75,9 @@ const List<Color> ticketAlertDialogColor = [
 const Color trainUnAvailableSeatColor = Color.fromRGBO(78, 64, 57, 1);
 const Color trainAvailableSeatColor = Color.fromRGBO(214, 192, 184, 1);
 const Color trainColor = Color.fromRGBO(227, 210, 203, 1);
-
+const Color smallTrackingCard = Color.fromRGBO(139, 112, 100, 1);
+const List<Color> trackingBottomModelSheet = [
+  Color.fromRGBO(97, 99, 80, 1),
+  Color.fromRGBO(140, 113, 101, 1),
+];
+const Color fractionalbox = Color.fromRGBO(152, 135, 127, 1);
