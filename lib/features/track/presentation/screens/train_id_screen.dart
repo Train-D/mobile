@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/features/track/presentation/screens/tracking.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
@@ -13,8 +14,7 @@ class TrainIdScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TrackingCubit, TrackingState>(
-      builder: (context, state) {
+    return BlocBuilder<TrackingCubit, TrackingState>(builder: (context, state) {
       TrackingCubit cubit = TrackingCubit.get(context);
       return SafeArea(
           child: SharedComponents.screenBg(
@@ -29,23 +29,23 @@ class TrainIdScreen extends StatelessWidget {
             children: [
               Stack(children: [
                 SharedComponents.defaultBgContainer(
-                    height: 45.h,
-                    topRedius: 30.sp,
-                    isLinearGradient: true,
-                    linearGradientbgColor: trainIdBottomSheetColor,
-                    ),
+                  height: 45.h,
+                  topRedius: 30.sp,
+                  isLinearGradient: true,
+                  linearGradientbgColor: trainIdBottomSheetColor,
+                ),
                 Center(
                   child: Column(
                     children: [
                       SizedBox(height: 6.h),
                       SharedComponents.defaultBgContainer(
-                          width: 90.w,
-                          height: 31.h,
-                          topRedius: 20.sp,
-                          bottomRedius: 20.sp,
-                          isLinearGradient: false,
-                          bgColor: trainIdCardColor,
-                          )
+                        width: 90.w,
+                        height: 31.h,
+                        topRedius: 20.sp,
+                        bottomRedius: 20.sp,
+                        isLinearGradient: false,
+                        bgColor: trainIdCardColor,
+                      )
                     ],
                   ),
                 ),
@@ -96,7 +96,10 @@ class TrainIdScreen extends StatelessWidget {
                               height: 1.5.h,
                             ),
                             InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                SharedComponents.navigateTo(
+                                    trackingScreen(), context);
+                              },
                               child: Container(
                                 height: 7.h,
                                 decoration: const BoxDecoration(

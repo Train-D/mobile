@@ -27,3 +27,7 @@ const String ticketDivider = 'ticket_devider_vector.png';
 const String ticketSuccessDownload = 'ticket_success_download.png';
 const String trainCarOneFrontVector = 'train_car_one_front_shape.png';
 const String card = 'card.png';
+const String bar = 'bar.png';
+const String train = 'train.png';
+const String currLocation = 'currLocation.png';
+const String trainVector = 'train_vector.png';
