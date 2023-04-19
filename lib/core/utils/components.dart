@@ -220,7 +220,7 @@ class SharedComponents {
         //if(chooseSeatsScreenAppBar){}
         title: chooseSeatsScreenAppBar
             ? ChooseSeatsComponents.appBarTitle(context: context)
-            : '',
+            : const Text(''),
       );
 
   static linearGradientBg({

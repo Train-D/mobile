@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_state.dart';
+import 'package:traind_app/features/tickets/presentation/screens/payment_screen.dart';
 
 import '../../../../../core/utils/app_sizes.dart';
 import '../../../../../core/utils/app_strings.dart';
@@ -39,6 +40,10 @@ Widget chooseSeatsAlertDialogContent({
                 context: context,
                 function: () {
                   cubit.bookSeat(seatNumber);
+                  SharedComponents.navigateTo(
+                    const PaymentScreen(),
+                    context,
+                  );
                 },
                 text: AppString.book,
                 width: 100,

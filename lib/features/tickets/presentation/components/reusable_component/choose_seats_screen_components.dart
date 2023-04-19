@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:traind_app/core/utils/app_strings.dart';
 
 import '../../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../screens/choose_seats_screen.dart';
 import '../classes/seat_details.dart';
 
 class ChooseSeatsComponents {
-  
   static appBarTitle({
     required BuildContext context,
   }) =>
       Padding(
         padding: const EdgeInsetsDirectional.only(
-          top: 40,
-          bottom: 15,
+          top: 50,
+          bottom: 30,
+          end: 20,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Text(
-              'Choose Your Seats',
+              AppString.chooseSeatsAppBarTitle,
               style: Theme.of(context).textTheme.displayLarge!.copyWith(
                     color: trainUnAvailableSeatColor,
                     fontSize: 20,
@@ -30,23 +31,21 @@ class ChooseSeatsComponents {
 
   static Widget defaultSeat({
     required BuildContext context,
-    required String seatNumber,
-    required bool isAvailable,
+    required Seat seatDetails,
   }) =>
       InkWell(
         onTap: () {
           showChooseSeatsAlertDialog(
             context: context,
-            seatNumber: seatNumber,
+            seatNumber: seatDetails.seatNumber,
           );
-          debugPrint(seatNumber);
         },
         child: Container(
           width: 33,
           height: 44,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: isAvailable
+            color: seatDetails.isAvailable
                 ? trainAvailableSeatColor
                 : trainUnAvailableSeatColor,
             border: Border.all(
@@ -56,10 +55,11 @@ class ChooseSeatsComponents {
           ),
           child: Align(
             alignment: Alignment.center,
-            child: Text(seatNumber,
+            child: Text(seatDetails.seatNumber,
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
                       color:
-                          isAvailable ? trainUnAvailableSeatColor : lightColor,
+                          seatDetails.isAvailable ? trainUnAvailableSeatColor : lightColor,
+                      fontSize: 18,
                     )),
           ),
         ),
@@ -74,16 +74,14 @@ class ChooseSeatsComponents {
         children: [
           ChooseSeatsComponents.defaultSeat(
             context: context,
-            seatNumber: seat1.seatNumber,
-            isAvailable: seat1.isAvailable,
+             seatDetails: seat1,
           ),
           const SizedBox(
             width: 10,
           ),
           ChooseSeatsComponents.defaultSeat(
             context: context,
-            seatNumber: seat2.seatNumber,
-            isAvailable: seat2.isAvailable,
+            seatDetails: seat2,
           ),
         ],
       );
@@ -93,6 +91,8 @@ class ChooseSeatsComponents {
     required Widget firstRowTwoSeats,
     required Widget secondRowTwoSeats,
     required Widget thirdRowTwoSeats,
+    bool isfirst = false,
+    Widget? fourthRowTwoSeats,
   }) =>
       Padding(
         padding: const EdgeInsets.symmetric(
@@ -108,7 +108,12 @@ class ChooseSeatsComponents {
             const SizedBox(
               height: 35,
             ),
-            thirdRowTwoSeats
+            thirdRowTwoSeats,
+            // if (!isfirst)
+            //   const SizedBox(
+            //     height: 35,
+            //   ),
+            //   fourthRowTwoSeats,
           ],
         ),
       );

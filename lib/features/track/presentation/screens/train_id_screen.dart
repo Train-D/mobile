@@ -13,7 +13,8 @@ class TrainIdScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TrackingCubit, TrackingState>(builder: (context, state) {
+    return BlocBuilder<TrackingCubit, TrackingState>(
+      builder: (context, state) {
       TrackingCubit cubit = TrackingCubit.get(context);
       return SafeArea(
           child: SharedComponents.screenBg(

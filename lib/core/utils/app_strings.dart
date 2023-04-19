@@ -47,6 +47,6 @@ class AppString {
   static const String download = 'Download';
   static const String ticketSuccessDownload = 'Successfully Downloaded';
   static const String backToHome = 'Back To Home';
-    static const String book = 'Book';
-
+  static const String book = 'Book';
+  static const String chooseSeatsAppBarTitle = 'Choose Your Seats';
 }

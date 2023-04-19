@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/features/tickets/presentation/screens/choose_seats_screen.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
@@ -9,7 +10,6 @@ import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
 import '../components/reusable_component/tickets_components.dart';
 import '../controller/from_to_cubit/from_to_cubit.dart';
-import 'payment_screen.dart';
 
 class FromToScreen extends StatelessWidget {
   const FromToScreen({super.key});
@@ -104,7 +104,7 @@ class FromToScreen extends StatelessWidget {
                                       /*TicketsComponents.bottomModelSheet(
                                           context);*/
                                       SharedComponents.navigateTo(
-                                        const PaymentScreen(),
+                                        const ChooseSeatsScreen(),
                                         context,
                                       );
                                     },
