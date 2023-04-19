@@ -31,3 +31,7 @@ const String bar = 'bar.png';
 const String train = 'train.png';
 const String currLocation = 'currLocation.png';
 const String trainVector = 'train_vector.png';
+const String trainLines = 'train_lines.png';
+const String smallTrainFirstCar = 'first_car.png';
+const String smallTrainDefaultCar = 'default_car.png';
+const String smallTrainLine = 'small_train_line.png';

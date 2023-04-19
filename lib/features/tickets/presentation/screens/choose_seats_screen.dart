@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
+import 'package:traind_app/core/utils/app_sizes.dart';
+import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
+import 'package:traind_app/features/tickets/presentation/components/classes/seat_details.dart';
+import 'package:traind_app/features/tickets/presentation/components/reusable_component/choose_seats_screen_components.dart';
 import 'package:traind_app/features/tickets/presentation/components/widgets/train_first_car_widget.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_state.dart';
+import '../../../../core/utils/app_images.dart';
 import '../components/reusable_component/tickets_components.dart';
 import '../components/widgets/choose_seats_alert_dialog_content_widget.dart';
 import '../components/widgets/train_second_car.dart';
@@ -33,24 +39,130 @@ class ChooseSeatsScreen extends StatelessWidget {
               chooseSeatsScreenAppBar: true,
             ),
             body: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'available\nunavailable',
+                SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 30.sp,
+                      ),
+                      ChooseSeatsComponents.buttonAndWordRow(
+                        context: context,
+                        isAvailable: true,
+                        text: AppString.available,
+                      ),
+                      ChooseSeatsComponents.buttonAndWordRow(
+                        context: context,
+                        isAvailable: false,
+                        text: AppString.unavailable,
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                            children: [
+                              ChooseSeatsComponents.trainCarClassText(
+                                context: context,
+                                carClass: '1A',
+                              ),
+                              ChooseSeatsComponents.trainCarClassText(
+                                context: context,
+                                carClass: '2A',
+                              ),
+                              ChooseSeatsComponents.trainCarClassText(
+                                context: context,
+                                carClass: '1B',
+                              ),
+                              ChooseSeatsComponents.trainCarClassText(
+                                context: context,
+                                carClass: '2B',
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Stack(
+                            alignment: Alignment.topCenter,
+                            children: [
+                              Image(
+                                image: AssetImage(
+                                  '${AppConstants.vectorsUrl}$smallTrainLine',
+                                ),
+                              ),
+                              Column(
+                                children: [
+                                  Container(
+                                    width: 70,
+                                    height: 130,
+                                    decoration: BoxDecoration(
+                                      color: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(5),
+                                      border: Border.all(
+                                        color: selectedTrainContainerColor,
+                                        width: 2,
+                                      ),
+                                    ),
+                                    child: Image(
+                                      image: AssetImage(
+                                        '${AppConstants.vectorsUrl}$smallTrainFirstCar',
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Image(
+                                    image: AssetImage(
+                                      '${AppConstants.vectorsUrl}$smallTrainDefaultCar',
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Image(
+                                    image: AssetImage(
+                                      '${AppConstants.vectorsUrl}$smallTrainDefaultCar',
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                  Image(
+                                    image: AssetImage(
+                                      '${AppConstants.vectorsUrl}$smallTrainDefaultCar',
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  width: 10,
                 ),
                 Stack(
                   children: [
                     Padding(
                       padding: const EdgeInsetsDirectional.only(
-                          top: 20,
-                        ),
+                        top: 20,
+                      ),
                       child: Image(
-                          width: 220,
-                          //height: AppSizes.height(context),
-                          fit: BoxFit.contain,
-                          image: AssetImage(
-                              '${AppConstants.vectorsUrl}train_lines.png')),
+                        width: 220,
+                        fit: BoxFit.contain,
+                        image: AssetImage(
+                          '${AppConstants.vectorsUrl}$trainLines',
+                        ),
+                      ),
                     ),
                     SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),

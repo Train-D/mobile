@@ -32,6 +32,10 @@ class ChooseSeatsComponents {
   static Widget defaultSeat({
     required BuildContext context,
     required Seat seatDetails,
+    double width = 33,
+    double height = 44,
+    double radius = 10,
+    double borderWidth = 0.5,
   }) =>
       InkWell(
         onTap: () {
@@ -41,15 +45,15 @@ class ChooseSeatsComponents {
           );
         },
         child: Container(
-          width: 33,
-          height: 44,
+          width: width,
+          height: height,
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
+            borderRadius: BorderRadius.circular(radius),
             color: seatDetails.isAvailable
                 ? trainAvailableSeatColor
                 : trainUnAvailableSeatColor,
             border: Border.all(
-              width: 0.5,
+              width: borderWidth,
               color: trainUnAvailableSeatColor,
             ),
           ),
@@ -57,8 +61,9 @@ class ChooseSeatsComponents {
             alignment: Alignment.center,
             child: Text(seatDetails.seatNumber,
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                      color:
-                          seatDetails.isAvailable ? trainUnAvailableSeatColor : lightColor,
+                      color: seatDetails.isAvailable
+                          ? trainUnAvailableSeatColor
+                          : lightColor,
                       fontSize: 18,
                     )),
           ),
@@ -74,7 +79,7 @@ class ChooseSeatsComponents {
         children: [
           ChooseSeatsComponents.defaultSeat(
             context: context,
-             seatDetails: seat1,
+            seatDetails: seat1,
           ),
           const SizedBox(
             width: 10,
@@ -125,5 +130,56 @@ class ChooseSeatsComponents {
         height: height,
         width: 1,
         color: lightColor,
+      );
+
+  static buttonAndWordRow({
+    required BuildContext context,
+    required bool isAvailable,
+    required String text,
+  }) =>
+      Row(
+        children: [
+          ChooseSeatsComponents.defaultSeat(
+            context: context,
+            seatDetails: Seat(
+              seatNumber: '',
+              isAvailable: isAvailable,
+            ),
+            width: 10,
+            height: 13,
+            radius: 3,
+            borderWidth: 1,
+          ),
+          const SizedBox(
+            width: 3,
+          ),
+          Text(
+            text,
+            style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                  color: trainUnAvailableSeatColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 18,
+                ),
+          ),
+        ],
+      );
+
+  static trainCarClassText({
+    required BuildContext context,
+    required String carClass,
+  }) =>
+      Padding(
+        padding: const EdgeInsetsDirectional.only(
+          top: 50,
+          bottom: 30,
+        ),
+        child: Text(
+          carClass,
+          style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                color: trainUnAvailableSeatColor,
+                fontWeight: FontWeight.bold,
+                fontSize: 20,
+              ),
+        ),
       );
 }

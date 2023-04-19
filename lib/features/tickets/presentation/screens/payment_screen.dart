@@ -89,7 +89,7 @@ class PaymentScreen extends StatelessWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          AppString.Name,
+                                          AppString.name,
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyMedium!

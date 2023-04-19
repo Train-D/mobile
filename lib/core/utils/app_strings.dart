@@ -52,7 +52,10 @@ class AppString {
   static const String ticketSuccessDownload = 'Successfully Downloaded';
   static const String backToHome = 'Back To Home';
   static const String book = 'Book';
-  static const String Name = 'Name';
+  static const String name = 'Name';
   static const String debitCard = 'Debit Card';
   static const String chooseSeatsAppBarTitle = 'Choose Your Seats';
+  static const String available = 'Available';
+    static const String unavailable = 'Unvailable';
+
 }

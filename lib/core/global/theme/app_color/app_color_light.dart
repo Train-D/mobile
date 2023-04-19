@@ -81,3 +81,4 @@ const List<Color> trackingBottomModelSheet = [
   Color.fromRGBO(140, 113, 101, 1),
 ];
 const Color fractionalbox = Color.fromRGBO(152, 135, 127, 1);
+const Color selectedTrainContainerColor = Color.fromRGBO(94, 59, 32, 1);
