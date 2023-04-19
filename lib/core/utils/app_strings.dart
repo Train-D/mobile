@@ -35,7 +35,9 @@ class AppString {
   static const String editProfile = 'Edit Profile';
   static const String general = 'General';
   static const String cardNumber = 'Card Number';
-  static const String expiryDate = 'Expiry Date';
+  static const String expiryYear = 'Expiry Year';
+  static const String expiryMonth = 'Expiry Month';
+  static const String yourEmail = 'Your Email';
   static const String cardName = 'Your Name and Surname';
   static const String cvv = 'CVV';
   static const String cvvDesc = 'The last three digits on the back of the card';
