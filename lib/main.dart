@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/theme_data/theme_data_light.dart';
+import 'package:traind_app/features/app/presentation/screens/splash_screen.dart';
 import 'package:traind_app/features/authentication/presentation/controller/profile_cubit/profile_cubit.dart';
 import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
@@ -14,7 +15,6 @@ import 'core/bloc_observer/bloc_observer.dart';
 import 'features/authentication/presentation/controller/login_cubit/login_cubit.dart';
 import 'features/authentication/presentation/controller/sign_up_cubit/sign_up_cubit.dart';
 import 'features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
-import 'features/tickets/presentation/screens/choose_seats_screen.dart';
 import 'features/track/presentation/controller/tracking_cubit/tracking_cubit.dart';
 
 void main() async{
@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Train D Edit Again',
             theme: lightTheme(),
-            home: const ChooseSeatsScreen(),
+            home: const SplashScreen(),
           );
         },
       ),

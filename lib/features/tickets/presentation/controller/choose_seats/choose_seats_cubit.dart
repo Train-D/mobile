@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:traind_app/features/tickets/presentation/components/widgets/train_first_car_widget.dart';
 
 import '../../components/classes/seat_details.dart';
 import 'choose_seats_state.dart';
@@ -27,7 +25,7 @@ class ChooseSeatsCubit extends Cubit<ChooseSeatsState> {
       seatNumber: '04',
       isAvailable: true,
     ),
-     Seat(
+    Seat(
       seatNumber: '05',
       isAvailable: true,
     ),
@@ -35,7 +33,7 @@ class ChooseSeatsCubit extends Cubit<ChooseSeatsState> {
       seatNumber: '06',
       isAvailable: true,
     ),
-     Seat(
+    Seat(
       seatNumber: '07',
       isAvailable: false,
     ),
@@ -43,7 +41,7 @@ class ChooseSeatsCubit extends Cubit<ChooseSeatsState> {
       seatNumber: '08',
       isAvailable: true,
     ),
-     Seat(
+    Seat(
       seatNumber: '09',
       isAvailable: true,
     ),
@@ -51,7 +49,7 @@ class ChooseSeatsCubit extends Cubit<ChooseSeatsState> {
       seatNumber: '10',
       isAvailable: true,
     ),
-     Seat(
+    Seat(
       seatNumber: '11',
       isAvailable: false,
     ),
@@ -60,7 +58,73 @@ class ChooseSeatsCubit extends Cubit<ChooseSeatsState> {
       isAvailable: true,
     ),
   ];
- 
+
+  List<Seat> secondCarSeats = [
+    Seat(
+      seatNumber: '01',
+      isAvailable: true,
+    ),
+    Seat(
+      seatNumber: '02',
+      isAvailable: false,
+    ),
+    Seat(
+      seatNumber: '03',
+      isAvailable: false,
+    ),
+    Seat(
+      seatNumber: '04',
+      isAvailable: true,
+    ),
+    Seat(
+      seatNumber: '05',
+      isAvailable: true,
+    ),
+    Seat(
+      seatNumber: '06',
+      isAvailable: true,
+    ),
+    Seat(
+      seatNumber: '07',
+      isAvailable: false,
+    ),
+    Seat(
+      seatNumber: '08',
+      isAvailable: true,
+    ),
+    Seat(
+      seatNumber: '09',
+      isAvailable: true,
+    ),
+    Seat(
+      seatNumber: '10',
+      isAvailable: false,
+    ),
+    Seat(
+      seatNumber: '11',
+      isAvailable: true,
+    ),
+    Seat(
+      seatNumber: '12',
+      isAvailable: true,
+    ),
+    Seat(
+      seatNumber: '13',
+      isAvailable: false,
+    ),
+    Seat(
+      seatNumber: '14',
+      isAvailable: true,
+    ),
+    Seat(
+      seatNumber: '15',
+      isAvailable: true,
+    ),
+    Seat(
+      seatNumber: '16',
+      isAvailable: true,
+    ),
+  ];
 
   void bookSeat(String seatNumber) {
     int idx = int.parse(seatNumber);
