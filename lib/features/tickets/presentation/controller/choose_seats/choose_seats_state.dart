@@ -6,3 +6,8 @@ class ChooseSeatsBookSeatLoadingState extends ChooseSeatsState {}
 class ChooseSeatsBookSeatSuccessState extends ChooseSeatsState {}
 class ChooseSeatsBookSeatErrorState extends ChooseSeatsState {}
 
+class ChangeVisiableState extends ChooseSeatsState {}
+class ChangeScrollControllerState extends ChooseSeatsState {}
+
+
+

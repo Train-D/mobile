@@ -82,3 +82,4 @@ const List<Color> trackingBottomModelSheet = [
 ];
 const Color fractionalbox = Color.fromRGBO(152, 135, 127, 1);
 const Color selectedTrainContainerColor = Color.fromRGBO(94, 59, 32, 1);
+const Color chooseSeatsCancelButtonBg = Color.fromRGBO(173, 155, 147, 0.23);

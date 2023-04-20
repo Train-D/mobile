@@ -58,7 +58,7 @@ class TrackingComponents {
                               formbegin,
                               style: TextStyle(fontSize: 13.sp),
                             ))),
-                    Spacer(),
+                    const Spacer(),
                     Text(
                       timeToArrive,
                       style: Theme.of(context).textTheme.displayMedium,

@@ -5,6 +5,7 @@ import 'package:traind_app/features/tickets/presentation/controller/choose_seats
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_state.dart';
 import 'package:traind_app/features/tickets/presentation/screens/payment_screen.dart';
 
+import '../../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../../core/utils/app_sizes.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/components.dart';
@@ -36,19 +37,36 @@ Widget chooseSeatsAlertDialogContent({
               const SizedBox(
                 height: 30,
               ),
-              SharedComponents.defaultButton(
-                context: context,
-                function: () {
-                  cubit.bookSeat(seatNumber);
-                  SharedComponents.navigateTo(
-                    const PaymentScreen(),
-                    context,
-                  );
-                },
-                text: AppString.book,
-                width: 100,
-                radius: AppSizes.defaultBottomRadius,
-                textSize: 16,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SharedComponents.defaultButton(
+                    context: context,
+                    function: () {
+                      Navigator.pop(context);
+                    },
+                    text: AppString.cancel,
+                    width: 100,
+                    radius: AppSizes.defaultBottomRadius,
+                    textSize: 16,
+                    bgColor: chooseSeatsCancelButtonBg,
+                    cancel: true,
+                  ),
+                  SharedComponents.defaultButton(
+                    context: context,
+                    function: () {
+                      cubit.bookSeat(seatNumber);
+                      SharedComponents.navigateTo(
+                        const PaymentScreen(),
+                        context,
+                      );
+                    },
+                    text: AppString.book,
+                    width: 100,
+                    radius: AppSizes.defaultBottomRadius,
+                    textSize: 16,
+                  ),
+                ],
               ),
             ],
           ),

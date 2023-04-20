@@ -21,6 +21,7 @@ class SharedComponents {
     required BuildContext context,
     required Function function,
     required String text,
+    bool cancel =  false,
   }) =>
       Container(
         width: width,
@@ -28,6 +29,10 @@ class SharedComponents {
         decoration: BoxDecoration(
           color: bgColor,
           borderRadius: BorderRadius.circular(radius),
+          border: Border.all(
+            width: cancel ? 2 : 0,
+            color: cancel ?  trainUnAvailableSeatColor : transparent,
+          ),
         ),
         child: MaterialButton(
           onPressed: () {

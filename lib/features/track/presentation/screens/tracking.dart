@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
@@ -12,15 +10,15 @@ import 'package:traind_app/features/track/presentation/components/tracking_compo
 import 'package:traind_app/features/track/presentation/controller/tracking_cubit/tracking_cubit.dart';
 import 'package:swipe/swipe.dart';
 
-class trackingScreen extends StatelessWidget {
-  const trackingScreen({super.key});
+class TrackingScreen extends StatelessWidget {
+  const TrackingScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child:
           BlocBuilder<TrackingCubit, TrackingState>(builder: (context, state) {
-        TrackingCubit cubit = TrackingCubit.get(context);
+        //TrackingCubit cubit = TrackingCubit.get(context);
         int currHour = DateTime.now().hour;
         int currMinInt = DateTime.now().minute;
         String currMin = (currMinInt < 10 ? '0$currMinInt' : '$currMinInt');

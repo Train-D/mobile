@@ -3,10 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
-import 'package:traind_app/core/utils/app_sizes.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 import 'package:traind_app/core/utils/components.dart';
-import 'package:traind_app/features/tickets/presentation/components/classes/seat_details.dart';
 import 'package:traind_app/features/tickets/presentation/components/reusable_component/choose_seats_screen_components.dart';
 import 'package:traind_app/features/tickets/presentation/components/widgets/train_first_car_widget.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
@@ -24,6 +22,8 @@ class ChooseSeatsScreen extends StatelessWidget {
     List<Widget> trainCars = [
       trainFirstCar(context: context),
       trainSecondCar(context: context),
+      trainSecondCar(context: context),
+      trainSecondCar(context: context),
     ];
     return SafeArea(
         child: SharedComponents.linearGradientBg(
@@ -31,7 +31,7 @@ class ChooseSeatsScreen extends StatelessWidget {
       child: BlocConsumer<ChooseSeatsCubit, ChooseSeatsState>(
         listener: (context, state) {},
         builder: (context, state) {
-          //ChooseSeatsCubit cubit = ChooseSeatsCubit.get(context);
+          ChooseSeatsCubit cubit = ChooseSeatsCubit.get(context);
           return Scaffold(
             backgroundColor: transparent,
             appBar: SharedComponents.defaultAppBar(
@@ -97,45 +97,85 @@ class ChooseSeatsScreen extends StatelessWidget {
                               ),
                               Column(
                                 children: [
-                                  Container(
-                                    width: 70,
-                                    height: 130,
-                                    decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      borderRadius: BorderRadius.circular(5),
-                                      border: Border.all(
-                                        color: selectedTrainContainerColor,
-                                        width: 2,
-                                      ),
+                                  AnimatedCrossFade(
+                                    firstChild: ChooseSeatsComponents
+                                        .trainSmallCarWithSelectedContainer(
+                                      image: smallTrainFirstCar,
+                                      showBorder: selectedTrainContainerColor,
                                     ),
-                                    child: Image(
-                                      image: AssetImage(
-                                        '${AppConstants.vectorsUrl}$smallTrainFirstCar',
-                                      ),
+                                    secondChild: ChooseSeatsComponents
+                                        .trainSmallCarWithSelectedContainer(
+                                      image: smallTrainFirstCar,
+                                      showBorder: transparent,
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 15,
-                                  ),
-                                  Image(
-                                    image: AssetImage(
-                                      '${AppConstants.vectorsUrl}$smallTrainDefaultCar',
+                                    crossFadeState: cubit.firstIdx == 0
+                                        ? CrossFadeState.showFirst
+                                        : CrossFadeState.showSecond,
+                                    duration: const Duration(
+                                      milliseconds: 150,
                                     ),
                                   ),
                                   const SizedBox(
                                     height: 15,
                                   ),
-                                  Image(
-                                    image: AssetImage(
-                                      '${AppConstants.vectorsUrl}$smallTrainDefaultCar',
+                                  AnimatedCrossFade(
+                                    firstChild: ChooseSeatsComponents
+                                        .trainSmallCarWithSelectedContainer(
+                                      image: smallTrainDefaultCar,
+                                      showBorder: selectedTrainContainerColor,
+                                    ),
+                                    secondChild: ChooseSeatsComponents
+                                        .trainSmallCarWithSelectedContainer(
+                                      image: smallTrainDefaultCar,
+                                      showBorder: transparent,
+                                    ),
+                                    crossFadeState: cubit.firstIdx == 1
+                                        ? CrossFadeState.showFirst
+                                        : CrossFadeState.showSecond,
+                                    duration: const Duration(
+                                      milliseconds: 150,
                                     ),
                                   ),
                                   const SizedBox(
                                     height: 15,
                                   ),
-                                  Image(
-                                    image: AssetImage(
-                                      '${AppConstants.vectorsUrl}$smallTrainDefaultCar',
+                                 AnimatedCrossFade(
+                                    firstChild: ChooseSeatsComponents
+                                        .trainSmallCarWithSelectedContainer(
+                                      image: smallTrainDefaultCar,
+                                      showBorder: selectedTrainContainerColor,
+                                    ),
+                                    secondChild: ChooseSeatsComponents
+                                        .trainSmallCarWithSelectedContainer(
+                                      image: smallTrainDefaultCar,
+                                      showBorder: transparent,
+                                    ),
+                                    crossFadeState: cubit.firstIdx == 2
+                                        ? CrossFadeState.showFirst
+                                        : CrossFadeState.showSecond,
+                                    duration: const Duration(
+                                      milliseconds: 150,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    height: 15,
+                                  ),
+                                   AnimatedCrossFade(
+                                    firstChild: ChooseSeatsComponents
+                                        .trainSmallCarWithSelectedContainer(
+                                      image: smallTrainDefaultCar,
+                                      showBorder: selectedTrainContainerColor,
+                                    ),
+                                    secondChild: ChooseSeatsComponents
+                                        .trainSmallCarWithSelectedContainer(
+                                      image: smallTrainDefaultCar,
+                                      showBorder: transparent,
+                                    ),
+                                    crossFadeState: cubit.firstIdx == 3
+                                        ? CrossFadeState.showFirst
+                                        : CrossFadeState.showSecond,
+                                    duration: const Duration(
+                                      milliseconds: 150,
                                     ),
                                   ),
                                 ],
@@ -166,6 +206,7 @@ class ChooseSeatsScreen extends StatelessWidget {
                     ),
                     SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
+                      controller: cubit.sc,
                       child: Padding(
                         padding: const EdgeInsetsDirectional.only(
                           top: 40,
@@ -207,7 +248,7 @@ dynamic showChooseSeatsAlertDialog({
   required String seatNumber,
 }) {
   showDialog(
-    barrierDismissible: true,
+    barrierDismissible: false,
     context: context,
     builder: (BuildContext context) {
       return TicketsComponents.defaultAlertDialog(

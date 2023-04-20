@@ -98,7 +98,7 @@ class TrainIdScreen extends StatelessWidget {
                             InkWell(
                               onTap: () {
                                 SharedComponents.navigateTo(
-                                    trackingScreen(), context);
+                                    const TrackingScreen(), context);
                               },
                               child: Container(
                                 height: 7.h,

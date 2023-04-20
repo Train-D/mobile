@@ -56,6 +56,6 @@ class AppString {
   static const String debitCard = 'Debit Card';
   static const String chooseSeatsAppBarTitle = 'Choose Your Seats';
   static const String available = 'Available';
-    static const String unavailable = 'Unvailable';
-
+  static const String unavailable = 'Unvailable';
+  static const String cancel = 'Cancel';
 }
