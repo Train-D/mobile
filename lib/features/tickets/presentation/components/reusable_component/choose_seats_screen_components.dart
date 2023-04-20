@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
 
 import '../../../../../core/global/theme/app_color/app_color_light.dart';
+import '../../../../../core/utils/app_constants.dart';
 import '../../screens/choose_seats_screen.dart';
 import '../classes/seat_details.dart';
 
@@ -13,10 +14,11 @@ class ChooseSeatsComponents {
         padding: const EdgeInsetsDirectional.only(
           top: 50,
           bottom: 30,
+          start: 30,
           end: 20,
         ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
               AppString.chooseSeatsAppBarTitle,
@@ -170,8 +172,8 @@ class ChooseSeatsComponents {
   }) =>
       Padding(
         padding: const EdgeInsetsDirectional.only(
-          top: 50,
-          bottom: 30,
+          top: 70,
+          bottom: 35,
         ),
         child: Text(
           carClass,
@@ -180,6 +182,27 @@ class ChooseSeatsComponents {
                 fontWeight: FontWeight.bold,
                 fontSize: 20,
               ),
+        ),
+      );
+
+  static trainSmallCarWithSelectedContainer({
+    required String image,
+    required Color showBorder,
+  }) => Container(
+        width: 70,
+        height: 130,
+        decoration: BoxDecoration(
+          color: Colors.transparent,
+          borderRadius: BorderRadius.circular(5),
+          border: Border.all(
+            color: showBorder,
+            width: 2,
+          ),
+        ),
+        child: Image(
+          image: AssetImage(
+            '${AppConstants.vectorsUrl}$image',
+          ),
         ),
       );
 }

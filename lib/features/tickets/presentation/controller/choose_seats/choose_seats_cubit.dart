@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../components/classes/seat_details.dart';
@@ -130,5 +131,23 @@ class ChooseSeatsCubit extends Cubit<ChooseSeatsState> {
     int idx = int.parse(seatNumber);
     firstCarSeats[idx - 1].isAvailable = !firstCarSeats[idx - 1].isAvailable;
     emit(ChooseSeatsBookSeatSuccessState());
+  }
+
+  bool visibleSelectedCarContainer = false;
+
+  void changeVisibleSelectedCarContainer(int carNumber) {
+    visibleSelectedCarContainer = !visibleSelectedCarContainer;
+
+    emit(ChangeVisiableState());
+  }
+
+  ScrollController sc = ScrollController();
+  int firstIdx = 0;
+
+  void initScrollCon() {
+    sc.addListener(() {
+      firstIdx = sc.offset ~/ 480;
+      emit(ChangeScrollControllerState());
+    });
   }
 }
