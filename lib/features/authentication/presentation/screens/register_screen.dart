@@ -1,4 +1,5 @@
 import 'package:basic_utils/basic_utils.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -141,25 +142,32 @@ class SignUpScreen extends StatelessWidget {
                             SizedBox(
                               height: AppSizes.spaceBetweenFields,
                             ),
-                            SharedComponents.defaultButton(
-                              context: context,
-                              function: () {
-                                cubit.userRegister(
-                                    firstName: cubit.signUpFirstNameCon.text,
-                                    lastName: cubit.signUpLastNameCon.text,
-                                    password: cubit.signUpPasswordCon.text,
-                                    email: cubit.signUpEmailCon.text);
-                                /*SharedComponents.navigateToReplace(
+                            ConditionalBuilder(
+                              condition: state is! RegisterLoadingState,
+                              builder: (context) =>
+                                  SharedComponents.defaultButton(
+                                context: context,
+                                function: () {
+                                  cubit.userRegister(
+                                      firstName: cubit.signUpFirstNameCon.text,
+                                      lastName: cubit.signUpLastNameCon.text,
+                                      password: cubit.signUpPasswordCon.text,
+                                      email: cubit.signUpEmailCon.text);
+                                  /*SharedComponents.navigateToReplace(
                                   const LoginScreen(),
                                   context,
                                 );*/
-                              },
-                              text:
-                                  StringUtils.capitalize(AppString.signUpTitle),
-                              width: AppSizes.width(context) / 3,
-                              height: AppSizes.height(context) / 14,
-                              radius: AppSizes.defaultBottomRadius,
-                            ),
+                                },
+                                text: StringUtils.capitalize(
+                                    AppString.signUpTitle),
+                                width: AppSizes.width(context) / 3,
+                                height: AppSizes.height(context) / 14,
+                                radius: AppSizes.defaultBottomRadius,
+                              ),
+                              fallback: (context) => const Center(
+                                  child: CircularProgressIndicator()),
+                            )
+                            
                           ],
                         ),
                       ),

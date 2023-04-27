@@ -1,15 +1,13 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traind_app/features/authentication/data/models/register_request.dart';
-import 'package:traind_app/features/authentication/data/models/register_response.dart';
 import 'package:traind_app/features/authentication/domain/usecase/register_usecase.dart';
-
-import '../../../domain/repository/register_domain_repository.dart';
-
+import '../../../../../core/error/exceptions.dart';
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  RegisterCubit(this.postRegisterDataUseCae) : super(RegisterInitial());
+  RegisterCubit(this.postRegisterDataUseCase) : super(RegisterInitial());
 
   static RegisterCubit get(context) => BlocProvider.of(context);
 
@@ -31,27 +29,65 @@ class RegisterCubit extends Cubit<RegisterState> {
     emit(RegisterChangesPasswordVisibilityState());
   }
 
-  final PostRegisterDataUseCase postRegisterDataUseCae;
-  Future<void> userRegister(
-      {required String firstName,
-      required String lastName,
-      required String password,
-      required String email}) async {
-    //print('$firstName $lastName $password $email');
+  final PostRegisterDataUseCase postRegisterDataUseCase;
+
+  Future<void> userRegister({
+    required String firstName,
+    required String lastName,
+    required String email,
+    required String password,
+  }) async {
+
     emit(RegisterLoadingState());
-    final result = await postRegisterDataUseCae(RegisterRequestModel(
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password));
-    print(result);
-    result.fold((l) {
-      print('${l.message}\n');
-      emit(RegisterErrorState(l.message));
-    }, (r) {
-      //print('${r.token}\n');
-      RegisterResponse(token: r.token);
+
+    try {
+      final result = await postRegisterDataUseCase(
+        RegisterRequestModel(
+          firstName: firstName,
+          lastName: lastName,
+          email: email,
+          password: password,
+        ),
+      );
+      result.fold((l) {
+        debugPrint(l.message);
+      }, (r) {
+        debugPrint(r.token);
+      });
+
+      //RegisterResponse(token: result.token);
+
       emit(RegisterSuccessState());
-    });
+    } on ServerException catch (e) {
+      debugPrint(e.toString());
+      emit(RegisterErrorState(e.toString()));
+    } on DioError catch (e) {
+      print(e.response);
+      emit(RegisterErrorState(e.response));
+    }
   }
+
+  // Future<void> userRegister({
+  //   required String firstName,
+  //   required String lastName,
+  //   required String password,
+  //   required String email,
+  // }) async {
+  //   emit(RegisterLoadingState());
+
+  //   final result = await postRegisterDataUseCase(
+  //     RegisterRequestModel(
+  //       firstName: firstName,
+  //       lastName: lastName,
+  //       email: email,
+  //       password: password,
+  //     ),
+  //   );
+  //   result.fold((l) {
+  //     emit(RegisterErrorState(l.message));
+  //   }, (r) {
+  //     RegisterResponse(token: r.token);
+  //     emit(RegisterSuccessState());
+  //   });
+  // }
 }

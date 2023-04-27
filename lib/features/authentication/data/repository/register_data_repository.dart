@@ -11,12 +11,17 @@ class RegisterRepository extends BaseRegisterRepository {
 
   RegisterRepository(this.baseRegisterDataSource);
   @override
-  Future<Either<Failure, Response>> postRegisterData(RegisterRequestModel model) async {
-    final result = await baseRegisterDataSource.postRegisterData(model);
+  Future<Either<Failure, Response>> postRegisterData(
+      RegisterRequestModel parameter) async {
+    final result = await baseRegisterDataSource.postRegisterData(parameter);
     try {
       return right(result);
     } on ServerException catch (failure) {
-      return left(ServerFailure(failure.errorMessageModel.statusMessage));
+      return left(
+        ServerFailure(
+          failure.errorMessageModel.statusMessage,
+        ),
+      );
     }
   }
 }

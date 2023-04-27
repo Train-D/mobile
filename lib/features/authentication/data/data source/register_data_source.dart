@@ -12,17 +12,21 @@ abstract class BaseRegisterDataSource {
 class RegisterDataSource extends BaseRegisterDataSource {
   @override
   Future<RegisterResponse> postRegisterData(RegisterRequestModel model) async {
-    final response = await Dio().post(ApiConstants.registerPath,
-        data: model.tojson(),
-        options: Options(headers: {
+    final response = await Dio().post(
+      ApiConstants.registerPath,
+      data: model.tojson(),
+      options: Options(
+        headers: {
           "Content-Type": "application/json",
-        }));
-    print(response.statusCode);
+        },
+      ),
+    );
     if (response.statusCode == 200) {
       return RegisterResponse.fromjson(response.data);
     }
-    
+
     throw ServerException(
-        errorMessageModel: ErrorMessageModel.fromText(response.data));
+      errorMessageModel: ErrorMessageModel.fromText(response.data),
+    );
   }
 }
