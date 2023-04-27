@@ -11,6 +11,6 @@ class RegisterSuccessState extends RegisterState {}
 class RegisterLoadingState extends RegisterState {}
 
 class RegisterErrorState extends RegisterState {
-  final String message;
+  final dynamic message;
   RegisterErrorState(this.message);
 }

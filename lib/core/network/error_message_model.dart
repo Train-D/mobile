@@ -10,7 +10,6 @@ class ErrorMessageModel extends Equatable {
   });
   @override
   factory ErrorMessageModel.fromText(String text) {
-    print(text);
     return ErrorMessageModel(statusMessage: text);
   }
 

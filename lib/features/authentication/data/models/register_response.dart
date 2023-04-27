@@ -1,5 +1,6 @@
 import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
 
+// ignore: must_be_immutable
 class RegisterResponse extends Response {
   @override
   // ignore: overridden_fields
