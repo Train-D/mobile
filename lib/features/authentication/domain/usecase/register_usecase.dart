@@ -1,16 +1,18 @@
 import 'package:dartz/dartz.dart';
+import 'package:traind_app/features/authentication/data/models/register_request.dart';
+import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
 import '../../../../core/error/failure.dart';
-import '../repository/register_repository.dart';
-
 import '../../../../core/usecases/base_usecase.dart';
+import '../repository/register_domain_repository.dart';
 
-class PostRegisterDataUseCase {
+class PostRegisterDataUseCase extends BaseUsecase<Response,RegisterRequestModel>{
   final BaseRegisterRepository baseRegisterRepository;
 
   PostRegisterDataUseCase(this.baseRegisterRepository);
 
-  Future<Either<Failure, bool>> call(NoParameters parameters) async{
-    return await baseRegisterRepository.postRegisterData();
+  @override
+  Future<Either<Failure, Response>> call(RegisterRequestModel parameters) async{
+    return await baseRegisterRepository.postRegisterData(parameters);
   } 
 }
 
