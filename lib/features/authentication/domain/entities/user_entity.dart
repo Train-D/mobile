@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-class RegisterEntity extends Equatable {
+class UserData extends Equatable {
   final String firstName;
   final String lastName;
   final String email;
   final String password;
 
-  const RegisterEntity({
+  const UserData({
     required this.firstName,
     required this.lastName,
     required this.email,

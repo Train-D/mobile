@@ -1,9 +1,13 @@
-class RegisterResponse {
-  String? token;
+import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
+
+class RegisterResponse extends Response {
+  @override
+  // ignore: overridden_fields
+  String token;
   RegisterResponse({
     required this.token,
-  });
-  factory RegisterResponse.fromjson(Map<String, String> res) {
-    return RegisterResponse(token: res["token"]);
+  }) : super(token: token);
+  factory RegisterResponse.fromjson(Map<String, dynamic> res) {
+    return RegisterResponse(token: res["token"]?? '');
   }
 }

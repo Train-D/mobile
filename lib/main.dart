@@ -1,24 +1,24 @@
 // ignore_for_file: avoid_types_as_parameter_names, non_constant_identifier_names
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/global/theme/theme_data/theme_data_light.dart';
+import 'package:traind_app/core/services/services_locator.dart';
 import 'package:traind_app/features/app/presentation/screens/splash_screen.dart';
 import 'package:traind_app/features/authentication/presentation/controller/profile_cubit/profile_cubit.dart';
 import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/payment_cubit/payment_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/ticket_cubit/cubit/ticket_cubit.dart';
-
 import 'core/bloc_observer/bloc_observer.dart';
 import 'features/authentication/presentation/controller/login_cubit/login_cubit.dart';
-import 'features/authentication/presentation/controller/sign_up_cubit/sign_up_cubit.dart';
+import 'features/authentication/presentation/controller/register_cubit/register_cubit.dart';
 import 'features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
 import 'features/track/presentation/controller/tracking_cubit/tracking_cubit.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  ServicesLocator().init();
   Bloc.observer = MyBlocObserver();
   runApp(const MyApp());
 }
@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
           create: (context) => FromToCubit(),
         ),
         BlocProvider(
-          create: (context) => SignUpCubit(),
+          create: (context) => RegisterCubit(sl()),
         ),
         BlocProvider(
           create: (context) => ProfileCubit(),
@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => TicketCubit(),
         ),
-         BlocProvider(
+        BlocProvider(
           create: (context) => ChooseSeatsCubit()..initScrollCon(),
         )
       ],

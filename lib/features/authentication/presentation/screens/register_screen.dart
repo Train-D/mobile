@@ -10,7 +10,7 @@ import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
 import '../components/auth_components.dart';
-import '../controller/sign_up_cubit/sign_up_cubit.dart';
+import '../controller/register_cubit/register_cubit.dart';
 import 'login_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -18,9 +18,9 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SignUpCubit, SignUpState>(
+    return BlocBuilder<RegisterCubit, RegisterState>(
       builder: (context, state) {
-        SignUpCubit cubit = SignUpCubit.get(context);
+        RegisterCubit cubit = RegisterCubit.get(context);
         return SafeArea(
           child: SharedComponents.screenBg(
             imageUrl: '${AppConstants.imagesUrl}$signupBg',
@@ -144,10 +144,15 @@ class SignUpScreen extends StatelessWidget {
                             SharedComponents.defaultButton(
                               context: context,
                               function: () {
-                                SharedComponents.navigateToReplace(
+                                cubit.userRegister(
+                                    firstName: cubit.signUpFirstNameCon.text,
+                                    lastName: cubit.signUpLastNameCon.text,
+                                    password: cubit.signUpPasswordCon.text,
+                                    email: cubit.signUpEmailCon.text);
+                                /*SharedComponents.navigateToReplace(
                                   const LoginScreen(),
                                   context,
-                                );
+                                );*/
                               },
                               text:
                                   StringUtils.capitalize(AppString.signUpTitle),

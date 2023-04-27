@@ -1,6 +1,6 @@
-import '../../domain/entities/register_entity.dart';
+import '../../domain/entities/user_entity.dart';
 
-class RegisterRequestModel extends RegisterEntity {
+class RegisterRequestModel extends UserData {
   const RegisterRequestModel(
       {required super.firstName,
       required super.lastName,
