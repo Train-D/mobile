@@ -5,6 +5,6 @@ import '../../../../core/error/failure.dart';
 
 abstract class BaseRegisterRepository{
 
-  Future < Either < Failure, Response > > postRegisterData(RegisterRequestModel parameter);
+  Future < Either < Failure, ResponseEntity > > postRegisterData(RegisterRequestModel parameter);
 
 }

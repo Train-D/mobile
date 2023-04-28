@@ -4,14 +4,15 @@ import 'package:traind_app/core/network/api_constants.dart';
 import 'package:traind_app/core/network/error_message_model.dart';
 import 'package:traind_app/features/authentication/data/models/register_request.dart';
 import 'package:traind_app/features/authentication/data/models/register_response.dart';
+import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
 
-abstract class BaseRegisterDataSource {
-  Future<RegisterResponse> postRegisterData(RegisterRequestModel model);
+abstract class BaseRegisterRemoteDataSource {
+  Future<ResponseEntity> postRegisterData(RegisterRequestModel model);
 }
 
-class RegisterDataSource extends BaseRegisterDataSource {
+class RegisterRemoteDataSource extends BaseRegisterRemoteDataSource {
   @override
-  Future<RegisterResponse> postRegisterData(RegisterRequestModel model) async {
+  Future<ResponseEntity> postRegisterData(RegisterRequestModel model) async {
     final response = await Dio().post(
       ApiConstants.registerPath,
       data: model.tojson(),
@@ -22,7 +23,9 @@ class RegisterDataSource extends BaseRegisterDataSource {
       ),
     );
     if (response.statusCode == 200) {
-      return RegisterResponse.fromjson(response.data);
+      var temp = RegisterResponseModel.fromjson(response.data);
+      var registerEntity = ResponseEntity.toEntity(temp);
+      return registerEntity;
     }
 
     throw ServerException(

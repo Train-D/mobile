@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/features/tickets/presentation/components/reusable_component/choose_seats_screen_components.dart';
-
+import 'package:fluttertoast/fluttertoast.dart';
 import '../global/theme/app_color/app_color_light.dart';
 import 'app_sizes.dart';
 
@@ -81,7 +81,19 @@ class SharedComponents {
               ),
         ),
       );
-
+  static showToast({
+    required String text,
+    required color,
+  }) {
+    Fluttertoast.showToast(
+      msg: text,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      backgroundColor: color,
+      textColor: Colors.white,
+      fontSize: 16,
+    );
+  }
   static navigateTo(Widget page, BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(builder: ((context) => page)));
   }
@@ -138,6 +150,7 @@ class SharedComponents {
             horizontal: 20.sp,
             vertical: 0.sp,
           ),
+          errorStyle: const TextStyle(fontWeight: FontWeight.bold),
           filled: true,
           fillColor: bgColor,
           labelText: label,
