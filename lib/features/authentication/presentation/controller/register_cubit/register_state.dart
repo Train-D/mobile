@@ -6,6 +6,10 @@ class RegisterInitial extends RegisterState {}
 
 class RegisterChangesPasswordVisibilityState extends RegisterState {}
 
+class ChangeAutoValidationModeState extends RegisterState{}
+
+class changeToastColorState extends RegisterState{}
+
 class RegisterSuccessState extends RegisterState {}
 
 class RegisterLoadingState extends RegisterState {}

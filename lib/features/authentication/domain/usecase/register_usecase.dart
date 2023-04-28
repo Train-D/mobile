@@ -5,13 +5,13 @@ import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/base_usecase.dart';
 import '../repository/register_domain_repository.dart';
 
-class PostRegisterDataUseCase extends BaseUsecase<Response,RegisterRequestModel>{
+class PostRegisterDataUseCase extends BaseUsecase<ResponseEntity,RegisterRequestModel>{
   final BaseRegisterRepository baseRegisterRepository;
 
   PostRegisterDataUseCase(this.baseRegisterRepository);
 
   @override
-  Future<Either<Failure, Response>> call(RegisterRequestModel parameters) async{
+  Future<Either<Failure, ResponseEntity>> call(RegisterRequestModel parameters) async{
     return await baseRegisterRepository.postRegisterData(parameters);
   } 
 }

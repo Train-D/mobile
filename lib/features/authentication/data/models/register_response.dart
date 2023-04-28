@@ -1,14 +1,14 @@
 import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
 
-// ignore: must_be_immutable
-class RegisterResponse extends Response {
+class RegisterResponseModel extends ResponseEntity {
   @override
-  // ignore: overridden_fields
-  String token;
-  RegisterResponse({
+  final String token;
+  final String message;
+  const RegisterResponseModel({
     required this.token,
-  }) : super(token: token);
-  factory RegisterResponse.fromjson(Map<String, dynamic> res) {
-    return RegisterResponse(token: res["token"]?? '');
+    required this.message
+  }) : super(token: token, message:  message);
+  factory RegisterResponseModel.fromjson(Map<String, dynamic> res) {
+    return RegisterResponseModel(token: res["token"] ?? '', message: res["message"]);
   }
 }
