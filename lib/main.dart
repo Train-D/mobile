@@ -7,6 +7,8 @@ import 'package:traind_app/core/services/services_locator.dart';
 import 'package:traind_app/features/app/presentation/screens/splash_screen.dart';
 import 'package:traind_app/features/authentication/presentation/controller/profile_cubit/profile_cubit.dart';
 import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_cubit.dart';
+import 'package:traind_app/features/stations/presentation/controller/all_stations_cubit/all_stations_cubit.dart';
+import 'package:traind_app/features/stations/presentation/screens/stations_screen.dart';
 import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/payment_cubit/payment_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/ticket_cubit/cubit/ticket_cubit.dart';
@@ -56,6 +58,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(
           create: (context) => ChooseSeatsCubit()..initScrollCon(),
+        ),
+        BlocProvider(
+          create: (context) => AllStationsCubit(),
         )
       ],
       child: ResponsiveSizer(
@@ -64,7 +69,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Train D',
             theme: lightTheme(),
-            home: const SplashScreen(),
+            home: const StationsScreen(),
           );
         },
       ),
