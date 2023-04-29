@@ -8,7 +8,7 @@ class RegisterChangesPasswordVisibilityState extends RegisterState {}
 
 class ChangeAutoValidationModeState extends RegisterState{}
 
-class changeToastColorState extends RegisterState{}
+class ChangeToastColorState extends RegisterState{}
 
 class RegisterSuccessState extends RegisterState {}
 

@@ -2,7 +2,9 @@ import 'package:traind_app/features/authentication/domain/entities/response_enti
 
 class RegisterResponseModel extends ResponseEntity {
   @override
+  // ignore: overridden_fields
   final String token;
+  // ignore: annotate_overrides, overridden_fields
   final String message;
   const RegisterResponseModel({
     required this.token,
