@@ -17,10 +17,17 @@ class SignUpScreen extends StatelessWidget {
   const SignUpScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RegisterCubit, RegisterState>(
+    return BlocConsumer<RegisterCubit, RegisterState>(
+      listener: (context, state) {
+        if (state is RegisterSuccessState) {
+          SharedComponents.navigateToReplace(
+            const LoginScreen(),
+            context,
+          );
+        }
+      },
       builder: (context, state) {
         RegisterCubit cubit = RegisterCubit.get(context);
-
         return SafeArea(
           child: SharedComponents.screenBg(
             imageUrl: '${AppConstants.imagesUrl}$signupBg',
@@ -163,22 +170,16 @@ class SignUpScreen extends StatelessWidget {
                                 function: () async {
                                   if (cubit.formKey.currentState!.validate()) {
                                     await cubit.userRegister(
-                                        firstName:
-                                            cubit.signUpFirstNameCon.text,
-                                        lastName: cubit.signUpLastNameCon.text,
-                                        password: cubit.signUpPasswordCon.text,
-                                        email: cubit.signUpEmailCon.text);
-                                    /*cubit.changeToastColor();
+                                      firstName: cubit.signUpFirstNameCon.text,
+                                      lastName: cubit.signUpLastNameCon.text,
+                                      password: cubit.signUpPasswordCon.text,
+                                      email: cubit.signUpEmailCon.text,
+                                    );
+                                    cubit.changeToastColor();
                                     SharedComponents.showToast(
-                                        text:
-                                            cubit.registerResponseModel.message,
-                                        color: cubit.toastColor);*/
-                                    if (state is RegisterSuccessState) {
-                                      SharedComponents.navigateToReplace(
-                                        const LoginScreen(),
-                                        context,
-                                      );
-                                    }
+                                      text: cubit.registerResponseModel.message,
+                                      color: cubit.toastColor,
+                                    );
                                   } else {
                                     cubit.changeAutoValidationMode();
                                   }
