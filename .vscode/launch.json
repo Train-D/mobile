@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "name": "Flutter (lib/features/stations/domain/temp.dart)",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/main.dart"
+        }
+    ]
+}

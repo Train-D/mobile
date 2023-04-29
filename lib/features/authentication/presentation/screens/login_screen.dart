@@ -133,7 +133,7 @@ class LoginScreen extends StatelessWidget {
                               SharedComponents.defaultTextButton(
                                 function: () {
                                   SharedComponents.navigateToReplace(
-                                    SignUpScreen(),
+                                    const SignUpScreen(),
                                     context,
                                   );
                                 },

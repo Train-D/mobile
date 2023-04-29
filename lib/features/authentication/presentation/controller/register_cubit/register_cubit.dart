@@ -38,7 +38,7 @@ class RegisterCubit extends Cubit<RegisterState> {
     } else {
       toastColor = Colors.red;
     }
-    emit(changeToastColorState());
+    emit(ChangeToastColorState());
   }
 
   void changeAutoValidationMode() {
