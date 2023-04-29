@@ -8,10 +8,10 @@ class AllStationsCubit extends Cubit<AllStationsState> {
   static AllStationsCubit get(context) =>  BlocProvider.of(context);
 
   final List<Map<String, List<String>>> stations = [
-     {"A": ["Alex"]},
-	   {"C": ["Cairo"]},
-	   {"I": ["Ismailia"]},
-	   {"s": ["string"]},
+     {"A": ["Alex","Alla", "Az"]},
+	   {"C": ["Cairo", "CZ"]},
+	   {"I": ["Ismailia" , "ISde"]},
+	   {"s": ["string" , "shh" , "ash"]},
   ];
 
 }

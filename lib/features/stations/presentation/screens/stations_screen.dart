@@ -66,46 +66,106 @@ class StationsScreen extends StatelessWidget {
                           ),
                           child: SingleChildScrollView(
                             child: Padding(
-                              padding: EdgeInsets.all(25.sp),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 25.sp,
+                                vertical: 20.sp,
+                              ),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-
-                                  
-                                  Text(
-                                    'A',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displayMedium!
-                                        .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                  ),
-                                  SizedBox(
-                                    height: 15.sp,
-                                  ),
                                   ListView.separated(
                                     shrinkWrap: true,
-                                    itemBuilder: (context, index) => InkWell(
-                                      child: Text(
-                                        'Apanpola',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .displayMedium,
-                                      ),
-                                      onTap: () {
-                                        SharedComponents.navigateTo(
-                                            const StationDetailsScreen(),
-                                            context);
-                                      },
+                                    itemBuilder: (context, index) => Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          cubit.stations[index].keys.first,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .displayMedium!
+                                              .copyWith(
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                        ),
+                                        SizedBox(
+                                          height: 0.sp,
+                                        ),
+                                        ListView.builder(
+                                          shrinkWrap: true,
+                                          itemBuilder: (context, idx) =>
+                                              InkWell(
+                                            child: Padding(
+                                              padding:
+                                                  EdgeInsetsDirectional.only(
+                                                top: 15.sp,
+                                                bottom: 15.sp,
+                                              ),
+                                              child: Text(
+                                                cubit.stations[index].values
+                                                    .last[idx],
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .displayMedium,
+                                              ),
+                                            ),
+                                            onTap: () {
+                                              SharedComponents.navigateTo(
+                                                const StationDetailsScreen(),
+                                                context,
+                                              );
+                                            },
+                                          ),
+                                          itemCount: cubit.stations[index]
+                                              .values.last.length,
+                                        ),
+                                      ],
                                     ),
                                     separatorBuilder: (context, index) =>
                                         SizedBox(
                                       height: 20.sp,
                                     ),
-                                    itemCount: 15,
+                                    itemCount: cubit.stations.length,
                                   ),
-                                  
+
+                                  // Column(
+                                  //   children: [
+                                  //     Text(
+                                  //       'A',
+                                  //       style: Theme.of(context)
+                                  //           .textTheme
+                                  //           .displayMedium!
+                                  //           .copyWith(
+                                  //             fontWeight: FontWeight.bold,
+                                  //           ),
+                                  //     ),
+                                  //     SizedBox(
+                                  //       height: 15.sp,
+                                  //     ),
+                                  //     ListView.separated(
+                                  //       shrinkWrap: true,
+                                  //       itemBuilder: (context, index) => InkWell(
+                                  //         child: Text(
+                                  //           'Apanpola',
+                                  //           style: Theme.of(context)
+                                  //               .textTheme
+                                  //               .displayMedium,
+                                  //         ),
+                                  //         onTap: () {
+                                  //           SharedComponents.navigateTo(
+                                  //               const StationDetailsScreen(),
+                                  //               context);
+                                  //         },
+                                  //       ),
+                                  //       separatorBuilder: (context, index) =>
+                                  //           SizedBox(
+                                  //         height: 20.sp,
+                                  //       ),
+                                  //       itemCount: 15,
+                                  //     ),
+                                  //   ],
+                                  // ),
+
                                   // SizedBox(
                                   //   height: 15.sp,
                                   // ),
@@ -122,7 +182,7 @@ class StationsScreen extends StatelessWidget {
                                   //         context);
                                   //   },
                                   // ),
-                                  
+
                                   // SizedBox(
                                   //   height: 20.sp,
                                   // ),
