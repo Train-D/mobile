@@ -74,13 +74,13 @@ class RegisterCubit extends Cubit<RegisterState> {
       emit(RegisterSuccessState());
     } on ServerException catch (e) {
       registerResponseModel = RegisterResponseModel.fromjson(
-          {"token": "", "message": e.toString()});
+          {"token": '', "message": e.toString()});
       emit(RegisterErrorState(e.toString()));
     } on DioError catch (e) {
       registerResponseModel = RegisterResponseModel.fromjson({
         "token": "",
         "message":
-            (e.response!.statusCode == 404 ? e.message : e.response.toString())
+            (e.response!.statusCode == 404 ? e.message : e.response!.data['message'])
       });
       emit(RegisterErrorState(e.response));
     }
