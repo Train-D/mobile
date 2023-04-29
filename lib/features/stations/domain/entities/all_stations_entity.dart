@@ -1,10 +1,21 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 class AllStationsEntity {
-  String stationsChars;
-  List<String> stationsNames;
+  List<CharacterStationsEntity> allStations;
   AllStationsEntity({
-    required this.stationsChars,
-    required this.stationsNames,
+    required this.allStations,
   });
-  
+}
+
+class CharacterStationsEntity {
+  Map<String, StationsNamesEntity> stations;
+  CharacterStationsEntity({
+    required this.stations,
+  });
+}
+
+class StationsNamesEntity {
+  List<String> names;
+  StationsNamesEntity({
+    required this.names,
+  });
 }
