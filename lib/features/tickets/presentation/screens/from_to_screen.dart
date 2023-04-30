@@ -46,25 +46,27 @@ class FromToScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               SizedBox(
-                                width: 65.w,
-                                // height: 10.h,
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    TicketsComponents.labelField(
-                                        text: AppString.from,
-                                        field: TicketsComponents
-                                            .defaultDropDownButton(context),
-                                        context: context),
-                                    TicketsComponents.labelField(
-                                        text: AppString.to,
-                                        field: TicketsComponents
-                                            .defaultDropDownButton(context),
-                                        context: context)
-                                  ],
-                                ),
-                              ),
+                                  width: 65.w,
+                                  // height: 10.h,
+                                  child: Column(
+                                    children: [
+                                      TicketsComponents.FromToLabel(context),
+                                      SizedBox(height: 1.h,),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          GestureDetector(
+                                            onTap: () => cubit.getStations(),
+                                            child: (state is FromToStationsLoadingState? CircularProgressIndicator() : TicketsComponents.defaultDropDownButton(context, cubit.allStations, cubit.changeDropDownButtonValue, cubit.fromDefaultValue)) 
+                                          ),
+                                          GestureDetector(
+                                            //onTap: () => cubit.getStations(),
+                                            child: TicketsComponents.defaultDropDownButton(context, cubit.fromToStations, cubit.changeDropDownButtonValue, cubit.fromDefaultValue) 
+                                          ),
+                                        ],
+                                      )
+                                    ],
+                                  )),
                               SizedBox(height: 2.h),
                               SizedBox(
                                 width: 65.w,
