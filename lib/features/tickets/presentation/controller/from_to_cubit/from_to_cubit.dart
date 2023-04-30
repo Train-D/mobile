@@ -13,10 +13,13 @@ class FromToCubit extends Cubit<FromToState> {
   static FromToCubit get(context) => BlocProvider.of(context);
 
   var fromToDateCon = TextEditingController();
-  List<String> allStations = [];
-  List<String> fromToStations = [];
+  String fromDefaultValue = "Select";
+  String ToDefaultValue = "Select";
+  List<String> allStations = ["Select"];
+  List<String> fromToStations = ["Select"];
   final GetStationsUseCase getStationsUseCase;
   late StationsModel stationsModel;
+
   Future<void> getStations() async {
     emit(FromToStationsLoadingState());
 
@@ -25,10 +28,11 @@ class FromToCubit extends Cubit<FromToState> {
       result.fold((l) {}, (r) {
         stationsModel = StationsModel.fromjson(r.stations);
         for (var keys in stationsModel.stations.keys) {
-          print(keys);
+          //print(keys);
           allStations.add(keys);
         }
       });
+      for (var i in allStations) print(i);
       emit(FromToStationsSuccessState());
     } on ServerException catch (e) {
       print(e.toString());
@@ -44,5 +48,10 @@ class FromToCubit extends Cubit<FromToState> {
   getToStations(String fromStations) {
     fromToStations = stationsModel.stations[fromStations]!;
     emit(FromToStationsSuccessState());
+  }
+
+  void changeDropDownButtonValue(String oldValue, String newValue) {
+    oldValue = newValue;
+    emit(ChangeDropDownButtonValueState());
   }
 }

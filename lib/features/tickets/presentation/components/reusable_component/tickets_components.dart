@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/utils/app_images.dart';
 import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
 
 import '../../../../../core/global/theme/app_color/app_color_light.dart';
@@ -8,39 +9,66 @@ import '../../../../../core/utils/app_sizes.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/components.dart';
 
-
 class TicketsComponents {
-  static Widget defaultDropDownButton(BuildContext context, List<String> allStations, dynamic state) => Container(
-        width: AppSizes.width(context) * 0.25,
-        height: AppSizes.height(context) * 0.056,
+  static Widget defaultDropDownButton(
+          BuildContext context, List<String> stations, dynamic func, String oldvalue) =>
+      Container(
+        width: 25.w,
+        height: 5.h,
         decoration: BoxDecoration(
             color: const Color.fromRGBO(235, 234, 234, 1),
             borderRadius: BorderRadius.circular(10)),
         child: GestureDetector(
           child: Center(
-            child: (state is FromToStationsLoadingState ? CircularProgressIndicator() :DropdownButton(
-              onChanged: (value) {},
-              value: "Select",
-              icon: const Icon(Icons.keyboard_arrow_down),
-              items: [
-                DropdownMenuItem(
-                  value: "Select",
-                  child: Text(
-                    AppString.select,
-                    //style: TextStyle(color: Color.fromRGBO(120, 118, 118, 1), fontSize: 18.sp),
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayMedium!
-                        .copyWith(color: fromToDropDownBgColor),
-                  ),
-                ),
-              ],
-            )
-            )
-          ),
+              child: DropdownButton(
+                  onChanged: (value) {
+                    func(oldvalue, value);
+                  },
+                  value: oldvalue,
+                  icon: const Icon(Icons.keyboard_arrow_down),
+                  items: stations
+                      .map(
+                        (e) => DropdownMenuItem(
+                          value: e,
+                          child: Text(
+                            e,
+                            //style: TextStyle(color: Color.fromRGBO(120, 118, 118, 1), fontSize: 18.sp),
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(color: fromToDropDownBgColor),
+                          ),
+                        ),
+                      )
+                      .toList())),
         ),
       );
 
+  static Widget FromToLabel(BuildContext context) => Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            '${AppString.from}:',
+            style: Theme.of(context)
+                .textTheme
+                .displayLarge!
+                .copyWith(fontWeight: FontWeight.w700, color: Colors.black),
+          ),
+          SizedBox(
+            width: 1.w,
+          ),
+          Text(
+            '${AppString.to}:',
+            style: Theme.of(context)
+                .textTheme
+                .displayLarge!
+                .copyWith(fontWeight: FontWeight.w700, color: Colors.black),
+          ),
+          SizedBox(
+            width: 5.w,
+          ),
+        ],
+      );
   static Widget labelField(
           {required String text,
           required dynamic field,
