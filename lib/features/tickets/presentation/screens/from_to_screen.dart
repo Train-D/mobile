@@ -52,15 +52,20 @@ class FromToScreen extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    TicketsComponents.labelField(
-                                        text: AppString.from,
-                                        field: TicketsComponents
-                                            .defaultDropDownButton(context),
-                                        context: context),
+                                    GestureDetector(
+                                      onTap: () {
+                                        cubit.getStations();
+                                      },
+                                      child: TicketsComponents.labelField(
+                                          text: AppString.from,
+                                          field: TicketsComponents
+                                              .defaultDropDownButton(context, cubit.allStations, state),
+                                          context: context),
+                                    ),
                                     TicketsComponents.labelField(
                                         text: AppString.to,
                                         field: TicketsComponents
-                                            .defaultDropDownButton(context),
+                                            .defaultDropDownButton(context, cubit.allStations, state),
                                         context: context)
                                   ],
                                 ),

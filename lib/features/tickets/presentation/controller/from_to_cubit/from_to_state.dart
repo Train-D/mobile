@@ -8,3 +8,11 @@ abstract class FromToState extends Equatable {
 }
 
 class FromToInitial extends FromToState {}
+class FromToStationsSuccessState extends FromToState {}
+class FromToStationsLoadingState extends FromToState{}
+
+class FromToStationsErrorState extends FromToState{
+  final dynamic message;
+
+  FromToStationsErrorState(this.message);
+}

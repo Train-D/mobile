@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
 
 import '../../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../../core/global/theme/theme_data/theme_data_light.dart';
@@ -9,30 +10,33 @@ import '../../../../../core/utils/components.dart';
 
 
 class TicketsComponents {
-  static Widget defaultDropDownButton(BuildContext context) => Container(
+  static Widget defaultDropDownButton(BuildContext context, List<String> allStations, dynamic state) => Container(
         width: AppSizes.width(context) * 0.25,
         height: AppSizes.height(context) * 0.056,
         decoration: BoxDecoration(
             color: const Color.fromRGBO(235, 234, 234, 1),
             borderRadius: BorderRadius.circular(10)),
-        child: Center(
-          child: DropdownButton(
-            onChanged: (value) {},
-            value: "Select",
-            icon: const Icon(Icons.keyboard_arrow_down),
-            items: [
-              DropdownMenuItem(
-                value: "Select",
-                child: Text(
-                  AppString.select,
-                  //style: TextStyle(color: Color.fromRGBO(120, 118, 118, 1), fontSize: 18.sp),
-                  style: Theme.of(context)
-                      .textTheme
-                      .displayMedium!
-                      .copyWith(color: fromToDropDownBgColor),
+        child: GestureDetector(
+          child: Center(
+            child: (state is FromToStationsLoadingState ? CircularProgressIndicator() :DropdownButton(
+              onChanged: (value) {},
+              value: "Select",
+              icon: const Icon(Icons.keyboard_arrow_down),
+              items: [
+                DropdownMenuItem(
+                  value: "Select",
+                  child: Text(
+                    AppString.select,
+                    //style: TextStyle(color: Color.fromRGBO(120, 118, 118, 1), fontSize: 18.sp),
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayMedium!
+                        .copyWith(color: fromToDropDownBgColor),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            )
+            )
           ),
         ),
       );
