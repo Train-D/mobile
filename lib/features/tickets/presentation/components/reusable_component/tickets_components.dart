@@ -10,38 +10,20 @@ import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/components.dart';
 
 class TicketsComponents {
-  static Widget defaultDropDownButton(
-          BuildContext context, List<String> stations, dynamic func, String oldvalue) =>
+  static Widget defaultDropDownButtonContainer(
+          dynamic child) =>
       Container(
         width: 25.w,
         height: 5.h,
         decoration: BoxDecoration(
             color: const Color.fromRGBO(235, 234, 234, 1),
             borderRadius: BorderRadius.circular(10)),
-        child: GestureDetector(
-          child: Center(
-              child: DropdownButton(
-                  onChanged: (value) {
-                    func(oldvalue, value);
-                  },
-                  value: oldvalue,
-                  icon: const Icon(Icons.keyboard_arrow_down),
-                  items: stations
-                      .map(
-                        (e) => DropdownMenuItem(
-                          value: e,
-                          child: Text(
-                            e,
-                            //style: TextStyle(color: Color.fromRGBO(120, 118, 118, 1), fontSize: 18.sp),
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayMedium!
-                                .copyWith(color: fromToDropDownBgColor),
-                          ),
-                        ),
-                      )
-                      .toList())),
-        ),
+        child: Center(
+            child: SingleChildScrollView(
+              child: FittedBox(
+                child:child
+              ),
+            )),
       );
 
   static Widget FromToLabel(BuildContext context) => Row(

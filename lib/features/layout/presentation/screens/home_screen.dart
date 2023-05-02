@@ -12,7 +12,6 @@ import '../controller/home_cubit/home_cubit.dart';
 import '../controller/home_cubit/home_state.dart';
 import '../../../stations/presentation/screens/stations_screen.dart';
 import '../../../tickets/presentation/screens/from_to_screen.dart';
-
 import '../../../track/presentation/screens/train_id_screen.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,7 +19,16 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+    return BlocConsumer<HomeCubit, HomeState>(listener: (context, state) {
+      HomeCubit cubit = HomeCubit.get(context);
+      if (state is StationsSuccessState) {
+        cubit.changeGetStationsFromApiIsDone();
+        SharedComponents.navigateTo(
+          const FromToScreen(),
+          context,
+        );
+      }
+    }, builder: (context, state) {
       HomeCubit cubit = HomeCubit.get(context);
       return SafeArea(
         child: SharedComponents.screenBg(
@@ -38,11 +46,25 @@ class HomeScreen extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        homeButton(
-                          label: AppString.tickets,
-                          screen: const FromToScreen(),
-                          context: context,
-                        ),
+                        (state is StationsLoadingState
+                            ? const CircularProgressIndicator()
+                            : SharedComponents.defaultButton(
+                                context: context,
+                                function: () async {
+                                  if (!cubit.getStationsFromApiIsDone) {
+                                    await cubit.getStationsFromApi();
+                                  } else {
+                                    SharedComponents.navigateTo(
+                                      const FromToScreen(),
+                                      context,
+                                    );
+                                  }
+                                },
+                                text: AppString.tickets,
+                                width: AppSizes.width(context) * 0.8,
+                                height: AppSizes.height(context) * 0.07,
+                                radius: 4.sp,
+                              )),
                         SizedBox(
                           height: AppSizes.height(context) * 0.02,
                         ),
