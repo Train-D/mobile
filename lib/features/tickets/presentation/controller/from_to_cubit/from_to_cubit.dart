@@ -1,57 +1,44 @@
-import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:traind_app/core/error/exceptions.dart';
-import 'package:traind_app/features/tickets/data/stations/models/stations_model.dart';
-import 'package:traind_app/features/tickets/domain/stations/usecase/get_stations_usecase.dart';
+import 'package:traind_app/core/utils/app_constants.dart';
 
 part 'from_to_state.dart';
 
 class FromToCubit extends Cubit<FromToState> {
-  FromToCubit(this.getStationsUseCase) : super(FromToInitial());
+  FromToCubit() : super(FromToInitial()) {
+    allStations.clear();
+    for (var station in AppConstants.allFromToStations.keys) {
+      allStations.add(station);
+    }
+    fromDefaultValue = allStations.first;
+  }
   static FromToCubit get(context) => BlocProvider.of(context);
 
   var fromToDateCon = TextEditingController();
   String fromDefaultValue = "Select";
-  String ToDefaultValue = "Select";
+  String toDefaultValue = "Select";
   List<String> allStations = ["Select"];
-  List<String> fromToStations = ["Select"];
-  final GetStationsUseCase getStationsUseCase;
-  late StationsModel stationsModel;
+  List<String> toStations = ["Select"];
+  void getToStationsData(String fromStation) {
+    //toStations.addAll(AppConstants.allFromToStations[fromStation]);
+    //toDefaultValue = '';
+    toStations.clear();
+    for (var station in AppConstants.allFromToStations[fromStation])
+      toStations.add(station);
+    toDefaultValue = toStations.first;
+    print(toStations);
+    emit(GetToStationsDataState());
+  }
 
-  Future<void> getStations() async {
-    emit(FromToStationsLoadingState());
-
-    try {
-      final result = await getStationsUseCase();
-      result.fold((l) {}, (r) {
-        stationsModel = StationsModel.fromjson(r.stations);
-        for (var keys in stationsModel.stations.keys) {
-          //print(keys);
-          allStations.add(keys);
-        }
-      });
-      for (var i in allStations) print(i);
-      emit(FromToStationsSuccessState());
-    } on ServerException catch (e) {
-      print(e.toString());
-      stationsModel = StationsModel.fromjson({});
-      emit(FromToStationsErrorState(e.toString()));
-    } on DioError catch (e) {
-      print(e.response);
-      stationsModel = StationsModel.fromjson({});
-      emit(FromToStationsErrorState(e.response));
+  void changeDropDownButtonValue(int option, String newValue) {
+    //print(newValue);
+    if (option == 1) {
+      fromDefaultValue = newValue;
+    } else {
+      toDefaultValue = newValue;
     }
-  }
-
-  getToStations(String fromStations) {
-    fromToStations = stationsModel.stations[fromStations]!;
-    emit(FromToStationsSuccessState());
-  }
-
-  void changeDropDownButtonValue(String oldValue, String newValue) {
-    oldValue = newValue;
+    //print(fromDefaultValue);
     emit(ChangeDropDownButtonValueState());
   }
 }

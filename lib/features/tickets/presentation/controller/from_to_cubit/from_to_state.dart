@@ -8,13 +8,7 @@ abstract class FromToState extends Equatable {
 }
 
 class FromToInitial extends FromToState {}
-class ChangeDropDownButtonValueState extends FromToState {}
-class FromToStationsSuccessState extends FromToState {}
-
-class FromToStationsLoadingState extends FromToState{}
-
-class FromToStationsErrorState extends FromToState{
-  final dynamic message;
-
-  FromToStationsErrorState(this.message);
+class ChangeDropDownButtonValueState extends FromToState {
+  
 }
+class GetToStationsDataState extends FromToState{}

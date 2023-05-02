@@ -1,8 +1,7 @@
 import 'package:traind_app/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:traind_app/core/usecases/base_usecase.dart';
-import 'package:traind_app/features/tickets/domain/stations/entity/stations_entity.dart';
-import 'package:traind_app/features/tickets/domain/stations/repository/get_stations_repository.dart';
+import 'package:traind_app/features/layout/domain/stations/entity/stations_entity.dart';
+import 'package:traind_app/features/layout/domain/stations/repository/get_stations_repository.dart';
 
 class GetStationsUseCase {
   BaseGetStationsRepository baseGetStationsRepository;

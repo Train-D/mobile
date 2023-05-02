@@ -51,17 +51,76 @@ class FromToScreen extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       TicketsComponents.FromToLabel(context),
-                                      SizedBox(height: 1.h,),
+                                      SizedBox(
+                                        height: 1.h,
+                                      ),
                                       Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
-                                          GestureDetector(
-                                            onTap: () => cubit.getStations(),
-                                            child: (state is FromToStationsLoadingState? CircularProgressIndicator() : TicketsComponents.defaultDropDownButton(context, cubit.allStations, cubit.changeDropDownButtonValue, cubit.fromDefaultValue)) 
+                                          TicketsComponents
+                                              .defaultDropDownButtonContainer(
+                                            DropdownButton(
+                                                onChanged: (value) {
+                                                  cubit
+                                                      .changeDropDownButtonValue(
+                                                         1,
+                                                          value!);
+                                                  cubit
+                                                      .getToStationsData(value);
+                                                },
+                                                menuMaxHeight: 30.h,
+                                                value: cubit.fromDefaultValue,
+                                                icon: const Icon(
+                                                    Icons.keyboard_arrow_down),
+                                                items: cubit.allStations
+                                                    .map(
+                                                      (e) => DropdownMenuItem(
+                                                        value: e,
+                                                        child: Text(
+                                                          e,
+                                                          style: Theme.of(
+                                                                  context)
+                                                              .textTheme
+                                                              .displayMedium!
+                                                              .copyWith(
+                                                                  color:
+                                                                      fromToDropDownBgColor),
+                                                        ),
+                                                      ),
+                                                    )
+                                                    .toList()),
                                           ),
-                                          GestureDetector(
-                                            //onTap: () => cubit.getStations(),
-                                            child: TicketsComponents.defaultDropDownButton(context, cubit.fromToStations, cubit.changeDropDownButtonValue, cubit.fromDefaultValue) 
+                                          TicketsComponents
+                                              .defaultDropDownButtonContainer(
+                                            DropdownButton(
+                                                onChanged: (value) {
+                                                  cubit
+                                                      .changeDropDownButtonValue(
+                                                          2,
+                                                          value!);
+                                                },
+                                                menuMaxHeight: 30.h,
+                                                value: cubit.toDefaultValue,
+                                                icon: const Icon(
+                                                    Icons.keyboard_arrow_down),
+                                                items: cubit.toStations
+                                                    .map(
+                                                      (e) => DropdownMenuItem(
+                                                        value: e,
+                                                        child: Text(
+                                                          e,
+                                                          style: Theme.of(
+                                                                  context)
+                                                              .textTheme
+                                                              .displayMedium!
+                                                              .copyWith(
+                                                                  color:
+                                                                      fromToDropDownBgColor),
+                                                        ),
+                                                      ),
+                                                    )
+                                                    .toList()),
                                           ),
                                         ],
                                       )
