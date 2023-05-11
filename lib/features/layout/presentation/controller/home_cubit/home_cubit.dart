@@ -36,12 +36,11 @@ class HomeCubit extends Cubit<HomeState> {
       });
       emit(StationsSuccessState());
     } on ServerException catch (e) {
-      print(e.toString());
-      stationsModel = StationsModel.fromjson({});
+      
+      stationsModel = StationsModel.fromjson(const {});
       emit(StationsErrorState(e.toString()));
     } on DioError catch (e) {
-      print(e.response);
-      stationsModel = StationsModel.fromjson({});
+      stationsModel = StationsModel.fromjson(const {});
       emit(StationsErrorState(e.response));
     }
   }

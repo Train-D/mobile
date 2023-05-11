@@ -59,6 +59,7 @@ class TicketScreen extends StatelessWidget {
                           await cubit.saveImage(ticket);
                           cubit.showDialog = true;
                           //print({'resulltttttt $res'});
+                          // ignore: use_build_context_synchronously
                           showTicketAlertDialog(context: context);
                         },
                         text: AppString.download,

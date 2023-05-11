@@ -15,6 +15,7 @@ class FromToLoadingState extends FromToState {}
 
 class FromToSuccessState extends FromToState {}
 
+// ignore: must_be_immutable
 class FromToErrorState extends FromToState {
   String message;
   FromToErrorState(this.message);
