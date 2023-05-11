@@ -1,4 +1,3 @@
-import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -19,9 +18,7 @@ class FromToScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FromToCubit, FromToState>(listener: (context, state) {
-      FromToCubit cubit = FromToCubit.get(context);
-    }, builder: (context, state) {
+    return BlocBuilder<FromToCubit, FromToState>(builder: (context, state) {
       FromToCubit cubit = FromToCubit.get(context);
       return SafeArea(
         child: SharedComponents.screenBg(
@@ -162,7 +159,7 @@ class FromToScreen extends StatelessWidget {
                                       cubit.changeDefualtDate(
                                           DateFormat('yyyy-MM-dd')
                                               .format(pickedDate));
-                                      print(cubit.fromToDefaultDate);
+                                      //print(cubit.fromToDefaultDate);
                                     }
                                   },
                                   child: Container(
@@ -202,7 +199,7 @@ class FromToScreen extends StatelessWidget {
                                 height: 4.h,
                               ),
                               (state is FromToLoadingState
-                                  ? CircularProgressIndicator()
+                                  ? const CircularProgressIndicator()
                                   : SizedBox(
                                       width: 65.w,
                                       height: 6.h,
@@ -212,62 +209,74 @@ class FromToScreen extends StatelessWidget {
                                             // ignore: use_build_context_synchronously
                                             TicketsComponents.bottomModelSheet(
                                                 context,
-                                                Padding(
-                                                  padding: EdgeInsets.only(
-                                                      top: 25.sp),
-                                                  child: ListView.builder(
-                                                    itemCount: cubit
-                                                        .scheduleModel
-                                                        .scheduleData
-                                                        .length,
-                                                    itemBuilder:
-                                                        (context, index) {
-                                                      return InkWell(
-                                                        onTap: () {
-                                                          SharedComponents
-                                                              .navigateTo(ChooseSeatsScreen(),
-                                                                  context);
-                                                        },
-                                                        child: Padding(
-                                                          padding: EdgeInsets
-                                                              .symmetric(
-                                                                  horizontal:
-                                                                      30.sp),
-                                                          child: Column(
-                                                            children: [
-                                                              Padding(
-                                                                padding: EdgeInsets
-                                                                    .symmetric(
+                                                Column(
+                                                  children: [
+                                                    SizedBox(
+                                                      height: 2.h,
+                                                    ),
+                                                    Image.asset(
+                                                        '${AppConstants.imagesUrl}$bar'),
+                                                    SizedBox(
+                                                      height: 3.h,
+                                                    ),
+                                                    Expanded(
+                                                      child: ListView.builder(
+                                                        itemCount: cubit
+                                                            .scheduleModel
+                                                            .scheduleData
+                                                            .length,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          return InkWell(
+                                                            onTap: () {
+                                                              SharedComponents
+                                                                  .navigateTo(
+                                                                      const ChooseSeatsScreen(),
+                                                                      context);
+                                                            },
+                                                            child: Padding(
+                                                              padding: EdgeInsets
+                                                                  .symmetric(
+                                                                      horizontal:
+                                                                          30.sp),
+                                                              child: Column(
+                                                                children: [
+                                                                  Padding(
+                                                                    padding: EdgeInsets.symmetric(
                                                                         vertical:
                                                                             10.sp),
-                                                                child: Row(
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .spaceAround,
-                                                                  children: [
-                                                                    TicketsComponents.timeText(cubit
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceAround,
+                                                                      children: [
+                                                                        TicketsComponents.timeText(cubit
                                                                             .scheduleModel
-                                                                            .scheduleData[index]
-                                                                        [
-                                                                        "startTime"]),
-                                                                    Expanded(
-                                                                        child: Image.asset(
-                                                                            '${AppConstants.imagesUrl}$bar')),
-                                                                    TicketsComponents.timeText(cubit
+                                                                            .scheduleData[index]["startTime"]),
+                                                                        SizedBox(
+                                                                          height:
+                                                                              2.h,
+                                                                          width:
+                                                                              5.w,
+                                                                          child:
+                                                                              Image.asset('${AppConstants.imagesUrl}$arrow'),
+                                                                        ),
+                                                                        TicketsComponents.timeText(cubit
                                                                             .scheduleModel
-                                                                            .scheduleData[index]
-                                                                        [
-                                                                        "arrivalTime"])
-                                                                  ],
-                                                                ),
+                                                                            .scheduleData[index]["arrivalTime"])
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                  TicketsComponents
+                                                                      .bottomDivider()
+                                                                ],
                                                               ),
-                                                              TicketsComponents.bottomDivider()
-                                                            ],
-                                                          ),
-                                                        ),
-                                                      );
-                                                    },
-                                                  ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ));
                                           },
                                           text: AppString.search,

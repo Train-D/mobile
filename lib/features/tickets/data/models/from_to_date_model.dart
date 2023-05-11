@@ -1,7 +1,7 @@
 import 'package:traind_app/features/tickets/domain/entities/from_to_date_entity.dart';
 
 class FromToDateModel extends FromToDateEntity {
-  FromToDateModel(
+  const FromToDateModel(
       {required super.fromStation,
       required super.toStation,
       required super.date});

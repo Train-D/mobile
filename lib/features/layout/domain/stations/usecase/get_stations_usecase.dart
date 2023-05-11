@@ -6,7 +6,6 @@ import 'package:traind_app/features/layout/domain/stations/repository/get_statio
 class GetStationsUseCase {
   BaseGetStationsRepository baseGetStationsRepository;
   GetStationsUseCase(this.baseGetStationsRepository);
-  @override
   Future<Either<Failure, StationsEntity>> call() async {
     return await baseGetStationsRepository.getStations();
   }

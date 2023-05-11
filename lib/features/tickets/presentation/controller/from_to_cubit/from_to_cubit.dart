@@ -31,11 +31,9 @@ class FromToCubit extends Cubit<FromToState> {
   void getToStationsData(String fromStation) {
     toStations.removeRange(1, toStations.length);
     //toStations.clear();
-    for (var station in AppConstants.allFromToStations[fromStation])
+    for (var station in AppConstants.allFromToStations[fromStation]) {
       toStations.add(station);
-    print(toStations);
-    // toDefaultValue = toStations.first;
-    print(toStations);
+    }
     emit(GetToStationsDataState());
   }
 
@@ -67,15 +65,15 @@ class FromToCubit extends Cubit<FromToState> {
           date: fromToDefaultDate));
       result.fold((l) {}, (r) {
         scheduleModel = ScheduleModel.fromjson(r.scheduleData);
-        print(r);
+        //print(r);
       });
       emit(FromToSuccessState());
     } on ServerException catch (e) {
-      scheduleModel = ScheduleModel.fromjson([]);
+      scheduleModel = ScheduleModel.fromjson(const []);
       errorMessage = e.toString();
       emit(FromToErrorState(e.toString()));
     } on DioError catch (e) {
-      scheduleModel = ScheduleModel.fromjson([]);
+      scheduleModel = ScheduleModel.fromjson(const []);
       errorMessage = e.toString();
       emit(FromToErrorState(e.message.toString()));
     }

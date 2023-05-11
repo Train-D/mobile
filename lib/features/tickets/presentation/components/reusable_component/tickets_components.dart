@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/utils/app_images.dart';
-import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
 
 import '../../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../../core/global/theme/theme_data/theme_data_light.dart';
@@ -22,6 +20,7 @@ class TicketsComponents {
               child: child)),
       );
 
+  // ignore: non_constant_identifier_names
   static Widget FromToLabel(BuildContext context) => Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
