@@ -7,6 +7,10 @@ import 'package:traind_app/features/layout/data/stations/data%20source/get_remot
 import 'package:traind_app/features/layout/data/stations/repository/get_stations_data_repository.dart';
 import 'package:traind_app/features/layout/domain/stations/repository/get_stations_repository.dart';
 import 'package:traind_app/features/layout/domain/stations/usecase/get_stations_usecase.dart';
+import 'package:traind_app/features/tickets/data/data%20source/fromto_data_sorce.dart';
+import 'package:traind_app/features/tickets/data/repository/fromto_repository.dart';
+import 'package:traind_app/features/tickets/domain/fromto_usecase.dart.dart';
+import 'package:traind_app/features/tickets/domain/repository/fromto_domain_repository.dart';
 
 final sl = GetIt.instance;
 
@@ -24,6 +28,12 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseGetStationsRepository>(
         () => StationsRepository(sl()));
     sl.registerLazySingleton(() => GetStationsUseCase(sl()));
+    //fromto feature
+    sl.registerLazySingleton<BaseFromToDateRemoteDataSource>(
+        () => FromToDateRemoteDataSource());
+    sl.registerLazySingleton<BaseFromToDateRepository>(
+        () => FromToDateRepository(sl()));
+    sl.registerLazySingleton(() => PostFromToDateDataUsecase(sl()));
     /*sl.registerLazySingleton(
         () => RegisterResponseModel(token: sl(), message: sl()));*/
     

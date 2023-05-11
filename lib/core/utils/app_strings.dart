@@ -27,7 +27,7 @@ class AppString {
   static const String from = 'From';
   static const String to = 'To';
   static const String date = 'Date';
-  static const String defaultDatePattern = 'dd/mm/yyyy';
+  static const String defaultDatePattern = 'yyyy/mm/dd';
   static const String search = 'Search';
   static const String select = 'Select';
   static const String trainIdTitle = 'Track Your Train';

@@ -10,20 +10,16 @@ import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/components.dart';
 
 class TicketsComponents {
-  static Widget defaultDropDownButtonContainer(
-          dynamic child) =>
-      Container(
+  static Widget defaultDropDownButtonContainer(dynamic child) => Container(
         width: 25.w,
         height: 5.h,
         decoration: BoxDecoration(
             color: const Color.fromRGBO(235, 234, 234, 1),
             borderRadius: BorderRadius.circular(10)),
         child: Center(
-            child: SingleChildScrollView(
-              child: FittedBox(
-                child:child
-              ),
-            )),
+            child: FittedBox(
+              //width: 20.w,
+              child: child)),
       );
 
   static Widget FromToLabel(BuildContext context) => Row(
@@ -83,26 +79,24 @@ class TicketsComponents {
         builder: (context, child) => Theme(data: lightTheme(), child: child!),
       );
 
-  static Future bottomModelSheet(BuildContext context) => showModalBottomSheet(
+  static Future bottomModelSheet(BuildContext context, Widget child) =>
+      showModalBottomSheet(
         backgroundColor: Colors.transparent,
         context: context,
         builder: (context) => Padding(
           padding: const EdgeInsets.only(bottom: 30),
           child: Container(
-            width: double.infinity,
-            height: AppSizes.height(context) * 0.4,
-            decoration: const BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(30)),
-              gradient: LinearGradient(
-                colors: fromToBottomSheetBg,
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
+              width: double.infinity,
+              height: AppSizes.height(context) * 0.4,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(30)),
+                gradient: LinearGradient(
+                  colors: fromToBottomSheetBg,
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
               ),
-            ),
-            child: SingleChildScrollView(
-              child: Column(children: const []),
-            ),
-          ),
+              child: child),
         ),
       );
 
@@ -149,7 +143,31 @@ class TicketsComponents {
           ),
         ),
       );
-
+  static timeText(String text) => Text(
+        text,
+        style: TextStyle(fontSize: 18.sp, fontFamily: 'jura'),
+      );
+  static bottomDivider() => Column(
+        children: [
+          SizedBox(
+            height: 1.h,
+          ),
+          Row(
+            children: [
+              SizedBox(
+                width: 5.w,
+              ),
+              const Expanded(
+                  child: Divider(
+                color: lightColor,
+              )),
+              SizedBox(
+                width: 5.w,
+              ),
+            ],
+          )
+        ],
+      );
   static priceRow({
     required BuildContext context,
     required double price,

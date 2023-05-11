@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginCubit(),
         ),
         BlocProvider(
-          create: (context) => FromToCubit(),
+          create: (context) => FromToCubit(sl()),
         ),
         BlocProvider(
           create: (context) => RegisterCubit(sl()),

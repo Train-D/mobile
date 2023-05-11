@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:traind_app/core/network/api_constants.dart';
 import 'package:traind_app/features/layout/data/stations/models/stations_model.dart';
 import 'package:traind_app/features/layout/domain/stations/entity/stations_entity.dart';
 
@@ -14,7 +15,7 @@ class GetRemoteStationsDataSource extends BaseGetRemoteStationsDataSource {
     try {
       final dio = Dio();
       final response = await dio.get(
-        'https://traind.azurewebsites.net/api/Stations'
+        ApiConstants.fromToStationsPath
       );
       var temp = StationsModel.fromjson(response.data);
       var stationsEntity = StationsEntity.toEntity(temp);
