@@ -1,6 +1,6 @@
 import 'package:traind_app/core/error/exceptions.dart';
 import 'package:traind_app/features/authentication/data/data%20source/register_remote_data_source.dart';
-import 'package:traind_app/features/authentication/data/models/register_request.dart';
+import 'package:traind_app/features/authentication/data/models/register_request_model.dart';
 import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
 import 'package:traind_app/core/error/failure.dart';
 import 'package:dartz/dartz.dart';

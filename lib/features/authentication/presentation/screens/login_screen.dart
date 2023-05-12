@@ -1,4 +1,5 @@
 import 'package:basic_utils/basic_utils.dart';
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -19,7 +20,14 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LoginCubit, LoginState>(builder: (context, state) {
+    return BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
+      if (state is LoginSuccessState) {
+        SharedComponents.navigateTo(
+          const HomeScreen(),
+          context,
+        );
+      }
+    }, builder: (context, state) {
       LoginCubit cubit = LoginCubit.get(context);
       return SafeArea(
         child: SharedComponents.screenBg(
@@ -64,14 +72,21 @@ class LoginScreen extends StatelessWidget {
                     height: 4.h,
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30.sp,),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 30.sp,
+                    ),
                     child: Form(
+                      key: cubit.loginFormKey,
+                      autovalidateMode: cubit.loginAutoValidationMode,
                       child: Column(
                         children: [
                           SharedComponents.defaultTextField(
                             controller: cubit.loginUsernameCon,
                             type: TextInputType.text,
-                            validate: (e) {
+                            validate: (String? value) {
+                              if (value!.isEmpty) {
+                                return 'This field must not be empty';
+                              }
                               return null;
                             },
                             label: AppString.userName,
@@ -85,7 +100,10 @@ class LoginScreen extends StatelessWidget {
                           SharedComponents.defaultTextField(
                             controller: cubit.loginPasswordCon,
                             type: TextInputType.visiblePassword,
-                            validate: (e) {
+                            validate: (String? value) {
+                              if (value!.isEmpty) {
+                                return 'This field must not be empty';
+                              }
                               return null;
                             },
                             label: AppString.passowrd,
@@ -102,16 +120,36 @@ class LoginScreen extends StatelessWidget {
                           SizedBox(
                             height: 2.h,
                           ),
-                          SharedComponents.defaultButton(
-                            context: context,
-                            function: () {
-                              SharedComponents.navigateTo(
-                                  const HomeScreen(), context);
-                            },
-                            text: StringUtils.capitalize(AppString.loginTitle),
-                            width: AppSizes.width(context) / 3,
-                            height: AppSizes.height(context) / 14,
-                            radius: AppSizes.defaultBottomRadius,
+                          ConditionalBuilder(
+                            condition: state is! LoginLoadingState,
+                            builder: (context) =>
+                                SharedComponents.defaultButton(
+                              context: context,
+                              function: () async {
+                                if (cubit.loginFormKey.currentState!
+                                    .validate()) {
+                                  await cubit.login(
+                                    userName: cubit.loginUsernameCon.text,
+                                    password: cubit.loginPasswordCon.text,
+                                  );
+                                  cubit.loginChangeToastColor();
+                                  SharedComponents.showToast(
+                                    text: cubit.authresponseModel.message,
+                                    color: cubit.loginToastColor,
+                                  );
+                                } else {
+                                  cubit.loginChangeAutoValidationMode();
+                                }
+                              },
+                              text:
+                                  StringUtils.capitalize(AppString.loginTitle),
+                              width: AppSizes.width(context) / 3,
+                              height: AppSizes.height(context) / 14,
+                              radius: AppSizes.defaultBottomRadius,
+                            ),
+                            fallback: (context) => const Center(
+                              child: CircularProgressIndicator(),
+                            ),
                           ),
                           SizedBox(
                             height: 1.h,
