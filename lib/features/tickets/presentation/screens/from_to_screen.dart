@@ -18,7 +18,69 @@ class FromToScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<FromToCubit, FromToState>(builder: (context, state) {
+    return BlocConsumer<FromToCubit, FromToState>(listener: (context, state) {
+      FromToCubit cubit = FromToCubit.get(context);
+      if (state is FromToErrorState) {
+        SharedComponents.showToast(text: cubit.errorMessage, color: Colors.red);
+      } else if (state is FromToSuccessState) {
+        // ignore: use_build_context_synchronously
+        TicketsComponents.bottomModelSheet(
+            context,
+            Column(
+              children: [
+                SizedBox(
+                  height: 2.h,
+                ),
+                Image.asset('${AppConstants.imagesUrl}$bar'),
+                SizedBox(
+                  height: 3.h,
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: cubit.scheduleModel.scheduleData.length,
+                    itemBuilder: (context, index) {
+                      return InkWell(
+                        onTap: () {
+                          SharedComponents.navigateTo(
+                              const ChooseSeatsScreen(), context);
+                        },
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 30.sp),
+                          child: Column(
+                            children: [
+                              Padding(
+                                padding: EdgeInsets.symmetric(vertical: 10.sp),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    TicketsComponents.timeText(cubit
+                                        .scheduleModel
+                                        .scheduleData[index]["startTime"]),
+                                    SizedBox(
+                                      height: 2.h,
+                                      width: 5.w,
+                                      child: Image.asset(
+                                          '${AppConstants.imagesUrl}$arrow'),
+                                    ),
+                                    TicketsComponents.timeText(cubit
+                                        .scheduleModel
+                                        .scheduleData[index]["arrivalTime"])
+                                  ],
+                                ),
+                              ),
+                              TicketsComponents.bottomDivider()
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ));
+      }
+    }, builder: (context, state) {
       FromToCubit cubit = FromToCubit.get(context);
       return SafeArea(
         child: SharedComponents.screenBg(
@@ -150,8 +212,8 @@ class FromToScreen extends StatelessWidget {
                                       context: context,
                                       initialDate: DateTime.now(),
                                       firstDate: DateTime.now(),
-                                      lastDate:
-                                          DateTime(DateTime.now().year + 1),
+                                      lastDate: DateTime.now()
+                                          .add(const Duration(days: 20)),
                                       builder: (context, child) => Theme(
                                           data: lightTheme(), child: child!),
                                     );
@@ -206,78 +268,6 @@ class FromToScreen extends StatelessWidget {
                                       child: SharedComponents.defaultButton(
                                           function: () async {
                                             await cubit.tripTimes();
-                                            // ignore: use_build_context_synchronously
-                                            TicketsComponents.bottomModelSheet(
-                                                context,
-                                                Column(
-                                                  children: [
-                                                    SizedBox(
-                                                      height: 2.h,
-                                                    ),
-                                                    Image.asset(
-                                                        '${AppConstants.imagesUrl}$bar'),
-                                                    SizedBox(
-                                                      height: 3.h,
-                                                    ),
-                                                    Expanded(
-                                                      child: ListView.builder(
-                                                        itemCount: cubit
-                                                            .scheduleModel
-                                                            .scheduleData
-                                                            .length,
-                                                        itemBuilder:
-                                                            (context, index) {
-                                                          return InkWell(
-                                                            onTap: () {
-                                                              SharedComponents
-                                                                  .navigateTo(
-                                                                      const ChooseSeatsScreen(),
-                                                                      context);
-                                                            },
-                                                            child: Padding(
-                                                              padding: EdgeInsets
-                                                                  .symmetric(
-                                                                      horizontal:
-                                                                          30.sp),
-                                                              child: Column(
-                                                                children: [
-                                                                  Padding(
-                                                                    padding: EdgeInsets.symmetric(
-                                                                        vertical:
-                                                                            10.sp),
-                                                                    child: Row(
-                                                                      mainAxisAlignment:
-                                                                          MainAxisAlignment
-                                                                              .spaceAround,
-                                                                      children: [
-                                                                        TicketsComponents.timeText(cubit
-                                                                            .scheduleModel
-                                                                            .scheduleData[index]["startTime"]),
-                                                                        SizedBox(
-                                                                          height:
-                                                                              2.h,
-                                                                          width:
-                                                                              5.w,
-                                                                          child:
-                                                                              Image.asset('${AppConstants.imagesUrl}$arrow'),
-                                                                        ),
-                                                                        TicketsComponents.timeText(cubit
-                                                                            .scheduleModel
-                                                                            .scheduleData[index]["arrivalTime"])
-                                                                      ],
-                                                                    ),
-                                                                  ),
-                                                                  TicketsComponents
-                                                                      .bottomDivider()
-                                                                ],
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ));
                                           },
                                           text: AppString.search,
                                           //size: 20.sp,

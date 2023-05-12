@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -63,18 +64,21 @@ class FromToCubit extends Cubit<FromToState> {
           fromStation: fromDefaultValue,
           toStation: toDefaultValue,
           date: fromToDefaultDate));
-      result.fold((l) {}, (r) {
+      result.fold((l) {
+        //print(l);
+      }, (r) {
         scheduleModel = ScheduleModel.fromjson(r.scheduleData);
         //print(r);
       });
       emit(FromToSuccessState());
     } on ServerException catch (e) {
-      scheduleModel = ScheduleModel.fromjson(const []);
-      errorMessage = e.toString();
+      errorMessage = 'Connection Error';
+      //print('object');
       emit(FromToErrorState(e.toString()));
     } on DioError catch (e) {
-      scheduleModel = ScheduleModel.fromjson(const []);
-      errorMessage = e.toString();
+      errorMessage = e.response?.data['message'] ?? 'Connection Error';
+      //print(e.response?.data['message']);
+      //print(errorMessage.runtimeType);
       emit(FromToErrorState(e.message.toString()));
     }
   }
