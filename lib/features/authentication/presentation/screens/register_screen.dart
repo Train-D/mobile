@@ -76,7 +76,7 @@ class SignUpScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.symmetric(horizontal: 30.sp),
                       child: Form(
-                        key: cubit.formKey,
+                        key: cubit.registerFormKey,
                         autovalidateMode: cubit.autoValidationMode,
                         child: Column(
                           children: [
@@ -140,6 +140,23 @@ class SignUpScreen extends StatelessWidget {
                               height: AppSizes.spaceBetweenFields,
                             ),
                             SharedComponents.defaultTextField(
+                              controller: cubit.signUpUsernameCon,
+                              type: TextInputType.text,
+                              validate: (String? value) {
+                                if (value!.isEmpty) {
+                                  return 'This field must not be empty';
+                                }
+                                return null;
+                              },
+                              label: AppString.userName,
+                              radius: AppSizes.textFormFieldRadius,
+                              bgColor: textFormBgColor,
+                              textColor: textFormTextColor,
+                            ),
+                            SizedBox(
+                              height: AppSizes.spaceBetweenFields,
+                            ),
+                            SharedComponents.defaultTextField(
                               controller: cubit.signUpPasswordCon,
                               type: TextInputType.visiblePassword,
                               validate: (String? value) {
@@ -168,16 +185,17 @@ class SignUpScreen extends StatelessWidget {
                                   SharedComponents.defaultButton(
                                 context: context,
                                 function: () async {
-                                  if (cubit.formKey.currentState!.validate()) {
+                                  if (cubit.registerFormKey.currentState!.validate()) {
                                     await cubit.userRegister(
                                       firstName: cubit.signUpFirstNameCon.text,
                                       lastName: cubit.signUpLastNameCon.text,
                                       password: cubit.signUpPasswordCon.text,
                                       email: cubit.signUpEmailCon.text,
+                                      userName: cubit.signUpUsernameCon.text,
                                     );
                                     cubit.changeToastColor();
                                     SharedComponents.showToast(
-                                      text: cubit.registerResponseModel.message,
+                                      text: cubit.authResponseModel.message,
                                       color: cubit.toastColor,
                                     );
                                   } else {
@@ -191,7 +209,8 @@ class SignUpScreen extends StatelessWidget {
                                 radius: AppSizes.defaultBottomRadius,
                               ),
                               fallback: (context) => const Center(
-                                  child: CircularProgressIndicator()),
+                                child: CircularProgressIndicator(),
+                              ),
                             )
                           ],
                         ),

@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:traind_app/features/authentication/data/models/register_request.dart';
-import 'package:traind_app/features/authentication/data/models/register_response.dart';
+import 'package:traind_app/features/authentication/data/models/register_request_model.dart';
+import 'package:traind_app/features/authentication/data/models/auth_response_model.dart';
 import 'package:traind_app/features/authentication/domain/usecase/register_usecase.dart';
 import '../../../../../core/error/exceptions.dart';
 part 'register_state.dart';
@@ -12,7 +12,7 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   static RegisterCubit get(context) => BlocProvider.of(context);
 
-  var formKey = GlobalKey<FormState>();
+  var registerFormKey = GlobalKey<FormState>();
   var signUpUsernameCon = TextEditingController();
   var signUpPasswordCon = TextEditingController();
   var signUpFirstNameCon = TextEditingController();
@@ -49,11 +49,12 @@ class RegisterCubit extends Cubit<RegisterState> {
   }
 
   final PostRegisterDataUseCase postRegisterDataUseCase;
-  late RegisterResponseModel registerResponseModel;
+  late AuthResponseModel authResponseModel;
   Future<void> userRegister({
     required String firstName,
     required String lastName,
     required String email,
+    required String userName,
     required String password,
   }) async {
     emit(RegisterLoadingState());
@@ -64,20 +65,21 @@ class RegisterCubit extends Cubit<RegisterState> {
           firstName: firstName,
           lastName: lastName,
           email: email,
+          userName:  userName,
           password: password,
         ),
       );
       result.fold((l) {}, (r) {
-        registerResponseModel = RegisterResponseModel.fromjson(
+        authResponseModel = AuthResponseModel.fromjson(
             {"token": r.token, "message": r.message});
       });
       emit(RegisterSuccessState());
     } on ServerException catch (e) {
-      registerResponseModel = RegisterResponseModel.fromjson(
+      authResponseModel = AuthResponseModel.fromjson(
           {"token": '', "message": e.toString()});
       emit(RegisterErrorState(e.toString()));
     } on DioError catch (e) {
-      registerResponseModel = RegisterResponseModel.fromjson({
+      authResponseModel = AuthResponseModel.fromjson({
         "token": "",
         "message":
             (e.response!.statusCode == 404 ? e.message : e.response!.data['message'])
@@ -86,27 +88,4 @@ class RegisterCubit extends Cubit<RegisterState> {
     }
   }
 
-  // Future<void> userRegister({
-  //   required String firstName,
-  //   required String lastName,
-  //   required String password,
-  //   required String email,
-  // }) async {
-  //   emit(RegisterLoadingState());
-
-  //   final result = await postRegisterDataUseCase(
-  //     RegisterRequestModel(
-  //       firstName: firstName,
-  //       lastName: lastName,
-  //       email: email,
-  //       password: password,
-  //     ),
-  //   );
-  //   result.fold((l) {
-  //     emit(RegisterErrorState(l.message));
-  //   }, (r) {
-  //     RegisterResponse(token: r.token);
-  //     emit(RegisterSuccessState());
-  //   });
-  // }
 }

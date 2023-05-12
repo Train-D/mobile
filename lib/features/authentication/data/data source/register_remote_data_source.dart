@@ -2,8 +2,8 @@ import 'package:dio/dio.dart';
 import 'package:traind_app/core/error/exceptions.dart';
 import 'package:traind_app/core/network/api_constants.dart';
 import 'package:traind_app/core/network/error_message_model.dart';
-import 'package:traind_app/features/authentication/data/models/register_request.dart';
-import 'package:traind_app/features/authentication/data/models/register_response.dart';
+import 'package:traind_app/features/authentication/data/models/register_request_model.dart';
+import 'package:traind_app/features/authentication/data/models/auth_response_model.dart';
 import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
 
 abstract class BaseRegisterRemoteDataSource {
@@ -23,7 +23,7 @@ class RegisterRemoteDataSource extends BaseRegisterRemoteDataSource {
       ),
     );
     if (response.statusCode == 200) {
-      var temp = RegisterResponseModel.fromjson(response.data);
+      var temp = AuthResponseModel.fromjson(response.data);
       var registerEntity = ResponseEntity.toEntity(temp);
       return registerEntity;
     }
