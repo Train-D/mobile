@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/network/local/cache_helper.dart';
+import 'package:traind_app/features/authentication/presentation/screens/login_screen.dart';
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -93,6 +95,19 @@ class SettingsScreen extends StatelessWidget {
                         title: 'Location',
                         context: context,
                       ),
+                      SharedComponents.defaultButton(
+                        context: context,
+                        function: () async {
+                          await CacheHelper.removeData(key: 'token');
+                          SharedComponents.navigateToRemove(
+                              context, LoginScreen());
+                        },
+                        text: 'Logout',
+                        radius: 10.sp,
+                        icon: Icons.logout,
+                        withIcon: true,
+                        iconSize: 18.sp,
+                      )
                     ],
                   ),
                 ),

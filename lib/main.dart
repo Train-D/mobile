@@ -2,15 +2,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import 'package:traind_app/core/global/theme/theme_data/theme_data_light.dart';
+import 'package:traind_app/core/network/local/cache_helper.dart';
 import 'package:traind_app/core/services/services_locator.dart';
+import 'package:traind_app/core/utils/app_constants.dart';
+import 'package:traind_app/features/app/presentation/screens/onboarding_one_screen.dart';
 import 'package:traind_app/features/app/presentation/screens/splash_screen.dart';
 import 'package:traind_app/features/authentication/presentation/controller/profile_cubit/profile_cubit.dart';
+import 'package:traind_app/features/authentication/presentation/screens/login_screen.dart';
 import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_cubit.dart';
+import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
 import 'package:traind_app/features/stations/presentation/controller/all_stations_cubit/all_stations_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/from_to_cubit/from_to_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/payment_cubit/payment_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/ticket_cubit/cubit/ticket_cubit.dart';
+
 import 'core/bloc_observer/bloc_observer.dart';
 import 'features/authentication/presentation/controller/login_cubit/login_cubit.dart';
 import 'features/authentication/presentation/controller/register_cubit/register_cubit.dart';
@@ -21,11 +28,31 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServicesLocator().init();
   Bloc.observer = MyBlocObserver();
-  runApp(const MyApp());
+  await CacheHelper.init();
+  dynamic boarding = CacheHelper.getData(key: 'onBoarding');
+  token = CacheHelper.getData(key: 'token');
+  Widget widget = LoginScreen();
+  if (boarding == null) {
+    widget = OnboardingOneScreen();
+    
+  } else {
+    if (token != null) {
+      widget = HomeScreen();
+    } else {
+      widget = LoginScreen();
+    }
+  }
+  runApp(MyApp(
+    widget: widget,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final Widget widget;
+  const MyApp({
+    Key? key,
+    required this.widget,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,7 +95,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Train D',
             theme: lightTheme(),
-            home: const SplashScreen(),
+            home: SplashScreen(nextScreen: widget,),
           );
         },
       ),

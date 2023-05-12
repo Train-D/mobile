@@ -19,11 +19,13 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<RegisterCubit, RegisterState>(
       listener: (context, state) {
+        RegisterCubit cubit = RegisterCubit.get(context);
         if (state is RegisterSuccessState) {
           SharedComponents.navigateToReplace(
             const LoginScreen(),
             context,
           );
+          cubit.registerClearData();
         }
       },
       builder: (context, state) {
@@ -185,7 +187,8 @@ class SignUpScreen extends StatelessWidget {
                                   SharedComponents.defaultButton(
                                 context: context,
                                 function: () async {
-                                  if (cubit.registerFormKey.currentState!.validate()) {
+                                  if (cubit.registerFormKey.currentState!
+                                      .validate()) {
                                     await cubit.userRegister(
                                       firstName: cubit.signUpFirstNameCon.text,
                                       lastName: cubit.signUpLastNameCon.text,

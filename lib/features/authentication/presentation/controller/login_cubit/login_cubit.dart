@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:traind_app/core/error/exceptions.dart';
+import 'package:traind_app/core/network/local/cache_helper.dart';
 import 'package:traind_app/features/authentication/data/models/login_request_model.dart';
 import 'package:traind_app/features/authentication/domain/usecase/login_usecase.dart';
 
@@ -51,9 +52,10 @@ class LoginCubit extends Cubit<LoginState> {
         ),
       );
 
-      result.fold((l) => null, (r) {
+      result.fold((l) => null, (r) async {
         authresponseModel = AuthResponseModel.fromjson(
             {"token": r.token, "message": r.message});
+        await CacheHelper.saveData(key: "token", value: r.token);
         debugPrint("token of user: ${r.token} \n ${r.message}");
         emit(LoginSuccessState());
       });
@@ -64,7 +66,9 @@ class LoginCubit extends Cubit<LoginState> {
     } on DioError catch (error) {
       authresponseModel = AuthResponseModel.fromjson({
         "token": '',
-        "message":  error.response!.statusCode == 404 ? error.message : error.response!.data['message']
+        "message": error.response!.statusCode == 404
+            ? error.message
+            : error.response!.data['message']
       });
       emit(LoginErrorState());
     }
@@ -83,5 +87,11 @@ class LoginCubit extends Cubit<LoginState> {
       loginAutoValidationMode = AutovalidateMode.onUserInteraction;
     }
     emit(LoginChangeAutoValidationModeState());
+  }
+
+  void loginClearData() {
+    loginUsernameCon.clear();
+    loginPasswordCon.clear();
+    emit(LoginClearDataState());
   }
 }

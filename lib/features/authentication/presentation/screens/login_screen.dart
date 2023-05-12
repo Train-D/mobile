@@ -21,11 +21,13 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
+      LoginCubit cubit = LoginCubit.get(context);
       if (state is LoginSuccessState) {
         SharedComponents.navigateTo(
           const HomeScreen(),
           context,
         );
+        cubit.loginClearData();
       }
     }, builder: (context, state) {
       LoginCubit cubit = LoginCubit.get(context);
@@ -174,6 +176,7 @@ class LoginScreen extends StatelessWidget {
                                     const SignUpScreen(),
                                     context,
                                   );
+                                  cubit.loginClearData();
                                 },
                                 text: AppString.signUpTitle,
                                 context: context,

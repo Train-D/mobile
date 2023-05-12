@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:traind_app/core/error/exceptions.dart';
-import 'package:traind_app/core/network/api_constants.dart';
-import 'package:traind_app/core/network/error_message_model.dart';
+import 'package:traind_app/core/network/remote/api_constants.dart';
+import 'package:traind_app/core/network/remote/error_message_model.dart';
 import 'package:traind_app/features/authentication/data/models/register_request_model.dart';
 import 'package:traind_app/features/authentication/data/models/auth_response_model.dart';
 import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
