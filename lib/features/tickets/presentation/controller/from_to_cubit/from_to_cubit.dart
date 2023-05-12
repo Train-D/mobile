@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -32,8 +31,12 @@ class FromToCubit extends Cubit<FromToState> {
   void getToStationsData(String fromStation) {
     toStations.removeRange(1, toStations.length);
     //toStations.clear();
-    for (var station in AppConstants.allFromToStations[fromStation]) {
-      toStations.add(station);
+    if (fromStation != 'Select') {
+      for (var station in AppConstants.allFromToStations[fromStation]) {
+        toStations.add(station);
+      }
+    }else{
+      toDefaultValue = "Select";
     }
     emit(GetToStationsDataState());
   }
