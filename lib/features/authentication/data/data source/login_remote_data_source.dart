@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
-import 'package:traind_app/core/network/api_constants.dart';
+import 'package:traind_app/core/network/remote/api_constants.dart';
 import 'package:traind_app/features/authentication/data/models/login_request_model.dart';
 import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
 import '../../../../core/error/exceptions.dart';
-import '../../../../core/network/error_message_model.dart';
+import '../../../../core/network/remote/error_message_model.dart';
 import '../models/auth_response_model.dart';
 
 abstract class BaseLoginRemoteDataSource {

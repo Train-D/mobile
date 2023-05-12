@@ -11,7 +11,11 @@ import '../../../../core/utils/components.dart';
 import 'onboarding_one_screen.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+  Widget nextScreen;
+  SplashScreen({
+    Key? key,
+    required this.nextScreen,
+  }) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -24,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         const Duration(seconds: 3),
         () => SharedComponents.navigateToReplace(
-            const OnboardingOneScreen(), context));
+            widget.nextScreen, context));
   }
 
   @override

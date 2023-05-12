@@ -18,3 +18,4 @@ class RegisterErrorState extends RegisterState {
   final dynamic message;
   RegisterErrorState(this.message);
 }
+class RegisterClearDataState extends RegisterState{}

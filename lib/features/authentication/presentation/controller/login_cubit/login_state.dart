@@ -11,3 +11,4 @@ class LoginErrorState extends LoginState {}
 
 class LoginChangeToastColorState extends LoginState {}
 class LoginChangeAutoValidationModeState extends LoginState {}
+class LoginClearDataState extends LoginState{}

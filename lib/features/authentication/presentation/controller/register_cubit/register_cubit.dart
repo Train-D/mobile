@@ -65,7 +65,7 @@ class RegisterCubit extends Cubit<RegisterState> {
           firstName: firstName,
           lastName: lastName,
           email: email,
-          userName:  userName,
+          userName: userName,
           password: password,
         ),
       );
@@ -75,17 +75,26 @@ class RegisterCubit extends Cubit<RegisterState> {
       });
       emit(RegisterSuccessState());
     } on ServerException catch (e) {
-      authResponseModel = AuthResponseModel.fromjson(
-          {"token": '', "message": e.toString()});
+      authResponseModel =
+          AuthResponseModel.fromjson({"token": '', "message": e.toString()});
       emit(RegisterErrorState(e.toString()));
     } on DioError catch (e) {
       authResponseModel = AuthResponseModel.fromjson({
         "token": "",
-        "message":
-            (e.response!.statusCode == 404 ? e.message : e.response!.data['message'])
+        "message": (e.response!.statusCode == 404
+            ? e.message
+            : e.response!.data['message'])
       });
       emit(RegisterErrorState(e.response));
     }
   }
 
+  void registerClearData() {
+    signUpUsernameCon.clear();
+    signUpPasswordCon.clear();
+    signUpFirstNameCon.clear();
+    signUpLastNameCon.clear();
+    signUpEmailCon.clear();
+    emit(RegisterClearDataState());
+  }
 }

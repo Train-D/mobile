@@ -51,7 +51,7 @@ class SharedComponents {
                 Row(
                   children: [
                     SizedBox(
-                      width: 1.w,
+                      width: 2.w,
                     ),
                     Icon(
                       icon,

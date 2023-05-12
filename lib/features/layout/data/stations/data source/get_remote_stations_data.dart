@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:traind_app/core/network/api_constants.dart';
+import 'package:traind_app/core/network/remote/api_constants.dart';
 import 'package:traind_app/features/layout/data/stations/models/stations_model.dart';
 import 'package:traind_app/features/layout/domain/stations/entity/stations_entity.dart';
 
