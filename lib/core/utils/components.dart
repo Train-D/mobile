@@ -135,9 +135,11 @@ class SharedComponents {
     Color bgColor = Colors.grey,
     Color textColor = Colors.grey,
     bool focusedRadius = true,
+    bool readOnly = false
     //Color borderCol = Colors.black
   }) =>
       TextFormField(
+        readOnly: readOnly,
         controller: controller,
         keyboardType: type,
         validator: validate,

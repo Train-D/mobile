@@ -7,10 +7,14 @@ import 'package:traind_app/features/authentication/domain/repository/base_login_
 import 'package:traind_app/features/authentication/domain/repository/register_domain_repository.dart';
 import 'package:traind_app/features/authentication/domain/usecase/login_usecase.dart';
 import 'package:traind_app/features/authentication/domain/usecase/register_usecase.dart';
-import 'package:traind_app/features/layout/data/stations/data%20source/get_remote_stations_data.dart';
-import 'package:traind_app/features/layout/data/stations/repository/get_stations_data_repository.dart';
-import 'package:traind_app/features/layout/domain/stations/repository/get_stations_repository.dart';
-import 'package:traind_app/features/layout/domain/stations/usecase/get_stations_usecase.dart';
+import 'package:traind_app/features/profile/data/data%20source/get_remote_user_profile_data.dart';
+import 'package:traind_app/features/profile/data/repository/user_profile_data_repositorty.dart';
+import 'package:traind_app/features/profile/domain/repository/base_user_profile_data_repository.dart';
+import 'package:traind_app/features/profile/domain/usecase/user_profile_data_usecase.dart';
+import 'package:traind_app/features/tickets/data/data%20source/get_remote_stations_data.dart';
+import 'package:traind_app/features/tickets/data/repository/get_stations_data_repository.dart';
+import 'package:traind_app/features/tickets/domain/repository/get_stations_repository.dart';
+import 'package:traind_app/features/tickets/domain/usecase/get_stations_usecase.dart';
 import 'package:traind_app/features/tickets/data/data%20source/fromto_data_sorce.dart';
 import 'package:traind_app/features/tickets/data/repository/fromto_repository.dart';
 import 'package:traind_app/features/tickets/domain/fromto_usecase.dart.dart';
@@ -31,6 +35,13 @@ class ServicesLocator {
     sl.registerLazySingleton(() => LoginRemoteDataSource());
     sl.registerLazySingleton<BaseLoginRepository>(() => LoginRepository(sl()));
     sl.registerLazySingleton(() => PostLoginDataUseCase(sl()));
+
+    //profile
+     sl.registerLazySingleton<BaseGetRemoteUserProfileDataSource>(
+        () => GetRemoteUserProfileDataSource());
+    sl.registerLazySingleton<BaseUserProfileDataRepository>(
+        () => UserProfileDataRepository(sl()));
+    sl.registerLazySingleton(() => GetUserProfileDataUseCase(sl()));
 
     //layout feature
     sl.registerLazySingleton<BaseGetRemoteStationsDataSource>(

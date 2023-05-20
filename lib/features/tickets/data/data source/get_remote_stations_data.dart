@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:traind_app/core/network/remote/api_constants.dart';
-import 'package:traind_app/features/layout/data/stations/models/stations_model.dart';
-import 'package:traind_app/features/layout/domain/stations/entity/stations_entity.dart';
+import 'package:traind_app/features/tickets/data/models/stations_model.dart';
+import 'package:traind_app/features/tickets/domain/entities/stations_entity.dart';
 
 abstract class BaseGetRemoteStationsDataSource {
 
