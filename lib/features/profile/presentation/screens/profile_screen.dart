@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/features/profile/presentation/components/profile_components.dart';
+import 'package:traind_app/features/profile/presentation/screens/display_profile_picture.dart';
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -30,12 +34,80 @@ class ProfileScreen extends StatelessWidget {
                       SizedBox(
                         height: 3.h,
                       ),
-                      SharedComponents.profilePicture(
-                        image: '${AppConstants.vectorsUrl}$profileCamera',
-                        radius: 40.sp,
-                        imgHeigh: 50.sp,
-                        imgWidth: 50.sp,
-                      ),
+                      Stack(children: [
+                        InkWell(
+                          onTap: () async {
+                            if (cubit.isProfileImage) {
+                              ProfileComponents.profileImageOptions(context, [
+                                ProfileComponents.option(
+                                    function: () {
+                                      Navigator.pop(context);
+                                      SharedComponents.navigateTo(
+                                          DisplayProfilePicture(), context);
+                                     
+                                    },
+                                    icon: Icons.person,
+                                    text: 'See profile picture',
+                                    context: context),
+                                ProfileComponents.option(
+                                    function: () {
+                                      cubit.removeProfilePicture();
+                                      Navigator.pop(context);
+                                    },
+                                    icon: Icons.delete,
+                                    text: 'Remove profile picture',
+                                    context: context),
+                              ]);
+                            }
+                          },
+                          child: SharedComponents.profilePicture(
+                            isProfileImage: cubit.isProfileImage,
+                            image: (cubit.isProfileImage == false
+                                ? '${AppConstants.imagesUrl}$profileIntialImage'
+                                : cubit.profileImage!.path),
+                            radius: 40.sp,
+                            imgHeigh: 50.sp,
+                            imgWidth: 50.sp,
+                          ),
+                        ),
+                        Positioned(
+                          top: 90,
+                          right: 0,
+                          child: CircleAvatar(
+                            //radius: 17.sp,
+                            backgroundColor: lightColor,
+                            child: FittedBox(
+                              child: IconButton(
+                                onPressed: () {
+                                  ProfileComponents.profileImageOptions(
+                                      context, [
+                                    ProfileComponents.option(
+                                        function: () async {
+                                          await cubit.pickImageFromCamera();
+                                          Navigator.pop(context);
+                                        },
+                                        icon: Icons.camera_alt,
+                                        text: 'Take profile picture',
+                                        context: context),
+                                    ProfileComponents.option(
+                                        function: () async {
+                                          await cubit.pickImageFromGallery();
+                                          Navigator.pop(context);
+                                        },
+                                        icon: Icons.image,
+                                        text: 'Select profile picture',
+                                        context: context),
+                                  ]);
+                                },
+                                icon: Icon(
+                                  Icons.camera_alt,
+                                  color: Colors.brown,
+                                ),
+                              ),
+                            ),
+                          ),
+                        )
+                      ]),
                       SizedBox(
                         height: 3.h,
                       ),

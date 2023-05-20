@@ -9,7 +9,7 @@ import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
-import '../../../authentication/presentation/screens/profile_screen.dart';
+import '../../../profile/presentation/screens/profile_screen.dart';
 import '../components/components.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -28,11 +28,15 @@ class SettingsScreen extends StatelessWidget {
               Center(
                 child: Column(
                   children: [
-                    SharedComponents.profilePicture(
-                      image: '${AppConstants.vectorsUrl}$profileCamera',
+                    CircleAvatar(
                       radius: 35.sp,
-                      imgHeigh: 15.h,
-                      imgWidth: 15.w,
+                      backgroundColor: cameraBG,
+                      child: SharedComponents.profilePicture(
+                        image: '${AppConstants.imagesUrl}$profileIntialImage',
+                        radius: 35.sp,
+                        imgHeigh: 15.h,
+                        imgWidth: 15.w,
+                      ),
                     ),
                     SizedBox(
                       height: 1.h,

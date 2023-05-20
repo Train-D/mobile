@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/features/tickets/presentation/components/reusable_component/choose_seats_screen_components.dart';
@@ -21,7 +23,7 @@ class SharedComponents {
     required BuildContext context,
     required Function function,
     required String text,
-    bool cancel =  false,
+    bool cancel = false,
   }) =>
       Container(
         width: width,
@@ -31,7 +33,7 @@ class SharedComponents {
           borderRadius: BorderRadius.circular(radius),
           border: Border.all(
             width: cancel ? 2 : 0,
-            color: cancel ?  trainUnAvailableSeatColor : transparent,
+            color: cancel ? trainUnAvailableSeatColor : transparent,
           ),
         ),
         child: MaterialButton(
@@ -94,6 +96,7 @@ class SharedComponents {
       fontSize: 16,
     );
   }
+
   static navigateTo(Widget page, BuildContext context) {
     Navigator.of(context).push(MaterialPageRoute(builder: ((context) => page)));
   }
@@ -261,26 +264,29 @@ class SharedComponents {
   static profilePicture({
     required dynamic image,
     required double radius,
+    bool isProfileImage = false,
     Color bgColor = cameraBG,
     dynamic fit = BoxFit.none,
     double? imgHeigh,
     double? imgWidth,
   }) =>
-      CircleAvatar(
-        radius: radius,
-        backgroundColor: bgColor,
-        child: ClipRRect(
+      ClipRRect(
           borderRadius: BorderRadius.circular(radius),
-          child: Image(
-            width: imgHeigh,
-            height: imgWidth,
-            fit: fit,
-            image: AssetImage(
-              '$image',
-            ),
-          ),
-        ),
-      );
+          child: isProfileImage == false
+              ? Image(
+                  width: imgHeigh,
+                  height: imgWidth,
+                  fit: fit,
+                  image: AssetImage(
+                    '$image',
+                  ))
+              : SizedBox(
+                  width: imgWidth,
+                  height: imgHeigh,
+                  child: Image.file(
+                    (File(image)),
+                    fit: BoxFit.cover,
+                  )));
 
   static defaultBgContainer({
     double width = double.infinity,
