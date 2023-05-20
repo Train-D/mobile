@@ -43,7 +43,7 @@ dependencies:
   fluttertoast: ^8.2.1
   get_it: ^7.2.0
   image_gallery_saver: ^1.7.1
-  image_picker: ^0.8.7
+  image_picker: ^0.8.7+5
   image_stack: ^2.1.1
   intl: ^0.18.1
   material: ^1.0.0+2

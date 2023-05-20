@@ -7,7 +7,7 @@ import 'package:traind_app/features/layout/domain/stations/usecase/get_stations_
 import '../../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/app_images.dart';
-import '../../../../authentication/presentation/screens/profile_screen.dart';
+import '../../../../profile/presentation/screens/profile_screen.dart';
 import '../../../../settings/presentation/screens/settings_screen.dart';
 import '../../screens/home_screen.dart';
 import 'home_state.dart';
