@@ -55,6 +55,7 @@ class LoginCubit extends Cubit<LoginState> {
       result.fold((l) => null, (r) async {
         authresponseModel = AuthResponseModel.fromjson(
             {"token": r.token, "message": r.message});
+        print(r.token);
         await CacheHelper.saveData(key: "token", value: r.token);
         debugPrint("token of user: ${r.token} \n ${r.message}");
         emit(LoginSuccessState());
