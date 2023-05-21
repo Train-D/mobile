@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/network/local/cache_helper.dart';
 import 'package:traind_app/features/profile/presentation/components/profile_components.dart';
 import 'package:traind_app/features/profile/presentation/screens/display_profile_picture.dart';
 
@@ -36,14 +35,15 @@ class ProfileScreen extends StatelessWidget {
                       Stack(children: [
                         InkWell(
                           onTap: () async {
-                            if (CacheHelper.getData(key: 'setProfileImage') == true) {
+                            if (cubit.isProfileImage) {
                               ProfileComponents.profileImageOptions(context, [
                                 ProfileComponents.option(
                                     function: () {
                                       Navigator.pop(context);
                                       SharedComponents.navigateTo(
-                                          const DisplayProfilePicture(),
-                                          context);
+                                        const DisplayProfilePicture(),
+                                        context,
+                                      );
                                     },
                                     icon: Icons.person,
                                     text: 'See profile picture',
@@ -60,8 +60,8 @@ class ProfileScreen extends StatelessWidget {
                             }
                           },
                           child: SharedComponents.profilePicture(
-                            isProfileImage: CacheHelper.getData(key: 'setProfileImage'),
-                            image: (CacheHelper.getData(key: 'setProfileImage') == false
+                            isProfileImage: cubit.isProfileImage,
+                            image: (cubit.isProfileImage == false
                                 ? '${AppConstants.imagesUrl}$profileIntialImage'
                                 : cubit.profileImage!.path),
                             radius: 40.sp,
@@ -83,8 +83,6 @@ class ProfileScreen extends StatelessWidget {
                                     ProfileComponents.option(
                                         function: () async {
                                           await cubit.pickImageFromCamera();
-                                          
-                                          // ignore: use_build_context_synchronously
                                           Navigator.pop(context);
                                         },
                                         icon: Icons.camera_alt,
@@ -93,8 +91,6 @@ class ProfileScreen extends StatelessWidget {
                                     ProfileComponents.option(
                                         function: () async {
                                           await cubit.pickImageFromGallery();
-                                          
-                                          // ignore: use_build_context_synchronously
                                           Navigator.pop(context);
                                         },
                                         icon: Icons.image,
@@ -102,7 +98,7 @@ class ProfileScreen extends StatelessWidget {
                                         context: context),
                                   ]);
                                 },
-                                icon: const Icon(
+                                icon: Icon(
                                   Icons.camera_alt,
                                   color: Colors.brown,
                                 ),
@@ -156,7 +152,6 @@ class ProfileScreen extends StatelessWidget {
                                 height: AppSizes.spaceBetweenFields,
                               ),
                               SharedComponents.defaultTextField(
-                                readOnly: true,
                                 controller: cubit.profileUsernameCon,
                                 type: TextInputType.text,
                                 validate: (e) {
@@ -166,12 +161,12 @@ class ProfileScreen extends StatelessWidget {
                                 radius: AppSizes.textFormFieldRadius,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
+                                readOnly: true,
                               ),
                               SizedBox(
                                 height: AppSizes.spaceBetweenFields,
                               ),
                               SharedComponents.defaultTextField(
-                                readOnly: true,
                                 controller: cubit.profileEmailCon,
                                 type: TextInputType.emailAddress,
                                 validate: (e) {
@@ -181,6 +176,7 @@ class ProfileScreen extends StatelessWidget {
                                 radius: AppSizes.textFormFieldRadius,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
+                                readOnly: true,
                               ),
                               SizedBox(
                                 height: AppSizes.spaceBetweenFields,
@@ -215,11 +211,14 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               SharedComponents.defaultButton(
                                 context: context,
-                                function: () {
-                                  // SharedComponents.navigateToReplace(
-                                  //   LoginScreen(),
-                                  //   context,
-                                  // );
+                                function: () async {
+                                  await cubit.postProfileUserData(
+                                    image: '',
+                                    firstName: cubit.profileFirstNameCon.text,
+                                    lastName: cubit.profileLastNameCon.text,
+                                    phoneNumber: cubit.profilePhoneCon.text,
+                                    city: cubit.profileCityCon.text,
+                                  );
                                 },
                                 text: AppString.save,
                                 width: AppSizes.width(context) / 3,

@@ -126,6 +126,7 @@ class SharedComponents {
     bool preIconFound = false,
     bool suffIconFound = false,
     bool isSuffIconImage = false,
+    bool readOnly = false,
     dynamic imageSuffIcon,
     IconData? preIcon,
     IconData? suffIcon,
@@ -135,8 +136,6 @@ class SharedComponents {
     Color bgColor = Colors.grey,
     Color textColor = Colors.grey,
     bool focusedRadius = true,
-    bool readOnly = false
-    //Color borderCol = Colors.black
   }) =>
       TextFormField(
         readOnly: readOnly,

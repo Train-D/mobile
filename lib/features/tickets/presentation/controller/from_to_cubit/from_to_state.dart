@@ -17,7 +17,7 @@ class FromToSuccessState extends FromToState {}
 
 // ignore: must_be_immutable
 class FromToErrorState extends FromToState {
-  dynamic message;
+  String message;
   FromToErrorState(this.message);
   
 }

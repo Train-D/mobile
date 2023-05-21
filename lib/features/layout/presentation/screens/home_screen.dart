@@ -19,70 +19,83 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeCubit, HomeState>(builder: (context, state) {
+    return BlocConsumer<HomeCubit, HomeState>(listener: (context, state) {
+      HomeCubit cubit = HomeCubit.get(context);
+      if (state is StationsSuccessState) {
+        cubit.changeGetStationsFromApiIsDone();
+        SharedComponents.navigateTo(
+          const FromToScreen(),
+          context,
+        );
+      }
+    }, builder: (context, state) {
       HomeCubit cubit = HomeCubit.get(context);
       return SafeArea(
         child: SharedComponents.screenBg(
-          imageUrl: '${AppConstants.imagesUrl}$home',
-          context: context,
-          child: Scaffold(
-              backgroundColor: transparent,
-              body: Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-                SharedComponents.defaultBgContainer(
-                  isLinearGradient: true,
-                  linearGradientbgColor: homeBg,
-                  height: 50.h,
-                  topRedius: 30.sp,
-                  child: state is GetAllDataLoadingState
-                      ? const Center(child: CircularProgressIndicator())
-                      : Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SharedComponents.defaultButton(
-                              context: context,
-                              function: () {
-                                SharedComponents.navigateTo(
-                                  const FromToScreen(),
-                                  context,
-                                );
-                              },
-                              text: AppString.tickets,
-                              width: AppSizes.width(context) * 0.8,
-                              height: AppSizes.height(context) * 0.07,
-                              radius: 4.sp,
-                            ),
-                            SizedBox(
-                              height: AppSizes.height(context) * 0.02,
-                            ),
-                            homeButton(
-                              label: AppString.track,
-                              screen: const TrainIdScreen(),
-                              context: context,
-                            ),
-                            SizedBox(
-                              height: AppSizes.height(context) * 0.02,
-                            ),
-                            homeButton(
-                              label: AppString.stations,
-                              screen: const StationsScreen(),
-                              context: context,
-                            ),
-                          ],
+            imageUrl: '${AppConstants.imagesUrl}$home',
+            context: context,
+            child: Scaffold(
+                backgroundColor: transparent,
+                body:
+                    Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  SharedComponents.defaultBgContainer(
+                    isLinearGradient: true,
+                    linearGradientbgColor: homeBg,
+                    height: 50.h,
+                    topRedius: 30.sp,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        (state is StationsLoadingState
+                            ? const CircularProgressIndicator()
+                            : SharedComponents.defaultButton(
+                                context: context,
+                                function: () async {
+                                  if (!cubit.getStationsFromApiIsDone) {
+                                    await cubit.getStationsFromApi();
+                                  } else {
+                                    SharedComponents.navigateTo(
+                                      const FromToScreen(),
+                                      context,
+                                    );
+                                  }
+                                },
+                                text: AppString.tickets,
+                                width: AppSizes.width(context) * 0.8,
+                                height: AppSizes.height(context) * 0.07,
+                                radius: 4.sp,
+                              )),
+                        SizedBox(
+                          height: AppSizes.height(context) * 0.02,
                         ),
-                )
-              ]),
-              bottomNavigationBar: BottomNavigationBar(
-                backgroundColor: bottomBarBg,
-                items: cubit.navItems,
-                currentIndex: cubit.currentIndex,
-                onTap: (index) {
-                  //print(state);
-                  if (index != 1 && state is GetAllDataSuccessState) {
-                    SharedComponents.navigateTo(cubit.screens[index], context);
-                  }
-                },
-              )),
-        ),
+                        homeButton(
+                          label: AppString.track,
+                          screen: const TrainIdScreen(),
+                          context: context,
+                        ),
+                        SizedBox(
+                          height: AppSizes.height(context) * 0.02,
+                        ),
+                        homeButton(
+                          label: AppString.stations,
+                          screen: const StationsScreen(),
+                          context: context,
+                        ),
+                      ],
+                    ),
+                  )
+                ]),
+                bottomNavigationBar: BottomNavigationBar(
+                  backgroundColor: bottomBarBg,
+                  items: cubit.navItems,
+                  currentIndex: cubit.currentIndex,
+                  onTap: (index) {
+                    if (index != 1) {
+                      SharedComponents.navigateTo(
+                          cubit.screens[index], context);
+                    }
+                  },
+                ))),
       );
     });
   }

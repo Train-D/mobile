@@ -1,19 +1,20 @@
-import 'package:dio/dio.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:traind_app/core/error/exceptions.dart';
-import 'package:traind_app/core/network/local/cache_helper.dart';
-import 'package:traind_app/features/profile/data/models/user_profile_data_model.dart';
-import 'package:traind_app/features/profile/domain/usecase/user_profile_data_usecase.dart';
+import 'package:traind_app/core/usecases/base_usecase.dart';
+import 'package:traind_app/features/profile/data/models/profile_user_data_model.dart';
+import 'package:traind_app/features/profile/domain/entities/profile_user_data_entity.dart';
+import 'package:traind_app/features/profile/domain/usecase/get_profile_user_data_use_case.dart';
+import 'package:traind_app/features/profile/domain/usecase/put_profile_user_data_use_case.dart';
 
 part 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
-  ProfileCubit(this.getUserProfileDataUseCase) : super(ProfileInitial()) {
-    
-    getUserProfileDataFromCache();
-  }
+  ProfileCubit(
+    this.getProfileUserDataUsecase,
+    this.putProfileUserDataUseCase,
+  ) : super(ProfileInitial());
 
   static ProfileCubit get(context) => BlocProvider.of(context);
 
@@ -23,100 +24,12 @@ class ProfileCubit extends Cubit<ProfileState> {
   var profileEmailCon = TextEditingController();
   var profilePhoneCon = TextEditingController();
   var profileCityCon = TextEditingController();
-  dynamic isProfileImage = CacheHelper.getData(key: 'setProfileImage');
   XFile? profileImage;
-  final GetUserProfileDataUseCase getUserProfileDataUseCase;
-  late UserProfileDataModel userProfileDataModel;
-  Future<void> getUserProfileDataFromApi() async {
-    emit(ProfileLoadingState());
-    try {
-      final result = await getUserProfileDataUseCase();
-      result.fold((l) {}, (r) {
-        userProfileDataModel = UserProfileDataModel.fromJson({
-          "email": r.email,
-          "userName": r.userName,
-          "image": r.image,
-          "firstName": r.firstName,
-          "lastName": r.lastName,
-          "city": r.city,
-          "phoneNumber": r.phoneNumber
-        });
-        CacheHelper.saveData(key: "getUserProfileData", value: true);
-        CacheHelper.saveData(key: "email", value: userProfileDataModel.email);
-        CacheHelper.saveData(
-            key: "userName", value: userProfileDataModel.userName);
-        CacheHelper.saveData(key: "image", value: userProfileDataModel.image);
-
-        CacheHelper.saveData(
-            key: "city", value: userProfileDataModel.city ?? '');
-        CacheHelper.saveData(
-            key: "phoneNumber", value: userProfileDataModel.phoneNumber ?? '');
-
-        CacheHelper.saveData(
-            key: "firstName", value: userProfileDataModel.firstName);
-        CacheHelper.saveData(
-            key: "lastName", value: userProfileDataModel.lastName);
-      });
-
-      emit(ProfileSuccessState());
-    } on ServerException catch (e) {
-      emit(ProfileErrorState(e.toString()));
-    } on DioError catch (e) {
-      emit(ProfileErrorState(e.response));
-    }
-  }
-  Future<void> putUserProfileDataFromApi() async {
-    emit(ProfileLoadingState());
-    try {
-      final result = await getUserProfileDataUseCase();
-      result.fold((l) {}, (r) {
-        userProfileDataModel = UserProfileDataModel.fromJson({
-          "email": r.email,
-          "userName": r.userName,
-          "image": r.image,
-          "firstName": r.firstName,
-          "lastName": r.lastName,
-          "city": r.city,
-          "phoneNumber": r.phoneNumber
-        });
-        CacheHelper.saveData(key: "getUserProfileData", value: true);
-        CacheHelper.saveData(key: "email", value: userProfileDataModel.email);
-        CacheHelper.saveData(
-            key: "userName", value: userProfileDataModel.userName);
-        CacheHelper.saveData(key: "image", value: userProfileDataModel.image);
-
-        CacheHelper.saveData(
-            key: "city", value: userProfileDataModel.city ?? '');
-        CacheHelper.saveData(
-            key: "phoneNumber", value: userProfileDataModel.phoneNumber ?? '');
-
-        CacheHelper.saveData(
-            key: "firstName", value: userProfileDataModel.firstName);
-        CacheHelper.saveData(
-            key: "lastName", value: userProfileDataModel.lastName);
-      });
-
-      emit(ProfileSuccessState());
-    } on ServerException catch (e) {
-      emit(ProfileErrorState(e.toString()));
-    } on DioError catch (e) {
-      emit(ProfileErrorState(e.response));
-    }
-  }
-  Future<void> getUserProfileDataFromCache() async {
-    profileFirstNameCon.text = CacheHelper.getData(key: "firstName")??'';
-    profileLastNameCon.text = CacheHelper.getData(key: "lastName")??'';
-    profileUsernameCon.text = CacheHelper.getData(key: "userName")??'';
-    profileEmailCon.text = CacheHelper.getData(key: "email")??'';
-    profilePhoneCon.text = CacheHelper.getData(key: "phoneNumber") ?? '';
-    profileCityCon.text = CacheHelper.getData(key: "city") ?? '';
-    profileImage = XFile(CacheHelper.getData(key: "image")??'');
-  }
-
+  bool isProfileImage = false;
   Future<void> pickImageFromGallery() async {
     profileImage = (await ImagePicker().pickImage(source: ImageSource.gallery));
     if (profileImage != null) {
-      CacheHelper.putData(key: 'setProfileImage', value: true);
+      isProfileImage = true;
     }
     emit(PickImageFromGalleryProfileState());
   }
@@ -124,14 +37,66 @@ class ProfileCubit extends Cubit<ProfileState> {
   Future<void> pickImageFromCamera() async {
     profileImage = (await ImagePicker().pickImage(source: ImageSource.camera));
     if (profileImage != null) {
-      CacheHelper.putData(key: 'setProfileImage', value: true);
+      isProfileImage = true;
     }
     emit(PickImageFromCameraProfileState());
   }
 
   void removeProfilePicture() {
-    CacheHelper.saveData(key: 'setProfileImage', value: false);
+    isProfileImage = false;
     profileImage = null;
     emit(RemoveProfilePictureState());
+  }
+
+  final GetProfileUserDataUsecase getProfileUserDataUsecase;
+
+  Future<void> getProfileUserData() async {
+    emit(ProfileLoadingUserDataState());
+    var result = await getProfileUserDataUsecase.call(const NoParameters());
+    result.fold((failure) {
+      debugPrint(failure.toString());
+      emit(ProfileFailureUserDataState(message: failure.message));
+    }, (userData) {
+      print(userData);
+      //profileImage = userData.image as XFile?;
+      assignProfileUserDataToTextFields(userData);
+      emit(ProfileSuccessUserDataState(profileUserDataEntity: userData));
+    });
+  }
+
+  final PutProfileUserDataUseCase putProfileUserDataUseCase;
+
+  Future<void> postProfileUserData({
+    required String image,
+    required String firstName,
+    required String lastName,
+    required String phoneNumber,
+    required String city,
+  }) async {
+    emit(ProfileLoadingPostUserDataState());
+    var result = await putProfileUserDataUseCase.call(ProfileUserDataModel(
+      firstName: firstName,
+      lastName: lastName,
+      phoneNumber: phoneNumber,
+      city: city,
+      image: image,
+    ));
+    result.fold((failure) {
+      debugPrint(failure.toString());
+      emit(ProfileFailurePostUserDataState(failure.message));
+    }, (userData) {
+      //profileImage = userData.image as XFile?;
+      assignProfileUserDataToTextFields(userData);
+      emit(ProfileSuccessPostUserDataState(userData));
+    });
+  }
+
+  void assignProfileUserDataToTextFields(ProfileUserDataEntity userData) {
+    profileFirstNameCon.text = userData.firstName ?? '';
+    profileLastNameCon.text = userData.lastName ?? '';
+    profileUsernameCon.text = userData.userName ?? '';
+    profileEmailCon.text = userData.email ?? '';
+    profilePhoneCon.text = userData.phoneNumber ?? '';
+    profileCityCon.text = userData.city ?? '';
   }
 }

@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:traind_app/core/error/exceptions.dart';
 import 'package:traind_app/core/error/failure.dart';
-import 'package:traind_app/features/tickets/data/data%20source/get_remote_stations_data.dart';
-import 'package:traind_app/features/tickets/domain/entities/stations_entity.dart';
-import 'package:traind_app/features/tickets/domain/repository/get_stations_repository.dart';
+import 'package:traind_app/features/layout/data/stations/data%20source/get_remote_stations_data.dart';
+import 'package:traind_app/features/layout/domain/stations/entity/stations_entity.dart';
+import 'package:traind_app/features/layout/domain/stations/repository/get_stations_repository.dart';
 
 class StationsRepository extends BaseGetStationsRepository {
   final BaseGetRemoteStationsDataSource baseGetRemoteStationsDataSource;
