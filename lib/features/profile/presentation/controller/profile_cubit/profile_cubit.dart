@@ -92,11 +92,13 @@ class ProfileCubit extends Cubit<ProfileState> {
   }
 
   void assignProfileUserDataToTextFields(ProfileUserDataEntity userData) {
-    profileFirstNameCon.text = userData.firstName ?? '';
-    profileLastNameCon.text = userData.lastName ?? '';
+    profileFirstNameCon.text = userData.firstName!;
+    profileLastNameCon.text = userData.lastName!;
     profileUsernameCon.text = userData.userName ?? '';
     profileEmailCon.text = userData.email ?? '';
     profilePhoneCon.text = userData.phoneNumber ?? '';
     profileCityCon.text = userData.city ?? '';
   }
+
+  
 }

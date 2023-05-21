@@ -53,20 +53,15 @@ class ServicesLocator {
         () => FromToDateRemoteDataSource());
     sl.registerLazySingleton<BaseFromToDateRepository>(
         () => FromToDateRepository(sl()));
-   
     sl.registerLazySingleton(() => PostFromToDateDataUsecase(sl()));
-     sl.registerLazySingleton<BaseGetStationsRepository>(
-         () => StationsRepository(sl()));
-    
 
     // profile
     sl.registerLazySingleton<ApiService>(() => ApiService(Dio()));
     sl.registerLazySingleton<ProfileRemoteDataSource>(
         () => ProfileRemoteDataSourceImpl(sl()));
-    sl.registerLazySingleton<ProfileLocalDataSource>(
-        () => ProfileLocalDataSourceImpl());
-    sl.registerLazySingleton<BaseProfileRepository>(
-        () => ProfileRepository(sl(), sl()));
+     sl.registerLazySingleton<ProfileLocalDataSource>(
+        () => ProfileLocalDataSourceImpl());    
+    sl.registerLazySingleton<BaseProfileRepository>(() => ProfileRepository(sl() , sl()));
     sl.registerLazySingleton(() => GetProfileUserDataUsecase(sl()));
     sl.registerLazySingleton(() => PutProfileUserDataUseCase(sl()));
   }
