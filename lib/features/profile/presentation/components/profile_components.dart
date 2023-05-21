@@ -1,5 +1,4 @@
-import 'package:dartz/dartz.dart';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/utils/app_constants.dart';

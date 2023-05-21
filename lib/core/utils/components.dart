@@ -136,9 +136,9 @@ class SharedComponents {
     Color bgColor = Colors.grey,
     Color textColor = Colors.grey,
     bool focusedRadius = true,
-    //Color borderCol = Colors.black
   }) =>
       TextFormField(
+        readOnly: readOnly,
         controller: controller,
         keyboardType: type,
         validator: validate,
@@ -148,7 +148,6 @@ class SharedComponents {
         onChanged: (value) {
           onChange!(value);
         },
-        readOnly: readOnly,
         obscureText: password,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(

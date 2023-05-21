@@ -6,6 +6,18 @@ class CacheHelper {
     sharedPref = await SharedPreferences.getInstance();
   }
 
+  static void removeUserData() {
+    CacheHelper.removeData(key: 'token');
+    CacheHelper.removeData(key: 'firstName');
+    CacheHelper.removeData(key: 'lastName');
+    CacheHelper.removeData(key: 'userName');
+    CacheHelper.removeData(key: 'email');
+    CacheHelper.removeData(key: 'image');
+    CacheHelper.removeData(key: 'city');
+    CacheHelper.removeData(key: 'phoneNumber');
+    CacheHelper.removeData(key: 'setProfileImage');
+  }
+
   static Future<bool> putData({
     required String key,
     required bool value,
@@ -29,7 +41,7 @@ class CacheHelper {
     return await sharedPref.setDouble(key, value);
   }
 
-  static Future<bool> removeData({required String key}) async{
+  static Future<bool> removeData({required String key}) async {
     return await sharedPref.remove(key);
   }
 }

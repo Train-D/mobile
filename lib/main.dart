@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginCubit(sl()),
         ),
         BlocProvider(
-          create: (context) => FromToCubit(sl()),
+          create: (context) => FromToCubit(sl() , sl()),
         ),
         BlocProvider(
           create: (context) => RegisterCubit(sl()),
@@ -70,8 +70,11 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => ProfileCubit(sl() , sl())..getProfileUserData(),
         ),
-        BlocProvider(
-          create: (context) => HomeCubit(sl()),
+       BlocProvider(
+          create: (context) => HomeCubit(
+              profileCubit: ProfileCubit(sl(), sl()),
+              fromToCubit: FromToCubit(sl(), sl()),
+),
         ),
         BlocProvider(
           create: (context) => TrackingCubit(),
