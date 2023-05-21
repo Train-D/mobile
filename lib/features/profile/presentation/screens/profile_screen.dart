@@ -43,8 +43,9 @@ class ProfileScreen extends StatelessWidget {
                                     function: () {
                                       Navigator.pop(context);
                                       SharedComponents.navigateTo(
-                                          DisplayProfilePicture(), context);
-                                     
+                                        const DisplayProfilePicture(),
+                                        context,
+                                      );
                                     },
                                     icon: Icons.person,
                                     text: 'See profile picture',
@@ -162,6 +163,7 @@ class ProfileScreen extends StatelessWidget {
                                 radius: AppSizes.textFormFieldRadius,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
+                                readOnly: true,
                               ),
                               SizedBox(
                                 height: AppSizes.spaceBetweenFields,
@@ -176,6 +178,7 @@ class ProfileScreen extends StatelessWidget {
                                 radius: AppSizes.textFormFieldRadius,
                                 bgColor: textFormBgColor,
                                 textColor: textFormTextColor,
+                                readOnly: true,
                               ),
                               SizedBox(
                                 height: AppSizes.spaceBetweenFields,
@@ -210,11 +213,14 @@ class ProfileScreen extends StatelessWidget {
                               ),
                               SharedComponents.defaultButton(
                                 context: context,
-                                function: () {
-                                  // SharedComponents.navigateToReplace(
-                                  //   LoginScreen(),
-                                  //   context,
-                                  // );
+                                function: () async {
+                                  await cubit.postProfileUserData(
+                                    image: '',
+                                    firstName: cubit.profileFirstNameCon.text,
+                                    lastName: cubit.profileLastNameCon.text,
+                                    phoneNumber: cubit.profilePhoneCon.text,
+                                    city: cubit.profileCityCon.text,
+                                  );
                                 },
                                 text: AppString.save,
                                 width: AppSizes.width(context) / 3,

@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:traind_app/core/services/api_service.dart';
 import 'package:traind_app/features/authentication/data/data%20source/login_remote_data_source.dart';
 import 'package:traind_app/features/authentication/data/data%20source/register_remote_data_source.dart';
 import 'package:traind_app/features/authentication/data/repository/login_repository.dart';
@@ -11,10 +13,17 @@ import 'package:traind_app/features/layout/data/stations/data%20source/get_remot
 import 'package:traind_app/features/layout/data/stations/repository/get_stations_data_repository.dart';
 import 'package:traind_app/features/layout/domain/stations/repository/get_stations_repository.dart';
 import 'package:traind_app/features/layout/domain/stations/usecase/get_stations_usecase.dart';
+import 'package:traind_app/features/profile/data/data%20source/profile_remote_data_source.dart';
+import 'package:traind_app/features/profile/data/repository/profile_repository.dart';
+import 'package:traind_app/features/profile/domain/repository/base_profile_repository.dart';
+import 'package:traind_app/features/profile/domain/usecase/get_profile_user_data_use_case.dart';
+import 'package:traind_app/features/profile/domain/usecase/put_profile_user_data_use_case.dart';
 import 'package:traind_app/features/tickets/data/data%20source/fromto_data_sorce.dart';
 import 'package:traind_app/features/tickets/data/repository/fromto_repository.dart';
 import 'package:traind_app/features/tickets/domain/fromto_usecase.dart.dart';
 import 'package:traind_app/features/tickets/domain/repository/fromto_domain_repository.dart';
+
+import '../../features/profile/data/data source/profile_local_data_source.dart';
 
 final sl = GetIt.instance;
 
@@ -44,6 +53,15 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseFromToDateRepository>(
         () => FromToDateRepository(sl()));
     sl.registerLazySingleton(() => PostFromToDateDataUsecase(sl()));
+    // profile
+    sl.registerLazySingleton<ApiService>(() => ApiService(Dio()));
+    sl.registerLazySingleton<ProfileRemoteDataSource>(
+        () => ProfileRemoteDataSourceImpl(sl()));
+     sl.registerLazySingleton<ProfileLocalDataSource>(
+        () => ProfileLocalDataSourceImpl());    
+    sl.registerLazySingleton<BaseProfileRepository>(() => ProfileRepository(sl() , sl()));
+    sl.registerLazySingleton(() => GetProfileUserDataUsecase(sl()));
+    sl.registerLazySingleton(() => PutProfileUserDataUseCase(sl()));
     /*sl.registerLazySingleton(
         () => RegisterResponseModel(token: sl(), message: sl()));*/
   }

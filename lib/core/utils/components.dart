@@ -126,6 +126,7 @@ class SharedComponents {
     bool preIconFound = false,
     bool suffIconFound = false,
     bool isSuffIconImage = false,
+    bool readOnly = false,
     dynamic imageSuffIcon,
     IconData? preIcon,
     IconData? suffIcon,
@@ -147,6 +148,7 @@ class SharedComponents {
         onChanged: (value) {
           onChange!(value);
         },
+        readOnly: readOnly,
         obscureText: password,
         decoration: InputDecoration(
           contentPadding: EdgeInsets.symmetric(

@@ -1,23 +1,44 @@
-import 'package:traind_app/features/profile/domain/entities/profile_user_data_entity.dart';
+import '../../domain/entities/profile_user_data_entity.dart';
 
+// ignore: must_be_immutable
 class ProfileUserDataModel extends ProfileUserDataEntity {
-  ProfileUserDataModel({
-    required super.email,
-    required super.userName,
-    required super.image,
-    required super.firstName,
-    required super.lastName,
-    required super.city,
-    required super.phoneNumber,
-  });
+  const ProfileUserDataModel({
+    String? email,
+    String? userName,
+    String? firstName,
+    String? lastName,
+    String? image,
+    String? city,
+    String? phoneNumber,
+  }) : super(
+          email: email,
+          userName: userName,
+          firstName: firstName,
+          lastName: lastName,
+          city: city,
+          phoneNumber: phoneNumber,
+          image: image,
+        );
 
-  // ProfileUserDataModel.fromJson(Map<String, dynamic> json) {
-  //   email = json['email'];
-  //   userName = json['userName'];
-  //   firstName = json['firstName'];
-  //   lastName = json['lastName'];
-  //   image = json['image'];
-  //   city = json['city'];
-  //   phoneNumber = json['phoneNumber'];
-  // }
+  factory ProfileUserDataModel.fromJson(Map<String, dynamic> json) {
+    return ProfileUserDataModel(
+      email: json['email'],
+      userName: json['userName'],
+      firstName: json['firstName'],
+      lastName: json['lastName'],
+      city: json['city'],
+      phoneNumber: json['phoneNumber'],
+      image: json['image'],
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "firstName": firstName,
+      "lastName" : lastName,
+      "city" : city,
+      "phoneNumber": phoneNumber,
+      "image" : image,
+    };
+  }
 }
