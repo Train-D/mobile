@@ -102,7 +102,9 @@ class SettingsScreen extends StatelessWidget {
                       SharedComponents.defaultButton(
                         context: context,
                         function: () async {
-                          await CacheHelper.removeData(key: 'token');
+                          //CacheHelper.resetPreference();
+                          CacheHelper.removeUserData();
+                          //await CacheHelper.removeData(key: 'token');
                           SharedComponents.navigateToRemove(
                               context, LoginScreen());
                         },

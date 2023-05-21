@@ -104,13 +104,13 @@ class ProfileCubit extends Cubit<ProfileState> {
     }
   }
   Future<void> getUserProfileDataFromCache() async {
-    profileFirstNameCon.text = CacheHelper.getData(key: "firstName");
-    profileLastNameCon.text = CacheHelper.getData(key: "lastName");
-    profileUsernameCon.text = CacheHelper.getData(key: "userName");
-    profileEmailCon.text = CacheHelper.getData(key: "email");
+    profileFirstNameCon.text = CacheHelper.getData(key: "firstName")??'';
+    profileLastNameCon.text = CacheHelper.getData(key: "lastName")??'';
+    profileUsernameCon.text = CacheHelper.getData(key: "userName")??'';
+    profileEmailCon.text = CacheHelper.getData(key: "email")??'';
     profilePhoneCon.text = CacheHelper.getData(key: "phoneNumber") ?? '';
     profileCityCon.text = CacheHelper.getData(key: "city") ?? '';
-    profileImage = XFile(CacheHelper.getData(key: "image"));
+    profileImage = XFile(CacheHelper.getData(key: "image")??'');
   }
 
   Future<void> pickImageFromGallery() async {
