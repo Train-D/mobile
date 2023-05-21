@@ -1,5 +1,5 @@
 
-import 'package:traind_app/features/tickets/domain/entities/stations_entity.dart';
+import 'package:traind_app/features/layout/domain/stations/entity/stations_entity.dart';
 
 class StationsModel extends StationsEntity{
   

@@ -103,6 +103,7 @@ class SettingsScreen extends StatelessWidget {
                         context: context,
                         function: () async {
                           //CacheHelper.resetPreference();
+                          //CacheHelper.removeData(key: 'userData');
                           CacheHelper.removeUserData();
                           //await CacheHelper.removeData(key: 'token');
                           SharedComponents.navigateToRemove(
