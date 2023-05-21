@@ -34,6 +34,7 @@ void main() async {
   Widget widget = LoginScreen();
   if (boarding == null) {
     widget = OnboardingOneScreen();
+    
   } else {
     if (token != null) {
       widget = HomeScreen();
@@ -61,17 +62,17 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginCubit(sl()),
         ),
         BlocProvider(
-          create: (context) => FromToCubit(sl(), sl()),
+          create: (context) => FromToCubit(sl() , sl()),
         ),
         BlocProvider(
           create: (context) => RegisterCubit(sl()),
         ),
         BlocProvider(
-          create: (context) => ProfileCubit(sl()),
+          create: (context) => ProfileCubit(sl() , sl())..getProfileUserData(),
         ),
-        BlocProvider(
+       BlocProvider(
           create: (context) => HomeCubit(
-              profileCubit: ProfileCubit(sl()),
+              profileCubit: ProfileCubit(sl(), sl()),
               fromToCubit: FromToCubit(sl(), sl()),
 ),
         ),
@@ -97,9 +98,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Train D',
             theme: lightTheme(),
-            home: SplashScreen(
-              nextScreen: widget,
-            ),
+            home: SplashScreen(nextScreen: widget,),
           );
         },
       ),

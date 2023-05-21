@@ -18,11 +18,11 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit({
     required this.profileCubit,
     required this.fromToCubit,
-  }) : super(HomeInitial()) {
+  }) : super(HomeInitial()){
     CacheHelper.saveData(key: 'setProfileImage', value: false);
     emit(GetAllDataLoadingState());
     fromToCubit.getStationsFromApi();
-    profileCubit.getUserProfileDataFromApi();
+    profileCubit.getProfileUserData();
     fromToCubit.stream.listen((FromToState) {
       //print(FromToState);
       if (FromToState is FromToSuccessState) {
