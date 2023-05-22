@@ -19,9 +19,9 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSource {
 
   @override
   Future<ProfileUserDataEntity> getProfileUserData() async {
-    var data = await apiService.get(endPoint: ApiConstants.profilePath);
+    var data = await apiService.get(endPoint: ApiConstants.profileGetEndPoint);
     ProfileUserDataEntity profileUserData = ProfileUserDataModel.fromJson(data);
-    
+
     storeProfileUserData(data);
     return profileUserData;
   }
@@ -29,12 +29,13 @@ class ProfileRemoteDataSourceImpl extends ProfileRemoteDataSource {
   @override
   Future<ProfileUserDataEntity> putProfileUserData(
       ProfileUserDataModel model) async {
-    var data = await apiService.put(
-      endPoint: '/Profile/UpdateProfile',
+    await apiService.put(
+      endPoint: ApiConstants.profilePutEndPoint,
       data: model.toJson(),
     );
+    var data = await apiService.get(endPoint: ApiConstants.profileGetEndPoint);
     ProfileUserDataEntity profileUserData = ProfileUserDataModel.fromJson(data);
-    //removeUserDataFromCache();
+    removeUserDataFromCache();
     storeProfileUserData(data);
     return profileUserData;
   }

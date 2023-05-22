@@ -5,5 +5,4 @@ class AppConstants {
   
   static Map<String, dynamic> allFromToStations ={};
 }
-dynamic token = '';
 

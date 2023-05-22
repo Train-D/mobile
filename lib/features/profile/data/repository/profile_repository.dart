@@ -25,6 +25,7 @@ class ProfileRepository extends BaseProfileRepository {
         print('cached');
         return Right(userData);
       }
+      print('Not Cached');
       userData = await profileRemoteDataSource.getProfileUserData();
       return Right(userData);
     } catch (e) {
@@ -33,20 +34,14 @@ class ProfileRepository extends BaseProfileRepository {
   }
 
   @override
-  Future<Either<Failure, ProfileUserDataEntity>> putProfileUserData(ProfileUserDataModel model) async{
-     try {
+  Future<Either<Failure, ProfileUserDataEntity>> putProfileUserData(
+      ProfileUserDataModel parameters) async {
+    try {
       // ignore: prefer_typing_uninitialized_variables
-      var userData;
-      // userData = profileLocalDataSource.getProfileUserData();
-      // if (userData != null) {
-      //   print('cached from put');
-      //   return Right(userData);
-      // }
-      userData = await profileRemoteDataSource.putProfileUserData(model);
+      var userData = await profileRemoteDataSource.putProfileUserData(parameters);
       return Right(userData);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }
   }
-  }
-
+}

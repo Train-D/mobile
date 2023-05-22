@@ -75,10 +75,14 @@ class LoginCubit extends Cubit<LoginState> {
     }
   }
 
-  Color loginToastColor = Colors.red;
+  Color loginToastColor = Colors.green;
 
   void loginChangeToastColor() {
-    loginToastColor = state is LoginSuccessState ? Colors.green : Colors.red;
+     if (state is LoginSuccessState) {
+      loginToastColor = Colors.green;
+    } else {
+      loginToastColor = Colors.red;
+    }
     emit(LoginChangeToastColorState());
   }
 

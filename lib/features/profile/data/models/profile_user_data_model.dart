@@ -33,21 +33,21 @@ class ProfileUserDataModel extends ProfileUserDataEntity {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      "firstName": firstName,
-      "lastName" : lastName,
-      "city" : city,
-      "phoneNumber": phoneNumber,
-      "image" : image,
-    };
-    // final Map<String, dynamic> data = <String, dynamic> {};
-    // //data['email'] = email;
-    // //data['userName'] = userName;
-    // data['firstName'] = firstName;
-    // data['lastName'] = lastName;
-    // data['city'] = city;
-    // data['phoneNumber'] = phoneNumber;
-    // data['image'] = image;
-    // return data;
+    // return {
+    //   "firstName": firstName,
+    //   "lastName" : lastName,
+    //   "city" : city,
+    //   "phoneNumber": phoneNumber,
+    //   "image" : image,
+    // };
+    final Map<String, dynamic> data = <String, dynamic> {};
+    //data['email'] = email;
+    //data['userName'] = userName;
+    data['firstName'] = firstName;
+    data['lastName'] = lastName;
+    data['city'] = city;
+    data['phoneNumber'] = phoneNumber;
+    data['image'] = image;
+    return data;
   }
 }
