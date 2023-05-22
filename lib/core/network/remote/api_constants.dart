@@ -4,5 +4,6 @@ class ApiConstants {
   static const String loginPath = '$baseUrl/User/Login';
   static const String fromToStationsPath = '$baseUrl/Trips/FromTo';
   static const String tripTimesPath = '$baseUrl/Trips/TripTimes';
-  static const String profilePath = '$baseUrl/Profile/UserData';
+  static const String profileGetEndPoint = '/Profile/UserData';
+  static const String profilePutEndPoint = '/Profile/UpdateProfile';
 }

@@ -1,3 +1,4 @@
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -111,7 +112,7 @@ class ProfileScreen extends StatelessWidget {
                         height: 3.h,
                       ),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 30.sp),
+                        padding: EdgeInsets.symmetric(horizontal: 25.sp),
                         child: Form(
                           child: Column(
                             children: [
@@ -209,23 +210,36 @@ class ProfileScreen extends StatelessWidget {
                               SizedBox(
                                 height: 4.h,
                               ),
-                              SharedComponents.defaultButton(
-                                context: context,
-                                function: () async {
-                                  await cubit.postProfileUserData(
-                                    image: '',
-                                    firstName: cubit.profileFirstNameCon.text,
-                                    lastName: cubit.profileLastNameCon.text,
-                                    phoneNumber: cubit.profilePhoneCon.text,
-                                    city: cubit.profileCityCon.text,
-                                  );
-                                },
-                                text: AppString.save,
-                                width: AppSizes.width(context) / 3,
-                                height: AppSizes.height(context) / 14,
-                                radius: AppSizes.defaultBottomRadius,
-                              ),
-                              //SizedBox(height: 20.h,)
+                              ConditionalBuilder(
+                                  condition:
+                                      state is! ProfileLoadingPostUserDataState,
+                                  builder: (context) =>
+                                      SharedComponents.defaultButton(
+                                        context: context,
+                                        function: () async {
+                                          await cubit.putProfileUserData(
+                                            image: '',
+                                            firstName:
+                                                cubit.profileFirstNameCon.text,
+                                            lastName:
+                                                cubit.profileLastNameCon.text,
+                                            phoneNumber:
+                                                cubit.profilePhoneCon.text,
+                                            city: cubit.profileCityCon.text,
+                                          );
+                                          SharedComponents.showToast(
+                                            text: 'Saved Successfully',
+                                            color: Colors.green,
+                                          );
+                                        },
+                                        text: AppString.save,
+                                        width: AppSizes.width(context) / 3,
+                                        height: AppSizes.height(context) / 14,
+                                        radius: AppSizes.defaultBottomRadius,
+                                      ),
+                                  fallback: (context) => Center(
+                                        child: CircularProgressIndicator(),
+                                      )),
                             ],
                           ),
                         ),

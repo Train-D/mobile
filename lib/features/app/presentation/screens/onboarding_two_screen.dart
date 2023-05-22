@@ -36,24 +36,16 @@ class OnboardingTwoScreen extends StatelessWidget {
                       image: '${AppConstants.vectorsUrl}$onboardingVectorTwo',
                     ),
                     SharedComponents.defaultButton(
-                      function: ()async {
+                      function: () async {
                         await CacheHelper.saveData(
                           key: 'onBoarding',
                           value: true,
                         );
-                        if (CacheHelper.getData(key: 'onBoarding') == true) {
-                          // ignore: use_build_context_synchronously
-                          SharedComponents.navigateToReplace(
-                            const HomeScreen(),
-                            context,
-                          );
-                        }else{
-                          // ignore: use_build_context_synchronously
-                          SharedComponents.navigateToReplace(
-                            const LoginScreen(),
-                            context,
-                          );
-                        }
+
+                        SharedComponents.navigateToReplace(
+                          const LoginScreen(),
+                          context,
+                        );
                       },
                       text: AppString.getStarted,
                       context: context,

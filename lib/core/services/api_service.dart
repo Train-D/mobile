@@ -19,7 +19,7 @@ class ApiService {
   Future<Map<String, dynamic>> post(
       {required String endPoint, required dynamic data}) async {
     dio.options.headers['Authorization'] =
-        'Bearer ${CacheHelper.getData(key: "token")}';  
+        'Bearer ${CacheHelper.getData(key: "token")}';
     var response = await dio.post(
       '${ApiConstants.baseUrl}$endPoint',
       data: data,
@@ -30,7 +30,7 @@ class ApiService {
   Future<Map<String, dynamic>> put(
       {required String endPoint, required dynamic data}) async {
     dio.options.headers['Authorization'] =
-        'Bearer ${CacheHelper.getData(key: "token")}';  
+        'Bearer ${CacheHelper.getData(key: "token")}';
     var response = await dio.put(
       '${ApiConstants.baseUrl}$endPoint',
       data: data,

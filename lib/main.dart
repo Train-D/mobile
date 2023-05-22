@@ -23,6 +23,7 @@ import 'features/authentication/presentation/controller/register_cubit/register_
 import 'features/profile/presentation/controller/profile_cubit/profile_cubit.dart';
 import 'features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
 import 'features/track/presentation/controller/tracking_cubit/tracking_cubit.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,21 +31,21 @@ void main() async {
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
   dynamic boarding = CacheHelper.getData(key: 'onBoarding');
-  token = CacheHelper.getData(key: 'token');
-  Widget widget = LoginScreen();
+  String? token = CacheHelper.getData(key: 'token');
+  print('tokennnn $token');
+  Widget widget = const LoginScreen();
   if (boarding == null) {
-    widget = OnboardingOneScreen();
-    
+    widget = const OnboardingOneScreen();
   } else {
     if (token != null) {
-      widget = HomeScreen();
-    } else {
-      widget = LoginScreen();
+      widget = const HomeScreen();
     }
   }
-  runApp(MyApp(
-    widget: widget,
-  ));
+  runApp(
+    MyApp(
+      widget: widget,
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -62,19 +63,19 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginCubit(sl()),
         ),
         BlocProvider(
-          create: (context) => FromToCubit(sl() , sl()),
+          create: (context) => FromToCubit(sl(), sl()),
         ),
         BlocProvider(
           create: (context) => RegisterCubit(sl()),
         ),
         BlocProvider(
-          create: (context) => ProfileCubit(sl() , sl())..getProfileUserData(),
+          create: (context) => ProfileCubit(sl(), sl())..getProfileUserData(),
         ),
-       BlocProvider(
+        BlocProvider(
           create: (context) => HomeCubit(
-              profileCubit: ProfileCubit(sl() , sl()),
-              fromToCubit: FromToCubit(sl() , sl()),
-),
+            profileCubit: ProfileCubit(sl(), sl()),
+            fromToCubit: FromToCubit(sl(), sl()),
+          ),
         ),
         BlocProvider(
           create: (context) => TrackingCubit(),
@@ -98,7 +99,9 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'Train D',
             theme: lightTheme(),
-            home: SplashScreen(nextScreen: widget,),
+            home: SplashScreen(
+              nextScreen: widget,
+            ),
           );
         },
       ),

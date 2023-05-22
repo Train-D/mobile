@@ -18,13 +18,6 @@ class CacheHelper {
     CacheHelper.removeData(key: 'setProfileImage');
   }
 
-  static Future<bool> putData({
-    required String key,
-    required bool value,
-  }) async {
-    return await sharedPref.setBool(key, value);
-  }
-
   static dynamic getData({
     required String key,
   }) {
@@ -43,5 +36,9 @@ class CacheHelper {
 
   static Future<bool> removeData({required String key}) async {
     return await sharedPref.remove(key);
+  }
+
+  static Future<bool> cleadData() async{
+    return await sharedPref.clear();
   }
 }
