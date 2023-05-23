@@ -32,18 +32,19 @@ void main() async {
   await CacheHelper.init();
   dynamic boarding = CacheHelper.getData(key: 'onBoarding');
   String? token = CacheHelper.getData(key: 'token');
-  print('tokennnn $token');
-  Widget widget = const LoginScreen();
+  //widget = const LoginScreen();
   if (boarding == null) {
-    widget = const OnboardingOneScreen();
+    AppConstants.widget = const OnboardingOneScreen();
   } else {
     if (token != null) {
-      widget = const HomeScreen();
+      AppConstants.widget = const HomeScreen();
     }
   }
   runApp(
-    MyApp(
-      widget: widget,
+    Phoenix(
+      child: MyApp(
+        widget: AppConstants.widget,
+      ),
     ),
   );
 }
@@ -100,7 +101,7 @@ class MyApp extends StatelessWidget {
             title: 'Train D',
             theme: lightTheme(),
             home: SplashScreen(
-              nextScreen: widget,
+              nextScreen: AppConstants.widget,
             ),
           );
         },

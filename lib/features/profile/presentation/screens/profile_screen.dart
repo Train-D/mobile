@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -218,7 +220,7 @@ class ProfileScreen extends StatelessWidget {
                                         context: context,
                                         function: () async {
                                           await cubit.putProfileUserData(
-                                            image: '',
+                                            image: cubit.isProfileImage ? cubit.profileImage : '',
                                             firstName:
                                                 cubit.profileFirstNameCon.text,
                                             lastName:
