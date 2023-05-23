@@ -106,9 +106,11 @@ class SettingsScreen extends StatelessWidget {
                           //CacheHelper.resetPreference();
                           await CacheHelper.removeData(key: 'userData');
                           await CacheHelper.removeData(key: 'token');
-                          //Restart.restartApp(webOrigin: '${Uri.base}');
-                          SharedComponents.navigateToRemove(
-                              context, const LoginScreen());
+                          AppConstants.widget = const LoginScreen();
+                          Phoenix.rebirth(context);
+                          // //Restart.restartApp(webOrigin: '${Uri.base}');
+                          // SharedComponents.navigateToRemove(
+                          //     context, const LoginScreen());
                         },
                         text: 'Logout',
                         radius: 10.sp,

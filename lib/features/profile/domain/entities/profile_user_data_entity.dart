@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 class ProfileUserDataEntity extends Equatable {
   final String? email;
   final String? userName;
-  final String? image;
+  final dynamic image;
   final String? firstName;
   final String? lastName;
   final String? city;

@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
@@ -57,7 +58,6 @@ class ProfileCubit extends Cubit<ProfileState> {
       debugPrint(failure.toString());
       emit(ProfileFailureUserDataState(message: failure.message));
     }, (userData) {
-      print(userData);
       //profileImage = userData.image as XFile?;
       assignProfileUserDataToTextFields(userData);
       emit(ProfileSuccessUserDataState(profileUserDataEntity: userData));
@@ -67,7 +67,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   final PutProfileUserDataUseCase putProfileUserDataUseCase;
 
   Future<void> putProfileUserData({
-    required String image,
+    required dynamic image,
     required String firstName,
     required String lastName,
     required String phoneNumber,

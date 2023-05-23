@@ -7,7 +7,7 @@ class ProfileUserDataModel extends ProfileUserDataEntity {
     String? userName,
     String? firstName,
     String? lastName,
-    String? image,
+    dynamic image,
     String? city,
     String? phoneNumber,
   }) : super(
