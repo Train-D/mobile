@@ -64,150 +64,91 @@ class StationsScreen extends StatelessWidget {
                               topEnd: Radius.circular(20.sp),
                             ),
                           ),
-                          child: SingleChildScrollView(
-                            child: Padding(
-                              padding: EdgeInsets.symmetric(
-                                horizontal: 25.sp,
-                                vertical: 20.sp,
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  ListView.separated(
-                                    shrinkWrap: true,
-                                    itemBuilder: (context, index) => Column(
+                          child: state is GetAllStationsNamesSuccessState
+                              ? SingleChildScrollView(
+                                  child: Padding(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 25.sp,
+                                      vertical: 20.sp,
+                                    ),
+                                    child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text(
-                                          cubit.stations[index].keys.first,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displayMedium!
-                                              .copyWith(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                        ),
-                                        SizedBox(
-                                          height: 0.sp,
-                                        ),
-                                        ListView.builder(
+                                        ListView.separated(
                                           shrinkWrap: true,
-                                          itemBuilder: (context, idx) =>
-                                              InkWell(
-                                            child: Padding(
-                                              padding:
-                                                  EdgeInsetsDirectional.only(
-                                                top: 15.sp,
-                                                bottom: 15.sp,
-                                              ),
-                                              child: Text(
-                                                cubit.stations[index].values
-                                                    .last[idx],
+                                          itemBuilder: (context, index) =>
+                                              Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                cubit.allStationsNamesModel.keys
+                                                    .toList()[index],
                                                 style: Theme.of(context)
                                                     .textTheme
-                                                    .displayMedium,
+                                                    .displayMedium!
+                                                    .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
                                               ),
-                                            ),
-                                            onTap: () {
-                                              SharedComponents.navigateTo(
-                                                const StationDetailsScreen(),
-                                                context,
-                                              );
-                                            },
+                                              SizedBox(
+                                                height: 0.sp,
+                                              ),
+                                              ListView.builder(
+                                                shrinkWrap: true,
+                                                itemBuilder: (context, idx) =>
+                                                    InkWell(
+                                                  child: Padding(
+                                                    padding:
+                                                        EdgeInsetsDirectional
+                                                            .only(
+                                                      top: 15.sp,
+                                                      bottom: 15.sp,
+                                                    ),
+                                                    child: Text(
+                                                      cubit
+                                                          .allStationsNamesModel
+                                                          .values
+                                                          .toList()[index][idx]
+                                                          .toString(),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .displayMedium,
+                                                    ),
+                                                  ),
+                                                  onTap: () {
+                                                    SharedComponents.navigateTo(
+                                                      const StationDetailsScreen(),
+                                                      context,
+                                                    );
+                                                  },
+                                                ),
+                                                itemCount: cubit
+                                                    .allStationsNamesModel
+                                                    .values
+                                                    .toList()[index]
+                                                    .length,
+                                              ),
+                                            ],
                                           ),
-                                          itemCount: cubit.stations[index]
-                                              .values.last.length,
+                                          separatorBuilder: (context, index) =>
+                                              SizedBox(
+                                            height: 20.sp,
+                                          ),
+                                          itemCount: cubit
+                                              .allStationsNamesModel.keys
+                                              .toList()
+                                              .length,
                                         ),
                                       ],
                                     ),
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(
-                                      height: 20.sp,
-                                    ),
-                                    itemCount: cubit.stations.length,
                                   ),
-
-                                  // Column(
-                                  //   children: [
-                                  //     Text(
-                                  //       'A',
-                                  //       style: Theme.of(context)
-                                  //           .textTheme
-                                  //           .displayMedium!
-                                  //           .copyWith(
-                                  //             fontWeight: FontWeight.bold,
-                                  //           ),
-                                  //     ),
-                                  //     SizedBox(
-                                  //       height: 15.sp,
-                                  //     ),
-                                  //     ListView.separated(
-                                  //       shrinkWrap: true,
-                                  //       itemBuilder: (context, index) => InkWell(
-                                  //         child: Text(
-                                  //           'Apanpola',
-                                  //           style: Theme.of(context)
-                                  //               .textTheme
-                                  //               .displayMedium,
-                                  //         ),
-                                  //         onTap: () {
-                                  //           SharedComponents.navigateTo(
-                                  //               const StationDetailsScreen(),
-                                  //               context);
-                                  //         },
-                                  //       ),
-                                  //       separatorBuilder: (context, index) =>
-                                  //           SizedBox(
-                                  //         height: 20.sp,
-                                  //       ),
-                                  //       itemCount: 15,
-                                  //     ),
-                                  //   ],
-                                  // ),
-
-                                  // SizedBox(
-                                  //   height: 15.sp,
-                                  // ),
-                                  // InkWell(
-                                  //   child: Text(
-                                  //     'Apanpola',
-                                  //     style: Theme.of(context)
-                                  //         .textTheme
-                                  //         .displayMedium,
-                                  //   ),
-                                  //   onTap: () {
-                                  //     SharedComponents.navigateTo(
-                                  //         const StationDetailsScreen(),
-                                  //         context);
-                                  //   },
-                                  // ),
-
-                                  // SizedBox(
-                                  //   height: 20.sp,
-                                  // ),
-                                  // Text(
-                                  //   'Agbopura',
-                                  //   style: Theme.of(context)
-                                  //       .textTheme
-                                  //       .displayMedium,
-                                  // ),
-                                  // SizedBox(
-                                  //   height: 20.sp,
-                                  // ),
-                                  // Text(
-                                  //   'Apanbola',
-                                  //   style: Theme.of(context)
-                                  //       .textTheme
-                                  //       .displayMedium,
-                                  // ),
-                                  // SizedBox(
-                                  //   height: 20.sp,
-                                  // ),
-                                ],
-                              ),
-                            ),
-                          ),
+                                )
+                              : const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
                         ),
                       ),
                     ],

@@ -7,6 +7,10 @@ import 'package:traind_app/features/authentication/data/repository/login_reposit
 import 'package:traind_app/features/authentication/data/repository/register_data_repository.dart';
 import 'package:traind_app/features/authentication/domain/repository/base_login_repository.dart';
 import 'package:traind_app/features/authentication/domain/repository/register_domain_repository.dart';
+import 'package:traind_app/features/stations/data/all_stations_names_repository.dart';
+import 'package:traind_app/features/stations/data/data%20source/all_stations_names_local_data_source.dart';
+import 'package:traind_app/features/stations/domain/repository/base_all_stations_repository.dart';
+import 'package:traind_app/features/stations/domain/usecase/get_all_stations_names_usecase.dart';
 import 'package:traind_app/features/tickets/data/data%20source/fromto_data_sorce.dart';
 import 'package:traind_app/features/tickets/data/repository/fromto_repository.dart';
 import 'package:traind_app/features/tickets/domain/fromto_usecase.dart.dart';
@@ -24,6 +28,7 @@ import '../../features/profile/data/repository/profile_repository.dart';
 import '../../features/profile/domain/repository/base_profile_repository.dart';
 import '../../features/profile/domain/usecase/get_profile_user_data_use_case.dart';
 import '../../features/profile/domain/usecase/put_profile_user_data_use_case.dart';
+import '../../features/stations/data/data source/all_stations_names_remote_data_source.dart';
 
 final sl = GetIt.instance;
 
@@ -59,10 +64,20 @@ class ServicesLocator {
     sl.registerLazySingleton<ApiService>(() => ApiService(Dio()));
     sl.registerLazySingleton<ProfileRemoteDataSource>(
         () => ProfileRemoteDataSourceImpl(sl()));
-     sl.registerLazySingleton<ProfileLocalDataSource>(
-        () => ProfileLocalDataSourceImpl());    
-    sl.registerLazySingleton<BaseProfileRepository>(() => ProfileRepository(sl() , sl()));
+    sl.registerLazySingleton<ProfileLocalDataSource>(
+        () => ProfileLocalDataSourceImpl());
+    sl.registerLazySingleton<BaseProfileRepository>(
+        () => ProfileRepository(sl(), sl()));
     sl.registerLazySingleton(() => GetProfileUserDataUsecase(sl()));
     sl.registerLazySingleton(() => PutProfileUserDataUseCase(sl()));
+
+    // all stations names
+    sl.registerLazySingleton<AllStationsNamesLocalDataSource>(
+        () => AllStationsNamesLocalDataSourceImpl());
+    sl.registerLazySingleton<AllStationsNamesRemoteDataSource>(
+        () => AllStationsNamesRemoteDataSourceImpl(sl()));
+    sl.registerLazySingleton<BaseAllStationsNamesRepository>(
+        () => AllStationsNamesRepository(sl(), sl()));
+    sl.registerLazySingleton(() => GetAllStationsNamesUseCase(sl()));
   }
 }
