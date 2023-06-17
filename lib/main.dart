@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
           create: (context) => ChooseSeatsCubit()..initScrollCon(),
         ),
         BlocProvider(
-          create: (context) => AllStationsCubit(sl())..getAllStationsNames(),
+          create: (context) => AllStationsCubit(sl(), sl())..getAllStationsNames(),
         )
       ],
       child: ResponsiveSizer(
