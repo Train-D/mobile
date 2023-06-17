@@ -9,8 +9,13 @@ import 'package:traind_app/features/authentication/domain/repository/base_login_
 import 'package:traind_app/features/authentication/domain/repository/register_domain_repository.dart';
 import 'package:traind_app/features/stations/data/all_stations_names_repository.dart';
 import 'package:traind_app/features/stations/data/data%20source/all_stations_names_local_data_source.dart';
+import 'package:traind_app/features/stations/data/data%20source/station_details_local_data_source.dart';
+import 'package:traind_app/features/stations/data/data%20source/station_details_remote_data_source.dart';
+import 'package:traind_app/features/stations/data/repository/station_details_repository.dart';
 import 'package:traind_app/features/stations/domain/repository/base_all_stations_repository.dart';
+import 'package:traind_app/features/stations/domain/repository/base_station_details_repository.dart';
 import 'package:traind_app/features/stations/domain/usecase/get_all_stations_names_usecase.dart';
+import 'package:traind_app/features/stations/domain/usecase/get_station_details_by_name_usecase.dart';
 import 'package:traind_app/features/tickets/data/data%20source/fromto_data_sorce.dart';
 import 'package:traind_app/features/tickets/data/repository/fromto_repository.dart';
 import 'package:traind_app/features/tickets/domain/fromto_usecase.dart.dart';
@@ -79,5 +84,14 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseAllStationsNamesRepository>(
         () => AllStationsNamesRepository(sl(), sl()));
     sl.registerLazySingleton(() => GetAllStationsNamesUseCase(sl()));
+
+    // station details
+    sl.registerLazySingleton<StationDetailsLocalDataSource>(
+        () => StationDetailsLocalDataSourceImpl());
+    sl.registerLazySingleton<StationDetailsRemoteDataSource>(
+        () => StationDetailsRemoteDataSourceImpl(sl()));
+    sl.registerLazySingleton<BaseStationDetailsRepository>(
+        () => StationDetailsRepository(sl(), sl()));
+    sl.registerLazySingleton(() => GetStationDetailsByNameUseCase(sl()));
   }
 }

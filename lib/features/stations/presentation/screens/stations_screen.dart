@@ -56,100 +56,119 @@ class StationsScreen extends StatelessWidget {
                       ),
                       Expanded(
                         child: Container(
-                          width: AppSizes.width(context),
-                          decoration: BoxDecoration(
-                            color: stationsContainerBgColor,
-                            borderRadius: BorderRadiusDirectional.only(
-                              topStart: Radius.circular(20.sp),
-                              topEnd: Radius.circular(20.sp),
+                            width: AppSizes.width(context),
+                            decoration: BoxDecoration(
+                              color: stationsContainerBgColor,
+                              borderRadius: BorderRadiusDirectional.only(
+                                topStart: Radius.circular(20.sp),
+                                topEnd: Radius.circular(20.sp),
+                              ),
                             ),
-                          ),
-                          child: state is GetAllStationsNamesSuccessState
-                              ? SingleChildScrollView(
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 25.sp,
-                                      vertical: 20.sp,
-                                    ),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        ListView.separated(
-                                          shrinkWrap: true,
-                                          itemBuilder: (context, index) =>
-                                              Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                cubit.allStationsNamesModel.keys
-                                                    .toList()[index],
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .displayMedium!
-                                                    .copyWith(
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                              ),
-                                              SizedBox(
-                                                height: 0.sp,
-                                              ),
-                                              ListView.builder(
-                                                shrinkWrap: true,
-                                                itemBuilder: (context, idx) =>
-                                                    InkWell(
-                                                  child: Padding(
-                                                    padding:
-                                                        EdgeInsetsDirectional
-                                                            .only(
-                                                      top: 15.sp,
-                                                      bottom: 15.sp,
-                                                    ),
-                                                    child: Text(
-                                                      cubit
-                                                          .allStationsNamesModel
-                                                          .values
-                                                          .toList()[index][idx]
-                                                          .toString(),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .displayMedium,
-                                                    ),
-                                                  ),
-                                                  onTap: () {
-                                                    SharedComponents.navigateTo(
-                                                      const StationDetailsScreen(),
-                                                      context,
-                                                    );
-                                                  },
+                            child: state is GetAllStationsNamesLoadingState ||
+                                    state is GetAllStationsNamesFailureState
+                                ? const Center(
+                                    child: CircularProgressIndicator(),
+                                  )
+                                : SingleChildScrollView(
+                                    child: Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 25.sp,
+                                        vertical: 20.sp,
+                                      ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          ListView.separated(
+                                            shrinkWrap: true,
+                                            itemBuilder: (context, index) =>
+                                                Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  cubit.allStationsNamesModel
+                                                      .keys
+                                                      .toList()[index],
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .displayMedium!
+                                                      .copyWith(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
                                                 ),
-                                                itemCount: cubit
-                                                    .allStationsNamesModel
-                                                    .values
-                                                    .toList()[index]
-                                                    .length,
-                                              ),
-                                            ],
+                                                SizedBox(
+                                                  height: 0.sp,
+                                                ),
+                                                ListView.builder(
+                                                  shrinkWrap: true,
+                                                  itemBuilder: (context, idx) =>
+                                                      InkWell(
+                                                    child: Padding(
+                                                      padding:
+                                                          EdgeInsetsDirectional
+                                                              .only(
+                                                        top: 15.sp,
+                                                        bottom: 15.sp,
+                                                      ),
+                                                      child: Text(
+                                                        cubit
+                                                            .allStationsNamesModel
+                                                            .values
+                                                            .toList()[index]
+                                                                [idx]
+                                                            .toString(),
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .displayMedium,
+                                                      ),
+                                                    ),
+                                                    onTap: () async {
+                                                      SharedComponents
+                                                          .navigateTo(
+                                                        StationDetailsScreen(
+                                                          stationName: cubit
+                                                              .allStationsNamesModel
+                                                              .values
+                                                              .toList()[index]
+                                                                  [idx]
+                                                              .toString(),
+                                                        ),
+                                                        context,
+                                                      );
+                                                      await cubit
+                                                          .getStationDetailsByName(
+                                                        cubit
+                                                            .allStationsNamesModel
+                                                            .values
+                                                            .toList()[index]
+                                                                [idx]
+                                                            .toString(),
+                                                      );
+                                                    },
+                                                  ),
+                                                  itemCount: cubit
+                                                      .allStationsNamesModel
+                                                      .values
+                                                      .toList()[index]
+                                                      .length,
+                                                ),
+                                              ],
+                                            ),
+                                            separatorBuilder:
+                                                (context, index) => SizedBox(
+                                              height: 20.sp,
+                                            ),
+                                            itemCount: cubit
+                                                .allStationsNamesModel.keys
+                                                .toList()
+                                                .length,
                                           ),
-                                          separatorBuilder: (context, index) =>
-                                              SizedBox(
-                                            height: 20.sp,
-                                          ),
-                                          itemCount: cubit
-                                              .allStationsNamesModel.keys
-                                              .toList()
-                                              .length,
-                                        ),
-                                      ],
+                                        ],
+                                      ),
                                     ),
-                                  ),
-                                )
-                              : const Center(
-                                  child: CircularProgressIndicator(),
-                                ),
-                        ),
+                                  )),
                       ),
                     ],
                   ),
