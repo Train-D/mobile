@@ -17,16 +17,17 @@ import 'package:traind_app/features/stations/domain/repository/base_station_deta
 import 'package:traind_app/features/stations/domain/usecase/get_all_stations_names_usecase.dart';
 import 'package:traind_app/features/stations/domain/usecase/get_station_details_by_name_usecase.dart';
 import 'package:traind_app/features/tickets/data/data%20source/fromto_data_sorce.dart';
+import 'package:traind_app/features/tickets/data/data%20source/fromto_local_data_source.dart';
 import 'package:traind_app/features/tickets/data/repository/fromto_repository.dart';
-import 'package:traind_app/features/tickets/domain/fromto_usecase.dart.dart';
+import 'package:traind_app/features/tickets/domain/usecase/fromto_usecase.dart.dart';
 import 'package:traind_app/features/tickets/domain/repository/fromto_domain_repository.dart';
 
 import '../../features/authentication/domain/usecase/login_usecase.dart';
 import '../../features/authentication/domain/usecase/register_usecase.dart';
-import '../../features/layout/data/stations/data source/get_remote_stations_data.dart';
-import '../../features/layout/data/stations/repository/get_stations_data_repository.dart';
-import '../../features/layout/domain/stations/repository/get_stations_repository.dart';
-import '../../features/layout/domain/stations/usecase/get_stations_usecase.dart';
+import '../../features/tickets/data/data source/get_remote_stations_data.dart';
+import '../../features/tickets/data/repository/get_stations_data_repository.dart';
+import '../../features/tickets/domain/repository/get_stations_repository.dart';
+import '../../features/tickets/domain/usecase/get_stations_usecase.dart';
 import '../../features/profile/data/data source/profile_local_data_source.dart';
 import '../../features/profile/data/data source/profile_remote_data_source.dart';
 import '../../features/profile/data/repository/profile_repository.dart';
@@ -55,10 +56,12 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseGetRemoteStationsDataSource>(
         () => GetRemoteStationsDataSource());
     sl.registerLazySingleton<BaseGetStationsRepository>(
-        () => StationsRepository(sl()));
+        () => StationsRepository(sl(), sl()));
     sl.registerLazySingleton(() => GetStationsUseCase(sl()));
 
     //fromto feature
+     sl.registerLazySingleton<FromToLocalDataSource>(
+        () => FromToLocalDataSourceImpl());
     sl.registerLazySingleton<BaseFromToDateRemoteDataSource>(
         () => FromToDateRemoteDataSource());
     sl.registerLazySingleton<BaseFromToDateRepository>(

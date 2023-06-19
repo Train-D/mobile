@@ -14,18 +14,15 @@ import 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   final ProfileCubit profileCubit;
-  final FromToCubit fromToCubit;
   HomeCubit({
     required this.profileCubit,
-    required this.fromToCubit,
   }) : super(HomeInitial()){
     CacheHelper.saveData(key: 'setProfileImage', value: false);
     emit(GetAllDataLoadingState());
-    fromToCubit.getStationsFromApi();
     profileCubit.getProfileUserData();
-    fromToCubit.stream.listen((FromToState) {
+    profileCubit.stream.listen((ProfileState) {
       //print(FromToState);
-      if (FromToState is FromToSuccessState) {
+      if (ProfileState is ProfileSuccessUserDataState) {
         emit(GetAllDataSuccessState());
       } else {
         emit(GetAllDataErrorState('Unexpected error'));

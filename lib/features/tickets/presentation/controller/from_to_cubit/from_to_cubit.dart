@@ -1,3 +1,4 @@
+import 'package:basic_utils/basic_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
@@ -5,10 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traind_app/core/error/exceptions.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/features/tickets/data/models/from_to_date_model.dart';
-import 'package:traind_app/features/tickets/domain/fromto_usecase.dart.dart';
+import 'package:traind_app/features/tickets/domain/usecase/fromto_usecase.dart.dart';
 
-import '../../../../layout/data/stations/models/stations_model.dart';
-import '../../../../layout/domain/stations/usecase/get_stations_usecase.dart';
+import '../../../data/models/stations_model.dart';
+import '../../../domain/usecase/get_stations_usecase.dart';
 import '../../../data/models/schedule_model.dart';
 
 part 'from_to_state.dart';
@@ -17,9 +18,9 @@ class FromToCubit extends Cubit<FromToState> {
   FromToCubit(this.postFromToDateDataUsecase, this.getStationsUseCase)
       : super(FromToInitial()) {
     //allStations.removeRange(1, allStations.length);
-    for (var station in AppConstants.allFromToStations.keys) {
-      allStations.add(station);
-    }
+    getStationsFromApi();
+    scheduleModel = ScheduleModel.fromjson([]);
+
     //fromDefaultValue = allStations.first;
   }
   static FromToCubit get(context) => BlocProvider.of(context);
@@ -40,15 +41,18 @@ class FromToCubit extends Cubit<FromToState> {
     try {
       final result = await getStationsUseCase();
       result.fold((l) {}, (r) {
-        stationsModel = StationsModel.fromjson(r.stations);
-        AppConstants.allFromToStations = stationsModel.stations;
+        stationsModel = StationsModel.fromJson(r.stations);
+        print(stationsModel.stations);
+        for (var station in stationsModel.stations.keys) {
+          allStations.add(station);
+        }
       });
       emit(FromToSuccessState());
     } on ServerException catch (e) {
-      stationsModel = StationsModel.fromjson(const {});
+      stationsModel = StationsModel.fromJson(const {});
       emit(FromToErrorState(e.toString()));
     } on DioError catch (e) {
-      stationsModel = StationsModel.fromjson(const {});
+      stationsModel = StationsModel.fromJson(const {});
       emit(FromToErrorState(e.response.toString()));
     }
   }
@@ -57,7 +61,7 @@ class FromToCubit extends Cubit<FromToState> {
     toStations.removeRange(1, toStations.length);
     //toStations.clear();
     if (fromStation != 'Select') {
-      for (var station in AppConstants.allFromToStations[fromStation]) {
+      for (var station in stationsModel.stations[fromStation]) {
         toStations.add(station);
       }
     } else {
@@ -75,7 +79,8 @@ class FromToCubit extends Cubit<FromToState> {
     //print(newValue);
     if (option == 1) {
       fromDefaultValue = newValue;
-       toDefaultValue = "Select";
+      toDefaultValue = "Select";
+      emit(ChangeDropDownButtonValueState());
     } else {
       toDefaultValue = newValue;
       emit(ChangeDropDownButtonValueState());
@@ -87,7 +92,7 @@ class FromToCubit extends Cubit<FromToState> {
   final PostFromToDateDataUsecase postFromToDateDataUsecase;
   late ScheduleModel scheduleModel;
   Future<void> tripTimes() async {
-    emit(FromToLoadingState());
+    emit(PostTripsLoadingState());
 
     try {
       final result = await postFromToDateDataUsecase(FromToDateModel(
@@ -100,16 +105,16 @@ class FromToCubit extends Cubit<FromToState> {
         scheduleModel = ScheduleModel.fromjson(r.scheduleData);
         //print(r);
       });
-      emit(FromToSuccessState());
+      emit(PostTripsSuccessState());
     } on ServerException catch (e) {
       errorMessage = 'Connection Error';
       //print('object');
-      emit(FromToErrorState(e.toString()));
+      emit(PostTripsErrorState(e.toString()));
     } on DioError catch (e) {
       errorMessage = e.response?.data['message'] ?? 'Connection Error';
       //print(e.response?.data['message']);
       //print(errorMessage.runtimeType);
-      emit(FromToErrorState(e.message.toString()));
+      emit(PostTripsErrorState(e.message.toString()));
     }
   }
 }

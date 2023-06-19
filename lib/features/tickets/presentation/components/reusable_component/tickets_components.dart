@@ -21,31 +21,13 @@ class TicketsComponents {
       );
 
   // ignore: non_constant_identifier_names
-  static Widget FromToLabel(BuildContext context) => Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            '${AppString.from}:',
-            style: Theme.of(context)
-                .textTheme
-                .displayLarge!
-                .copyWith(fontWeight: FontWeight.w700, color: Colors.black),
-          ),
-          SizedBox(
-            width: 1.w,
-          ),
-          Text(
-            '${AppString.to}:',
-            style: Theme.of(context)
-                .textTheme
-                .displayLarge!
-                .copyWith(fontWeight: FontWeight.w700, color: Colors.black),
-          ),
-          SizedBox(
-            width: 5.w,
-          ),
-        ],
-      );
+  static Widget label(BuildContext context, String label) => Text(
+    '${label}:',
+    style: Theme.of(context)
+        .textTheme
+        .displayLarge!
+        .copyWith(fontWeight: FontWeight.w700, color: Colors.black),
+  );
   static Widget labelField(
           {required String text,
           required dynamic field,
