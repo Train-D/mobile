@@ -21,6 +21,14 @@ class FromToErrorState extends FromToState {
   FromToErrorState(this.message);
   
 }
+class PostTripsLoadingState extends FromToState {}
+
+class PostTripsSuccessState extends FromToState {}
+class PostTripsErrorState extends FromToState {
+  String message;
+  PostTripsErrorState(this.message);
+  
+}
 
 class ChangeDefualtDateState extends FromToState {}
 
