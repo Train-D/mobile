@@ -18,9 +18,13 @@ import 'package:traind_app/features/stations/domain/usecase/get_all_stations_nam
 import 'package:traind_app/features/stations/domain/usecase/get_station_details_by_name_usecase.dart';
 import 'package:traind_app/features/tickets/data/data%20source/fromto_data_sorce.dart';
 import 'package:traind_app/features/tickets/data/data%20source/fromto_local_data_source.dart';
+import 'package:traind_app/features/tickets/data/data%20source/train_info_remote_data_source.dart';
 import 'package:traind_app/features/tickets/data/repository/fromto_repository.dart';
+import 'package:traind_app/features/tickets/data/repository/train_info_repository.dart';
+import 'package:traind_app/features/tickets/domain/repository/base_train_info_repository.dart';
 import 'package:traind_app/features/tickets/domain/usecase/fromto_usecase.dart.dart';
 import 'package:traind_app/features/tickets/domain/repository/fromto_domain_repository.dart';
+import 'package:traind_app/features/tickets/domain/usecase/train_info_usecase.dart';
 
 import '../../features/authentication/domain/usecase/login_usecase.dart';
 import '../../features/authentication/domain/usecase/register_usecase.dart';
@@ -60,7 +64,7 @@ class ServicesLocator {
     sl.registerLazySingleton(() => GetStationsUseCase(sl()));
 
     //fromto feature
-     sl.registerLazySingleton<FromToLocalDataSource>(
+    sl.registerLazySingleton<FromToLocalDataSource>(
         () => FromToLocalDataSourceImpl());
     sl.registerLazySingleton<BaseFromToDateRemoteDataSource>(
         () => FromToDateRemoteDataSource());
@@ -96,5 +100,12 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseStationDetailsRepository>(
         () => StationDetailsRepository(sl(), sl()));
     sl.registerLazySingleton(() => GetStationDetailsByNameUseCase(sl()));
+
+    // train info
+    sl.registerLazySingleton<TrainInfoRemoteDataSource>(
+        () => TrainInfoRemoteDataSourceImpl(sl()));
+    sl.registerLazySingleton<BaseTrainInfoRepository>(
+        () => TrainInfoRepository(sl()));
+    sl.registerLazySingleton(() => TrainInfoUseCase(sl()));
   }
 }

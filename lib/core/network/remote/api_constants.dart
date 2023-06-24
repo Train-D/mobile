@@ -7,4 +7,5 @@ class ApiConstants {
   static const String profileGetEndPoint = '/Profile/UserData';
   static const String profilePutEndPoint = '/Profile/UpdateProfile';
   static const String getAllStationsNamesEndPoint = '/Stations';
+  static const String trainInfoEndPoint = '/Trips/TrainInfo';
 }
