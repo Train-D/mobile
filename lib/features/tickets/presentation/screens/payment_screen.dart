@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/features/tickets/data/models/trip_info_model.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
@@ -40,7 +41,6 @@ class PaymentScreen extends StatelessWidget {
                     child: SingleChildScrollView(
                       child: Form(
                         child: Column(
-                          
                           children: [
                             Container(
                               height: 22.h,
@@ -70,20 +70,24 @@ class PaymentScreen extends StatelessWidget {
                                         )
                                       ],
                                     ),
-                                    SizedBox(height: 2.5.h,),
+                                    SizedBox(
+                                      height: 2.5.h,
+                                    ),
                                     Align(
                                       alignment: Alignment.centerLeft,
                                       child: Text(
-                                            AppString.cardNumber,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .bodyMedium!
-                                                .copyWith(
-                                                    fontSize: 16.sp,
-                                                    color: cardText),
-                                          ),
+                                        AppString.cardNumber,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyMedium!
+                                            .copyWith(
+                                                fontSize: 16.sp,
+                                                color: cardText),
+                                      ),
                                     ),
-                                    SizedBox(height: 2.h,),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
@@ -262,6 +266,10 @@ class PaymentScreen extends StatelessWidget {
                             SharedComponents.defaultButton(
                                 context: context,
                                 function: () {
+                                  /*cubit.getTrainInfo(const TripInfoModel(
+                                    tripId: "7",
+                                    tripDate: "2023-06-30",
+                                  ));*/
                                   SharedComponents.navigateTo(
                                       const TicketScreen(), context);
                                 },
