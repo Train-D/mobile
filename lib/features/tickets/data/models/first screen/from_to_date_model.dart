@@ -1,4 +1,4 @@
-import 'package:traind_app/features/tickets/domain/entities/from_to_date_entity.dart';
+import 'package:traind_app/features/tickets/domain/entities/first%20screen/from_to_date_entity.dart';
 
 class FromToDateModel extends FromToDateEntity {
   const FromToDateModel(

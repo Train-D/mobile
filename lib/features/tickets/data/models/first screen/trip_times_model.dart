@@ -1,4 +1,4 @@
-import 'package:traind_app/features/tickets/domain/entities/trip_times_entity.dart';
+import 'package:traind_app/features/tickets/domain/entities/first%20screen/trip_times_entity.dart';
 
 // ignore: must_be_immutable
 class TripTimesModel extends TripTimesEntity{

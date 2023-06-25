@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/features/tickets/data/models/trip_info_model.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
-import '../controller/payment_cubit/payment_cubit.dart';
+import '../controller/booking_cubit/booking_cubit.dart';
 import 'ticket_screen.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -15,8 +14,8 @@ class PaymentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<PaymentCubit, PaymentState>(builder: (context, state) {
-      PaymentCubit cubit = PaymentCubit.get(context);
+    return BlocBuilder<BookingCubit, BookingState>(builder: (context, state) {
+      BookingCubit cubit = BookingCubit.get(context);
       return SafeArea(
         child: SharedComponents.linearGradientBg(
             colors: profileBg,
@@ -121,7 +120,7 @@ class PaymentScreen extends StatelessWidget {
                             ),
                             SharedComponents.defaultTextField(
                                 controller: cubit.cardNumber,
-                                type: TextInputType.number,
+                                type: TextInputType.text,
                                 validate: (e) {
                                   return null;
                                 },
@@ -263,15 +262,13 @@ class PaymentScreen extends StatelessWidget {
                             SizedBox(
                               height: 2.h,
                             ),
+                            state is GetPaymentCustomerDataLoadingState? CircularProgressIndicator():
                             SharedComponents.defaultButton(
                                 context: context,
                                 function: () {
-                                  /*cubit.getTrainInfo(const TripInfoModel(
-                                    tripId: "7",
-                                    tripDate: "2023-06-30",
-                                  ));*/
-                                  SharedComponents.navigateTo(
-                                      const TicketScreen(), context);
+                                  cubit.getPaymentCustomerData();
+                                  /*SharedComponents.navigateTo(
+                                      const TicketScreen(), context);*/
                                 },
                                 text: AppString.buyTicket,
                                 radius: 7.sp,
@@ -281,20 +278,6 @@ class PaymentScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  /* SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        SizedBox(height: 5.h,),
-                        Align(
-                          alignment: Alignment.topCenter,
-                          child: SizedBox(width: 80.w,
-                          child: Image.asset('${AppConstants.imagesUrl}$card'),
-                          ),
-                        ),
-                       
-                      ],
-                    ),
-                  ),*/
                 ],
               ),
             )),

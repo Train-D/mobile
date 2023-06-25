@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:traind_app/core/network/remote/api_constants.dart';
-import 'package:traind_app/features/tickets/data/models/stations_model.dart';
-import 'package:traind_app/features/tickets/domain/entities/stations_entity.dart';
+import 'package:traind_app/features/tickets/data/models/first%20screen/stations_model.dart';
+import 'package:traind_app/features/tickets/domain/entities/first%20screen/stations_entity.dart';
 
 import '../../../../core/network/local/cache_helper.dart';
 

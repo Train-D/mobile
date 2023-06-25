@@ -2,8 +2,8 @@
 import 'package:dartz/dartz.dart';
 import 'package:traind_app/core/error/failure.dart';
 import 'package:traind_app/features/tickets/data/data%20source/train_info_remote_data_source.dart';
-import 'package:traind_app/features/tickets/data/models/trip_info_model.dart';
-import 'package:traind_app/features/tickets/domain/entities/train_info_entity.dart';
+import 'package:traind_app/features/tickets/data/models/first%20screen/trip_info_model.dart';
+import 'package:traind_app/features/tickets/domain/entities/second%20screen/train_info_entity.dart';
 import 'package:traind_app/features/tickets/domain/repository/base_train_info_repository.dart';
 
 class TrainInfoRepository extends BaseTrainInfoRepository {

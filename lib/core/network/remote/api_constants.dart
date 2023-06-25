@@ -8,4 +8,6 @@ class ApiConstants {
   static const String profilePutEndPoint = '/Profile/UpdateProfile';
   static const String getAllStationsNamesEndPoint = '/Stations';
   static const String trainInfoEndPoint = '/Trips/TrainInfo';
+  static const String creditCardEndPoint = '/Stripe/customer/add';
+  static const String paymentEndPoint = '/Stripe/Payment/add';
 }

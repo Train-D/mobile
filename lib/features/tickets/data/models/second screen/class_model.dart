@@ -1,4 +1,4 @@
-import '../../domain/entities/class_entity.dart';
+import '../../../domain/entities/second screen/class_entity.dart';
 
 class ClassModel extends ClassEntity {
   const ClassModel({

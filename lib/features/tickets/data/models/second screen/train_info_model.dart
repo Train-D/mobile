@@ -1,5 +1,5 @@
-import 'package:traind_app/features/tickets/data/models/seat_model.dart';
-import 'package:traind_app/features/tickets/domain/entities/train_info_entity.dart';
+import 'package:traind_app/features/tickets/data/models/second%20screen/seat_model.dart';
+import 'package:traind_app/features/tickets/domain/entities/second%20screen/train_info_entity.dart';
 
 import 'class_model.dart';
 

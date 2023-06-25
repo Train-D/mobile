@@ -1,9 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:traind_app/core/network/remote/api_constants.dart';
 import 'package:traind_app/core/services/api_service.dart';
-import 'package:traind_app/features/tickets/data/models/train_info_model.dart';
-import 'package:traind_app/features/tickets/data/models/trip_info_model.dart';
-import 'package:traind_app/features/tickets/domain/entities/train_info_entity.dart';
+import 'package:traind_app/features/tickets/data/models/second%20screen/train_info_model.dart';
+import 'package:traind_app/features/tickets/data/models/first%20screen/trip_info_model.dart';
+import 'package:traind_app/features/tickets/domain/entities/second%20screen/train_info_entity.dart';
 
 abstract class TrainInfoRemoteDataSource {
   Future<TrainInfoEntity> trainInfo(TripInfoModel model);
