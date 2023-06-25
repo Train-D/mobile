@@ -28,9 +28,17 @@ import 'package:traind_app/features/tickets/domain/usecase/train_info_usecase.da
 
 import '../../features/authentication/domain/usecase/login_usecase.dart';
 import '../../features/authentication/domain/usecase/register_usecase.dart';
+import '../../features/tickets/data/data source/credit_card_remote_data_source.dart';
 import '../../features/tickets/data/data source/get_remote_stations_data.dart';
+import '../../features/tickets/data/data source/payment_remote_data_source.dart';
+import '../../features/tickets/data/repository/credit_card_repository.dart';
+import '../../features/tickets/data/repository/payment_repository.dart';
 import '../../features/tickets/data/repository/stations_data_repository.dart';
+import '../../features/tickets/domain/repository/base_credit_card_repository.dart';
+import '../../features/tickets/domain/repository/base_payment_repository.dart';
 import '../../features/tickets/domain/repository/base_stations_repository.dart';
+import '../../features/tickets/domain/usecase/credit_card_usecase.dart';
+import '../../features/tickets/domain/usecase/payment_usecase.dart';
 import '../../features/tickets/domain/usecase/stations_usecase.dart';
 import '../../features/profile/data/data source/profile_local_data_source.dart';
 import '../../features/profile/data/data source/profile_remote_data_source.dart';
@@ -107,5 +115,20 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseTrainInfoRepository>(
         () => TrainInfoRepository(sl()));
     sl.registerLazySingleton(() => TrainInfoUseCase(sl()));
+
+    //credit card data
+    sl.registerLazySingleton<CreditCardRemoteDataSource>(
+        () => CreditCardRemoteDataSourceImpl(sl()));
+    sl.registerLazySingleton<BaseCreditCardRepository>(
+        () => CreditCardRepository(sl()));
+    sl.registerLazySingleton(() => CreditCardUseCase(sl()));
+
+    //payment info
+    sl.registerLazySingleton<PaymentRemoteDataSource>(
+        () => PaymentRemoteDataSourceImpl(sl()));
+    sl.registerLazySingleton<BasePaymentRepository>(
+        () => PaymentRepository(paymentRemoteDataSource: sl()));
+    sl.registerLazySingleton(() => PaymentUseCase(basePaymentRepository: sl()));
   }
+
 }

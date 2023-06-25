@@ -1,5 +1,5 @@
 
-import '../../domain/entities/seat_entity.dart';
+import '../../../domain/entities/second screen/seat_entity.dart';
 
 class SeatModel extends SeatEntity {
   const SeatModel({

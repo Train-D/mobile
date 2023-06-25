@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:traind_app/features/tickets/data/models/trip_info_model.dart';
+import 'package:traind_app/features/tickets/data/models/first%20screen/trip_info_model.dart';
 import 'package:traind_app/features/tickets/domain/usecase/train_info_usecase.dart';
 
 part 'payment_state.dart';

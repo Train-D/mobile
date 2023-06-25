@@ -10,16 +10,17 @@ import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
 import '../components/reusable_component/tickets_components.dart';
-import '../controller/from_to_cubit/from_to_cubit.dart';
 import 'package:intl/intl.dart';
+
+import '../controller/booking_cubit/booking_cubit.dart';
 
 class FromToScreen extends StatelessWidget {
   const FromToScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<FromToCubit, FromToState>(listener: (context, state) {
-      FromToCubit cubit = FromToCubit.get(context);
+    return BlocConsumer<BookingCubit, BookingState>(listener: (context, state) {
+      BookingCubit cubit = BookingCubit.get(context);
       if (state is GetTripsErrorState) {
         SharedComponents.showToast(text: cubit.errorMessage, color: Colors.red);
       } else if (state is GetTripsSuccessState) {
@@ -85,7 +86,7 @@ class FromToScreen extends StatelessWidget {
             ));
       }
     }, builder: (context, state) {
-      FromToCubit cubit = FromToCubit.get(context);
+      BookingCubit cubit = BookingCubit.get(context);
       return SafeArea(
         child: SharedComponents.screenBg(
           imageUrl: '${AppConstants.imagesUrl}$fromTo',
