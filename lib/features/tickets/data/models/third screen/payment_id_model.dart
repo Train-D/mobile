@@ -5,7 +5,7 @@ class PaymentIdModel extends PaymentIdEntity{
   factory PaymentIdModel.fromJson(Map<String, dynamic> json) {
     return PaymentIdModel(
       message: json['message'],
-      customerId: json['customerId']
+      customerId: json['paymentId']
     );
   }
 }
