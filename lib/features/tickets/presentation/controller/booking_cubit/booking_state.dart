@@ -16,9 +16,8 @@ class ChangeDropDownButtonValueState extends BookingState {}
 class FromToStationsLoadingState extends BookingState {}
 class FromToStationsSuccessState extends BookingState {}
 class FromToStationsErrorState extends BookingState {
-  String message;
-  FromToStationsErrorState(this.message);
-  
+  final String message;
+  const FromToStationsErrorState(this.message);
 }
 
 
@@ -26,8 +25,8 @@ class GetTripsLoadingState extends BookingState {}
 class GetTripsSuccessState extends BookingState {}
 
 class GetTripsErrorState extends BookingState {
-  String message;
-  GetTripsErrorState({
+  final String message;
+  const GetTripsErrorState({
     required this.message,
   });
   

@@ -3,6 +3,7 @@ import 'package:traind_app/core/utils/app_strings.dart';
 
 import '../../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../../core/utils/app_constants.dart';
+import '../../../data/models/second screen/seat_model.dart';
 import '../../screens/choose_seats_screen.dart';
 import '../classes/seat_details.dart';
 
@@ -33,7 +34,9 @@ class ChooseSeatsComponents {
 
   static Widget defaultSeat({
     required BuildContext context,
-    required Seat seatDetails,
+    required SeatModel seatDetails,
+    required Function fun,
+    required bool booked,
     double width = 33,
     double height = 44,
     double radius = 10,
@@ -41,19 +44,18 @@ class ChooseSeatsComponents {
   }) =>
       InkWell(
         onTap: () {
-          showChooseSeatsAlertDialog(
-            context: context,
-            seatNumber: seatDetails.seatNumber,
-          );
+          fun();
+          // showChooseSeatsAlertDialog(
+          //   context: context,
+          //   seatNumber: seatDetails.seatNumber.toString(),
+          // );
         },
         child: Container(
           width: width,
           height: height,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(radius),
-            color: seatDetails.isAvailable
-                ? trainAvailableSeatColor
-                : trainUnAvailableSeatColor,
+            color: !booked ? trainAvailableSeatColor : trainUnAvailableSeatColor,
             border: Border.all(
               width: borderWidth,
               color: trainUnAvailableSeatColor,
@@ -61,27 +63,31 @@ class ChooseSeatsComponents {
           ),
           child: Align(
             alignment: Alignment.center,
-            child: Text(seatDetails.seatNumber,
+            child: Text(seatDetails.seatNumber.toString(),
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                      color: seatDetails.isAvailable
-                          ? trainUnAvailableSeatColor
-                          : lightColor,
+                      color: !booked ? trainUnAvailableSeatColor : lightColor,
                       fontSize: 18,
                     )),
           ),
         ),
       );
 
-  static Widget twoSeats({
+   static Widget twoSeats({
     required BuildContext context,
-    required Seat seat1,
-    required Seat seat2,
+    required SeatModel seat1,
+    required Function fun1,
+    required Function fun2,
+    required SeatModel seat2,
+    required bool booked1,
+    required bool booked2,
   }) =>
       Row(
         children: [
           ChooseSeatsComponents.defaultSeat(
             context: context,
             seatDetails: seat1,
+            fun: fun1,
+            booked: booked1, 
           ),
           const SizedBox(
             width: 10,
@@ -89,6 +95,8 @@ class ChooseSeatsComponents {
           ChooseSeatsComponents.defaultSeat(
             context: context,
             seatDetails: seat2,
+            fun: fun2,
+            booked: booked2,
           ),
         ],
       );
@@ -134,7 +142,7 @@ class ChooseSeatsComponents {
         color: lightColor,
       );
 
-  static buttonAndWordRow({
+  /*static buttonAndWordRow({
     required BuildContext context,
     required bool isAvailable,
     required String text,
@@ -165,7 +173,7 @@ class ChooseSeatsComponents {
           ),
         ],
       );
-
+*/
   static trainCarClassText({
     required BuildContext context,
     required String carClass,
@@ -188,7 +196,8 @@ class ChooseSeatsComponents {
   static trainSmallCarWithSelectedContainer({
     required String image,
     required Color showBorder,
-  }) => Container(
+  }) =>
+      Container(
         width: 70,
         height: 130,
         decoration: BoxDecoration(

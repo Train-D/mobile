@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../data/models/second screen/seat_model.dart';
 import '../../components/classes/seat_details.dart';
 import 'choose_seats_state.dart';
 
@@ -9,54 +10,66 @@ class ChooseSeatsCubit extends Cubit<ChooseSeatsState> {
 
   static ChooseSeatsCubit get(context) => BlocProvider.of(context);
 
-  List<Seat> firstCarSeats = [
-    Seat(
-      seatNumber: '01',
-      isAvailable: false,
+  List<SeatModel> firstCarSeats = [
+    const SeatModel(
+      seatNumber: 1,
+      coach: 1,
+      classChar: "A",
     ),
-    Seat(
-      seatNumber: '02',
-      isAvailable: true,
+    const SeatModel(
+      seatNumber: 2,
+      coach: 1,
+      classChar: "A",
     ),
-    Seat(
-      seatNumber: '03',
-      isAvailable: true,
+    const SeatModel(
+      seatNumber: 3,
+      coach: 1,
+      classChar: "A",
     ),
-    Seat(
-      seatNumber: '04',
-      isAvailable: true,
+    const SeatModel(
+      seatNumber: 4,
+      coach: 1,
+      classChar: "A",
     ),
-    Seat(
-      seatNumber: '05',
-      isAvailable: true,
+    const SeatModel(
+      seatNumber: 5,
+      coach: 1,
+      classChar: "A",
     ),
-    Seat(
-      seatNumber: '06',
-      isAvailable: true,
+    const SeatModel(
+      seatNumber: 6,
+      coach: 1,
+      classChar: "A",
     ),
-    Seat(
-      seatNumber: '07',
-      isAvailable: false,
+    const SeatModel(
+      seatNumber: 7,
+      coach: 1,
+      classChar: "A",
     ),
-    Seat(
-      seatNumber: '08',
-      isAvailable: true,
+    const SeatModel(
+      seatNumber: 8,
+      coach: 1,
+      classChar: "A",
     ),
-    Seat(
-      seatNumber: '09',
-      isAvailable: true,
+    const SeatModel(
+      seatNumber: 9,
+      coach: 1,
+      classChar: "A",
     ),
-    Seat(
-      seatNumber: '10',
-      isAvailable: true,
+    const SeatModel(
+      seatNumber: 10,
+      coach: 1,
+      classChar: "A",
     ),
-    Seat(
-      seatNumber: '11',
-      isAvailable: false,
+    const SeatModel(
+      seatNumber: 11,
+     coach: 1,
+      classChar: "A",
     ),
-    Seat(
-      seatNumber: '12',
-      isAvailable: true,
+    const SeatModel(
+      seatNumber: 12,
+      coach: 1,
+      classChar: "A",
     ),
   ];
 
@@ -129,7 +142,7 @@ class ChooseSeatsCubit extends Cubit<ChooseSeatsState> {
 
   void bookSeat(String seatNumber) {
     int idx = int.parse(seatNumber);
-    firstCarSeats[idx - 1].isAvailable = !firstCarSeats[idx - 1].isAvailable;
+    //firstCarSeats[idx - 1].book = !firstCarSeats[idx - 1].isAvailable;
     emit(ChooseSeatsBookSeatSuccessState());
   }
 
