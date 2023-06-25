@@ -3,16 +3,16 @@ import 'package:traind_app/core/error/exceptions.dart';
 import 'package:traind_app/core/network/remote/api_constants.dart';
 import 'package:traind_app/core/network/remote/error_message_model.dart';
 import 'package:traind_app/features/tickets/data/models/from_to_date_model.dart';
-import 'package:traind_app/features/tickets/data/models/schedule_model.dart';
-import 'package:traind_app/features/tickets/domain/entities/schedule_data.dart';
+import 'package:traind_app/features/tickets/data/models/trip_times_model.dart';
+import 'package:traind_app/features/tickets/domain/entities/trip_times_entity.dart';
 
-abstract class BaseFromToDateRemoteDataSource {
-  Future<ScheduleDataEntity> postFromToDateData(FromToDateModel model);
+abstract class BaseTripTimesRemoteDataSource {
+  Future<TripTimesEntity> tripTimesData(FromToDateModel model);
 }
 
-class FromToDateRemoteDataSource extends BaseFromToDateRemoteDataSource {
+class TripTimesRemoteDataSource extends BaseTripTimesRemoteDataSource {
   @override
-  Future<ScheduleDataEntity> postFromToDateData(FromToDateModel model) async {
+  Future<TripTimesEntity> tripTimesData(FromToDateModel model) async {
     final response = await Dio().post(
       ApiConstants.tripTimesPath,
       data: model.tojson(),
@@ -23,8 +23,8 @@ class FromToDateRemoteDataSource extends BaseFromToDateRemoteDataSource {
       ),
     );
     if (response.statusCode == 200) {
-      var temp = ScheduleModel.fromjson(response.data);
-      var scheduleDataEntity = ScheduleDataEntity.toEntity(temp);
+      var temp = TripTimesModel.fromjson(response.data);
+      var scheduleDataEntity = TripTimesEntity.toEntity(temp);
       return scheduleDataEntity;
     }
 

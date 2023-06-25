@@ -11,24 +11,33 @@ class FromToInitial extends FromToState {}
 
 class ChangeDropDownButtonValueState extends FromToState {}
 
-class FromToLoadingState extends FromToState {}
 
-class FromToSuccessState extends FromToState {}
 
-// ignore: must_be_immutable
-class FromToErrorState extends FromToState {
+class FromToStationsLoadingState extends FromToState {}
+class FromToStationsSuccessState extends FromToState {}
+class FromToStationsErrorState extends FromToState {
   String message;
-  FromToErrorState(this.message);
+  FromToStationsErrorState(this.message);
   
 }
-class PostTripsLoadingState extends FromToState {}
 
-class PostTripsSuccessState extends FromToState {}
-class PostTripsErrorState extends FromToState {
+
+class GetTripsLoadingState extends FromToState {}
+class GetTripsSuccessState extends FromToState {}
+
+class GetTripsErrorState extends FromToState {
   String message;
-  PostTripsErrorState(this.message);
+  GetTripsErrorState({
+    required this.message,
+  });
   
 }
+
+class GetTrainInfoLoadingState extends FromToState {}
+class GetTrainInfoSuccessState extends FromToState {}
+class GetTrainInfoFailureState extends FromToState {}
+
+
 
 class ChangeDefualtDateState extends FromToState {}
 

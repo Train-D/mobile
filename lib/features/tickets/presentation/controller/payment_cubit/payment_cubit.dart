@@ -24,19 +24,4 @@ class PaymentCubit extends Cubit<PaymentState> {
     saveCardData = !saveCardData;
     emit(PaymentSaveDataCheckboxChangeState());
   }
-
-  /*final TrainInfoUseCase trainInfoUseCase;
-  var tripInfoModel = {"tripId": "7", "date": "2023-06-30"};
-
-  Future<void> getTrainInfo(TripInfoModel model) async {
-    emit(GetTrainInfoLoadingState());
-    var result = await trainInfoUseCase.call(model);
-    result.fold((failure) {
-      debugPrint(failure.toString());
-      emit(GetTrainInfoFailureState());
-    }, (trainInfoData) {
-      print(trainInfoData);
-      emit(GetTrainInfoSuccessState());
-    });
-  }*/
 }
