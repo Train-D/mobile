@@ -48,7 +48,7 @@ class ChooseSeatsScreen extends StatelessWidget {
                       SizedBox(
                         height: 30.sp,
                       ),
-                      ChooseSeatsComponents.buttonAndWordRow(
+                      /*ChooseSeatsComponents.buttonAndWordRow(
                         context: context,
                         isAvailable: true,
                         text: AppString.available,
@@ -58,6 +58,7 @@ class ChooseSeatsScreen extends StatelessWidget {
                         isAvailable: false,
                         text: AppString.unavailable,
                       ),
+                      */
                       const SizedBox(
                         height: 50,
                       ),

@@ -91,7 +91,7 @@ class BookingCubit extends Cubit<BookingState> {
     }
   }
 
-  //get data of booking second screen
+  //get data of booking train screen
   final TrainInfoUseCase trainInfoUseCase;
 
   Future<void> getTrainInfo(int tripId, String tripDate) async {

@@ -39,11 +39,12 @@ Widget trainSecondCar({
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 15,
                               ),
-                              child: ChooseSeatsComponents.twoSeats(
+                              /*child: ChooseSeatsComponents.twoSeats(
                                 context: context,
                                 seat1: cubit.secondCarSeats[leftIdx],
                                 seat2: cubit.secondCarSeats[leftIdx + 1],
                               ),
+                            */
                             );
                           },
                           separatorBuilder: (context, idx) => const SizedBox(
@@ -67,11 +68,11 @@ Widget trainSecondCar({
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 15,
                               ),
-                              child: ChooseSeatsComponents.twoSeats(
+                              /*child: ChooseSeatsComponents.twoSeats(
                                 context: context,
                                 seat1: cubit.secondCarSeats[rightIdx],
                                 seat2: cubit.secondCarSeats[rightIdx + 1],
-                              ),
+                              ),*/
                             );
                           },
                           separatorBuilder: (context, idx) => const SizedBox(
