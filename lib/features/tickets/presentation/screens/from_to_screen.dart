@@ -20,9 +20,9 @@ class FromToScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<FromToCubit, FromToState>(listener: (context, state) {
       FromToCubit cubit = FromToCubit.get(context);
-      if (state is PostTripsErrorState) {
+      if (state is GetTripsErrorState) {
         SharedComponents.showToast(text: cubit.errorMessage, color: Colors.red);
-      } else if (state is PostTripsSuccessState) {
+      } else if (state is GetTripsSuccessState) {
         // ignore: use_build_context_synchronously
         TicketsComponents.bottomModelSheet(
             context,
@@ -37,13 +37,16 @@ class FromToScreen extends StatelessWidget {
                 ),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: cubit.scheduleModel.scheduleData.length,
+                    itemCount: cubit.tripTimesModel.tripTimes.length,
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
+                          cubit.getTrainInfo(
+                              cubit.tripTimesModel.tripTimes[index]["tripId"],
+                              cubit.fromToDefaultDate);
                           Navigator.pop(context);
                           SharedComponents.navigateTo(
-                              const ChooseSeatsScreen(), context);
+                              ChooseSeatsScreen(), context);
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 30.sp),
@@ -56,8 +59,8 @@ class FromToScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     TicketsComponents.timeText(cubit
-                                        .scheduleModel
-                                        .scheduleData[index]["startTime"]),
+                                        .tripTimesModel
+                                        .tripTimes[index]["startTime"]),
                                     SizedBox(
                                       height: 2.h,
                                       width: 5.w,
@@ -65,8 +68,8 @@ class FromToScreen extends StatelessWidget {
                                           '${AppConstants.imagesUrl}$arrow'),
                                     ),
                                     TicketsComponents.timeText(cubit
-                                        .scheduleModel
-                                        .scheduleData[index]["arrivalTime"])
+                                        .tripTimesModel
+                                        .tripTimes[index]["arrivalTime"])
                                   ],
                                 ),
                               ),
@@ -104,9 +107,9 @@ class FromToScreen extends StatelessWidget {
                     bottomRedius: 17.sp,
                     height: 40.h,
                     width: 80.w,
-                    child: (state is FromToLoadingState
+                    child: (state is FromToStationsLoadingState
                         ? Center(child: CircularProgressIndicator())
-                        : (state is FromToErrorState
+                        : (state is FromToStationsErrorState
                             ? RefreshIndicator(
                                 onRefresh: () async {
                                   cubit.getStationsFromApi();
@@ -293,7 +296,7 @@ class FromToScreen extends StatelessWidget {
                                       SizedBox(
                                         height: 4.h,
                                       ),
-                                      (state is PostTripsLoadingState
+                                      (state is GetTripsLoadingState
                                           ? const CircularProgressIndicator()
                                           : SizedBox(
                                               width: 65.w,
@@ -301,7 +304,8 @@ class FromToScreen extends StatelessWidget {
                                               child: SharedComponents
                                                   .defaultButton(
                                                       function: () async {
-                                                        await cubit.tripTimes();
+                                                        await cubit
+                                                            .getTripTimes();
                                                       },
                                                       text: AppString.search,
                                                       //size: 20.sp,

@@ -2,7 +2,7 @@
 import 'package:equatable/equatable.dart';
 
 class TripInfoEntity extends Equatable {
-  final String tripId;
+  final int tripId;
   final String tripDate;
   const TripInfoEntity({
     required this.tripId,
