@@ -42,6 +42,11 @@ Widget trainFirstCar({
                           context: context,
                           seat1: cubit.firstCarSeats[0],
                           fun1: () {
+                            cubit.seatNumber =
+                                cubit.firstCarSeats[0].seatNumber;
+                            cubit.coach = cubit.firstCarSeats[0].coach;
+                            cubit.classs = cubit.firstCarSeats[0].classChar;
+                            cubit.seatPrice = cubit.classAPrice;
                             showChooseSeatsAlertDialog(
                               context: context,
                               price: cubit.classAPrice,
