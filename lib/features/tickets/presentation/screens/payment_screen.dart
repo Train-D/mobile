@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/utils/app_sizes.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
@@ -14,7 +15,17 @@ class PaymentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<BookingCubit, BookingState>(builder: (context, state) {
+    return BlocConsumer<BookingCubit, BookingState>(listener: (context, state) {
+      BookingCubit cubit = BookingCubit.get(context);
+      if (state is GetPaymentCustomerDataSuccessState) {
+        cubit.getTicketData();
+          SharedComponents.navigateTo(TicketScreen(), context);
+      }
+      if (state is GetPaymentCustomerDataFailureState) {
+        SharedComponents.showToast(
+            text: cubit.thirdScreenErrorMessage, color: Colors.red);
+      }
+    }, builder: (context, state) {
       BookingCubit cubit = BookingCubit.get(context);
       return SafeArea(
         child: SharedComponents.linearGradientBg(
@@ -34,65 +45,50 @@ class PaymentScreen extends StatelessWidget {
                       bgColor: ticketColor,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                        horizontal: 25.sp, vertical: 15.sp),
-                    child: SingleChildScrollView(
-                      child: Form(
-                        child: Column(
-                          children: [
-                            Container(
-                              height: 22.h,
-                              width: 80.w,
-                              decoration: BoxDecoration(
-                                  color: cardColor,
-                                  borderRadius: BorderRadius.circular(15.sp)),
-                              child: Padding(
-                                padding: const EdgeInsets.all(20.0),
-                                child: SingleChildScrollView(
-                                    child: Column(
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Image.asset(
-                                            '${AppConstants.imagesUrl}$masterCard'),
-                                        Text(
-                                          AppString.expiryDate,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                  fontSize: 16.sp,
-                                                  color: cardText),
-                                        )
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 2.5.h,
-                                    ),
-                                    Align(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text(
-                                        AppString.cardNumber,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium!
-                                            .copyWith(
-                                                fontSize: 16.sp,
-                                                color: cardText),
+                  Container(
+                    height: AppSizes.height(context),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: 25.sp, vertical: 15.sp),
+                      child: SingleChildScrollView(
+                        child: Form(
+                          child: Column(
+                            children: [
+                              Container(
+                                height: 22.h,
+                                width: 80.w,
+                                decoration: BoxDecoration(
+                                    color: cardColor,
+                                    borderRadius: BorderRadius.circular(15.sp)),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(20.0),
+                                  child: SingleChildScrollView(
+                                      child: Column(
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Image.asset(
+                                              '${AppConstants.imagesUrl}$masterCard'),
+                                          Text(
+                                            AppString.expiryDate,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .copyWith(
+                                                    fontSize: 16.sp,
+                                                    color: cardText),
+                                          )
+                                        ],
                                       ),
-                                    ),
-                                    SizedBox(
-                                      height: 2.h,
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text(
-                                          AppString.name,
+                                      SizedBox(
+                                        height: 2.5.h,
+                                      ),
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text(
+                                          AppString.cardNumber,
                                           style: Theme.of(context)
                                               .textTheme
                                               .bodyMedium!
@@ -100,180 +96,208 @@ class PaymentScreen extends StatelessWidget {
                                                   fontSize: 16.sp,
                                                   color: cardText),
                                         ),
-                                        Text(
-                                          AppString.debitCard,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(
-                                                  fontSize: 15.sp,
-                                                  color: fromToCardBgColor),
-                                        )
-                                      ],
-                                    ),
-                                  ],
-                                )),
+                                      ),
+                                      SizedBox(
+                                        height: 2.h,
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text(
+                                            AppString.name,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .copyWith(
+                                                    fontSize: 16.sp,
+                                                    color: cardText),
+                                          ),
+                                          Text(
+                                            AppString.debitCard,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyMedium!
+                                                .copyWith(
+                                                    fontSize: 15.sp,
+                                                    color: fromToCardBgColor),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  )),
+                                ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 3.h,
-                            ),
-                            SharedComponents.defaultTextField(
-                                controller: cubit.cardNumber,
-                                type: TextInputType.text,
-                                validate: (e) {
-                                  return null;
-                                },
-                                bgColor: paymentTextFieldColor,
-                                textColor: paymentTextFieldTextColor,
-                                label: AppString.cardNumber,
-                                radius: 15.sp,
-                                suffIconFound: true,
-                                isSuffIconImage: true,
-                                imageSuffIcon: Padding(
-                                  padding: EdgeInsets.only(right: 15.sp),
-                                  child: SizedBox(
-                                    height: 1.h,
-                                    width: 1.w,
-                                    child: Image.asset(
-                                        '${AppConstants.imagesUrl}$masterCard'),
-                                  ),
-                                )),
-                            SizedBox(
-                              height: 2.h,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(
-                                  width: 38.w,
-                                  child: SharedComponents.defaultTextField(
-                                    controller: cubit.expiryYear,
-                                    type: TextInputType.text,
-                                    validate: (e) {
-                                      return null;
-                                    },
-                                    bgColor: paymentTextFieldColor,
-                                    textColor: paymentTextFieldTextColor,
-                                    label: AppString.expiryYear,
-                                    radius: 17.sp,
-                                  ),
-                                ),
-                                //SizedBox(width: 5.w,),
-                                SizedBox(
-                                  width: 38.w,
-                                  child: SharedComponents.defaultTextField(
-                                    controller: cubit.expiryMonth,
-                                    type: TextInputType.text,
-                                    validate: (e) {
-                                      return null;
-                                    },
-                                    bgColor: paymentTextFieldColor,
-                                    textColor: paymentTextFieldTextColor,
-                                    label: AppString.expiryMonth,
-                                    radius: 17.sp,
-                                    suffIconFound: false,
-                                    preIconFound: false,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 2.h,
-                            ),
-                            SharedComponents.defaultTextField(
-                              controller: cubit.cardHolderName,
-                              type: TextInputType.text,
-                              validate: (e) {
-                                return null;
-                              },
-                              bgColor: paymentTextFieldColor,
-                              textColor: paymentTextFieldTextColor,
-                              label: AppString.cardName,
-                              radius: 17.sp,
-                            ),
-                            SizedBox(
-                              height: 2.h,
-                            ),
-                            SharedComponents.defaultTextField(
-                              controller: cubit.email,
-                              type: TextInputType.text,
-                              validate: (e) {
-                                return null;
-                              },
-                              bgColor: paymentTextFieldColor,
-                              textColor: paymentTextFieldTextColor,
-                              label: AppString.yourEmail,
-                              radius: 17.sp,
-                            ),
-                            SizedBox(
-                              height: 2.h,
-                            ),
-                            Row(
-                              children: [
-                                SizedBox(
-                                    width: 30.w,
-                                    child: SharedComponents.defaultTextField(
-                                      controller: cubit.cvvCode,
-                                      type: TextInputType.number,
+                              SizedBox(
+                                height: 3.h,
+                              ),
+                              Column(
+                                children: [
+                                  SharedComponents.defaultTextField(
+                                      controller: cubit.cardNumber,
+                                      type: TextInputType.text,
                                       validate: (e) {
                                         return null;
                                       },
                                       bgColor: paymentTextFieldColor,
                                       textColor: paymentTextFieldTextColor,
-                                      label: AppString.cvv,
-                                      radius: 17.sp,
-                                    )),
-                                SizedBox(
-                                  width: 5.w,
-                                ),
-                                Expanded(
-                                    child: Text(
-                                  AppString.cvvDesc,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displayMedium!
-                                      .copyWith(
-                                          fontSize: 15.sp,
-                                          color: cardTextCvvColor),
-                                  textAlign: TextAlign.center,
-                                ))
-                              ],
-                            ),
-                            SizedBox(
-                              height: 2.h,
-                            ),
-                            Row(
-                              children: [
-                                Checkbox(
-                                    value: cubit.saveCardData,
-                                    onChanged: (e) {
-                                      cubit.changeCheckboxValue();
-                                    }),
-                                Text(
-                                  AppString.savePaymentData,
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .displayMedium!
-                                      .copyWith(fontSize: 15.sp),
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: 2.h,
-                            ),
-                            state is GetPaymentCustomerDataLoadingState? CircularProgressIndicator():
-                            SharedComponents.defaultButton(
-                                context: context,
-                                function: () {
-                                  cubit.getPaymentCustomerData();
-                                  /*SharedComponents.navigateTo(
-                                      const TicketScreen(), context);*/
-                                },
-                                text: AppString.buyTicket,
-                                radius: 7.sp,
-                                width: 35.w)
-                          ],
+                                      label: AppString.cardNumber,
+                                      radius: 15.sp,
+                                      suffIconFound: true,
+                                      isSuffIconImage: true,
+                                      imageSuffIcon: Padding(
+                                        padding: EdgeInsets.only(right: 15.sp),
+                                        child: SizedBox(
+                                          height: 1.h,
+                                          width: 1.w,
+                                          child: Image.asset(
+                                              '${AppConstants.imagesUrl}$masterCard'),
+                                        ),
+                                      )),
+                                  SizedBox(
+                                    height: 2.h,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      SizedBox(
+                                        width: 38.w,
+                                        child:
+                                            SharedComponents.defaultTextField(
+                                          controller: cubit.expiryYear,
+                                          type: TextInputType.text,
+                                          validate: (e) {
+                                            return null;
+                                          },
+                                          bgColor: paymentTextFieldColor,
+                                          textColor: paymentTextFieldTextColor,
+                                          label: AppString.expiryYear,
+                                          radius: 17.sp,
+                                        ),
+                                      ),
+                                      //SizedBox(width: 5.w,),
+                                      SizedBox(
+                                        width: 38.w,
+                                        child:
+                                            SharedComponents.defaultTextField(
+                                          controller: cubit.expiryMonth,
+                                          type: TextInputType.text,
+                                          validate: (e) {
+                                            return null;
+                                          },
+                                          bgColor: paymentTextFieldColor,
+                                          textColor: paymentTextFieldTextColor,
+                                          label: AppString.expiryMonth,
+                                          radius: 17.sp,
+                                          suffIconFound: false,
+                                          preIconFound: false,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 2.h,
+                                  ),
+                                  SharedComponents.defaultTextField(
+                                    controller: cubit.cardHolderName,
+                                    type: TextInputType.text,
+                                    validate: (e) {
+                                      return null;
+                                    },
+                                    bgColor: paymentTextFieldColor,
+                                    textColor: paymentTextFieldTextColor,
+                                    label: AppString.cardName,
+                                    radius: 17.sp,
+                                  ),
+                                  SizedBox(
+                                    height: 2.h,
+                                  ),
+                                  SharedComponents.defaultTextField(
+                                    controller: cubit.email,
+                                    type: TextInputType.text,
+                                    validate: (e) {
+                                      return null;
+                                    },
+                                    bgColor: paymentTextFieldColor,
+                                    textColor: paymentTextFieldTextColor,
+                                    label: AppString.yourEmail,
+                                    radius: 17.sp,
+                                  ),
+                                  SizedBox(
+                                    height: 2.h,
+                                  ),
+                                  Row(
+                                    children: [
+                                      SizedBox(
+                                          width: 30.w,
+                                          child:
+                                              SharedComponents.defaultTextField(
+                                            controller: cubit.cvvCode,
+                                            type: TextInputType.number,
+                                            validate: (e) {
+                                              return null;
+                                            },
+                                            bgColor: paymentTextFieldColor,
+                                            textColor:
+                                                paymentTextFieldTextColor,
+                                            label: AppString.cvv,
+                                            radius: 17.sp,
+                                          )),
+                                      SizedBox(
+                                        width: 5.w,
+                                      ),
+                                      Expanded(
+                                          child: Text(
+                                        AppString.cvvDesc,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayMedium!
+                                            .copyWith(
+                                                fontSize: 15.sp,
+                                                color: cardTextCvvColor),
+                                        textAlign: TextAlign.center,
+                                      ))
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 2.h,
+                                  ),
+                                  /*Row(
+                                    children: [
+                                      Checkbox(
+                                          value: cubit.saveCardData,
+                                          onChanged: (e) {
+                                            cubit.changeCheckboxValue();
+                                          }),
+                                      Text(
+                                        AppString.savePaymentData,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayMedium!
+                                            .copyWith(fontSize: 15.sp),
+                                      )
+                                    ],
+                                  ),*/
+                                  SizedBox(
+                                    height: 4.h,
+                                  ),
+                                  state is GetPaymentCustomerDataLoadingState
+                                      ? CircularProgressIndicator()
+                                      : SharedComponents.defaultButton(
+                                          context: context,
+                                          function: () {
+                                            cubit.getPaymentCustomerData();
+                                            /*SharedComponents.navigateTo(
+                                        const TicketScreen(), context);*/
+                                          },
+                                          text: AppString.buyTicket,
+                                          radius: 7.sp,
+                                          width: 35.w)
+                                ],
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     ),

@@ -211,7 +211,8 @@ class SharedComponents {
 
   static defaultAppBar(
           {required BuildContext context,
-          bool chooseSeatsScreenAppBar = false}) =>
+          bool chooseSeatsScreenAppBar = false,
+          }) =>
       AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -232,6 +233,7 @@ class SharedComponents {
               ),
               child: IconButton(
                   onPressed: () {
+                   
                     Navigator.pop(context);
                   },
                   icon: const Icon(

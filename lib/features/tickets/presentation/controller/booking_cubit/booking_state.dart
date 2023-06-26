@@ -10,7 +10,7 @@ abstract class BookingState extends Equatable {
 class FromToInitial extends BookingState {}
 
 class ChangeDropDownButtonValueState extends BookingState {}
-
+class CleanCubitDataState extends BookingState {}
 
 
 class FromToStationsLoadingState extends BookingState {}
@@ -48,7 +48,9 @@ class GetPaymentCustomerDataLoadingState extends BookingState {}
 class GetPaymentCustomerDataSuccessState extends BookingState {}
 class GetPaymentCustomerDataFailureState extends BookingState {}
 
-
+class GetTicketDataLoadingState extends BookingState {}
+class GetTicketDataSuccessState extends BookingState {}
+class GetTicketDataFailureState extends BookingState {}
 
 class ChangeDefualtDateState extends BookingState {}
 

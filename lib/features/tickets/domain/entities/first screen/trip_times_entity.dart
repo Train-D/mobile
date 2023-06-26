@@ -3,7 +3,7 @@ import 'package:traind_app/features/tickets/data/models/first%20screen/trip_time
 
 // ignore: must_be_immutable
 class TripTimesEntity extends Equatable {
-  List<dynamic> tripTimes;
+  final List<dynamic> tripTimes;
   TripTimesEntity({
     required this.tripTimes,
   });
