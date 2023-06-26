@@ -16,12 +16,16 @@ import 'package:traind_app/features/stations/domain/repository/base_all_stations
 import 'package:traind_app/features/stations/domain/repository/base_station_details_repository.dart';
 import 'package:traind_app/features/stations/domain/usecase/get_all_stations_names_usecase.dart';
 import 'package:traind_app/features/stations/domain/usecase/get_station_details_by_name_usecase.dart';
+import 'package:traind_app/features/tickets/data/data%20source/booking_ticket_remote_data_source.dart';
 import 'package:traind_app/features/tickets/data/data%20source/trip_times_remote_data_source.dart';
 import 'package:traind_app/features/tickets/data/data%20source/fromto_local_data_source.dart';
 import 'package:traind_app/features/tickets/data/data%20source/train_info_remote_data_source.dart';
+import 'package:traind_app/features/tickets/data/repository/booking_ticket_repository.dart';
 import 'package:traind_app/features/tickets/data/repository/trip_times_repository.dart';
 import 'package:traind_app/features/tickets/data/repository/train_info_repository.dart';
+import 'package:traind_app/features/tickets/domain/repository/base_booking_ticket_repository.dart';
 import 'package:traind_app/features/tickets/domain/repository/base_train_info_repository.dart';
+import 'package:traind_app/features/tickets/domain/usecase/booking_ticket_usecase.dart';
 import 'package:traind_app/features/tickets/domain/usecase/trip_times_usecase.dart.dart';
 import 'package:traind_app/features/tickets/domain/repository/base_trip_times_repository.dart';
 import 'package:traind_app/features/tickets/domain/usecase/train_info_usecase.dart';
@@ -129,6 +133,15 @@ class ServicesLocator {
     sl.registerLazySingleton<BasePaymentRepository>(
         () => PaymentRepository(paymentRemoteDataSource: sl()));
     sl.registerLazySingleton(() => PaymentUseCase(basePaymentRepository: sl()));
+
+    //booking ticket info
+    sl.registerLazySingleton<BookingTicketRemoteDataSource>(
+        () => BookingTicketRemoteDataSourceImpl(apiService: sl()));
+    sl.registerLazySingleton<BaseBookingTicketRepository>(
+        () => BookingTicketRepository(bookingTicketRemoteDataSource: sl()));
+    sl.registerLazySingleton(() => BookingTicketUsecase(sl()));
   }
+  
+  
 
 }

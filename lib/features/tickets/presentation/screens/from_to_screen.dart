@@ -22,7 +22,7 @@ class FromToScreen extends StatelessWidget {
     return BlocConsumer<BookingCubit, BookingState>(listener: (context, state) {
       BookingCubit cubit = BookingCubit.get(context);
       if (state is GetTripsErrorState) {
-        SharedComponents.showToast(text: cubit.errorMessage, color: Colors.red);
+        SharedComponents.showToast(text: cubit.firstScreenErrorMessage, color: Colors.red);
       } else if (state is GetTripsSuccessState) {
         // ignore: use_build_context_synchronously
         TicketsComponents.bottomModelSheet(
@@ -92,8 +92,9 @@ class FromToScreen extends StatelessWidget {
           imageUrl: '${AppConstants.imagesUrl}$fromTo',
           context: context,
           child: Scaffold(
-            appBar: SharedComponents.defaultAppBar(context: context),
+            appBar: SharedComponents.defaultAppBar(context: context,),
             backgroundColor: fromToBgColor,
+            
             body: SingleChildScrollView(
               child: Column(
                 children: [

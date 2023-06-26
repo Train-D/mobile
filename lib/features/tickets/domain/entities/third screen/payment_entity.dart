@@ -5,7 +5,7 @@ class PaymentEntity extends Equatable {
   String email;
   String description;
   String currency;
-  var amount;
+  int amount;
   PaymentEntity({
     required this.customerId,
     required this.email,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:screenshot/screenshot.dart';
+import 'package:traind_app/features/tickets/presentation/controller/booking_cubit/booking_cubit.dart';
 import '../../../layout/presentation/screens/home_screen.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -10,77 +11,78 @@ import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/components.dart';
 import '../components/reusable_component/tickets_components.dart';
 import '../../../../core/utils/app_strings.dart';
-import '../controller/ticket_cubit/cubit/ticket_cubit.dart';
-import '../controller/ticket_cubit/cubit/ticket_state.dart';
 
 class TicketScreen extends StatelessWidget {
   const TicketScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SharedComponents.linearGradientBg(
-        colors: profileBg,
-        child: BlocConsumer<TicketCubit, TicketState>(
-          builder: (context, state) {
-            var cubit = TicketCubit.get(context);
-            return Screenshot(
+    return SafeArea(child:
+        BlocBuilder<BookingCubit, BookingState>(builder: (context, state) {
+      BookingCubit cubit = BookingCubit.get(context);
+      Widget ticketData = buildTicket(
+          context: context,
+          startTime: cubit.ticketInfoModel.startTime,
+          endTime: cubit.ticketInfoModel.endTime,
+          idNumber: cubit.ticketInfoModel.ticketId.toString(),
+          name: cubit.ticketInfoModel.passengerName,
+          date: cubit.ticketInfoModel.date,
+          price: cubit.ticketInfoModel.price,
+          classs: cubit.ticketInfoModel.className,
+          seatNumber: cubit.ticketInfoModel.seatNumber,
+          coachNumber: cubit.ticketInfoModel.coachNumber,
+          time: cubit.ticketInfoModel.duration,
+          from: cubit.ticketInfoModel.from,
+          to: cubit.ticketInfoModel.to);
+      return SharedComponents.linearGradientBg(
+          colors: profileBg,
+          child: Screenshot(
               controller: cubit.screenshotCon,
               child: Scaffold(
                 backgroundColor: transparent,
-                appBar: SharedComponents.defaultAppBar(context: context),
-                body: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 25,
-                        ),
-                        child: Center(
-                          child: buildTicket(
-                            context: context,
+                //appBar: SharedComponents.defaultAppBar(context: context),
+                body: state is GetTicketDataLoadingState
+                    ? Center(child: CircularProgressIndicator())
+                    : SingleChildScrollView(
+                        child: Column(children: [
+                          SizedBox(
+                            height: 2.h,
                           ),
-                        ),
+                          Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 25,
+                              ),
+                              child: Center(
+                                child: ticketData,
+                              ),
+                              ),
+                          SizedBox(
+                            height: 2.h,
+                          ),
+                          SharedComponents.defaultButton(
+                            context: context,
+                            function: () async {
+                              //final ticket = await cubit.screenshotCon.capture();
+                              final ticket = await cubit.screenshotCon
+                                  .captureFromWidget(ticketData);
+                              await cubit.saveImage(ticket);
+                              cubit.showDialog = true;
+                              //print({'resulltttttt $res'});
+                              // ignore: use_build_context_synchronously
+                              showTicketAlertDialog(context: context);
+                            },
+                            text: AppString.download,
+                            width: AppSizes.width(context) / 2.5,
+                            height: AppSizes.height(context) / 14,
+                            radius: AppSizes.defaultBottomRadius,
+                            withIcon: true,
+                            icon: Icons.arrow_downward_outlined,
+                            iconSize: 18.sp,
+                          ),
+                        ]),
                       ),
-                      SizedBox(
-                        height: 2.h,
-                      ),
-                      SharedComponents.defaultButton(
-                        context: context,
-                        function: () async {
-                          //final ticket = await cubit.screenshotCon.capture();
-                          final ticket =
-                              await cubit.screenshotCon.captureFromWidget(
-                            buildTicket(context: context),
-                          );
-                          await cubit.saveImage(ticket);
-                          cubit.showDialog = true;
-                          //print({'resulltttttt $res'});
-                          // ignore: use_build_context_synchronously
-                          showTicketAlertDialog(context: context);
-                        },
-                        text: AppString.download,
-                        width: AppSizes.width(context) / 2.5,
-                        height: AppSizes.height(context) / 14,
-                        radius: AppSizes.defaultBottomRadius,
-                        withIcon: true,
-                        icon: Icons.arrow_downward_outlined,
-                        iconSize: 18.sp,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            );
-          
-          },
-          listener: (context, state) {},
-        ),
-      ),
-    );
+              )));
+    }));
   }
 }
 
@@ -144,9 +146,20 @@ Widget cutsAndDivider() => Row(
       ],
     );
 
-Widget buildTicket({
-  required BuildContext context,
-}) =>
+Widget buildTicket(
+        {required BuildContext context,
+        required String startTime,
+        required String endTime,
+        required String idNumber,
+        required String name,
+        required String date,
+        required double price,
+        required String classs,
+        required int seatNumber,
+        required int coachNumber,
+        required String time,
+        required String from,
+        required String to}) =>
     Container(
       width: 328,
       height: 610,
@@ -165,7 +178,7 @@ Widget buildTicket({
           ),
           trainStack(
             context: context,
-            time: '2h 20m',
+            time: time,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -177,13 +190,13 @@ Widget buildTicket({
               children: [
                 TicketsComponents.twoText(
                   context: context,
-                  title: AppString.from,
-                  label: '08:30 am',
+                  title: from,
+                  label: startTime,
                 ),
                 TicketsComponents.twoText(
                   context: context,
-                  title: AppString.to,
-                  label: '10:50 am',
+                  title: to,
+                  label: endTime,
                 ),
               ],
             ),
@@ -193,7 +206,7 @@ Widget buildTicket({
           ),
           TicketsComponents.idNumberContainer(
             context: context,
-            idNumber: 'ID Number',
+            idNumber: idNumber,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(
@@ -206,12 +219,12 @@ Widget buildTicket({
                 TicketsComponents.twoText(
                   context: context,
                   title: AppString.passenger,
-                  label: 'Dina Gamal',
+                  label: name,
                 ),
                 TicketsComponents.twoText(
                   context: context,
                   title: AppString.date,
-                  label: '13/10/2023',
+                  label: date,
                 ),
               ],
             ),
@@ -219,7 +232,7 @@ Widget buildTicket({
           TicketsComponents.twoText(
             context: context,
             title: AppString.seat,
-            label: 'A2-2',
+            label: '$classs$coachNumber-$seatNumber',
           ),
           cutsAndDivider(),
           Row(
@@ -228,7 +241,7 @@ Widget buildTicket({
                 padding: const EdgeInsets.all(40),
                 child: TicketsComponents.priceRow(
                   context: context,
-                  price: 34.5,
+                  price: price,
                 ),
               ),
             ],

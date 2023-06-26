@@ -10,4 +10,5 @@ class ApiConstants {
   static const String trainInfoEndPoint = '/Trips/TrainInfo';
   static const String creditCardEndPoint = '/Stripe/customer/add';
   static const String paymentEndPoint = '/Stripe/Payment/add';
+  static const String bookingTicketEndPoint = '/Ticket/Book';
 }

@@ -5,8 +5,9 @@ class AppSizes {
   static double height(BuildContext context) {
     double statusBarHeight = MediaQuery.of(context).padding.top;
     double appBarHeight = AppBar().preferredSize.height;
+    double keyBoardHeight = MediaQuery.viewInsetsOf(context).bottom;
     double h =
-        MediaQuery.of(context).size.height - statusBarHeight - appBarHeight;
+        MediaQuery.of(context).size.height - statusBarHeight - appBarHeight - keyBoardHeight;
     return h;
   }
 
