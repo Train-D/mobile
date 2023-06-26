@@ -36,6 +36,13 @@ class GetTrainInfoLoadingState extends BookingState {}
 class GetTrainInfoSuccessState extends BookingState {}
 class GetTrainInfoFailureState extends BookingState {}
 
+class ChooseSeatsBookSeatLoadingState extends BookingState {}
+class ChooseSeatsBookSeatSuccessState extends BookingState {}
+class ChooseSeatsBookSeatErrorState extends BookingState {}
+
+class ChangeVisiableState extends BookingState {}
+class ChangeScrollControllerState extends BookingState {}
+
 
 class GetPaymentCustomerDataLoadingState extends BookingState {}
 class GetPaymentCustomerDataSuccessState extends BookingState {}

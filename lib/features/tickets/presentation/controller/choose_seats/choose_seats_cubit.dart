@@ -140,27 +140,5 @@ class ChooseSeatsCubit extends Cubit<ChooseSeatsState> {
     ),
   ];
 
-  void bookSeat(String seatNumber) {
-    int idx = int.parse(seatNumber);
-    //firstCarSeats[idx - 1].book = !firstCarSeats[idx - 1].isAvailable;
-    emit(ChooseSeatsBookSeatSuccessState());
-  }
-
-  bool visibleSelectedCarContainer = false;
-
-  void changeVisibleSelectedCarContainer(int carNumber) {
-    visibleSelectedCarContainer = !visibleSelectedCarContainer;
-
-    emit(ChangeVisiableState());
-  }
-
-  ScrollController sc = ScrollController();
-  int firstIdx = 0;
-
-  void initScrollCon() {
-    sc.addListener(() {
-      firstIdx = sc.offset ~/ 480;
-      emit(ChangeScrollControllerState());
-    });
-  }
+  
 }

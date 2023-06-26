@@ -11,6 +11,8 @@ import 'package:traind_app/features/tickets/domain/usecase/payment_usecase.dart'
 import 'package:traind_app/features/tickets/domain/usecase/trip_times_usecase.dart.dart';
 
 import '../../../data/models/first screen/stations_model.dart';
+import '../../../data/models/second screen/seat_model.dart';
+import '../../../domain/entities/second screen/train_info_entity.dart';
 import '../../../domain/usecase/credit_card_usecase.dart';
 import '../../../domain/usecase/stations_usecase.dart';
 import '../../../data/models/first screen/trip_times_model.dart';
@@ -92,7 +94,99 @@ class BookingCubit extends Cubit<BookingState> {
   }
 
   //get data of booking train screen
+
+  List<SeatModel> firstCarSeats = [
+    const SeatModel(
+      seatNumber: 1,
+      coach: 1,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 2,
+      coach: 1,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 3,
+      coach: 1,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 4,
+      coach: 1,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 5,
+      coach: 1,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 6,
+      coach: 1,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 7,
+      coach: 1,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 8,
+      coach: 1,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 9,
+      coach: 1,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 10,
+      coach: 1,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 11,
+      coach: 1,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 12,
+      coach: 1,
+      classChar: "A",
+    ),
+  ];
+
+  void bookSeat(String seatNumber) {
+    int idx = int.parse(seatNumber);
+    //firstCarSeats[idx - 1].book = !firstCarSeats[idx - 1].isAvailable;
+    emit(ChooseSeatsBookSeatSuccessState());
+  }
+
+  bool visibleSelectedCarContainer = false;
+
+  void changeVisibleSelectedCarContainer(int carNumber) {
+    visibleSelectedCarContainer = !visibleSelectedCarContainer;
+
+    emit(ChangeVisiableState());
+  }
+
+  ScrollController sc = ScrollController();
+  int firstIdx = 0;
+
+  void initScrollCon() {
+    sc.addListener(() {
+      firstIdx = sc.offset ~/ 480;
+      emit(ChangeScrollControllerState());
+    });
+  }
+
   final TrainInfoUseCase trainInfoUseCase;
+  late TrainInfoEntity trainInfoEntity;
+  late double classAPrice;
+  late double classBPrice;
+  late double classCPrice;
 
   Future<void> getTrainInfo(int tripId, String tripDate) async {
     emit(GetTrainInfoLoadingState());
@@ -102,9 +196,27 @@ class BookingCubit extends Cubit<BookingState> {
       debugPrint(failure.toString());
       emit(GetTrainInfoFailureState());
     }, (trainInfoData) {
-      print(trainInfoData);
+      trainInfoEntity = trainInfoData;
+      classAPrice = trainInfoData.classes[0].classPrice;
+      classBPrice = trainInfoData.classes[1].classPrice;
+      classCPrice = trainInfoData.classes[2].classPrice;
+      print('${classAPrice}  ${classBPrice}  ${classCPrice}');
+      print(trainInfoEntity);
+
       emit(GetTrainInfoSuccessState());
     });
+  }
+
+  bool isBooked = false;
+  bool isSeatBooked(SeatModel model) {
+    for (int i = 0; i < trainInfoEntity.seats.length; i++) {
+      if (trainInfoEntity.seats[i].coach == model.coach &&
+          trainInfoEntity.seats[i].classChar == model.classChar &&
+          trainInfoEntity.seats[i].seatNumber == model.seatNumber) {
+        return true;
+      }
+    }
+    return false;
   }
 
   //get data of booking third screen
