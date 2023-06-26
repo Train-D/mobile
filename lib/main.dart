@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginCubit(sl()),
         ),
         BlocProvider(
-          create: (context) => BookingCubit(sl(), sl(), sl(), sl(), sl()),
+          create: (context) => BookingCubit(sl(), sl(), sl(), sl(), sl())..initScrollCon(),
         ),
         BlocProvider(
           create: (context) => RegisterCubit(sl()),
@@ -85,9 +85,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => TicketCubit(),
         ),
-        BlocProvider(
-          create: (context) => ChooseSeatsCubit()..initScrollCon(),
-        ),
+        // BlocProvider(
+        //   create: (context) => ChooseSeatsCubit()..initScrollCon(),
+        // ),
         BlocProvider(
           create: (context) => AllStationsCubit(sl(), sl())..getAllStationsNames(),
         )

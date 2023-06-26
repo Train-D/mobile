@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:traind_app/features/tickets/presentation/controller/booking_cubit/booking_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_state.dart';
 import 'package:traind_app/features/tickets/presentation/screens/payment_screen.dart';
@@ -13,12 +14,13 @@ import '../../components/reusable_component/tickets_components.dart';
 
 Widget chooseSeatsAlertDialogContent({
   required BuildContext context,
-  required String seatNumber,
+  required double price,
+  required bool isBooked,
 }) =>
-    BlocConsumer<ChooseSeatsCubit, ChooseSeatsState>(
+    BlocConsumer<BookingCubit, BookingState>(
       listener: (context, state) {},
       builder: (context, state) {
-        ChooseSeatsCubit cubit = ChooseSeatsCubit.get(context);
+        BookingCubit cubit = BookingCubit.get(context);
         return Padding(
           padding: const EdgeInsetsDirectional.only(
             top: 60,
@@ -28,9 +30,17 @@ Widget chooseSeatsAlertDialogContent({
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  TicketsComponents.priceRow(
-                    context: context,
-                    price: 24.5,
+                  !isBooked ? 
+                    TicketsComponents.priceRow(
+                      context: context,
+                      price: price,
+                    ):
+                  Text(
+                    "Already Booked",
+                    style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                   ),
                 ],
               ),
@@ -52,20 +62,21 @@ Widget chooseSeatsAlertDialogContent({
                     bgColor: chooseSeatsCancelButtonBg,
                     cancel: true,
                   ),
-                  SharedComponents.defaultButton(
-                    context: context,
-                    function: () {
-                      cubit.bookSeat(seatNumber);
-                      SharedComponents.navigateTo(
-                        const PaymentScreen(),
-                        context,
-                      );
-                    },
-                    text: AppString.book,
-                    width: 100,
-                    radius: AppSizes.defaultBottomRadius,
-                    textSize: 16,
-                  ),
+                  if(!isBooked)
+                    SharedComponents.defaultButton(
+                      context: context,
+                      function: () {
+                        //cubit.bookSeat(seatNumber);
+                        SharedComponents.navigateTo(
+                          const PaymentScreen(),
+                          context,
+                        );
+                      },
+                      text: AppString.book,
+                      width: 100,
+                      radius: AppSizes.defaultBottomRadius,
+                      textSize: 16,
+                    ),
                 ],
               ),
             ],
