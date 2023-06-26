@@ -62,6 +62,10 @@ class BookingCubit extends Cubit<BookingState> {
   late dynamic paymentID;
 
   //fourth screen data
+  var seatNumber;
+  var coach;
+  var classs;
+  var seatPrice;
   final screenshotCon = ScreenshotController();
   Future<String> saveImage(Uint8List bytes) async {
     await [Permission.storage].request();
@@ -256,7 +260,6 @@ class BookingCubit extends Cubit<BookingState> {
     });
   }
 
-  bool isBooked = false;
   bool isSeatBooked(SeatModel model) {
     for (int i = 0; i < trainInfoEntity.seats.length; i++) {
       if (trainInfoEntity.seats[i].coach == model.coach &&
@@ -294,7 +297,7 @@ class BookingCubit extends Cubit<BookingState> {
           email: paymentCustomerData.email,
           description: "Test",
           currency: "USD",
-          amount: 100));
+          amount: seatPrice.toInt()));
       data.fold((failure) {
         debugPrint(failure.toString());
         emit(GetPaymentCustomerDataFailureState());
@@ -326,10 +329,10 @@ class BookingCubit extends Cubit<BookingState> {
     var result = await bookingTicketUsecase.call(BookingTicketModel(
         tripId: tripID,
         date: fromToDefaultDate,
-        seatNumber: 2,
-        coach: 2,
-        classs: 'A',
-        amount: 32.0000,
+        seatNumber: seatNumber,
+        coach: coach,
+        classs: classs,
+        amount: seatPrice,
         paymentId: paymentID));
     result.fold((failure) {
       debugPrint(failure.toString());
