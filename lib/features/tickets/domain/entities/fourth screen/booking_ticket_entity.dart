@@ -8,7 +8,7 @@ class BookingTicketEntity extends Equatable {
   final String classs;
   final double amount;
   final String paymentId;
-  BookingTicketEntity({
+  const BookingTicketEntity({
     required this.tripId,
     required this.date,
     required this.seatNumber,
@@ -18,6 +18,5 @@ class BookingTicketEntity extends Equatable {
     required this.paymentId,
   });
   @override
-  // TODO: implement props
   List<Object?> get props => [tripId, date, seatNumber, coach, classs, amount, paymentId];
 }

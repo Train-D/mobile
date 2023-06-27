@@ -10,4 +10,3 @@ class ChangeVisiableState extends ChooseSeatsState {}
 class ChangeScrollControllerState extends ChooseSeatsState {}
 
 
-

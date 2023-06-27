@@ -1,10 +1,11 @@
-import 'package:traind_app/core/error/exceptions.dart';
-import 'package:traind_app/features/authentication/data/data%20source/register_remote_data_source.dart';
-import 'package:traind_app/features/authentication/data/models/register_request_model.dart';
-import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
-import 'package:traind_app/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:traind_app/features/authentication/domain/repository/register_domain_repository.dart';
+
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/error/failure.dart';
+import '../../domain/entities/response_entity.dart';
+import '../../domain/repository/register_domain_repository.dart';
+import '../data%20source/register_remote_data_source.dart';
+import '../models/register_request_model.dart';
 
 class RegisterRepository extends BaseRegisterRepository {
   final BaseRegisterRemoteDataSource baseRegisterDataSource;

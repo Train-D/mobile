@@ -1,5 +1,6 @@
-import 'package:traind_app/features/tickets/domain/entities/third%20screen/payment_entity.dart';
+import '../../../domain/entities/third%20screen/payment_entity.dart';
 
+// ignore: must_be_immutable
 class PaymentModel extends PaymentEntity {
   PaymentModel(
       {required super.customerId,

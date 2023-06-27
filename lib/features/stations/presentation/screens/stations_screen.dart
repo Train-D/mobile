@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/features/stations/presentation/controller/all_stations_cubit/all_stations_cubit.dart';
+import '../controller/all_stations_cubit/all_stations_cubit.dart';
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -70,6 +70,7 @@ class StationsScreen extends StatelessWidget {
                                     child: CircularProgressIndicator(),
                                   )
                                 : SingleChildScrollView(
+                                   physics: const BouncingScrollPhysics(),
                                     child: Padding(
                                       padding: EdgeInsets.symmetric(
                                         horizontal: 25.sp,
@@ -80,6 +81,7 @@ class StationsScreen extends StatelessWidget {
                                             CrossAxisAlignment.start,
                                         children: [
                                           ListView.separated(
+                                            physics: const BouncingScrollPhysics(),
                                             shrinkWrap: true,
                                             itemBuilder: (context, index) =>
                                                 Column(

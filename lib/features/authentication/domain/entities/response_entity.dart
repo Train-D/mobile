@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:traind_app/features/authentication/data/models/auth_response_model.dart';
+import '../../data/models/auth_response_model.dart';
 
 class ResponseEntity extends Equatable {
   final String token;

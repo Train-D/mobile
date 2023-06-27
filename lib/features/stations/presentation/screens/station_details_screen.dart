@@ -10,6 +10,7 @@ import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/components.dart';
 
+// ignore: must_be_immutable
 class StationDetailsScreen extends StatelessWidget {
   String stationName;
   StationDetailsScreen({

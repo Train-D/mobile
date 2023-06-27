@@ -1,5 +1,6 @@
-import 'package:traind_app/features/tickets/domain/entities/third%20screen/credit_card_entity.dart';
+import '../../../domain/entities/third%20screen/credit_card_entity.dart';
 
+// ignore: must_be_immutable
 class CreditCardModel extends CreditCardEntity {
   CreditCardModel(
       {required super.email, required super.name, required super.creditCard});

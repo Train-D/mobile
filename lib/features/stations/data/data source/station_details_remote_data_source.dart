@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:traind_app/core/network/local/cache_helper.dart';
-import 'package:traind_app/core/services/api_service.dart';
-import 'package:traind_app/features/stations/data/models/sation_details_model.dart';
+import '../../../../core/network/local/cache_helper.dart';
+import '../../../../core/services/api_service.dart';
+import '../models/sation_details_model.dart';
 
 import '../../domain/entities/station_details_entity.dart';
 

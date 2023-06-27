@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:traind_app/features/tickets/data/models/first%20screen/stations_model.dart';
+import '../../../data/models/first%20screen/stations_model.dart';
 class StationsEntity extends Equatable {
   final Map<String, dynamic> stations;
   const StationsEntity({

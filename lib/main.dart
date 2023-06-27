@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_types_as_parameter_names, non_constant_identifier_names
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-
 import 'package:traind_app/core/global/theme/theme_data/theme_data_light.dart';
 import 'package:traind_app/core/network/local/cache_helper.dart';
 import 'package:traind_app/core/services/services_locator.dart';
@@ -12,6 +12,7 @@ import 'package:traind_app/features/app/presentation/screens/splash_screen.dart'
 import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
 import 'package:traind_app/features/stations/presentation/controller/all_stations_cubit/all_stations_cubit.dart';
+import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/payment_cubit/payment_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/ticket_cubit/cubit/ticket_cubit.dart';
 
@@ -20,9 +21,7 @@ import 'features/authentication/presentation/controller/login_cubit/login_cubit.
 import 'features/authentication/presentation/controller/register_cubit/register_cubit.dart';
 import 'features/profile/presentation/controller/profile_cubit/profile_cubit.dart';
 import 'features/tickets/presentation/controller/booking_cubit/booking_cubit.dart';
-import 'features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
 import 'features/track/presentation/controller/tracking_cubit/tracking_cubit.dart';
-import 'package:flutter_phoenix/flutter_phoenix.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -63,11 +62,14 @@ class MyApp extends StatelessWidget {
           create: (context) => LoginCubit(sl()),
         ),
         BlocProvider(
-          create: (context) => BookingCubit(sl(), sl(), sl(), sl(), sl(), sl())..initScrollCon(),
+          create: (context) => BookingCubit(sl(), sl(), sl(), sl(), sl(), sl()),
         ),
         BlocProvider(
           create: (context) => RegisterCubit(sl()),
         ),
+        //   BlocProvider(
+        //   create: (context) => ChooseSeatsCubit()..initScrollCon(),
+        // ),
         BlocProvider(
           create: (context) => ProfileCubit(sl(), sl())..getProfileUserData(),
         ),

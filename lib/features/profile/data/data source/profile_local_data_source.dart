@@ -1,5 +1,6 @@
 import 'dart:convert';
-import 'package:traind_app/core/network/local/cache_helper.dart';
+
+import '../../../../core/network/local/cache_helper.dart';
 import '../../domain/entities/profile_user_data_entity.dart';
 import '../models/profile_user_data_model.dart';
 

@@ -1,7 +1,7 @@
-import 'package:traind_app/features/tickets/domain/entities/fourth%20screen/ticket_info_entity.dart';
+import '../../../domain/entities/fourth%20screen/ticket_info_entity.dart';
 
 class TicketInfoModel extends TicketInfoEntity {
-  TicketInfoModel(
+  const TicketInfoModel(
       {required super.from,
       required super.to,
       required super.startTime,

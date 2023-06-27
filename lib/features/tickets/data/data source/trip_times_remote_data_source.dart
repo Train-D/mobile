@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:traind_app/core/error/exceptions.dart';
-import 'package:traind_app/core/network/remote/api_constants.dart';
-import 'package:traind_app/core/network/remote/error_message_model.dart';
-import 'package:traind_app/features/tickets/data/models/first%20screen/from_to_date_model.dart';
-import 'package:traind_app/features/tickets/data/models/first%20screen/trip_times_model.dart';
-import 'package:traind_app/features/tickets/domain/entities/first%20screen/trip_times_entity.dart';
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/network/remote/api_constants.dart';
+import '../../../../core/network/remote/error_message_model.dart';
+import '../models/first%20screen/from_to_date_model.dart';
+import '../models/first%20screen/trip_times_model.dart';
+import '../../domain/entities/first%20screen/trip_times_entity.dart';
 
 abstract class BaseTripTimesRemoteDataSource {
   Future<TripTimesEntity> tripTimesData(FromToDateModel model);

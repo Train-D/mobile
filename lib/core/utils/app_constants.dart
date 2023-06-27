@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:traind_app/features/authentication/presentation/screens/login_screen.dart';
+import '../../features/authentication/presentation/screens/login_screen.dart';
 
 class AppConstants {
   static String imagesUrl = 'assets/images/imgs/';

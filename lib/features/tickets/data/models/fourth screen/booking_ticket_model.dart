@@ -1,7 +1,7 @@
-import 'package:traind_app/features/tickets/domain/entities/fourth%20screen/booking_ticket_entity.dart';
+import '../../../domain/entities/fourth%20screen/booking_ticket_entity.dart';
 
 class BookingTicketModel extends BookingTicketEntity {
-  BookingTicketModel(
+  const BookingTicketModel(
       {required super.tripId,
       required super.date,
       required super.seatNumber,

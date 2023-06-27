@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
-import 'package:traind_app/core/error/exceptions.dart';
-import 'package:traind_app/core/network/remote/api_constants.dart';
-import 'package:traind_app/core/network/remote/error_message_model.dart';
-import 'package:traind_app/features/authentication/data/models/register_request_model.dart';
-import 'package:traind_app/features/authentication/data/models/auth_response_model.dart';
-import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
+
+import '../../../../core/error/exceptions.dart';
+import '../../../../core/network/remote/api_constants.dart';
+import '../../../../core/network/remote/error_message_model.dart';
+import '../../domain/entities/response_entity.dart';
+import '../models/auth_response_model.dart';
+import '../models/register_request_model.dart';
 
 abstract class BaseRegisterRemoteDataSource {
   Future<ResponseEntity> postRegisterData(RegisterRequestModel model);

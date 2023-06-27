@@ -22,7 +22,7 @@ class TicketsComponents {
 
   // ignore: non_constant_identifier_names
   static Widget label(BuildContext context, String label) => Text(
-    '${label}:',
+    '$label:',
     style: Theme.of(context)
         .textTheme
         .displayLarge!

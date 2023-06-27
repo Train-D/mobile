@@ -1,11 +1,10 @@
 import 'package:dartz/dartz.dart';
 
-import 'package:traind_app/core/error/failure.dart';
-import 'package:traind_app/features/tickets/data/data%20source/payment_remote_data_source.dart';
-import 'package:traind_app/features/tickets/data/models/third%20screen/payment_model.dart';
-import 'package:traind_app/features/tickets/domain/entities/third%20screen/payment_id_entity.dart';
-import 'package:traind_app/features/tickets/domain/repository/base_payment_repository.dart';
-import 'package:traind_app/features/tickets/domain/usecase/payment_usecase.dart';
+import '../../../../core/error/failure.dart';
+import '../data%20source/payment_remote_data_source.dart';
+import '../models/third%20screen/payment_model.dart';
+import '../../domain/entities/third%20screen/payment_id_entity.dart';
+import '../../domain/repository/base_payment_repository.dart';
 
 class PaymentRepository extends BasePaymentRepository {
   final PaymentRemoteDataSource paymentRemoteDataSource;

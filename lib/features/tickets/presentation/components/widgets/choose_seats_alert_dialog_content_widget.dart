@@ -2,8 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:traind_app/features/tickets/presentation/controller/booking_cubit/booking_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_state.dart';
 import 'package:traind_app/features/tickets/presentation/screens/payment_screen.dart';
 
 import '../../../../../core/global/theme/app_color/app_color_light.dart';
@@ -20,7 +18,7 @@ Widget chooseSeatsAlertDialogContent({
     BlocConsumer<BookingCubit, BookingState>(
       listener: (context, state) {},
       builder: (context, state) {
-        BookingCubit cubit = BookingCubit.get(context);
+        //BookingCubit cubit = BookingCubit.get(context);
         return Padding(
           padding: const EdgeInsetsDirectional.only(
             top: 60,

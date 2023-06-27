@@ -1,11 +1,9 @@
-import 'dart:convert';
-
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/features/profile/presentation/components/profile_components.dart';
-import 'package:traind_app/features/profile/presentation/screens/display_profile_picture.dart';
+import '../components/profile_components.dart';
+import 'display_profile_picture.dart';
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -86,6 +84,7 @@ class ProfileScreen extends StatelessWidget {
                                     ProfileComponents.option(
                                         function: () async {
                                           await cubit.pickImageFromCamera();
+                                          // ignore: use_build_context_synchronously
                                           Navigator.pop(context);
                                         },
                                         icon: Icons.camera_alt,
@@ -94,6 +93,7 @@ class ProfileScreen extends StatelessWidget {
                                     ProfileComponents.option(
                                         function: () async {
                                           await cubit.pickImageFromGallery();
+                                          // ignore: use_build_context_synchronously
                                           Navigator.pop(context);
                                         },
                                         icon: Icons.image,
@@ -101,7 +101,7 @@ class ProfileScreen extends StatelessWidget {
                                         context: context),
                                   ]);
                                 },
-                                icon: Icon(
+                                icon: const Icon(
                                   Icons.camera_alt,
                                   color: Colors.brown,
                                 ),
@@ -239,7 +239,7 @@ class ProfileScreen extends StatelessWidget {
                                         height: AppSizes.height(context) / 14,
                                         radius: AppSizes.defaultBottomRadius,
                                       ),
-                                  fallback: (context) => Center(
+                                  fallback: (context) => const Center(
                                         child: CircularProgressIndicator(),
                                       )),
                             ],
