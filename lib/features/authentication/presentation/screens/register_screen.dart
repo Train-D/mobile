@@ -43,7 +43,7 @@ class SignUpScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: 25.h,
+                      height: 21.h,
                     ),
                     Text(
                       AppString.signUpTitle,

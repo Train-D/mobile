@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:traind_app/features/authentication/data/data%20source/reset_password_remote_data_source.dart';
+import '../../features/authentication/data/repository/reset_password_repository.dart';
+import '../../features/authentication/domain/repository/base_reset_password_respository.dart';
+import '../../features/authentication/domain/usecase/reset_password_usecase.dart';
 import 'api_service.dart';
 import '../../features/authentication/data/data%20source/login_remote_data_source.dart';
 import '../../features/authentication/data/data%20source/register_remote_data_source.dart';
@@ -140,6 +144,13 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseBookingTicketRepository>(
         () => BookingTicketRepository(bookingTicketRemoteDataSource: sl()));
     sl.registerLazySingleton(() => BookingTicketUsecase(sl()));
+
+    //reset password
+    sl.registerLazySingleton<ResetPasswordRemoteDataSource>(
+        () => ResetPasswordRemoteDataSourceImpl());
+    sl.registerLazySingleton<BaseResetPasswordRepository>(
+        () => ResetPasswordRepository(resetPasswordRemoteDataSource: sl()));
+    sl.registerLazySingleton(() => ResetPasswordUseCase(baseResetPasswordRepository: sl()));
   }
   
   

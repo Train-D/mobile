@@ -36,7 +36,7 @@ class BookingCubit extends Cubit<BookingState> {
       this.creditCardUseCase,
       this.paymentUseCase,
       this.bookingTicketUsecase)
-      : super(FromToInitial()) {
+      : super(BookingInitial()) {
     getStationsFromApi();
   }
   static BookingCubit get(context) => BlocProvider.of(context);
@@ -46,7 +46,7 @@ class BookingCubit extends Cubit<BookingState> {
   String toDefaultValue = "Select";
   String fromToDefaultDate = 'yyyy/mm/dd';
   dynamic firstScreenErrorMessage = 'Connection Error';
-  dynamic thirdScreenErrorMessage = 'Connection Error or invalid data';
+  dynamic thirdScreenErrorMessage = 'Connection Error or Invalid data';
   List<String> allStations = ["Select"];
   List<String> toStations = ["Select"];
 
@@ -87,10 +87,10 @@ class BookingCubit extends Cubit<BookingState> {
 
   // clean data of the cubit
   cleanData() {
-    fromDefaultValue = "Select";
+    /*fromDefaultValue = "Select";
     toDefaultValue = "Select";
     fromToDefaultDate = 'yyyy/mm/dd';
-    firstScreenErrorMessage = 'Connection Error';
+    firstScreenErrorMessage = 'Connection Error';*/
     cardNumber.clear();
     expiryYear.clear();
     expiryMonth.clear();
@@ -98,6 +98,10 @@ class BookingCubit extends Cubit<BookingState> {
     cardHolderName.clear();
     cvvCode.clear();
     emit(CleanCubitDataState());
+  }
+
+  resetData() {
+    emit(BookingInitial());
   }
 
   //get data of booking first screen
@@ -746,7 +750,7 @@ class BookingCubit extends Cubit<BookingState> {
         }));
     result.fold((failure) {
       debugPrint(failure.toString());
-
+      print(failure);
       emit(GetPaymentCustomerDataFailureState());
     }, (paymentCustomerData) async {
       //print(paymentCustomerData);
@@ -755,9 +759,10 @@ class BookingCubit extends Cubit<BookingState> {
           email: paymentCustomerData.email,
           description: "Test",
           currency: "USD",
-          amount: seatPrice.toInt()));
+          amount: seatPrice.toInt() * 100));
       data.fold((failure) {
         debugPrint(failure.toString());
+        print(failure);
         emit(GetPaymentCustomerDataFailureState());
       }, (paymentIdData) {
         //print(paymentIdData);

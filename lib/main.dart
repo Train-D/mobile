@@ -9,6 +9,7 @@ import 'package:traind_app/core/services/services_locator.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/features/app/presentation/screens/onboarding_one_screen.dart';
 import 'package:traind_app/features/app/presentation/screens/splash_screen.dart';
+import 'package:traind_app/features/authentication/presentation/controller/reset_password_cubit/reset_password_cubit.dart';
 import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
 import 'package:traind_app/features/stations/presentation/controller/all_stations_cubit/all_stations_cubit.dart';
@@ -72,6 +73,9 @@ class MyApp extends StatelessWidget {
         // ),
         BlocProvider(
           create: (context) => ProfileCubit(sl(), sl())..getProfileUserData(),
+        ),
+        BlocProvider(
+          create: (context) => ResetPasswordCubit(sl()),
         ),
         BlocProvider(
           create: (context) => HomeCubit(

@@ -69,7 +69,7 @@ class TicketScreen extends StatelessWidget {
                               cubit.showDialog = true;
                               //print({'resulltttttt $res'});
                               // ignore: use_build_context_synchronously
-                              showTicketAlertDialog(context: context);
+                              showTicketAlertDialog(context: context, resetData: cubit.resetData());
                             },
                             text: AppString.download,
                             width: AppSizes.width(context) / 2.5,
@@ -252,6 +252,7 @@ Widget buildTicket(
 
 Widget alertDialogTicketContent({
   required BuildContext context,
+  required Function resetData
 }) =>
     Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -278,7 +279,9 @@ Widget alertDialogTicketContent({
             SharedComponents.navigateToRemove(
               context,
               const HomeScreen(),
+              
             );
+            resetData;
           },
           text: AppString.backToHome,
           width: 150,
@@ -290,6 +293,7 @@ Widget alertDialogTicketContent({
 
 showTicketAlertDialog({
   required BuildContext context,
+  required Function resetData
 }) {
   showDialog(
     barrierDismissible: false,
@@ -297,7 +301,7 @@ showTicketAlertDialog({
     builder: (BuildContext context) {
       return TicketsComponents.defaultAlertDialog(
         height: 220,
-        content: alertDialogTicketContent(context: context),
+        content: alertDialogTicketContent(context: context, resetData: resetData),
       );
     },
   );

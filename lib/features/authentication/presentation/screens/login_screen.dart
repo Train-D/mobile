@@ -3,6 +3,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/features/authentication/presentation/screens/reset_password.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
@@ -22,6 +23,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocConsumer<LoginCubit, LoginState>(listener: (context, state) {
       LoginCubit cubit = LoginCubit.get(context);
+
       if (state is LoginSuccessState) {
         SharedComponents.navigateTo(
           const HomeScreen(),
@@ -41,7 +43,7 @@ class LoginScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(
-                    height: 25.h,
+                    height: 21.h,
                   ),
                   Text(
                     AppString.loginTitle,
@@ -119,8 +121,18 @@ class LoginScreen extends StatelessWidget {
                               cubit.changePasswordVisibility();
                             },
                           ),
-                          SizedBox(
-                            height: 2.h,
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              SharedComponents.defaultTextButton(
+                                  function: () {
+                                    SharedComponents.navigateTo(
+                                        ResetPasswordScreen(), context);
+                                  },
+                                  text: AppString.forgotPassword,
+                                  context: context,
+                                  size: 15)
+                            ],
                           ),
                           ConditionalBuilder(
                             condition: state is! LoginLoadingState,
@@ -154,9 +166,6 @@ class LoginScreen extends StatelessWidget {
                               child: CircularProgressIndicator(),
                             ),
                           ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -173,7 +182,7 @@ class LoginScreen extends StatelessWidget {
                               ),
                               SharedComponents.defaultTextButton(
                                 function: () {
-                                  SharedComponents.navigateToReplace(
+                                  SharedComponents.navigateTo(
                                     const SignUpScreen(),
                                     context,
                                   );
