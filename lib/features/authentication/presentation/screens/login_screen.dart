@@ -25,7 +25,7 @@ class LoginScreen extends StatelessWidget {
       LoginCubit cubit = LoginCubit.get(context);
 
       if (state is LoginSuccessState) {
-        SharedComponents.navigateTo(
+        SharedComponents.navigateToReplace(
           const HomeScreen(),
           context,
         );
@@ -121,19 +121,7 @@ class LoginScreen extends StatelessWidget {
                               cubit.changePasswordVisibility();
                             },
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              SharedComponents.defaultTextButton(
-                                  function: () {
-                                    SharedComponents.navigateTo(
-                                        ResetPasswordScreen(), context);
-                                  },
-                                  text: AppString.forgotPassword,
-                                  context: context,
-                                  size: 15)
-                            ],
-                          ),
+                          SizedBox(height: 3.h,),
                           ConditionalBuilder(
                             condition: state is! LoginLoadingState,
                             builder: (context) =>
@@ -191,6 +179,19 @@ class LoginScreen extends StatelessWidget {
                                 text: AppString.signUpTitle,
                                 context: context,
                               ),
+                            ],
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SharedComponents.defaultTextButton(
+                                  function: () {
+                                    SharedComponents.navigateTo(
+                                        ResetPasswordScreen(), context);
+                                  },
+                                  text: AppString.forgotPassword,
+                                  context: context,
+                                  size: 15)
                             ],
                           ),
                         ],
