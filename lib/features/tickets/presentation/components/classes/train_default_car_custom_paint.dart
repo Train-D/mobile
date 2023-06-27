@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:traind_app/core/global/theme/app_color/app_color_light.dart';
+
+import '../../../../../core/global/theme/app_color/app_color_light.dart';
 
 class TrainDefaultCarShape extends CustomPainter {
   @override

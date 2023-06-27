@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/network/local/cache_helper.dart';
+import '../../../../core/network/local/cache_helper.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
@@ -11,7 +11,6 @@ import '../../../../core/utils/components.dart';
 import '../../../authentication/presentation/screens/login_screen.dart';
 import '../../../profile/presentation/screens/profile_screen.dart';
 import '../components/components.dart';
-import 'package:restart_app/restart_app.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -107,6 +106,7 @@ class SettingsScreen extends StatelessWidget {
                           await CacheHelper.removeData(key: 'userData');
                           await CacheHelper.removeData(key: 'token');
                           AppConstants.widget = const LoginScreen();
+                          // ignore: use_build_context_synchronously
                           Phoenix.rebirth(context);
                           // //Restart.restartApp(webOrigin: '${Uri.base}');
                           // SharedComponents.navigateToRemove(

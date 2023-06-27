@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:traind_app/features/tickets/presentation/controller/booking_cubit/booking_cubit.dart';
+import '../controller/booking_cubit/booking_cubit.dart';
 import '../../../layout/presentation/screens/home_screen.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -42,7 +42,7 @@ class TicketScreen extends StatelessWidget {
                 backgroundColor: transparent,
                 //appBar: SharedComponents.defaultAppBar(context: context),
                 body: state is GetTicketDataLoadingState
-                    ? Center(child: CircularProgressIndicator())
+                    ? const Center(child: CircularProgressIndicator())
                     : SingleChildScrollView(
                         child: Column(children: [
                           SizedBox(

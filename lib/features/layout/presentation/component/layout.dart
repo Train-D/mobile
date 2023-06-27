@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/components.dart';
 

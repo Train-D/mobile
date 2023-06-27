@@ -22,10 +22,10 @@ class ProfileRepository extends BaseProfileRepository {
       var userData;
       userData = profileLocalDataSource.getProfileUserData();
       if (userData != null) {
-        print('cached');
+        //print('cached');
         return Right(userData);
       }
-      print('Not Cached');
+      //print('Not Cached');
       userData = await profileRemoteDataSource.getProfileUserData();
       return Right(userData);
     } catch (e) {

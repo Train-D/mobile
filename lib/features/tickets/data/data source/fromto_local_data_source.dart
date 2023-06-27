@@ -1,9 +1,8 @@
 import 'dart:convert';
 
-import 'package:traind_app/features/tickets/data/models/first%20screen/stations_model.dart';
-
 import '../../../../core/network/local/cache_helper.dart';
 import '../../domain/entities/first screen/stations_entity.dart';
+import '../models/first%20screen/stations_model.dart';
 
 abstract class FromToLocalDataSource {
   StationsEntity? getFromToStations();

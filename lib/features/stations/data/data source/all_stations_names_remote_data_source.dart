@@ -1,9 +1,9 @@
 import 'dart:convert';
-import 'package:traind_app/core/network/local/cache_helper.dart';
-import 'package:traind_app/core/network/remote/api_constants.dart';
-import 'package:traind_app/core/services/api_service.dart';
-import 'package:traind_app/features/stations/data/models/all_satations_model.dart';
-import 'package:traind_app/features/stations/domain/entities/all_stations_names_entity.dart';
+import '../../../../core/network/local/cache_helper.dart';
+import '../../../../core/network/remote/api_constants.dart';
+import '../../../../core/services/api_service.dart';
+import '../models/all_satations_model.dart';
+import '../../domain/entities/all_stations_names_entity.dart';
 
 abstract class AllStationsNamesRemoteDataSource {
   Future<AllStationsNamesEntity> getAllStationsNames();

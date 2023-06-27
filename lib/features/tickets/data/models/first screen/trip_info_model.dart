@@ -1,4 +1,4 @@
-import 'package:traind_app/features/tickets/domain/entities/first%20screen/trip_info_entity.dart';
+import '../../../domain/entities/first%20screen/trip_info_entity.dart';
 
 class TripInfoModel extends TripInfoEntity {
   const TripInfoModel({

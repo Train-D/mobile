@@ -1,4 +1,4 @@
-import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
+import '../../domain/entities/response_entity.dart';
 
 class AuthResponseModel extends ResponseEntity {
   @override

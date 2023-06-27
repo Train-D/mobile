@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
-import 'package:traind_app/features/tickets/data/models/first%20screen/trip_times_model.dart';
+import '../../../data/models/first%20screen/trip_times_model.dart';
 
 // ignore: must_be_immutable
 class TripTimesEntity extends Equatable {
   final List<dynamic> tripTimes;
-  TripTimesEntity({
+  const TripTimesEntity({
     required this.tripTimes,
   });
 

@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/features/tickets/presentation/components/reusable_component/choose_seats_screen_components.dart';
+import '../../features/tickets/presentation/components/reusable_component/choose_seats_screen_components.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import '../global/theme/app_color/app_color_light.dart';
 import 'app_sizes.dart';

@@ -1,4 +1,4 @@
-import 'package:traind_app/features/authentication/domain/entities/login_entity.dart';
+import '../../domain/entities/login_entity.dart';
 
 class LoginRequestModel extends LoginEntity {
   const LoginRequestModel({

@@ -2,7 +2,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:traind_app/core/error/exceptions.dart';
 import 'package:traind_app/core/network/local/cache_helper.dart';
 import 'package:traind_app/features/authentication/data/models/login_request_model.dart';
@@ -55,7 +54,7 @@ class LoginCubit extends Cubit<LoginState> {
       result.fold((l) => null, (r) async {
         authresponseModel = AuthResponseModel.fromjson(
             {"token": r.token, "message": r.message});
-        print(r.token);
+        //print(r.token);
         await CacheHelper.saveData(key: "token", value: r.token);
         debugPrint("token of user: ${r.token} \n ${r.message}");
         emit(LoginSuccessState());

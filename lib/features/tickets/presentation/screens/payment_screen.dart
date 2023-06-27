@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/utils/app_sizes.dart';
+import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
@@ -19,7 +19,7 @@ class PaymentScreen extends StatelessWidget {
       BookingCubit cubit = BookingCubit.get(context);
       if (state is GetPaymentCustomerDataSuccessState) {
         cubit.getTicketData();
-          SharedComponents.navigateTo(TicketScreen(), context);
+          SharedComponents.navigateTo(const TicketScreen(), context);
       }
       if (state is GetPaymentCustomerDataFailureState) {
         SharedComponents.showToast(
@@ -45,7 +45,7 @@ class PaymentScreen extends StatelessWidget {
                       bgColor: ticketColor,
                     ),
                   ),
-                  Container(
+                  SizedBox(
                     height: AppSizes.height(context),
                     child: Padding(
                       padding: EdgeInsets.symmetric(
@@ -283,7 +283,7 @@ class PaymentScreen extends StatelessWidget {
                                     height: 4.h,
                                   ),
                                   state is GetPaymentCustomerDataLoadingState
-                                      ? CircularProgressIndicator()
+                                      ? const CircularProgressIndicator()
                                       : SharedComponents.defaultButton(
                                           context: context,
                                           function: () {

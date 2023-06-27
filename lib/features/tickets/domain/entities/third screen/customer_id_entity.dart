@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// ignore: must_be_immutable
 class CustomerIdEntity extends Equatable {
   String name;
   String email;
@@ -10,6 +11,5 @@ class CustomerIdEntity extends Equatable {
     required this.customerId,
   });
   @override
-  // TODO: implement props
   List<Object?> get props => [name, email, customerId];
 }

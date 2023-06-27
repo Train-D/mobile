@@ -135,7 +135,7 @@ class LoginScreen extends StatelessWidget {
                                     password: cubit.loginPasswordCon.text,
                                   );
                                   cubit.loginChangeToastColor();
-                                  print(cubit.loginToastColor);
+                                  //print(cubit.loginToastColor);
                                   SharedComponents.showToast(
                                     text: cubit.authresponseModel.message,
                                     color: cubit.loginToastColor,

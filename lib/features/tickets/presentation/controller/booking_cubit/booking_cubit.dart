@@ -7,15 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
-import 'package:traind_app/core/error/exceptions.dart';
-import 'package:traind_app/features/tickets/data/models/first%20screen/from_to_date_model.dart';
-import 'package:traind_app/features/tickets/data/models/first%20screen/trip_info_model.dart';
-import 'package:traind_app/features/tickets/data/models/fourth%20screen/booking_ticket_model.dart';
-import 'package:traind_app/features/tickets/data/models/fourth%20screen/ticket_info_model.dart';
-import 'package:traind_app/features/tickets/data/models/third%20screen/credit_card_model.dart';
-import 'package:traind_app/features/tickets/data/models/third%20screen/payment_model.dart';
-import 'package:traind_app/features/tickets/domain/usecase/payment_usecase.dart';
-import 'package:traind_app/features/tickets/domain/usecase/trip_times_usecase.dart.dart';
+import '../../../../../core/error/exceptions.dart';
+import '../../../data/models/first%20screen/from_to_date_model.dart';
+import '../../../data/models/first%20screen/trip_info_model.dart';
+import '../../../data/models/fourth%20screen/booking_ticket_model.dart';
+import '../../../data/models/fourth%20screen/ticket_info_model.dart';
+import '../../../data/models/third%20screen/credit_card_model.dart';
+import '../../../data/models/third%20screen/payment_model.dart';
+import '../../../domain/usecase/payment_usecase.dart';
+import '../../../domain/usecase/trip_times_usecase.dart.dart';
 
 import '../../../data/models/first screen/stations_model.dart';
 import '../../../data/models/second screen/seat_model.dart';
@@ -62,9 +62,13 @@ class BookingCubit extends Cubit<BookingState> {
   late dynamic paymentID;
 
   //fourth screen data
+  // ignore: prefer_typing_uninitialized_variables
   var seatNumber;
+  // ignore: prefer_typing_uninitialized_variables
   var coach;
+  // ignore: prefer_typing_uninitialized_variables
   var classs;
+  // ignore: prefer_typing_uninitialized_variables
   var seatPrice;
   final screenshotCon = ScreenshotController();
   Future<String> saveImage(Uint8List bytes) async {
@@ -210,29 +214,483 @@ class BookingCubit extends Cubit<BookingState> {
     ),
   ];
 
-  void bookSeat(String seatNumber) {
-    int idx = int.parse(seatNumber);
-    //firstCarSeats[idx - 1].book = !firstCarSeats[idx - 1].isAvailable;
-    emit(ChooseSeatsBookSeatSuccessState());
-  }
+  List<SeatModel> carA2 = [
+    const SeatModel(
+      seatNumber: 1,
+      coach: 2,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 2,
+      coach: 2,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 3,
+      coach: 2,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 4,
+      coach: 2,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 5,
+      coach: 2,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 6,
+      coach: 2,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 7,
+      coach: 2,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 8,
+      coach: 2,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 9,
+      coach: 2,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 10,
+      coach: 2,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 11,
+      coach: 2,
+      classChar: "A",
+    ),
+    const SeatModel(
+      seatNumber: 12,
+      coach: 2,
+      classChar: "A",
+    ),
+  ];
 
-  bool visibleSelectedCarContainer = false;
+  List<SeatModel> carB1 = [
+    const SeatModel(
+      seatNumber: 1,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 2,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 3,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 4,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 5,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 6,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 7,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 8,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 9,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 10,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 11,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 12,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 13,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 14,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 15,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 16,
+      coach: 1,
+      classChar: "B",
+    ),
+  ];
 
-  void changeVisibleSelectedCarContainer(int carNumber) {
-    visibleSelectedCarContainer = !visibleSelectedCarContainer;
+  List<SeatModel> carB2 = [
+    const SeatModel(
+      seatNumber: 1,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 2,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 3,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 4,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 5,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 6,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 7,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 8,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 9,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 10,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 11,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 12,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 13,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 14,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 15,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 16,
+      coach: 2,
+      classChar: "B",
+    ),
+  ];
 
-    emit(ChangeVisiableState());
-  }
+  List<SeatModel> carC1 = [
+    const SeatModel(
+      seatNumber: 1,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 2,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 3,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 4,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 5,
+      coach: 1,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 6,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 7,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 8,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 9,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 10,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 11,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 12,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 13,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 14,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 15,
+      coach: 1,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 16,
+      coach: 1,
+      classChar: "C",
+    ),
+  ];
 
-  ScrollController sc = ScrollController();
-  int firstIdx = 0;
+  List<SeatModel> carC2 = [
+    const SeatModel(
+      seatNumber: 1,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 2,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 3,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 4,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 5,
+      coach: 2,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 6,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 7,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 8,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 9,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 10,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 11,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 12,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 13,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 14,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 15,
+      coach: 2,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 16,
+      coach: 2,
+      classChar: "C",
+    ),
+  ];
 
-  void initScrollCon() {
-    sc.addListener(() {
-      firstIdx = sc.offset ~/ 480;
-      emit(ChangeScrollControllerState());
-    });
-  }
+  List<SeatModel> carC3 = [
+    const SeatModel(
+      seatNumber: 1,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 2,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 3,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 4,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 5,
+      coach: 3,
+      classChar: "B",
+    ),
+    const SeatModel(
+      seatNumber: 6,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 7,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 8,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 9,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 10,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 11,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 12,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 13,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 14,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 15,
+      coach: 3,
+      classChar: "C",
+    ),
+    const SeatModel(
+      seatNumber: 16,
+      coach: 3,
+      classChar: "C",
+    ),
+  ];
 
   final TrainInfoUseCase trainInfoUseCase;
   late TrainInfoEntity trainInfoEntity;
@@ -253,8 +711,8 @@ class BookingCubit extends Cubit<BookingState> {
       classAPrice = trainInfoData.classes[0].classPrice;
       classBPrice = trainInfoData.classes[1].classPrice;
       classCPrice = trainInfoData.classes[2].classPrice;
-      print('${classAPrice}  ${classBPrice}  ${classCPrice}');
-      print(trainInfoEntity);
+      //print('${classAPrice}  ${classBPrice}  ${classCPrice}');
+      //print(trainInfoEntity);
 
       emit(GetTrainInfoSuccessState());
     });
@@ -291,7 +749,7 @@ class BookingCubit extends Cubit<BookingState> {
 
       emit(GetPaymentCustomerDataFailureState());
     }, (paymentCustomerData) async {
-      print(paymentCustomerData);
+      //print(paymentCustomerData);
       var data = await paymentUseCase.call(PaymentModel(
           customerId: paymentCustomerData.customerId,
           email: paymentCustomerData.email,
@@ -302,7 +760,7 @@ class BookingCubit extends Cubit<BookingState> {
         debugPrint(failure.toString());
         emit(GetPaymentCustomerDataFailureState());
       }, (paymentIdData) {
-        print(paymentIdData);
+        //print(paymentIdData);
         paymentID = paymentIdData.paymentId;
         emit(GetPaymentCustomerDataSuccessState());
       });
@@ -311,7 +769,7 @@ class BookingCubit extends Cubit<BookingState> {
 
   //get data of booking fourth screen
   final BookingTicketUsecase bookingTicketUsecase;
-  TicketInfoModel ticketInfoModel = TicketInfoModel(
+  TicketInfoModel ticketInfoModel = const TicketInfoModel(
       from: '',
       to: '',
       startTime: '',
@@ -341,19 +799,20 @@ class BookingCubit extends Cubit<BookingState> {
     }, (ticketData) async {
       //print(ticketData);
       ticketInfoModel = TicketInfoModel(
-          from: ticketData.from,
-          to: ticketData.to,
-          startTime: ticketData.startTime,
-          endTime: ticketData.endTime,
-          ticketId: ticketData.ticketId,
-          passengerName: ticketData.passengerName,
-          date: ticketData.date,
-          className: ticketData.className,
-          coachNumber: ticketData.coachNumber,
-          seatNumber: ticketData.seatNumber,
-          price: ticketData.price,
-          duration: ticketData.duration);
-      print(ticketInfoModel);
+        from: ticketData.from,
+        to: ticketData.to,
+        startTime: ticketData.startTime,
+        endTime: ticketData.endTime,
+        ticketId: ticketData.ticketId,
+        passengerName: ticketData.passengerName,
+        date: ticketData.date,
+        className: ticketData.className,
+        coachNumber: ticketData.coachNumber,
+        seatNumber: ticketData.seatNumber,
+        price: ticketData.price,
+        duration: ticketData.duration,
+      );
+      //print(ticketInfoModel);
       emit(GetTicketDataSuccessState());
     });
   }

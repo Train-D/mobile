@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
-import 'package:traind_app/core/error/failure.dart';
-import 'package:traind_app/features/profile/data/models/profile_user_data_model.dart';
-import 'package:traind_app/features/profile/domain/entities/profile_user_data_entity.dart';
+import '../../../../core/error/failure.dart';
+import '../../data/models/profile_user_data_model.dart';
+import '../entities/profile_user_data_entity.dart';
 
 abstract class BaseProfileRepository {
   Future<Either<Failure, ProfileUserDataEntity>> getProfileUserData();

@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 
-import 'package:traind_app/core/error/failure.dart';
-import 'package:traind_app/features/tickets/data/models/third%20screen/payment_model.dart';
-import 'package:traind_app/features/tickets/domain/entities/third%20screen/payment_id_entity.dart';
-import 'package:traind_app/features/tickets/domain/repository/base_payment_repository.dart';
+import '../../../../core/error/failure.dart';
+import '../../data/models/third%20screen/payment_model.dart';
+import '../entities/third%20screen/payment_id_entity.dart';
+import '../repository/base_payment_repository.dart';
 
 import '../../../../core/usecases/base_usecase.dart';
 

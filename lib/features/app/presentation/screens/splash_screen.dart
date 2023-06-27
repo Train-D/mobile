@@ -8,8 +8,8 @@ import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
-import 'onboarding_one_screen.dart';
 
+// ignore: must_be_immutable
 class SplashScreen extends StatefulWidget {
   Widget nextScreen;
   SplashScreen({

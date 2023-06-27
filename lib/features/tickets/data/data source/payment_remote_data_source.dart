@@ -1,10 +1,8 @@
-import 'package:traind_app/features/tickets/data/models/third%20screen/payment_id_model.dart';
-import 'package:traind_app/features/tickets/data/models/third%20screen/payment_model.dart';
-import 'package:traind_app/features/tickets/domain/entities/third%20screen/payment_id_entity.dart';
-import 'package:traind_app/features/tickets/domain/usecase/payment_usecase.dart';
-
 import '../../../../core/network/remote/api_constants.dart';
 import '../../../../core/services/api_service.dart';
+import '../../domain/entities/third%20screen/payment_id_entity.dart';
+import '../models/third%20screen/payment_id_model.dart';
+import '../models/third%20screen/payment_model.dart';
 
 abstract class PaymentRemoteDataSource {
   Future<PaymentIdEntity> paymentInfo(PaymentModel model);
@@ -22,8 +20,8 @@ class PaymentRemoteDataSourceImpl extends PaymentRemoteDataSource{
       data: model.toJson(),
     );
 
-    PaymentIdEntity PaymentId = PaymentIdModel.fromJson(data);
-    return PaymentId;
+    PaymentIdEntity paymentId = PaymentIdModel.fromJson(data);
+    return paymentId;
   }
 
 }

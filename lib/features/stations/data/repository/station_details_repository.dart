@@ -19,14 +19,14 @@ class StationDetailsRepository extends BaseStationDetailsRepository {
   Future<Either<Failure, StationDetailsEntity>> getStationDetailsByName(
       String stationName) async {
     try {
-      var stationDetails;
+      StationDetailsEntity? stationDetails;
       stationDetails =
           stationDetailsLocalDataSource.getStationDetailsByName(stationName);
       if (stationDetails != null) {
-        print('Station Details Cached');
+        //print('Station Details Cached');
         return Right(stationDetails);
       }
-      print('Station Details Not Cached');
+      //print('Station Details Not Cached');
       stationDetails = await stationDetailsRemoteDataSource
           .getStationDetailsByName(stationName);
       return Right(stationDetails);

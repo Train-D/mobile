@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
 import 'package:traind_app/core/error/exceptions.dart';
-
 import 'package:traind_app/core/error/failure.dart';
 import 'package:traind_app/features/authentication/data/data%20source/login_remote_data_source.dart';
 import 'package:traind_app/features/authentication/data/models/login_request_model.dart';

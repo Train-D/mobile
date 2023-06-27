@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/features/tickets/presentation/screens/choose_seats_screen.dart';
+import 'choose_seats_screen.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/global/theme/theme_data/theme_data_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -22,7 +22,8 @@ class FromToScreen extends StatelessWidget {
     return BlocConsumer<BookingCubit, BookingState>(listener: (context, state) {
       BookingCubit cubit = BookingCubit.get(context);
       if (state is GetTripsErrorState) {
-        SharedComponents.showToast(text: cubit.firstScreenErrorMessage, color: Colors.red);
+        SharedComponents.showToast(
+            text: cubit.firstScreenErrorMessage, color: Colors.red);
       } else if (state is GetTripsSuccessState) {
         // ignore: use_build_context_synchronously
         TicketsComponents.bottomModelSheet(
@@ -47,7 +48,7 @@ class FromToScreen extends StatelessWidget {
                               cubit.fromToDefaultDate);
                           Navigator.pop(context);
                           SharedComponents.navigateTo(
-                              ChooseSeatsScreen(), context);
+                              const ChooseSeatsScreen(), context);
                         },
                         child: Padding(
                           padding: EdgeInsets.symmetric(horizontal: 30.sp),
@@ -92,9 +93,10 @@ class FromToScreen extends StatelessWidget {
           imageUrl: '${AppConstants.imagesUrl}$fromTo',
           context: context,
           child: Scaffold(
-            appBar: SharedComponents.defaultAppBar(context: context,),
+            appBar: SharedComponents.defaultAppBar(
+              context: context,
+            ),
             backgroundColor: fromToBgColor,
-            
             body: SingleChildScrollView(
               child: Column(
                 children: [
@@ -110,13 +112,13 @@ class FromToScreen extends StatelessWidget {
                     height: 40.h,
                     width: 80.w,
                     child: (state is FromToStationsLoadingState
-                        ? Center(child: CircularProgressIndicator())
+                        ? const Center(child: CircularProgressIndicator())
                         : (state is FromToStationsErrorState
                             ? RefreshIndicator(
                                 onRefresh: () async {
                                   cubit.getStationsFromApi();
                                 },
-                                child: Text(''),
+                                child: const Text(''),
                               )
                             : SingleChildScrollView(
                                 child: Padding(

@@ -1,7 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:traind_app/core/utils/app_images.dart';
-import 'package:traind_app/features/profile/domain/usecase/get_profile_user_data_use_case.dart';
 import 'package:traind_app/features/stations/domain/usecase/get_all_stations_names_usecase.dart';
 
 import '../../../../../core/usecases/base_usecase.dart';
@@ -24,12 +22,12 @@ class AllStationsCubit extends Cubit<AllStationsState> {
     emit(GetAllStationsNamesLoadingState());
     var result = await getAllStationsNamesUseCase.call(const NoParameters());
     result.fold((failure) {
-      print(failure.toString());
+      //print(failure.toString());
       emit(GetAllStationsNamesFailureState());
     }, (allStationsNames) {
       allStationsNamesModel = allStationsNames.allStationsNames;
       //print(allStationsNamesModel.keys);
-      print(allStationsNamesModel.values.toList()[0]);
+      //print(allStationsNamesModel.values.toList()[0]);
 
       emit(GetAllStationsNamesSuccessState());
     });
@@ -42,12 +40,12 @@ class AllStationsCubit extends Cubit<AllStationsState> {
     emit(GetStationDetailsByNameLoadingState());
     var result = await getStationDetails.call(stationName);
     result.fold((failure) {
-      print(failure.toString());
+      //print(failure.toString());
       emit(GetStationDetailsByNameFailureState());
     }, (stationDet) {
       stationDetails = stationDet;
 
-      print(stationDetails);
+      //print(stationDetails);
 
       emit(GetStationDetailsByNameSuccessState());
     });

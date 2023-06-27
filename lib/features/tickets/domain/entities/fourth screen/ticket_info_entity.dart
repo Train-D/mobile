@@ -13,7 +13,7 @@ class TicketInfoEntity extends Equatable {
   final int seatNumber;
   final double price;
   final String duration;
-  TicketInfoEntity({
+  const TicketInfoEntity({
     required this.from,
     required this.to,
     required this.startTime,
@@ -29,7 +29,6 @@ class TicketInfoEntity extends Equatable {
   });
 
   @override
-  // TODO: implement props
   List<Object?> get props => [
         from,
         to,

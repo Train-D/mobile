@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:traind_app/core/utils/app_strings.dart';
 
 import '../../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../../core/utils/app_constants.dart';
+import '../../../../../core/utils/app_strings.dart';
 import '../../../data/models/second screen/seat_model.dart';
-import '../../screens/choose_seats_screen.dart';
-import '../classes/seat_details.dart';
 
 class ChooseSeatsComponents {
   static appBarTitle({
@@ -45,10 +43,6 @@ class ChooseSeatsComponents {
       InkWell(
         onTap: () {
           fun();
-          // showChooseSeatsAlertDialog(
-          //   context: context,
-          //   seatNumber: seatDetails.seatNumber.toString(),
-          // );
         },
         child: Container(
           width: width,
@@ -63,7 +57,7 @@ class ChooseSeatsComponents {
           ),
           child: Align(
             alignment: Alignment.center,
-            child: Text(seatDetails.seatNumber.toString(),
+            child: Text(seatDetails.seatNumber == 0 ? '' : seatDetails.seatNumber.toString(),
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
                       color: !booked ? trainUnAvailableSeatColor : lightColor,
                       fontSize: 18,
@@ -106,7 +100,7 @@ class ChooseSeatsComponents {
     required Widget firstRowTwoSeats,
     required Widget secondRowTwoSeats,
     required Widget thirdRowTwoSeats,
-    bool isfirst = false,
+    bool isFourRows = false,
     Widget? fourthRowTwoSeats,
   }) =>
       Padding(
@@ -124,11 +118,11 @@ class ChooseSeatsComponents {
               height: 35,
             ),
             thirdRowTwoSeats,
-            // if (!isfirst)
-            //   const SizedBox(
-            //     height: 35,
-            //   ),
-            //   fourthRowTwoSeats,
+            if(isFourRows)
+              const SizedBox(
+                height: 35,
+              ),
+              fourthRowTwoSeats ?? const Card(),
           ],
         ),
       );
@@ -142,7 +136,7 @@ class ChooseSeatsComponents {
         color: lightColor,
       );
 
-  /*static buttonAndWordRow({
+  static buttonAndWordRow({
     required BuildContext context,
     required bool isAvailable,
     required String text,
@@ -151,14 +145,17 @@ class ChooseSeatsComponents {
         children: [
           ChooseSeatsComponents.defaultSeat(
             context: context,
-            seatDetails: Seat(
-              seatNumber: '',
-              isAvailable: isAvailable,
+            seatDetails: const SeatModel(
+              seatNumber: 0,
+              classChar: '', 
+              coach: 0,
             ),
+            fun: (){},
             width: 10,
             height: 13,
             radius: 3,
-            borderWidth: 1,
+            borderWidth: 1, 
+            booked: !isAvailable,
           ),
           const SizedBox(
             width: 3,
@@ -173,15 +170,15 @@ class ChooseSeatsComponents {
           ),
         ],
       );
-*/
+
   static trainCarClassText({
     required BuildContext context,
     required String carClass,
   }) =>
       Padding(
         padding: const EdgeInsetsDirectional.only(
-          top: 70,
-          bottom: 35,
+          top: 26,
+          bottom: 50,
         ),
         child: Text(
           carClass,
@@ -199,7 +196,7 @@ class ChooseSeatsComponents {
   }) =>
       Container(
         width: 70,
-        height: 130,
+        height: 100,
         decoration: BoxDecoration(
           color: Colors.transparent,
           borderRadius: BorderRadius.circular(5),
