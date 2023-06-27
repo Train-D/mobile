@@ -7,7 +7,7 @@ abstract class BookingState extends Equatable {
   List<Object> get props => [];
 }
 
-class FromToInitial extends BookingState {}
+class   BookingInitial extends BookingState {}
 
 class ChangeDropDownButtonValueState extends BookingState {}
 class CleanCubitDataState extends BookingState {}

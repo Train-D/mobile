@@ -6,9 +6,15 @@ class AppString {
   static const String onboardingTwoSubtitle =
       'You can book your tickets online, choose your seats easily and choose the type of your train';
   static const String appName = 'TrainD';
-
+  static const String resetPasswordInstructions =
+      'Enter the email associated with your account and we\'ll send an email with instructions to reset your password.';
   static const String loginTitle = 'LOGIN';
+  static const String errorMessage = 'Error Message!';
+  static const String note = 'Note..';
   static const String signUpTitle = 'SIGN UP';
+  static const String forgotPassword = 'Forgot Password?';
+  static const String resetPassword = 'Reset Password';
+  static const String sendInstructions = 'Send Instructions';
   static const String getStarted = 'Get started';
   static const String skip = 'Skip';
   static const String train = 'Train';
@@ -21,6 +27,7 @@ class AppString {
   static const String firstName = 'First Name';
   static const String lasttName = 'Last Name';
   static const String email = 'E-mail';
+  static const String emailAdrress = 'Email address';
   static const String phoneNumber = 'Phone Number';
   static const String city = 'City';
   static const String save = 'Save';

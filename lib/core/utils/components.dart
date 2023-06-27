@@ -71,6 +71,7 @@ class SharedComponents {
     required Function function,
     required String text,
     required BuildContext context,
+    int size = 18,
   }) =>
       TextButton(
         onPressed: () {
@@ -80,6 +81,7 @@ class SharedComponents {
           text.toUpperCase(),
           style: Theme.of(context).textTheme.displayMedium!.copyWith(
                 color: textButtonColor,
+                fontSize: size.sp
               ),
         ),
       );
