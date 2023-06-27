@@ -102,7 +102,7 @@ class MyApp extends StatelessWidget {
         builder: (BuildContext, Orientation, ScreenType) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            title: 'Train D',
+            title: 'TrainD',
             theme: lightTheme(),
             home: SplashScreen(
               nextScreen: AppConstants.widget,
