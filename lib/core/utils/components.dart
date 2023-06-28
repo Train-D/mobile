@@ -79,10 +79,10 @@ class SharedComponents {
         },
         child: Text(
           text.toUpperCase(),
-          style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                color: textButtonColor,
-                fontSize: size.sp
-              ),
+          style: Theme.of(context)
+              .textTheme
+              .displayMedium!
+              .copyWith(color: textButtonColor, fontSize: size.sp),
         ),
       );
   static showToast({
@@ -211,10 +211,10 @@ class SharedComponents {
         child: child,
       );
 
-  static defaultAppBar(
-          {required BuildContext context,
-          bool chooseSeatsScreenAppBar = false,
-          }) =>
+  static defaultAppBar({
+    required BuildContext context,
+    bool chooseSeatsScreenAppBar = false,
+  }) =>
       AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -235,8 +235,8 @@ class SharedComponents {
               ),
               child: IconButton(
                   onPressed: () {
-                   
-                    Navigator.pop(context);
+                   // Navigator.popUntil(context, ModalRoute.withName('/'));
+                     Navigator.pop(context);
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios,
@@ -285,13 +285,7 @@ class SharedComponents {
                   image: AssetImage(
                     '$image',
                   ))
-              : SizedBox(
-                  width: imgWidth,
-                  height: imgHeigh,
-                  child: Image.file(
-                    (File(image)),
-                    fit: BoxFit.cover,
-                  )));
+              : SizedBox(width: imgWidth, height: imgHeigh, child: image));
 
   static defaultBgContainer({
     double width = double.infinity,

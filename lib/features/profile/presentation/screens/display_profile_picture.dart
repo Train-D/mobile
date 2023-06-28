@@ -24,10 +24,7 @@ class DisplayProfilePicture extends StatelessWidget {
                   child: SizedBox(
                       height: 50.h,
                       width: double.infinity,
-                      child: Image.file(
-                        File(cubit.profileImage!.path),
-                        fit: BoxFit.cover,
-                      )),
+                      child: cubit.base64ToImage(cubit.base64Image!)),
                 )),
           );
         },
