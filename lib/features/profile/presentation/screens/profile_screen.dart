@@ -2,6 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/network/local/cache_helper.dart';
 import '../components/profile_components.dart';
 import 'display_profile_picture.dart';
 
@@ -36,7 +37,7 @@ class ProfileScreen extends StatelessWidget {
                       Stack(children: [
                         InkWell(
                           onTap: () async {
-                            if (cubit.isProfileImage) {
+                            if (CacheHelper.getData(key: 'isProfileImage')) {
                               ProfileComponents.profileImageOptions(context, [
                                 ProfileComponents.option(
                                     function: () {
@@ -61,10 +62,10 @@ class ProfileScreen extends StatelessWidget {
                             }
                           },
                           child: SharedComponents.profilePicture(
-                            isProfileImage: cubit.isProfileImage,
-                            image: (cubit.isProfileImage == false
+                            isProfileImage: CacheHelper.getData(key: 'isProfileImage'),
+                            image: (CacheHelper.getData(key: 'isProfileImage') == false
                                 ? '${AppConstants.imagesUrl}$profileIntialImage'
-                                : cubit.profileImage!.path),
+                                : cubit.base64ToImage(cubit.base64Image!)),
                             radius: 40.sp,
                             imgHeigh: 50.sp,
                             imgWidth: 50.sp,
@@ -220,7 +221,7 @@ class ProfileScreen extends StatelessWidget {
                                         context: context,
                                         function: () async {
                                           await cubit.putProfileUserData(
-                                            image: cubit.isProfileImage ? cubit.profileImage : '',
+                                            image: cubit.base64Image ?? '',
                                             firstName:
                                                 cubit.profileFirstNameCon.text,
                                             lastName:
