@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 import '../../../../core/error/failure.dart';
 import '../data%20source/payment_remote_data_source.dart';
@@ -17,8 +18,8 @@ class PaymentRepository extends BasePaymentRepository {
     try {
       var customerIdData = await paymentRemoteDataSource.paymentInfo(parameters);
       return Right(customerIdData);
-    } catch (e) {
-      return Left(ServerFailure('hello, ${e.toString()}'));
+    } on DioError catch (e) {
+      return Left(ServerFailure(e.response!.data['message'].toString()));
     }
   
   }

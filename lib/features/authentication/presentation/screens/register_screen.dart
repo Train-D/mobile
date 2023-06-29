@@ -25,7 +25,26 @@ class SignUpScreen extends StatelessWidget {
             const LoginScreen(),
             context,
           );
+          SharedComponents.showToast(
+            text: cubit.authResponseModel.message,
+            color: Colors.green,
+          );
           cubit.registerClearData();
+        }
+        if (state is RegisterErrorState) {
+          SharedComponents.showAlertDialog(
+              context: context,
+              title: 'Error!',
+              message: cubit.authResponseModel.message,
+              actions: [
+                SharedComponents.defaultButton(
+                    width: 20.w,
+                    context: context,
+                    function: () {
+                      Navigator.pop(context);
+                    },
+                    text: 'Ok')
+              ]);
         }
       },
       builder: (context, state) {
@@ -196,11 +215,11 @@ class SignUpScreen extends StatelessWidget {
                                       email: cubit.signUpEmailCon.text,
                                       userName: cubit.signUpUsernameCon.text,
                                     );
-                                    cubit.changeToastColor();
-                                    SharedComponents.showToast(
+                                    //cubit.changeToastColor();
+                                    /*SharedComponents.showToast(
                                       text: cubit.authResponseModel.message,
                                       color: cubit.toastColor,
-                                    );
+                                    );*/
                                   } else {
                                     cubit.changeAutoValidationMode();
                                   }

@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/utils/app_strings.dart';
-import 'package:traind_app/features/authentication/presentation/components/reset_password_components.dart';
 import 'package:traind_app/features/authentication/presentation/controller/reset_password_cubit/reset_password_cubit.dart';
-import 'package:traind_app/features/authentication/presentation/screens/login_screen.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/components.dart';
 
@@ -18,17 +16,34 @@ class ResetPasswordScreen extends StatelessWidget {
         ResetPasswordCubit cubit = ResetPasswordCubit.get(context);
         // TODO: implement listener
         if (state is ResetPasswordFailureState) {
-          ResetPasswordComponents.alertMessage(
-              context, AppString.errorMessage, cubit.message, () {
-            Navigator.pop(context);
-          });
+          SharedComponents.showAlertDialog(
+              context: context,
+              title: 'Error!',
+              message: cubit.message,
+              actions: [
+                SharedComponents.defaultButton(
+                  width: 20.w,
+                    context: context,
+                    function: () {
+                      Navigator.pop(context);
+                    },
+                    text: 'Ok')
+              ]);
         }
         if (state is ResetPasswordSuccessState) {
-          ResetPasswordComponents.alertMessage(
-              context, AppString.note, cubit.message, () {
-            Navigator.pop(context);
-            SharedComponents.navigateToReplace(LoginScreen(), context);
-          });
+         SharedComponents.showAlertDialog(
+              context: context,
+              title: 'Note...',
+              message: cubit.message,
+              actions: [
+                SharedComponents.defaultButton(
+                  width: 20.w,
+                    context: context,
+                    function: () {
+                      Navigator.pop(context);
+                    },
+                    text: 'Ok')
+              ]);
         }
       },
       builder: (context, state) {

@@ -19,11 +19,24 @@ class PaymentScreen extends StatelessWidget {
       BookingCubit cubit = BookingCubit.get(context);
       if (state is GetPaymentCustomerDataSuccessState) {
         cubit.getTicketData();
-          SharedComponents.navigateTo(const TicketScreen(), context);
+        SharedComponents.navigateTo(const TicketScreen(), context);
       }
       if (state is GetPaymentCustomerDataFailureState) {
-        SharedComponents.showToast(
-            text: cubit.thirdScreenErrorMessage, color: Colors.red);
+        /*SharedComponents.showToast(
+            text: cubit.thirdScreenErrorMessage, color: Colors.red);*/
+        SharedComponents.showAlertDialog(
+            context: context,
+            title: 'Error!',
+            message: cubit.thirdScreenErrorMessage,
+            actions: [
+              SharedComponents.defaultButton(
+                  width: 20.w,
+                  context: context,
+                  function: () {
+                    Navigator.pop(context);
+                  },
+                  text: 'Ok')
+            ]);
       }
     }, builder: (context, state) {
       BookingCubit cubit = BookingCubit.get(context);

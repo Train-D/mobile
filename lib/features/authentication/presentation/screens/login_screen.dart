@@ -3,7 +3,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/features/authentication/presentation/screens/reset_password.dart';
+import 'package:traind_app/features/authentication/presentation/screens/reset_password_screen.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
@@ -29,7 +29,17 @@ class LoginScreen extends StatelessWidget {
           const HomeScreen(),
           context,
         );
+        SharedComponents.showToast(
+          text: cubit.authresponseModel.message,
+          color: Colors.green,
+        );
         cubit.loginClearData();
+      }
+      if(state is LoginErrorState){
+        SharedComponents.showToast(
+          text: cubit.authresponseModel.message,
+          color: Colors.red,
+        );
       }
     }, builder: (context, state) {
       LoginCubit cubit = LoginCubit.get(context);
@@ -121,7 +131,9 @@ class LoginScreen extends StatelessWidget {
                               cubit.changePasswordVisibility();
                             },
                           ),
-                          SizedBox(height: 3.h,),
+                          SizedBox(
+                            height: 3.h,
+                          ),
                           ConditionalBuilder(
                             condition: state is! LoginLoadingState,
                             builder: (context) =>
@@ -134,12 +146,12 @@ class LoginScreen extends StatelessWidget {
                                     userName: cubit.loginUsernameCon.text,
                                     password: cubit.loginPasswordCon.text,
                                   );
-                                  cubit.loginChangeToastColor();
+                                  //cubit.loginChangeToastColor();
                                   //print(cubit.loginToastColor);
-                                  SharedComponents.showToast(
+                                  /*SharedComponents.showToast(
                                     text: cubit.authresponseModel.message,
                                     color: cubit.loginToastColor,
-                                  );
+                                  );*/
                                 } else {
                                   cubit.loginChangeAutoValidationMode();
                                 }

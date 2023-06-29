@@ -46,7 +46,7 @@ class BookingCubit extends Cubit<BookingState> {
   String toDefaultValue = "Select";
   String fromToDefaultDate = 'yyyy/mm/dd';
   dynamic firstScreenErrorMessage = 'Connection Error';
-  dynamic thirdScreenErrorMessage = 'Connection Error or Invalid data';
+  dynamic thirdScreenErrorMessage = 'Connection Error';
   List<String> allStations = ["Select"];
   List<String> toStations = ["Select"];
 
@@ -750,6 +750,7 @@ class BookingCubit extends Cubit<BookingState> {
         }));
     result.fold((failure) {
       debugPrint(failure.toString());
+      thirdScreenErrorMessage = failure.message;
       print(failure);
       emit(GetPaymentCustomerDataFailureState());
     }, (paymentCustomerData) async {
@@ -762,7 +763,8 @@ class BookingCubit extends Cubit<BookingState> {
           amount: seatPrice.toInt() * 100));
       data.fold((failure) {
         debugPrint(failure.toString());
-        print(failure);
+        thirdScreenErrorMessage = failure.message;
+        //print(failure);
         emit(GetPaymentCustomerDataFailureState());
       }, (paymentIdData) {
         //print(paymentIdData);

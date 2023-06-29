@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:dio/dio.dart';
 
 import '../../../../core/error/failure.dart';
 import '../../domain/entities/third%20screen/customer_id_entity.dart';
@@ -17,8 +18,8 @@ class CreditCardRepository extends BaseCreditCardRepository{
     try {
       var paymentCustomerData = await creditCardRemoteDataSource.creditCardInfo(parameters);
       return Right(paymentCustomerData);
-    } catch (e) {
-      return Left(ServerFailure(e.toString()));
+    } on DioError catch (e) {
+      return Left(ServerFailure(e.response!.data['message'].toString()));
     }
   }
   
