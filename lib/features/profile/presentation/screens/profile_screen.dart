@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/core/network/local/cache_helper.dart';
+import '../../../../core/services/services_locator.dart';
 import '../components/profile_components.dart';
 import 'display_profile_picture.dart';
 
@@ -19,240 +20,254 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
-        ProfileCubit cubit = ProfileCubit.get(context);
-        return SharedComponents.linearGradientBg(
-            colors: profileBg,
-            child: Scaffold(
-              backgroundColor: Colors.transparent,
-              appBar: SharedComponents.defaultAppBar(context: context),
-              body: SingleChildScrollView(
-                child: Center(
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 3.h,
-                      ),
-                      Stack(children: [
-                        InkWell(
-                          onTap: () async {
-                            if (CacheHelper.getData(key: 'isProfileImage')) {
-                              ProfileComponents.profileImageOptions(context, [
-                                ProfileComponents.option(
-                                    function: () {
-                                      Navigator.pop(context);
-                                      SharedComponents.navigateTo(
-                                        const DisplayProfilePicture(),
-                                        context,
-                                      );
-                                    },
-                                    icon: Icons.person,
-                                    text: 'See profile picture',
-                                    context: context),
-                                ProfileComponents.option(
-                                    function: () {
-                                      cubit.removeProfilePicture();
-                                      Navigator.pop(context);
-                                    },
-                                    icon: Icons.delete,
-                                    text: 'Remove profile picture',
-                                    context: context),
-                              ]);
-                            }
-                          },
-                          child: SharedComponents.profilePicture(
-                            isProfileImage: CacheHelper.getData(key: 'isProfileImage'),
-                            image: (CacheHelper.getData(key: 'isProfileImage') == false
-                                ? '${AppConstants.imagesUrl}$profileIntialImage'
-                                : cubit.base64ToImage(cubit.base64Image!)),
-                            radius: 40.sp,
-                            imgHeigh: 50.sp,
-                            imgWidth: 50.sp,
+    return SafeArea(child:
+        BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
+      ProfileCubit cubit = ProfileCubit.get(context);
+      return SharedComponents.linearGradientBg(
+          colors: profileBg,
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: SharedComponents.defaultAppBar(context: context),
+            body: state is ProfileLoadingUserDataState ||
+                    state is ProfileFailureUserDataState
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : SingleChildScrollView(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          SizedBox(
+                            height: 3.h,
                           ),
-                        ),
-                        Positioned(
-                          top: 90,
-                          right: 0,
-                          child: CircleAvatar(
-                            //radius: 17.sp,
-                            backgroundColor: lightColor,
-                            child: FittedBox(
-                              child: IconButton(
-                                onPressed: () {
+                          Stack(children: [
+                            InkWell(
+                              onTap: () async {
+                                if (CacheHelper.getData(
+                                    key: 'isProfileImage')) {
                                   ProfileComponents.profileImageOptions(
                                       context, [
                                     ProfileComponents.option(
-                                        function: () async {
-                                          await cubit.pickImageFromCamera();
-                                          // ignore: use_build_context_synchronously
+                                        function: () {
                                           Navigator.pop(context);
+                                          SharedComponents.navigateTo(
+                                            const DisplayProfilePicture(),
+                                            context,
+                                          );
                                         },
-                                        icon: Icons.camera_alt,
-                                        text: 'Take profile picture',
+                                        icon: Icons.person,
+                                        text: 'See profile picture',
                                         context: context),
                                     ProfileComponents.option(
-                                        function: () async {
-                                          await cubit.pickImageFromGallery();
-                                          // ignore: use_build_context_synchronously
+                                        function: () {
+                                          cubit.removeProfilePicture();
                                           Navigator.pop(context);
                                         },
-                                        icon: Icons.image,
-                                        text: 'Select profile picture',
+                                        icon: Icons.delete,
+                                        text: 'Remove profile picture',
                                         context: context),
                                   ]);
-                                },
-                                icon: const Icon(
-                                  Icons.camera_alt,
-                                  color: Colors.brown,
+                                }
+                              },
+                              child: SharedComponents.profilePicture(
+                                isProfileImage:
+                                    CacheHelper.getData(key: 'isProfileImage'),
+                                image: (CacheHelper.getData(
+                                            key: 'isProfileImage') ==
+                                        false
+                                    ? '${AppConstants.imagesUrl}$profileIntialImage'
+                                    : cubit.base64ToImage(cubit.base64Image!)),
+                                radius: 40.sp,
+                                imgHeigh: 50.sp,
+                                imgWidth: 50.sp,
+                              ),
+                            ),
+                            Positioned(
+                              top: 90,
+                              right: 0,
+                              child: CircleAvatar(
+                                //radius: 17.sp,
+                                backgroundColor: lightColor,
+                                child: FittedBox(
+                                  child: IconButton(
+                                    onPressed: () {
+                                      ProfileComponents.profileImageOptions(
+                                          context, [
+                                        ProfileComponents.option(
+                                            function: () async {
+                                              await cubit.pickImageFromCamera();
+                                              // ignore: use_build_context_synchronously
+                                              Navigator.pop(context);
+                                            },
+                                            icon: Icons.camera_alt,
+                                            text: 'Take profile picture',
+                                            context: context),
+                                        ProfileComponents.option(
+                                            function: () async {
+                                              await cubit
+                                                  .pickImageFromGallery();
+                                              // ignore: use_build_context_synchronously
+                                              Navigator.pop(context);
+                                            },
+                                            icon: Icons.image,
+                                            text: 'Select profile picture',
+                                            context: context),
+                                      ]);
+                                    },
+                                    icon: const Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.brown,
+                                    ),
+                                  ),
                                 ),
+                              ),
+                            )
+                          ]),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 25.sp),
+                            child: Form(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    children: [
+                                      Flexible(
+                                        child:
+                                            SharedComponents.defaultTextField(
+                                          controller: cubit.profileFirstNameCon,
+                                          type: TextInputType.text,
+                                          validate: (e) {
+                                            return null;
+                                          },
+                                          label: AppString.firstName,
+                                          radius: AppSizes.textFormFieldRadius,
+                                          bgColor: textFormBgColor,
+                                          textColor: textFormTextColor,
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
+                                      Flexible(
+                                        child:
+                                            SharedComponents.defaultTextField(
+                                          controller: cubit.profileLastNameCon,
+                                          type: TextInputType.text,
+                                          validate: (e) {
+                                            return null;
+                                          },
+                                          label: AppString.lasttName,
+                                          radius: AppSizes.textFormFieldRadius,
+                                          bgColor: textFormBgColor,
+                                          textColor: textFormTextColor,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: AppSizes.spaceBetweenFields,
+                                  ),
+                                  SharedComponents.defaultTextField(
+                                    controller: cubit.profileUsernameCon,
+                                    type: TextInputType.text,
+                                    validate: (e) {
+                                      return null;
+                                    },
+                                    label: AppString.userName,
+                                    radius: AppSizes.textFormFieldRadius,
+                                    bgColor: textFormBgColor,
+                                    textColor: textFormTextColor,
+                                    readOnly: true,
+                                  ),
+                                  SizedBox(
+                                    height: AppSizes.spaceBetweenFields,
+                                  ),
+                                  SharedComponents.defaultTextField(
+                                    controller: cubit.profileEmailCon,
+                                    type: TextInputType.emailAddress,
+                                    validate: (e) {
+                                      return null;
+                                    },
+                                    label: AppString.email,
+                                    radius: AppSizes.textFormFieldRadius,
+                                    bgColor: textFormBgColor,
+                                    textColor: textFormTextColor,
+                                    readOnly: true,
+                                  ),
+                                  SizedBox(
+                                    height: AppSizes.spaceBetweenFields,
+                                  ),
+                                  SharedComponents.defaultTextField(
+                                    controller: cubit.profilePhoneCon,
+                                    type: TextInputType.phone,
+                                    validate: (e) {
+                                      return null;
+                                    },
+                                    label: AppString.phoneNumber,
+                                    radius: AppSizes.textFormFieldRadius,
+                                    bgColor: textFormBgColor,
+                                    textColor: textFormTextColor,
+                                  ),
+                                  SizedBox(
+                                    height: AppSizes.spaceBetweenFields,
+                                  ),
+                                  SharedComponents.defaultTextField(
+                                    controller: cubit.profileCityCon,
+                                    type: TextInputType.text,
+                                    validate: (e) {
+                                      return null;
+                                    },
+                                    label: AppString.city,
+                                    radius: AppSizes.textFormFieldRadius,
+                                    bgColor: textFormBgColor,
+                                    textColor: textFormTextColor,
+                                  ),
+                                  SizedBox(
+                                    height: 4.h,
+                                  ),
+                                  ConditionalBuilder(
+                                      condition: state
+                                          is! ProfileLoadingPostUserDataState,
+                                      builder: (context) =>
+                                          SharedComponents.defaultButton(
+                                            context: context,
+                                            function: () async {
+                                              await cubit.putProfileUserData(
+                                                image: cubit.base64Image ?? '',
+                                                firstName: cubit
+                                                    .profileFirstNameCon.text,
+                                                lastName: cubit
+                                                    .profileLastNameCon.text,
+                                                phoneNumber:
+                                                    cubit.profilePhoneCon.text,
+                                                city: cubit.profileCityCon.text,
+                                              );
+                                              SharedComponents.showToast(
+                                                text: 'Saved Successfully',
+                                                color: Colors.green,
+                                              );
+                                            },
+                                            text: AppString.save,
+                                            width: AppSizes.width(context) / 3,
+                                            height:
+                                                AppSizes.height(context) / 14,
+                                            radius:
+                                                AppSizes.defaultBottomRadius,
+                                          ),
+                                      fallback: (context) => const Center(
+                                            child: CircularProgressIndicator(),
+                                          )),
+                                ],
                               ),
                             ),
                           ),
-                        )
-                      ]),
-                      SizedBox(
-                        height: 3.h,
+                        ],
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 25.sp),
-                        child: Form(
-                          child: Column(
-                            children: [
-                              Row(
-                                children: [
-                                  Flexible(
-                                    child: SharedComponents.defaultTextField(
-                                      controller: cubit.profileFirstNameCon,
-                                      type: TextInputType.text,
-                                      validate: (e) {
-                                        return null;
-                                      },
-                                      label: AppString.firstName,
-                                      radius: AppSizes.textFormFieldRadius,
-                                      bgColor: textFormBgColor,
-                                      textColor: textFormTextColor,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 2.w,
-                                  ),
-                                  Flexible(
-                                    child: SharedComponents.defaultTextField(
-                                      controller: cubit.profileLastNameCon,
-                                      type: TextInputType.text,
-                                      validate: (e) {
-                                        return null;
-                                      },
-                                      label: AppString.lasttName,
-                                      radius: AppSizes.textFormFieldRadius,
-                                      bgColor: textFormBgColor,
-                                      textColor: textFormTextColor,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: AppSizes.spaceBetweenFields,
-                              ),
-                              SharedComponents.defaultTextField(
-                                controller: cubit.profileUsernameCon,
-                                type: TextInputType.text,
-                                validate: (e) {
-                                  return null;
-                                },
-                                label: AppString.userName,
-                                radius: AppSizes.textFormFieldRadius,
-                                bgColor: textFormBgColor,
-                                textColor: textFormTextColor,
-                                readOnly: true,
-                              ),
-                              SizedBox(
-                                height: AppSizes.spaceBetweenFields,
-                              ),
-                              SharedComponents.defaultTextField(
-                                controller: cubit.profileEmailCon,
-                                type: TextInputType.emailAddress,
-                                validate: (e) {
-                                  return null;
-                                },
-                                label: AppString.email,
-                                radius: AppSizes.textFormFieldRadius,
-                                bgColor: textFormBgColor,
-                                textColor: textFormTextColor,
-                                readOnly: true,
-                              ),
-                              SizedBox(
-                                height: AppSizes.spaceBetweenFields,
-                              ),
-                              SharedComponents.defaultTextField(
-                                controller: cubit.profilePhoneCon,
-                                type: TextInputType.phone,
-                                validate: (e) {
-                                  return null;
-                                },
-                                label: AppString.phoneNumber,
-                                radius: AppSizes.textFormFieldRadius,
-                                bgColor: textFormBgColor,
-                                textColor: textFormTextColor,
-                              ),
-                              SizedBox(
-                                height: AppSizes.spaceBetweenFields,
-                              ),
-                              SharedComponents.defaultTextField(
-                                controller: cubit.profileCityCon,
-                                type: TextInputType.text,
-                                validate: (e) {
-                                  return null;
-                                },
-                                label: AppString.city,
-                                radius: AppSizes.textFormFieldRadius,
-                                bgColor: textFormBgColor,
-                                textColor: textFormTextColor,
-                              ),
-                              SizedBox(
-                                height: 4.h,
-                              ),
-                              ConditionalBuilder(
-                                  condition:
-                                      state is! ProfileLoadingPostUserDataState,
-                                  builder: (context) =>
-                                      SharedComponents.defaultButton(
-                                        context: context,
-                                        function: () async {
-                                          await cubit.putProfileUserData(
-                                            image: cubit.base64Image ?? '',
-                                            firstName:
-                                                cubit.profileFirstNameCon.text,
-                                            lastName:
-                                                cubit.profileLastNameCon.text,
-                                            phoneNumber:
-                                                cubit.profilePhoneCon.text,
-                                            city: cubit.profileCityCon.text,
-                                          );
-                                          SharedComponents.showToast(
-                                            text: 'Saved Successfully',
-                                            color: Colors.green,
-                                          );
-                                        },
-                                        text: AppString.save,
-                                        width: AppSizes.width(context) / 3,
-                                        height: AppSizes.height(context) / 14,
-                                        radius: AppSizes.defaultBottomRadius,
-                                      ),
-                                  fallback: (context) => const Center(
-                                        child: CircularProgressIndicator(),
-                                      )),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ));
-      }),
-    );
+          ));
+    }));
   }
 }

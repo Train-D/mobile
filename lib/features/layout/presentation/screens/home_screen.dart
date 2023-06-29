@@ -77,7 +77,7 @@ class HomeScreen extends StatelessWidget {
                 currentIndex: cubit.currentIndex,
                 onTap: (index) {
                   //print(state);
-                  if (index != 1 && state is GetAllDataSuccessState) {
+                  if (index != 1 ) {
                     SharedComponents.navigateTo(cubit.screens[index], context);
                   }
                 },
