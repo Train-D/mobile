@@ -235,8 +235,8 @@ class SharedComponents {
               ),
               child: IconButton(
                   onPressed: () {
-                   // Navigator.popUntil(context, ModalRoute.withName('/'));
-                     Navigator.pop(context);
+                    // Navigator.popUntil(context, ModalRoute.withName('/'));
+                    Navigator.pop(context);
                   },
                   icon: const Icon(
                     Icons.arrow_back_ios,
@@ -317,4 +317,36 @@ class SharedComponents {
         ),
         child: child,
       );
+  static showAlertDialog(
+      {required BuildContext context, required String title, required String message, required List<Widget> actions}) {
+    showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              backgroundColor: Color.fromRGBO(255, 255, 255, 0.85),
+              title: Text(
+                title,
+                style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                      color: Color.fromRGBO(103, 79, 68, 1),
+                      //fontSize: 14.sp
+                    ),
+              ),
+              content: Text(
+                message,
+                style:
+                    Theme.of(context).textTheme.displayMedium!.copyWith(
+                          color: Color.fromRGBO(103, 79, 68, 1),
+                          //fontSize: 14.sp
+                        ),
+              ),
+              actions: actions,
+              
+              contentPadding:  EdgeInsets.symmetric(vertical: 20.sp, horizontal: 20.sp),
+              shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(
+                Radius.circular(10),
+              )),
+            );
+          });
+  }
 }
