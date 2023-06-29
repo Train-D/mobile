@@ -16,7 +16,7 @@ class HomeCubit extends Cubit<HomeState> {
   HomeCubit({
     required this.profileCubit,
   }) : super(HomeInitial()){
-    CacheHelper.saveData(key: 'setProfileImage', value: false);
+    /*CacheHelper.saveData(key: 'setProfileImage', value: false);
     emit(GetAllDataLoadingState());
     profileCubit.getProfileUserData();
     // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
@@ -27,7 +27,7 @@ class HomeCubit extends Cubit<HomeState> {
       } else {
         emit(GetAllDataErrorState('Unexpected error'));
       }
-    });
+    });*/
   }
   static HomeCubit get(context) => BlocProvider.of(context);
   int currentIndex = 1;

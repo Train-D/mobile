@@ -338,6 +338,7 @@ class SharedComponents {
                           color: Color.fromRGBO(103, 79, 68, 1),
                           //fontSize: 14.sp
                         ),
+                        
               ),
               actions: actions,
               

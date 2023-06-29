@@ -20,11 +20,11 @@ class ProfileRepository extends BaseProfileRepository {
     try {
       // ignore: prefer_typing_uninitialized_variables
       var userData;
-      userData = profileLocalDataSource.getProfileUserData();
+     /* userData = profileLocalDataSource.getProfileUserData();
       if (userData != null) {
         //print('cached');
         return Right(userData);
-      }
+      }*/
       //print('Not Cached');
       userData = await profileRemoteDataSource.getProfileUserData();
       return Right(userData);

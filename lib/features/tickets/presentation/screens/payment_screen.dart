@@ -30,6 +30,7 @@ class PaymentScreen extends StatelessWidget {
             message: cubit.thirdScreenErrorMessage,
             actions: [
               SharedComponents.defaultButton(
+                radius: 10.sp,
                   width: 20.w,
                   context: context,
                   function: () {
