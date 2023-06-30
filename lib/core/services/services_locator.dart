@@ -1,6 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:traind_app/features/authentication/data/data%20source/reset_password_remote_data_source.dart';
+import 'package:traind_app/features/tickets/data/data%20source/user_valid_booked_tickets_remote_data_source.dart';
+import 'package:traind_app/features/tickets/data/repository/user_valid_booked_tickets_repository.dart';
+import 'package:traind_app/features/tickets/domain/repository/base_user_valid_booked_tickets_repository.dart';
+import 'package:traind_app/features/tickets/domain/usecase/user_valid_booked_tickets_usecase.dart';
 import '../../features/authentication/data/repository/reset_password_repository.dart';
 import '../../features/authentication/domain/repository/base_reset_password_respository.dart';
 import '../../features/authentication/domain/usecase/reset_password_usecase.dart';
@@ -151,6 +155,13 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseResetPasswordRepository>(
         () => ResetPasswordRepository(resetPasswordRemoteDataSource: sl()));
     sl.registerLazySingleton(() => ResetPasswordUseCase(baseResetPasswordRepository: sl()));
+    //User Valid Booked Tickets
+    sl.registerLazySingleton<UserValidBookedTicketsRemoteDataSource>(
+        () => UserValidBookedTicketsRemoteDataSourceImpl());
+    sl.registerLazySingleton<BaseUserValidBookedTicketsRepository>(
+        () => UserValidBookedTicketsRepository(sl()));
+    sl.registerLazySingleton(() => UserValidBookedTicketsUseCase(sl()));
+
   }
   
   
