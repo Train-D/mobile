@@ -14,7 +14,7 @@ import 'package:traind_app/features/layout/presentation/controller/home_cubit/ho
 import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
 import 'package:traind_app/features/stations/presentation/controller/all_stations_cubit/all_stations_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/controller/payment_cubit/payment_cubit.dart';
+import 'package:traind_app/features/tickets/presentation/controller/userValidBookedTickets_cubit/userValidBookedTickets_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/ticket_cubit/cubit/ticket_cubit.dart';
 
 import 'core/bloc_observer/bloc_observer.dart';
@@ -85,9 +85,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => TrackingCubit(),
         ),
-        BlocProvider(
-          create: (context) => PaymentCubit(),
-        ),
+        
         BlocProvider(
           create: (context) => TicketCubit(),
         ),

@@ -339,7 +339,7 @@ class SharedComponents {
                           //fontSize: 14.sp
                         ),
                         
-              ),
+              ), 
               actions: actions,
               
               contentPadding:  EdgeInsets.symmetric(vertical: 20.sp, horizontal: 20.sp),
