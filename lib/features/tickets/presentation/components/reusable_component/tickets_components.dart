@@ -1,3 +1,4 @@
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -6,6 +7,7 @@ import '../../../../../core/global/theme/theme_data/theme_data_light.dart';
 import '../../../../../core/utils/app_sizes.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/components.dart';
+import 'package:barcode/barcode.dart';
 
 class TicketsComponents {
   static Widget defaultDropDownButtonContainer(dynamic child) => Container(
@@ -16,18 +18,18 @@ class TicketsComponents {
             borderRadius: BorderRadius.circular(10)),
         child: Center(
             child: FittedBox(
-              //width: 20.w,
-              child: child)),
+                //width: 20.w,
+                child: child)),
       );
 
   // ignore: non_constant_identifier_names
   static Widget label(BuildContext context, String label) => Text(
-    '$label:',
-    style: Theme.of(context)
-        .textTheme
-        .displayLarge!
-        .copyWith(fontWeight: FontWeight.w700, color: Colors.black),
-  );
+        '$label:',
+        style: Theme.of(context)
+            .textTheme
+            .displayLarge!
+            .copyWith(fontWeight: FontWeight.w700, color: Colors.black),
+      );
   static Widget labelField(
           {required String text,
           required dynamic field,
@@ -188,8 +190,6 @@ class TicketsComponents {
         shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.all(
           Radius.circular(10),
-        )
-        )
-        ,
+        )),
       );
 }

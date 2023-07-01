@@ -48,6 +48,11 @@ class GetTicketDataLoadingState extends BookingState {}
 class GetTicketDataSuccessState extends BookingState {}
 class GetTicketDataFailureState extends BookingState {}
 
+class DownloadWidgetLoadingState extends BookingState {}
+class DownloadWidgetSuccessState extends BookingState {}
+class DownloadWidgetErrorState extends BookingState {}
+
+
 class ChangeDefualtDateState extends BookingState {}
 
 class GetToStationsDataState extends BookingState {}

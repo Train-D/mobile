@@ -1,8 +1,10 @@
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -25,6 +27,8 @@ import '../../../domain/usecase/credit_card_usecase.dart';
 import '../../../domain/usecase/stations_usecase.dart';
 import '../../../data/models/first screen/trip_times_model.dart';
 import '../../../domain/usecase/train_info_usecase.dart';
+import 'dart:ui' as ui;
+import 'package:path_provider/path_provider.dart';
 
 part 'booking_state.dart';
 
@@ -81,6 +85,35 @@ class BookingCubit extends Cubit<BookingState> {
       name: name,
     );
     return result['filePath'];
+  }
+
+  final GlobalKey globalKey = GlobalKey();
+
+  Future<void> captureWidget() async {
+    try {
+       emit(DownloadWidgetLoadingState());
+      final RenderRepaintBoundary boundary =
+          globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
+
+      final ui.Image image = await boundary.toImage(pixelRatio: 1.0);
+
+      final ByteData? byteData =
+          await image.toByteData(format: ui.ImageByteFormat.png);
+
+      final Uint8List pngBytes = byteData!.buffer.asUint8List();
+      
+      //save the image to the gallery
+      final result = await ImageGallerySaver.saveImage(pngBytes);
+
+      if (result['isSuccess'] == true) {
+        emit(DownloadWidgetSuccessState());
+      } else {
+        emit(DownloadWidgetErrorState());
+      }
+    } catch (e) {
+       emit(DownloadWidgetErrorState());
+      print(e.toString());
+    }
   }
 
   bool showDialog = false;

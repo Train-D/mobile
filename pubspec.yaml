@@ -29,9 +29,12 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  barcode: ^2.2.4
+  barcode_widget: ^2.0.4
   basic_utils: ^5.5.3
   bloc: ^8.1.1
   conditional_builder_null_safety: ^0.0.6
+  connectivity_plus: ^4.0.1
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
   dio: ^5.1.1
@@ -40,6 +43,7 @@ dependencies:
     sdk: flutter
   flutter_bloc: ^8.1.2
   flutter_credit_card: ^3.0.6
+  flutter_launcher_icons: ^0.13.1
   flutter_phoenix: ^1.1.0
   fluttertoast: ^8.2.1
   get_it: ^7.2.0
@@ -48,13 +52,14 @@ dependencies:
   image_stack: ^2.1.1
   intl: ^0.18.1
   material: ^1.0.0+2
+  measured_size: ^1.0.0
+  path_provider: ^2.0.15
   permission_handler: ^10.2.0
   responsive_sizer: ^3.1.1
   restart_app: ^1.1.0+1
   screenshot: ^2.1.0
   shared_preferences: ^2.1.1
   swipe: ^0.0.1
-  flutter_launcher_icons: ^0.13.1
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:

@@ -1,3 +1,4 @@
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -40,46 +41,47 @@ class TicketScreen extends StatelessWidget {
               controller: cubit.screenshotCon,
               child: Scaffold(
                 backgroundColor: transparent,
+                appBar: SharedComponents.defaultAppBar(context: context),
                 //appBar: SharedComponents.defaultAppBar(context: context),
                 body: state is GetTicketDataLoadingState
                     ? const Center(child: CircularProgressIndicator())
                     : SingleChildScrollView(
-                        child: Column(children: [
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          Padding(
+                        child: Center(
+                          child: Column(children: [
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 25,
                               ),
                               child: Center(
                                 child: ticketData,
                               ),
-                              ),
-                          SizedBox(
-                            height: 2.h,
-                          ),
-                          SharedComponents.defaultButton(
-                            context: context,
-                            function: () async {
-                              //final ticket = await cubit.screenshotCon.capture();
-                              final ticket = await cubit.screenshotCon
-                                  .captureFromWidget(ticketData);
-                              await cubit.saveImage(ticket);
-                              cubit.showDialog = true;
-                              //print({'resulltttttt $res'});
-                              // ignore: use_build_context_synchronously
-                              showTicketAlertDialog(context: context, resetData: cubit.resetData());
-                            },
-                            text: AppString.download,
-                            width: AppSizes.width(context) / 2.5,
-                            height: AppSizes.height(context) / 14,
-                            radius: AppSizes.defaultBottomRadius,
-                            withIcon: true,
-                            icon: Icons.arrow_downward_outlined,
-                            iconSize: 18.sp,
-                          ),
-                        ]),
+                            ),
+                            SizedBox(
+                              height: 2.h,
+                            ),
+                            SharedComponents.defaultButton(
+                              context: context,
+                              function: () async {
+                                final ticket = await cubit.screenshotCon
+                                    .captureFromWidget(ticketData);
+                                await cubit.saveImage(ticket);
+                                cubit.showDialog = true;
+                                //await cubit.captureWidget();
+                                showTicketAlertDialog(context: context);
+                              },
+                              text: AppString.download,
+                              width: AppSizes.width(context) / 2.5,
+                              height: AppSizes.height(context) / 14,
+                              radius: AppSizes.defaultBottomRadius,
+                              withIcon: true,
+                              icon: Icons.arrow_downward_outlined,
+                              iconSize: 18.sp,
+                            ),
+                          ]),
+                        ),
                       ),
               )));
     }));
@@ -123,8 +125,10 @@ Widget trainStack({
         ),
       ],
     );
-
-Widget cutsAndDivider() => Row(
+Widget cutsAndDivider({
+  required BuildContext context,
+}) =>
+    Row(
       children: [
         Image(
           image: AssetImage(
@@ -132,11 +136,21 @@ Widget cutsAndDivider() => Row(
           ),
         ),
         const Spacer(),
-        Image(
-          image: AssetImage(
-            '${AppConstants.vectorsUrl}$ticketDivider',
+        Row(children: [
+          // TextButton(
+          //   onPressed: () {
+          //     print(wid);
+          //   },
+          //   child: Text('test'),
+          // ),
+          //for (int i = 0; i < (wid - 103) / 9; i++)
+          Image(
+            fit: BoxFit.fitWidth,
+            image: AssetImage(
+              '${AppConstants.vectorsUrl}tss.png',
+            ),
           ),
-        ),
+        ]),
         const Spacer(),
         Image(
           image: AssetImage(
@@ -234,16 +248,31 @@ Widget buildTicket(
             title: AppString.seat,
             label: '$classs$coachNumber-$seatNumber',
           ),
-          cutsAndDivider(),
+          const SizedBox(
+            height: 20,
+          ),
+          cutsAndDivider(
+            context: context,
+          ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(40),
-                child: TicketsComponents.priceRow(
-                  context: context,
-                  price: price,
-                ),
+              TicketsComponents.priceRow(
+                context: context,
+                price: price,
               ),
+              Container(
+                color: lightColor,
+                child: Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: BarcodeWidget(
+                    barcode: Barcode.qrCode(),
+                    data: 'From: $from ($startTime)\nTo: $to ($endTime)\nPassenger: $name\nDate: $date\nSeat: $classs$coachNumber-$seatNumber',
+                    width: 70,
+                    height: 70,
+                  ),
+                ),
+              )
             ],
           ),
         ],
@@ -252,7 +281,6 @@ Widget buildTicket(
 
 Widget alertDialogTicketContent({
   required BuildContext context,
-  required Function resetData
 }) =>
     Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -273,27 +301,30 @@ Widget alertDialogTicketContent({
         const SizedBox(
           height: 20,
         ),
-        SharedComponents.defaultButton(
-          context: context,
-          function: () {
-            SharedComponents.navigateToRemove(
-              context,
-              const HomeScreen(),
-              
-            );
-            resetData;
-          },
-          text: AppString.backToHome,
-          width: 150,
-          radius: AppSizes.defaultBottomRadius,
-          textSize: 16,
-        ),
+        BlocConsumer<BookingCubit, BookingState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              var cubit = BookingCubit.get(context);
+              return SharedComponents.defaultButton(
+                context: context,
+                function: () {
+                  cubit.resetData();
+                  SharedComponents.navigateToRemove(
+                    context,
+                    const HomeScreen(),
+                  );
+                },
+                text: AppString.backToHome,
+                width: 150,
+                radius: AppSizes.defaultBottomRadius,
+                textSize: 16,
+              );
+            }),
       ],
     );
 
 showTicketAlertDialog({
   required BuildContext context,
-  required Function resetData
 }) {
   showDialog(
     barrierDismissible: false,
@@ -301,7 +332,7 @@ showTicketAlertDialog({
     builder: (BuildContext context) {
       return TicketsComponents.defaultAlertDialog(
         height: 220,
-        content: alertDialogTicketContent(context: context, resetData: resetData),
+        content: alertDialogTicketContent(context: context),
       );
     },
   );
