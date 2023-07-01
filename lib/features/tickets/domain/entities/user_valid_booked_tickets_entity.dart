@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class UserValidBookedTicketsEntity extends Equatable {
-  dynamic userValidBookedTickets;
+  List<Map<String, dynamic>> userValidBookedTickets;
   UserValidBookedTicketsEntity({
     required this.userValidBookedTickets,
   });

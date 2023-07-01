@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../../core/network/local/cache_helper.dart';
 import '../../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/app_images.dart';
@@ -15,20 +13,8 @@ class HomeCubit extends Cubit<HomeState> {
   final ProfileCubit profileCubit;
   HomeCubit({
     required this.profileCubit,
-  }) : super(HomeInitial()){
-    /*CacheHelper.saveData(key: 'setProfileImage', value: false);
-    emit(GetAllDataLoadingState());
-    profileCubit.getProfileUserData();
-    // ignore: avoid_types_as_parameter_names, non_constant_identifier_names
-    profileCubit.stream.listen((ProfileState) {
-      //print(FromToState);
-      if (ProfileState is ProfileSuccessUserDataState) {
-        emit(GetAllDataSuccessState());
-      } else {
-        emit(GetAllDataErrorState('Unexpected error'));
-      }
-    });*/
-  }
+  }) : super(HomeInitial());
+
   static HomeCubit get(context) => BlocProvider.of(context);
   int currentIndex = 1;
   bool getStationsFromApiIsDone = false;

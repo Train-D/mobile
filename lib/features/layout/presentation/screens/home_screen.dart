@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/features/tickets/presentation/screens/user_valid_booked_tickets_screen.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
 import '../../../../core/utils/app_images.dart';
+import '../../../tickets/presentation/screens/user_valid_booked_tickets_screen.dart';
 import '../component/layout.dart';
 import '../controller/home_cubit/home_cubit.dart';
 import '../controller/home_cubit/home_state.dart';
@@ -34,9 +34,7 @@ class HomeScreen extends StatelessWidget {
                   linearGradientbgColor: homeBg,
                   height: 50.h,
                   topRedius: 30.sp,
-                  child: state is GetAllDataLoadingState
-                      ? const Center(child: CircularProgressIndicator())
-                      : Column(
+                  child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             SharedComponents.defaultButton(

@@ -19,7 +19,7 @@ class UserValidBookedTicketsRemoteDataSourceImpl extends UserValidBookedTicketsR
     dio.options.headers['Authorization'] =
         'Bearer ${CacheHelper.getData(key: "token")}';
     var response = await dio.get('${ApiConstants.baseUrl}${ApiConstants.userBookedTickets}');
-    UserValidBookedTicketsEntity userValidBookedTicketsEntity = UserValidBookedTicketsModel(userValidBookedTickets: response);
+    UserValidBookedTicketsEntity userValidBookedTicketsEntity = UserValidBookedTicketsModel(userValidBookedTickets: List.castFrom(response.data));
     return userValidBookedTicketsEntity;
   }
 
