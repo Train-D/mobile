@@ -25,7 +25,7 @@ class TicketScreen extends StatelessWidget {
           context: context,
           startTime: cubit.ticketInfoModel.startTime,
           endTime: cubit.ticketInfoModel.endTime,
-          idNumber: cubit.ticketInfoModel.ticketId.toString(),
+          idNumber: 'Ticket ID: ${cubit.ticketInfoModel.ticketId.toString()}',
           name: cubit.ticketInfoModel.passengerName,
           date: cubit.ticketInfoModel.date,
           price: cubit.ticketInfoModel.price,
@@ -267,7 +267,8 @@ Widget buildTicket(
                   padding: const EdgeInsets.all(5),
                   child: BarcodeWidget(
                     barcode: Barcode.qrCode(),
-                    data: 'From: $from ($startTime)\nTo: $to ($endTime)\nPassenger: $name\nDate: $date\nSeat: $classs$coachNumber-$seatNumber',
+                    data:
+                        'From: $from ($startTime)\nTo: $to ($endTime)\nPassenger: $name\nDate: $date\nSeat: $classs$coachNumber-$seatNumber',
                     width: 70,
                     height: 70,
                   ),
