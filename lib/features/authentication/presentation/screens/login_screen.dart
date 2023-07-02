@@ -44,7 +44,12 @@ class LoginScreen extends StatelessWidget {
     }, builder: (context, state) {
       LoginCubit cubit = LoginCubit.get(context);
       return SafeArea(
-        child: SharedComponents.screenBg(
+        child: GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child:
+        SharedComponents.screenBg(
           imageUrl: '${AppConstants.imagesUrl}$loginBg',
           context: context,
           child: Scaffold(
@@ -140,6 +145,8 @@ class LoginScreen extends StatelessWidget {
                                 SharedComponents.defaultButton(
                               context: context,
                               function: () async {
+                                FocusScope.of(context)
+                                            .requestFocus(new FocusNode());
                                 if (cubit.loginFormKey.currentState!
                                     .validate()) {
                                   await cubit.login(
@@ -216,6 +223,7 @@ class LoginScreen extends StatelessWidget {
             // Colum
           ),
         ),
+      )
       );
     });
   }

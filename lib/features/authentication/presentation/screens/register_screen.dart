@@ -51,7 +51,12 @@ class SignUpScreen extends StatelessWidget {
       builder: (context, state) {
         RegisterCubit cubit = RegisterCubit.get(context);
         return SafeArea(
-          child: SharedComponents.screenBg(
+          child: GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child:
+          SharedComponents.screenBg(
             imageUrl: '${AppConstants.imagesUrl}$signupBg',
             context: context,
             child: Scaffold(
@@ -207,6 +212,8 @@ class SignUpScreen extends StatelessWidget {
                                   SharedComponents.defaultButton(
                                 context: context,
                                 function: () async {
+                                  FocusScope.of(context)
+                                            .requestFocus(new FocusNode());
                                   if (cubit.registerFormKey.currentState!
                                       .validate()) {
                                     await cubit.userRegister(
@@ -245,6 +252,7 @@ class SignUpScreen extends StatelessWidget {
               // Colum
             ),
           ),
+        )
         );
       },
     );
