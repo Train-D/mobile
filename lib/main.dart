@@ -83,7 +83,7 @@ class MyApp extends StatelessWidget {
           ),
         ),
         BlocProvider(
-          create: (context) => TrackingCubit(),
+          create: (context) => TrackingCubit(sl()),
         ),
         
         BlocProvider(

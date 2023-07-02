@@ -5,9 +5,13 @@ import 'package:traind_app/features/tickets/data/data%20source/user_valid_booked
 import 'package:traind_app/features/tickets/data/repository/user_valid_booked_tickets_repository.dart';
 import 'package:traind_app/features/tickets/domain/repository/base_user_valid_booked_tickets_repository.dart';
 import 'package:traind_app/features/tickets/domain/usecase/user_valid_booked_tickets_usecase.dart';
+import 'package:traind_app/features/track/data/data%20source/track_remote_data_source.dart';
+import 'package:traind_app/features/track/data/repository/track_repository.dart';
+import 'package:traind_app/features/track/domain/repository/base_track_repository.dart';
 import '../../features/authentication/data/repository/reset_password_repository.dart';
 import '../../features/authentication/domain/repository/base_reset_password_respository.dart';
 import '../../features/authentication/domain/usecase/reset_password_usecase.dart';
+import '../../features/track/domain/usecase/get_track_info_usecase.dart';
 import 'api_service.dart';
 import '../../features/authentication/data/data%20source/login_remote_data_source.dart';
 import '../../features/authentication/data/data%20source/register_remote_data_source.dart';
@@ -154,7 +158,8 @@ class ServicesLocator {
         () => ResetPasswordRemoteDataSourceImpl());
     sl.registerLazySingleton<BaseResetPasswordRepository>(
         () => ResetPasswordRepository(resetPasswordRemoteDataSource: sl()));
-    sl.registerLazySingleton(() => ResetPasswordUseCase(baseResetPasswordRepository: sl()));
+    sl.registerLazySingleton(
+        () => ResetPasswordUseCase(baseResetPasswordRepository: sl()));
     //User Valid Booked Tickets
     sl.registerLazySingleton<UserValidBookedTicketsRemoteDataSource>(
         () => UserValidBookedTicketsRemoteDataSourceImpl(apiService: sl()));
@@ -162,8 +167,11 @@ class ServicesLocator {
         () => UserValidBookedTicketsRepository(sl()));
     sl.registerLazySingleton(() => UserValidBookedTicketsUseCase(sl()));
 
+    //track
+    sl.registerLazySingleton<TrackRemoteDataSource>(
+        () => TrackRemoteDataSourceImpl(sl()));
+    sl.registerLazySingleton<BaseTrackRepository>(
+        () => TrackRepository(sl()));
+    sl.registerLazySingleton(() => GetTrackInfoUsecase(sl()));
   }
-  
-  
-
 }

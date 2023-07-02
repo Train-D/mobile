@@ -14,7 +14,12 @@ class TrainIdScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TrackingCubit, TrackingState>(builder: (context, state) {
+    return BlocConsumer<TrackingCubit, TrackingState>(
+        listener: (context, state) {
+      if (state is GetTrackInfoSuccessState) {
+        SharedComponents.navigateTo(const TrackingScreen(), context);
+      }
+    }, builder: (context, state) {
       TrackingCubit cubit = TrackingCubit.get(context);
       return SafeArea(
           child: SharedComponents.screenBg(
@@ -96,9 +101,8 @@ class TrainIdScreen extends StatelessWidget {
                               height: 1.5.h,
                             ),
                             InkWell(
-                              onTap: () {
-                                SharedComponents.navigateTo(
-                                    const TrackingScreen(), context);
+                              onTap: () async {
+                                await cubit.getTrackInfo(cubit.trainId.text);
                               },
                               child: Container(
                                 height: 7.h,
