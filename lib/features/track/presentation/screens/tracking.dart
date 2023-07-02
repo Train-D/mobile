@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -36,13 +39,23 @@ class TrackingScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      GoogleMap(
+                        mapType: MapType.hybrid,
+                        initialCameraPosition: CameraPosition(
+                          target: LatLng(37.42796133580664, -122.085749655962),
+                          zoom: 14.4746,
+                        ),
+                        onMapCreated: (GoogleMapController controller) {
+                          Completer<GoogleMapController>().complete(controller);
+                        },
+                      ),
                       SizedBox(
                         height: AppSizes.height(context) * 0.87,
                       ),
                       Swipe(
                         onSwipeUp: () {
-                          TrackingComponents.bottomModelSheet(
-                              context, currTime, '8.30', formBegin, 'pm', fraction);
+                          TrackingComponents.bottomModelSheet(context, currTime,
+                              '8.30', formBegin, 'pm', fraction);
                         },
                         child: Container(
                           width: double.infinity,
@@ -52,7 +65,9 @@ class TrackingScreen extends StatelessWidget {
                               borderRadius: BorderRadius.only(
                                   topLeft: Radius.circular(30.sp),
                                   topRight: Radius.circular(30.sp))),
-                          child: Image.asset('${AppConstants.imagesUrl}$bar'),
+                          child: Image.asset(
+                            '${AppConstants.imagesUrl}$bar',
+                          ),
                         ),
                       )
                     ],
