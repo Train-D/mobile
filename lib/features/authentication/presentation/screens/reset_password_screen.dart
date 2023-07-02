@@ -51,7 +51,12 @@ class ResetPasswordScreen extends StatelessWidget {
       builder: (context, state) {
         ResetPasswordCubit cubit = ResetPasswordCubit.get(context);
         return SafeArea(
-          child: SharedComponents.linearGradientBg(
+          child: GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: 
+          SharedComponents.linearGradientBg(
             colors: onBoardingBg,
             child: Scaffold(
               backgroundColor: transparent,
@@ -120,6 +125,9 @@ class ResetPasswordScreen extends StatelessWidget {
                               child: SharedComponents.defaultButton(
                                   context: context,
                                   function: () {
+                                     FocusScope.of(context)
+                                            .requestFocus(new FocusNode());
+                                            
                                     cubit.resetPassword();
                                   },
                                   text: AppString.sendInstructions,
@@ -133,6 +141,7 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
             ),
           ),
+        )
         );
       },
     );

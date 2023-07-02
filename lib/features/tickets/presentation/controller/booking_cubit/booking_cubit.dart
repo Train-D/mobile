@@ -55,6 +55,7 @@ class BookingCubit extends Cubit<BookingState> {
   List<String> toStations = ["Select"];
 
   //booking third screen data
+  var paymentFormKey = GlobalKey<FormState>();
   var cardNumber = TextEditingController();
   var expiryYear = TextEditingController();
   var expiryMonth = TextEditingController();

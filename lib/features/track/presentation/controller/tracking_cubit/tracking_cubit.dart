@@ -12,9 +12,9 @@ class TrackingCubit extends Cubit<TrackingState> {
   ) : super(TrackingInitial());
 
   static TrackingCubit get(context) => BlocProvider.of(context);
-
+  var trackingFormKey = GlobalKey<FormState>();
   var trainId = TextEditingController();
-
+  String message = '';
   final GetTrackInfoUsecase trackInfoUsecase;
 
   Future<void> getTrackInfo(String ticketId) async {
@@ -22,6 +22,7 @@ class TrackingCubit extends Cubit<TrackingState> {
     var result = await trackInfoUsecase.call(ticketId);
     result.fold((failure) {
       print(failure.toString());
+      message = failure.message.toString();
       emit(GetTrackInfoFailureState());
     }, (trackInfo) {
       print(trackInfo);
