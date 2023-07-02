@@ -6,6 +6,8 @@ import 'package:traind_app/features/tickets/presentation/screens/ticket_screen.d
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/services/services_locator.dart';
+import '../../../../core/utils/app_constants.dart';
+import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
 import '../components/reusable_component/tickets_components.dart';
@@ -36,30 +38,29 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
                   appBar: SharedComponents.defaultAppBar(context: context),
                   body: state is UserValidBookedTicketsLoadingState
                       ? Center(child: CircularProgressIndicator())
-                      : SingleChildScrollView(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              SizedBox(width: double.infinity,),
-                             
-                              buildTicket(
-                                    context: context,
-                                    startTime: '2:40 PM',
-                                    endTime: '7:20 PM',
-                                    idNumber: '9855',
-                                    name: 'Hodaahmed',
-                                    date: '30/06/2023',
-                                    price: 10,
-                                    classs: 'A',
-                                    seatNumber: 1,
-                                    coachNumber: 1,
-                                    time: '04:40',
-                                    from: 'Alexandria',
-                                    to: 'Cairo'),
-                                    
-                            ],
-                          ),
-                        ),
+                      : Column(
+                        //crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text('All Your Valid Tickets', style: Theme.of(context).textTheme.displayLarge,),
+                          Expanded(child: 
+                          ListView.builder(itemCount: cubit.userValidBookedTicketsModel.userValidBookedTickets.length,
+                            itemBuilder:(context, index) => buildTicket(
+                                  context: context,
+                                  startTime: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['startTime'],
+                                  endTime: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['endTime'],
+                                  idNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['ticketId'].toString(),
+                                  name: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['passengerName'],
+                                  date: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['date'],
+                                  price: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['price'].toDouble(),
+                                  classs: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['className'],
+                                  seatNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['seatNumber'].toInt(),
+                                  coachNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['coachNumber'].toInt(),
+                                  time: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['duration'],
+                                  from: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['from'],
+                                  to: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['to']),)
+                          )
+                        ],
+                      ),
                 ),
               ));
             }));
@@ -80,89 +81,129 @@ Widget buildTicket(
         required String time,
         required String from,
         required String to}) =>
-    Container(
-      width: 95.w,
-      height: 50.h,
-      decoration: BoxDecoration(
-        color: ticketColor,
-        borderRadius: BorderRadius.circular(50),
-      ),
-      child: Column(
-        children: [
-          SizedBox(height: 5.h,),
-          SizedBox(
-            height: 8.h,
-            child: trainStack(
-              context: context,
-              time: time,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                TicketsComponents.twoText(
-                  context: context,
-                  title: from,
-                  label: startTime,
-                ),
-                TicketsComponents.twoText(
-                  context: context,
-                  title: to,
-                  label: endTime,
-                ),
-              ],
-            ),
-          ),
-          const SizedBox(
-            height: 2,
-          ),
-          TicketsComponents.idNumberContainer(
-            context: context,
-            idNumber: idNumber,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 30,
-              vertical: 15,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                
-                TicketsComponents.twoText(
-                  context: context,
-                  title: AppString.date,
-                  label: date,
-                ),
-                TicketsComponents.twoText(
-            context: context,
-            title: AppString.seat,
-            label: '$classs$coachNumber-$seatNumber',
-          ),
-              ],
-            ),
-          ),
-          
-          const SizedBox(
-            height: 10,
-          ),
-          cutsAndDivider(
-            context: context,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    Padding(
+      padding: EdgeInsets.all(15.sp),
+      child: Container(
+        width: 95.w,
+        height: 40.h,
+        decoration: BoxDecoration(
+          color: ticketColor,
+          borderRadius: BorderRadius.circular(20),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              TicketsComponents.priceRow(
-                context: context,
-                price: price,
+              SizedBox(
+                height: 2.h,
               ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.sp,
+                  vertical: 10.sp,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TicketsComponents.twoText(
+                      context: context,
+                      title: 'Ticket ID',
+                      label:  idNumber,
+                    ),
+                    TicketsComponents.twoText(
+                      context: context,
+                      title: AppString.seat,
+                      label: '$classs$coachNumber-$seatNumber',
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 8.h,
+                child: trainStack(
+                  context: context,
+                  time: time,
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.sp,
+                  vertical: 10.sp,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TicketsComponents.twoText(
+                      context: context,
+                      title: from,
+                      label: startTime,
+                    ),
+                    TicketsComponents.twoText(
+                      context: context,
+                      title: to,
+                      label: endTime,
+                    ),
+                  ],
+                ),
+              ),
+             SizedBox(
+                height: 2.h,
+              ),
+            
+              divider(
+                context: context,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: 20.sp,
+                  vertical: 10.sp,
+                ),
+              child:Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                   TicketsComponents.twoText(
+                      context: context,
+                      title: AppString.date,
+                      label: date,
+                    ),
+                  TicketsComponents.priceRow(
+                    context: context,
+                    price: price,
+                  ),
+                ],
+              ))
             ],
+          ),
+        ),
+      ),
+    );
+
+
+Widget divider({
+  required BuildContext context,
+}) =>
+    SizedBox(
+      width: double.infinity,
+      child: Row(
+        children: [
+          Image(
+            image: AssetImage(
+              '${AppConstants.vectorsUrl}$ticketLeftCut',
+            ),
+          ),
+          Expanded(
+            child: Image(
+              fit: BoxFit.fitWidth,
+              image: AssetImage(
+                '${AppConstants.vectorsUrl}Line 42.png',
+              ),
+            ),
+          ),
+          Image(
+            image: AssetImage(
+              '${AppConstants.vectorsUrl}$ticketRightCut',
+            ),
           ),
         ],
       ),
     );
+

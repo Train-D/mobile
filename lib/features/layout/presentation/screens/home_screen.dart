@@ -41,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                               context: context,
                               function: () {
                                 SharedComponents.navigateTo(
-                                  FromToScreen(),
+                                 FromToScreen(),
                                   //UserValidBookedTicketsScreen(),
                                   context,
                                 );
@@ -65,6 +65,14 @@ class HomeScreen extends StatelessWidget {
                             homeButton(
                               label: AppString.stations,
                               screen: const StationsScreen(),
+                              context: context,
+                            ),
+                            SizedBox(
+                              height: AppSizes.height(context) * 0.02,
+                            ),
+                            homeButton(
+                              label: 'All Tickets',
+                              screen: const UserValidBookedTicketsScreen(),
                               context: context,
                             ),
                           ],

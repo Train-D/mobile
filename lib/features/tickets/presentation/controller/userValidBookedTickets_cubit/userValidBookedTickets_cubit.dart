@@ -25,9 +25,9 @@ class UserValidBookedTicketsCubit extends Cubit<UserValidBookedTicketsState> {
       debugPrint(failure.toString());
       emit(UserValidBookedTicketsFailureState());
     }, (userValidBookedTickets) {
-      print(userValidBookedTickets);
-      /*userValidBookedTicketsModel = UserValidBookedTicketsModel(
-          userValidBookedTickets: userValidBookedTickets);*/
+      //print(userValidBookedTickets);
+      userValidBookedTicketsModel = UserValidBookedTicketsModel(
+          userValidBookedTickets: userValidBookedTickets.userValidBookedTickets);
       print(userValidBookedTicketsModel);
       //assignProfileUserDataToTextFields(userData);
       emit(UserValidBookedTicketsSuccessState());

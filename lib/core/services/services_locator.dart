@@ -157,7 +157,7 @@ class ServicesLocator {
     sl.registerLazySingleton(() => ResetPasswordUseCase(baseResetPasswordRepository: sl()));
     //User Valid Booked Tickets
     sl.registerLazySingleton<UserValidBookedTicketsRemoteDataSource>(
-        () => UserValidBookedTicketsRemoteDataSourceImpl());
+        () => UserValidBookedTicketsRemoteDataSourceImpl(apiService: sl()));
     sl.registerLazySingleton<BaseUserValidBookedTicketsRepository>(
         () => UserValidBookedTicketsRepository(sl()));
     sl.registerLazySingleton(() => UserValidBookedTicketsUseCase(sl()));
