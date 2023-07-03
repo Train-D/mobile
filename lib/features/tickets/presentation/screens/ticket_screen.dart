@@ -41,7 +41,7 @@ class TicketScreen extends StatelessWidget {
               controller: cubit.screenshotCon,
               child: Scaffold(
                 backgroundColor: transparent,
-               // appBar: SharedComponents.defaultAppBar(context: context),
+               appBar: SharedComponents.defaultAppBar(context: context),
                 //appBar: SharedComponents.defaultAppBar(context: context),
                 body: state is GetTicketDataLoadingState
                     ? const Center(child: CircularProgressIndicator())
@@ -268,7 +268,7 @@ Widget buildTicket(
                   child: BarcodeWidget(
                     barcode: Barcode.qrCode(),
                     data:
-                        'From: $from ($startTime)\nTo: $to ($endTime)\nPassenger: $name\nDate: $date\nSeat: $classs$coachNumber-$seatNumber',
+                        'ID: $idNumber\nFrom: $from ($startTime)\nTo: $to ($endTime)\nPassenger: $name\nDate: $date\nSeat: $classs$coachNumber-$seatNumber',
                     width: 70,
                     height: 70,
                   ),

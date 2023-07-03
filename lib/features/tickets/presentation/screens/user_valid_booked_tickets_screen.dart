@@ -37,173 +37,220 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
                   backgroundColor: transparent,
                   appBar: SharedComponents.defaultAppBar(context: context),
                   body: state is UserValidBookedTicketsLoadingState
-                      ? Center(child: CircularProgressIndicator())
+                      ? const Center(child: CircularProgressIndicator())
                       : Column(
-                        //crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text('All Your Valid Tickets', style: Theme.of(context).textTheme.displayLarge,),
-                          Expanded(child: 
-                          ListView.builder(itemCount: cubit.userValidBookedTicketsModel.userValidBookedTickets.length,
-                            itemBuilder:(context, index) => buildTicket(
-                                  context: context,
-                                  startTime: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['startTime'],
-                                  endTime: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['endTime'],
-                                  idNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['ticketId'].toString(),
-                                  name: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['passengerName'],
-                                  date: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['date'],
-                                  price: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['price'].toDouble(),
-                                  classs: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['className'],
-                                  seatNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['seatNumber'].toInt(),
-                                  coachNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['coachNumber'].toInt(),
-                                  time: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['duration'],
-                                  from: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['from'],
-                                  to: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['to']),)
-                          )
-                        ],
-                      ),
+                          children: [
+                            Text(
+                              'Your Tickets',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayLarge!
+                                  .copyWith(
+                                    color: trainUnAvailableSeatColor,
+                                    fontSize: 20,
+                                  ),
+                            ),
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Expanded(
+                                child: ListView.builder(
+                                  itemCount: cubit.userValidBookedTicketsModel
+                                      .userValidBookedTickets.length,
+                                  itemBuilder: (context, index) => buildTicket(
+                                      context: context,
+                                      startTime: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]
+                                          ['startTime'],
+                                      endTime: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]
+                                          ['endTime'],
+                                      idNumber: cubit
+                                          .userValidBookedTicketsModel
+                                          .userValidBookedTickets[index]
+                                              ['ticketId']
+                                          .toString(),
+                                      date: cubit.userValidBookedTicketsModel
+                                          .userValidBookedTickets[index]['date'],
+                                      classs: cubit.userValidBookedTicketsModel
+                                          .userValidBookedTickets[index]['className'],
+                                      seatNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['seatNumber'].toInt(),
+                                      coachNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['coachNumber'].toInt(),
+                                      from: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['from'],
+                                      to: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['to']),
+                                ),)
+                          ],
+                        ),
                 ),
               ));
             }));
   }
 }
 
-Widget buildTicket(
-        {required BuildContext context,
-        required String startTime,
-        required String endTime,
-        required String idNumber,
-        required String name,
-        required String date,
-        required double price,
-        required String classs,
-        required int seatNumber,
-        required int coachNumber,
-        required String time,
-        required String from,
-        required String to}) =>
+Widget buildTicket({
+  required BuildContext context,
+  required String startTime,
+  required String endTime,
+  required String idNumber,
+  required String date,
+  required String classs,
+  required int seatNumber,
+  required int coachNumber,
+  required String from,
+  required String to,
+  //required Function viewFun,
+  //required Function cancelFun
+}) =>
     Padding(
-      padding: EdgeInsets.all(15.sp),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20,),
       child: Container(
-        width: 95.w,
-        height: 40.h,
+        width: 400,
+        height: 200,
         decoration: BoxDecoration(
-          color: ticketColor,
+          color: smallTicketColor,
           borderRadius: BorderRadius.circular(20),
         ),
-        child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(30),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 2.h,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.sp,
-                  vertical: 10.sp,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TicketsComponents.twoText(
-                      context: context,
-                      title: 'Ticket ID',
-                      label:  idNumber,
-                    ),
-                    TicketsComponents.twoText(
-                      context: context,
-                      title: AppString.seat,
-                      label: '$classs$coachNumber-$seatNumber',
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(
-                height: 8.h,
-                child: trainStack(
-                  context: context,
-                  time: time,
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.sp,
-                  vertical: 10.sp,
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    TicketsComponents.twoText(
-                      context: context,
-                      title: from,
-                      label: startTime,
-                    ),
-                    TicketsComponents.twoText(
-                      context: context,
-                      title: to,
-                      label: endTime,
-                    ),
-                  ],
-                ),
-              ),
-             SizedBox(
-                height: 2.h,
-              ),
-            
-              divider(
-                context: context,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 20.sp,
-                  vertical: 10.sp,
-                ),
-              child:Row(
+              Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                   TicketsComponents.twoText(
-                      context: context,
-                      title: AppString.date,
-                      label: date,
-                    ),
-                  TicketsComponents.priceRow(
+                  SizedBox(
+                  width:  90,
+                  height: 40,
+                  child: TicketsComponents.twoText(
                     context: context,
-                    price: price,
-                  ),
+                    title: from,
+                    label: startTime,
+                  )),
+                  Column(
+                    //mainAxisAlignment:  MainAxisAlignment.center,
+                    //crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Image(
+                        image: AssetImage(
+                          '${AppConstants.vectorsUrl}$smallTicketShape',
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 6,
+                      ),
+                      Text(
+                        '$coachNumber$classs-$seatNumber',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(
+                              fontSize: 15,
+                              fontWeight: FontWeight.w100,
+                            ),
+                      ),
+                    ],
+                  ),  SizedBox(
+                  width:  90,
+                  height: 40,
+                  child:
+                  TicketsComponents.twoText(
+                    context: context,
+                    title: to,
+                    label: endTime,
+                  )),
                 ],
-              ))
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Center(
+                child: Container(
+                  width: 320,
+                  height: 1,
+                  color: lightColor,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsetsDirectional.only(
+                  top: 20,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              'ID',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium!
+                                  .copyWith(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            const SizedBox(
+                              width: 2,
+                            ),
+                            Text(
+                              idNumber,
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .displayMedium!
+                                  .copyWith(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w100,
+                                  ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          date,
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayMedium!
+                              .copyWith(
+                                fontSize: 15,
+                                fontWeight: FontWeight.w100,
+                              ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Row(
+                      children: [
+                        SharedComponents.defaultButton(
+                          context: context,
+                          function: () {},
+                          text: 'View',
+                          width: 90,
+                          radius: 5,
+                          textSize: 16,
+                        ),
+                        const SizedBox(
+                          width: 5,
+                        ),
+                        SharedComponents.defaultButton(
+                          context: context,
+                          function: () {},
+                          text: 'Cancel',
+                          width: 90,
+                          radius: 5,
+                          textSize: 16,
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
             ],
           ),
         ),
       ),
     );
-
-
-Widget divider({
-  required BuildContext context,
-}) =>
-    SizedBox(
-      width: double.infinity,
-      child: Row(
-        children: [
-          Image(
-            image: AssetImage(
-              '${AppConstants.vectorsUrl}$ticketLeftCut',
-            ),
-          ),
-          Expanded(
-            child: Image(
-              fit: BoxFit.fitWidth,
-              image: AssetImage(
-                '${AppConstants.vectorsUrl}Line 42.png',
-              ),
-            ),
-          ),
-          Image(
-            image: AssetImage(
-              '${AppConstants.vectorsUrl}$ticketRightCut',
-            ),
-          ),
-        ],
-      ),
-    );
-

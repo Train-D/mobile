@@ -46,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                                   context,
                                 );
                               },
-                              text: AppString.tickets,
+                              text: AppString.booking,
                               width: AppSizes.width(context) * 0.8,
                               height: AppSizes.height(context) * 0.07,
                               radius: 4.sp,
@@ -71,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                               height: AppSizes.height(context) * 0.02,
                             ),
                             homeButton(
-                              label: 'All Tickets',
+                              label: 'My Tickets',
                               screen: const UserValidBookedTicketsScreen(),
                               context: context,
                             ),
