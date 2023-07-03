@@ -21,6 +21,7 @@ const String trainIdArrowVector = 'train_id_arrow.png';
 const String ticketLogo = 'ticket_logo_vector.png';
 const String masterCard = 'master card.png';
 const String ticketTrainCurveVector = 'nticket_train.png';
+const String smallTicketShape = 'small_ticket_shape.png';
 const String ticketLeftCut = 'ticket_l_cut.png';
 const String ticketRightCut = 'ticket_right_cut.png';
 const String ticketDivider = 'temp.png';

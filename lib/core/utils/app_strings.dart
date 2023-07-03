@@ -18,7 +18,7 @@ class AppString {
   static const String getStarted = 'Get started';
   static const String skip = 'Skip';
   static const String train = 'Train';
-  static const String tickets = 'Tickets';
+  static const String booking = 'Booking';
   static const String track = 'Track Your Train';
   static const String stations = 'Stations';
   static const String userName = 'Username';
