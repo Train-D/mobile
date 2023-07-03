@@ -7,3 +7,4 @@ class TrackingInitial extends TrackingState {}
 class GetTrackInfoLoadingState extends TrackingState {}
 class GetTrackInfoSuccessState extends TrackingState {}
 class GetTrackInfoFailureState extends TrackingState {}
+class GetPolylineCoordinateState extends TrackingState{}

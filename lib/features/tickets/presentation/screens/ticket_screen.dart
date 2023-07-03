@@ -41,7 +41,7 @@ class TicketScreen extends StatelessWidget {
               controller: cubit.screenshotCon,
               child: Scaffold(
                 backgroundColor: transparent,
-               appBar: SharedComponents.defaultAppBar(context: context),
+               //appBar: SharedComponents.defaultAppBar(context: context),
                 //appBar: SharedComponents.defaultAppBar(context: context),
                 body: state is GetTicketDataLoadingState
                     ? const Center(child: CircularProgressIndicator())
