@@ -100,156 +100,160 @@ Widget buildTicket({
   //required Function cancelFun
 }) =>
     Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20,),
+      padding: EdgeInsets.symmetric(vertical: 10.sp, horizontal: 20.sp,),
       child: Container(
-        width: 400,
-        height: 200,
+        //width: 400.w,
+        height: 25.h,
         decoration: BoxDecoration(
           color: smallTicketColor,
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(20.sp),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(30),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  SizedBox(
-                  width:  90,
-                  height: 40,
-                  child: TicketsComponents.twoText(
-                    context: context,
-                    title: from,
-                    label: startTime,
-                  )),
-                  Column(
-                    //mainAxisAlignment:  MainAxisAlignment.center,
-                    //crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image(
-                        image: AssetImage(
-                          '${AppConstants.vectorsUrl}$smallTicketShape',
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Text(
-                        '$coachNumber$classs-$seatNumber',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayMedium!
-                            .copyWith(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w100,
-                            ),
-                      ),
-                    ],
-                  ),  SizedBox(
-                  width:  90,
-                  height: 40,
-                  child:
-                  TicketsComponents.twoText(
-                    context: context,
-                    title: to,
-                    label: endTime,
-                  )),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Center(
-                child: Container(
-                  width: 320,
-                  height: 1,
-                  color: lightColor,
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsetsDirectional.only(
-                  top: 20,
-                ),
-                child: Row(
+          padding: EdgeInsets.all(20.sp),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    SizedBox(
+                    //width:  90,
+                    height: 5.h,
+                    child: TicketsComponents.twoText(
+                      context: context,
+                      title: from,
+                      label: startTime,
+                    )),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      //mainAxisAlignment:  MainAxisAlignment.center,
+                      //crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Row(
-                          children: [
-                            Text(
-                              'ID',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayMedium!
-                                  .copyWith(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                            ),
-                            const SizedBox(
-                              width: 2,
-                            ),
-                            Text(
-                              idNumber,
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayMedium!
-                                  .copyWith(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w100,
-                                  ),
-                            ),
-                          ],
+                        Image(
+                          image: AssetImage(
+                            '${AppConstants.vectorsUrl}$smallTicketShape',
+                          ),
                         ),
-                        const SizedBox(
-                          height: 5,
+                         SizedBox(
+                          height: 1.5.h,
                         ),
                         Text(
-                          date,
+                          '$coachNumber$classs-$seatNumber',
                           style: Theme.of(context)
                               .textTheme
                               .displayMedium!
                               .copyWith(
-                                fontSize: 15,
+                                fontSize: 16.sp,
                                 fontWeight: FontWeight.w100,
                               ),
                         ),
                       ],
-                    ),
-                    const SizedBox(
-                      width: 30,
-                    ),
-                    Row(
-                      children: [
-                        SharedComponents.defaultButton(
-                          context: context,
-                          function: () {},
-                          text: 'View',
-                          width: 90,
-                          radius: 5,
-                          textSize: 16,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        SharedComponents.defaultButton(
-                          context: context,
-                          function: () {},
-                          text: 'Cancel',
-                          width: 90,
-                          radius: 5,
-                          textSize: 16,
-                        ),
-                      ],
-                    )
+                    ),  SizedBox(
+                    //width:  90,
+                    height: 5.h,
+                    child:
+                    TicketsComponents.twoText(
+                      context: context,
+                      title: to,
+                      label: endTime,
+                    )),
                   ],
                 ),
-              ),
-            ],
+                SizedBox(
+                  height: 2.5.h,
+                ),
+                Center(
+                  child: Container(
+                    width: 80.w,
+                    height: 0.1.h,
+                    color: lightColor,
+                  ),
+                ),
+                Padding(
+                  padding:  EdgeInsetsDirectional.only(
+                    top: 20.sp,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Text(
+                                'ID',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .copyWith(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              SizedBox(
+                                width: 2.w,
+                              ),
+                              Text(
+                                idNumber,
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayMedium!
+                                    .copyWith(
+                                      fontSize: 16.sp,
+                                      fontWeight: FontWeight.w100,
+                                    ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 1.h,
+                          ),
+                          Text(
+                            date,
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(
+                                  fontSize: 16.sp,
+                                  fontWeight: FontWeight.w100,
+                                ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 4.w,
+                      ),
+                      Row(
+                        children: [
+                          SharedComponents.defaultButton(
+                            context: context,
+                            function: () {},
+                            text: 'View',
+                            width: 25.w,
+                            radius: 10.sp,
+                            height: 5.5.h,
+                            textSize: 17.sp,
+                          ),
+                          SizedBox(
+                            width: 2.w,
+                          ),
+                          SharedComponents.defaultButton(
+                            context: context,
+                            function: () {},
+                            text: 'Cancel',
+                            width: 25.w,
+                            radius: 10.sp,
+                            height: 5.5.h,
+                            textSize: 17.sp,
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
