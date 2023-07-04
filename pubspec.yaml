@@ -29,6 +29,8 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  geolocator: ^9.0.2
+  google_directions_api: ^0.9.1
   barcode: ^2.2.4
   barcode_widget: ^2.0.4
   basic_utils: ^5.5.3
@@ -36,6 +38,7 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   connectivity_plus: ^4.0.1
   cupertino_icons: ^1.0.2
+  firebase_core: ^2.14.0
   firebase_database: ^10.2.3
   dartz: ^0.10.1
   dio: ^5.1.1

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import '../../../../core/services/services_locator.dart';
 import 'tracking.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -14,10 +15,21 @@ class TrainIdScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<TrackingCubit, TrackingState>(
-        listener: (context, state) {
+    return /*MultiBlocProvider(
+      providers: [
+        /*BlocProvider(
+          create: (context) => TrackingCubit(sl())
+    )*/
+    ],
+        child:*/
+    BlocConsumer<TrackingCubit, TrackingState>(
+        listener: (context, state){
       TrackingCubit cubit = TrackingCubit.get(context);
       if (state is GetTrackInfoSuccessState) {
+        //cubit.getPolyline(cubit.trackModel.latitude, cubit.trackModel.longitude);
+       cubit.fetchPoints();
+        /*cubit.drawPolyline(
+            cubit.trackModel.latitude, cubit.trackModel.longitude);*/
         SharedComponents.navigateTo(const TrackingScreen(), context);
       }
       if (state is GetTrackInfoFailureState) {
@@ -47,7 +59,7 @@ class TrainIdScreen extends StatelessWidget {
           imageUrl: '${AppConstants.imagesUrl}$trainIdBg',
           context: context,
           child: Scaffold(
-            resizeToAvoidBottomInset: false,
+            //resizeToAvoidBottomInset: false,
             appBar: SharedComponents.defaultAppBar(context: context),
             backgroundColor: transparent,
             body: Column(
@@ -113,7 +125,6 @@ class TrainIdScreen extends StatelessWidget {
                                   child: SharedComponents.defaultTextField(
                                       controller: cubit.trainId,
                                       bgColor: trainIdTextFieldColor,
-                                      
                                       validate: (String? value) {
                                         if (value!.isEmpty) {
                                           return 'This field is required';
@@ -163,5 +174,6 @@ class TrainIdScreen extends StatelessWidget {
         ),
       ));
     });
+  //  );
   }
 }

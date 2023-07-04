@@ -3,7 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:swipe/swipe.dart';
+import 'package:traind_app/features/track/presentation/components/tracking_components.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
+import '../../../../core/utils/app_constants.dart';
+import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/components.dart';
 import '../controller/tracking_cubit/tracking_cubit.dart';
@@ -36,15 +40,16 @@ class TrackingScreen extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15.sp),
                           child: GoogleMap(
+                            onMapCreated: (controller) => cubit.mapController.complete(controller),
                             initialCameraPosition: CameraPosition(
                               target: LatLng(cubit.trackModel.latitude,
                                   cubit.trackModel.longitude),
-                              zoom: 14.5,
+                              zoom: 8,
                             ),
                             markers: {
                               Marker(
                                   markerId: MarkerId('Souce'),
-                                  position: cubit.sourceLocation),
+                                  position: LatLng(cubit.sourceLat, cubit.sourceLng) ),
                               Marker(
                                   markerId: MarkerId('destination'),
                                   position: LatLng(cubit.trackModel.latitude,
@@ -61,10 +66,10 @@ class TrackingScreen extends StatelessWidget {
                       height: AppSizes.height(context) * 0.047,
                     ),
                     //Spacer(),
-                    /*Swipe(
+                    Swipe(
                       onSwipeUp: () {
-                        TrackingComponents.bottomModelSheet(context, currTime,
-                            '8.30', formBegin, 'pm', fraction);
+                        TrackingComponents.bottomModelSheet(context, cubit.trackModel.startTime,
+                            cubit.trackModel.arrivalTime, 1, cubit.trackModel.fromStation);
                       },
                       child: Container(
                         width: double.infinity,
@@ -78,7 +83,7 @@ class TrackingScreen extends StatelessWidget {
                           '${AppConstants.imagesUrl}$bar',
                         ),
                       ),
-                    )*/
+                    )
                   ],
                 ),
               ),

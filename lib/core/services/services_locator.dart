@@ -6,8 +6,12 @@ import 'package:traind_app/features/tickets/data/repository/user_valid_booked_ti
 import 'package:traind_app/features/tickets/domain/repository/base_user_valid_booked_tickets_repository.dart';
 import 'package:traind_app/features/tickets/domain/usecase/user_valid_booked_tickets_usecase.dart';
 import 'package:traind_app/features/track/data/data%20source/track_remote_data_source.dart';
+import 'package:traind_app/features/track/data/data%20source/train_tracking_remote_data_source.dart';
 import 'package:traind_app/features/track/data/repository/track_repository.dart';
+import 'package:traind_app/features/track/data/repository/train_tracking_respository.dart';
 import 'package:traind_app/features/track/domain/repository/base_track_repository.dart';
+import 'package:traind_app/features/track/domain/repository/base_train_tracking_repository.dart';
+import 'package:traind_app/features/track/domain/usecase/train_tracking_usecase.dart';
 import '../../features/authentication/data/repository/reset_password_repository.dart';
 import '../../features/authentication/domain/repository/base_reset_password_respository.dart';
 import '../../features/authentication/domain/usecase/reset_password_usecase.dart';
@@ -173,5 +177,12 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseTrackRepository>(
         () => TrackRepository(sl()));
     sl.registerLazySingleton(() => GetTrackInfoUsecase(sl()));
+
+    //train tracking
+    sl.registerLazySingleton<TrainTrackingRemoteDataSource>(
+        () => TrainTrackingRemoteDataSourceImpl(apiService: sl()));
+    sl.registerLazySingleton<BaseTrainTrackingRepository>(
+        () => TrainTrackingRepository(trackingRemoteDataSource: sl()));
+    sl.registerLazySingleton(() => TrainTrackingUseCase(sl()));
   }
 }
