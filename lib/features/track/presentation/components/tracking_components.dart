@@ -10,9 +10,10 @@ class TrackingComponents {
           BuildContext context,
           String currTime,
           String timeToArrive,
-          String formbegin,
-          String formEnd,
-          double fraction) =>
+          double fraction,
+          String fromStation,
+          
+          ) =>
       showModalBottomSheet(
         backgroundColor: Colors.transparent,
         context: context,
@@ -44,36 +45,13 @@ class TrackingComponents {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      currTime,
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                    SizedBox(
-                      width: 1.w,
-                    ),
-                    SizedBox(
-                        height: 3.h,
-                        child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Text(
-                              formbegin,
-                              style: TextStyle(fontSize: 13.sp),
-                            ))),
-                    const Spacer(),
-                    Text(
                       timeToArrive,
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
-                    SizedBox(
-                      width: 1.w,
+                    Text(
+                      currTime,
+                      style: Theme.of(context).textTheme.displayMedium,
                     ),
-                    SizedBox(
-                        height: 3.h,
-                        child: Align(
-                            alignment: Alignment.bottomCenter,
-                            child: Text(
-                              formEnd,
-                              style: TextStyle(fontSize: 13.sp),
-                            ))),
                   ],
                 ),
                 SizedBox(
@@ -140,19 +118,62 @@ class TrackingComponents {
                       style: Theme.of(context).textTheme.displayMedium,
                     ),
                     Text(
-                      AppString.from,
+                      fromStation,
                       style: Theme.of(context).textTheme.displayMedium,
                     )
                   ],
                 ),
                 //SizedBox(height: 1.h,),
                 Center(
-                  child: Text('00:45:10', style: Theme.of(context).textTheme.displayMedium!.copyWith(fontSize: 20.sp),),
+                  child: Text(
+                    '00:45:10',
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayMedium!
+                        .copyWith(fontSize: 20.sp),
+                  ),
                 ),
                 Center(
-                  child: Text('HOURS:MINUTES:SECONDS', style: Theme.of(context).textTheme.displayMedium!.copyWith(fontSize: 12.sp),),
+                  child: Text(
+                    'HOURS:MINUTES:SECONDS',
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayMedium!
+                        .copyWith(fontSize: 12.sp),
+                  ),
                 )
               ]),
+            ),
+          ),
+        ),
+      );
+  static Widget diaplayTime(BuildContext context, String time) => Positioned(
+        left: 40.sp,
+        top: 95.5.sp,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(5.sp),
+          child: Container(
+            height: 6.h,
+            width: 40.w,
+            color: Colors.white,
+            child: FittedBox(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text('Time to arrive: ',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge!
+                            .copyWith(color: Colors.black)),
+                    Text(time,
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(color: Colors.black)),
+                  ],
+                ),
+              ),
             ),
           ),
         ),

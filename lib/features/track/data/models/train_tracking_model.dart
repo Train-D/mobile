@@ -5,7 +5,7 @@ class TrainTrackingModel extends TrainTrackingEntity {
       {required super.latitude,
       required super.longitude,
       required super.speed});
-  factory TrainTrackingModel.fromJson(Map<dynamic, dynamic> json) {
+  factory TrainTrackingModel.fromJson(Map<String, dynamic> json) {
     return TrainTrackingModel(
         latitude: json['latitude'].toDouble,
         longitude: json['longitude'].toDouble,

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "752657279025",
+    "firebase_url": "https://esp32-gps-firebase-8ac4c-default-rtdb.firebaseio.com",
+    "project_id": "esp32-gps-firebase-8ac4c",
+    "storage_bucket": "esp32-gps-firebase-8ac4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:752657279025:android:8f79611ab1277ca3f30d10",
+        "android_client_info": {
+          "package_name": "com.example.traind_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "752657279025-hcd8tv4of6slv52u2j0etmqf8c06e5jt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyMftC5eRQxDYf5aaIzP9oIytH1MLtjAE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "752657279025-hcd8tv4of6slv52u2j0etmqf8c06e5jt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

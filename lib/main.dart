@@ -1,4 +1,5 @@
 // ignore_for_file: avoid_types_as_parameter_names, non_constant_identifier_names
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -26,6 +27,8 @@ import 'features/track/presentation/controller/tracking_cubit/tracking_cubit.dar
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  //await Firebase.initializeApp(options: );
   ServicesLocator().init();
   Bloc.observer = MyBlocObserver();
   await CacheHelper.init();
@@ -82,7 +85,7 @@ class MyApp extends StatelessWidget {
             profileCubit: ProfileCubit(sl(), sl()),
           ),
         ),
-        BlocProvider(
+       BlocProvider(
           create: (context) => TrackingCubit(sl()),
         ),
         
