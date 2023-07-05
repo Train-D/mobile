@@ -189,6 +189,8 @@ class LoginScreen extends StatelessWidget {
                               ),
                               SharedComponents.defaultTextButton(
                                 function: () {
+                                  FocusScope.of(context)
+                                            .requestFocus(new FocusNode());
                                   SharedComponents.navigateTo(
                                     const SignUpScreen(),
                                     context,
@@ -205,6 +207,8 @@ class LoginScreen extends StatelessWidget {
                             children: [
                               SharedComponents.defaultTextButton(
                                   function: () {
+                                    FocusScope.of(context)
+                                            .requestFocus(new FocusNode());
                                     SharedComponents.navigateTo(
                                         ResetPasswordScreen(), context);
                                   },

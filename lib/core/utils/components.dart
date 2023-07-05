@@ -235,7 +235,8 @@ class SharedComponents {
               ),
               child: IconButton(
                   onPressed: () {
-                    // Navigator.popUntil(context, ModalRoute.withName('/'));
+                    FocusScope.of(context)
+                                            .requestFocus(new FocusNode());
                     Navigator.pop(context);
                   },
                   icon: const Icon(

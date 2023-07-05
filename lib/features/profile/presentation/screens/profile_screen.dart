@@ -22,7 +22,12 @@ class ProfileScreen extends StatelessWidget {
     return SafeArea(child:
         BlocBuilder<ProfileCubit, ProfileState>(builder: (context, state) {
       ProfileCubit cubit = ProfileCubit.get(context);
-      return SharedComponents.linearGradientBg(
+      return GestureDetector(
+        onTap: () {
+          FocusManager.instance.primaryFocus?.unfocus();
+        },
+        child: 
+      SharedComponents.linearGradientBg(
           colors: profileBg,
           child: Scaffold(
             backgroundColor: Colors.transparent,
@@ -233,7 +238,10 @@ class ProfileScreen extends StatelessWidget {
                                           SharedComponents.defaultButton(
                                             context: context,
                                             function: () async {
+                                              FocusScope.of(context)
+                                            .requestFocus(new FocusNode());
                                               await cubit.putProfileUserData(
+                                                
                                                 image: cubit.base64Image ?? '',
                                                 firstName: cubit
                                                     .profileFirstNameCon.text,
@@ -266,7 +274,11 @@ class ProfileScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-          ));
-    }));
+          )
+          )
+      );   
+    }
+    )
+    );
   }
 }

@@ -9,3 +9,4 @@ class GetTrackInfoSuccessState extends TrackingState {}
 class GetTrackInfoFailureState extends TrackingState {}
 class GetPolylineCoordinateState extends TrackingState{}
 class GetCoordinateState extends TrackingState{}
+class ChangeState extends TrackingState{}

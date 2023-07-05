@@ -146,6 +146,11 @@ class FromToScreen extends StatelessWidget {
                                                   TicketsComponents
                                                       .defaultDropDownButtonContainer(
                                                     DropdownButton(
+                                                        //underline: SizedBox(height: 0.5.h,),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    20.sp),
                                                         onChanged: (value) {
                                                           cubit
                                                               .changeDropDownButtonValue(
@@ -192,6 +197,10 @@ class FromToScreen extends StatelessWidget {
                                                   TicketsComponents
                                                       .defaultDropDownButtonContainer(
                                                     DropdownButton(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                                    20.sp),
                                                         onChanged: (value) {
                                                           cubit
                                                               .changeDropDownButtonValue(
@@ -247,16 +256,55 @@ class FromToScreen extends StatelessWidget {
                                           onTap: () async {
                                             DateTime? pickedDate =
                                                 await showDatePicker(
-                                              context: context,
-                                              initialDate: DateTime.now(),
-                                              firstDate: DateTime.now(),
-                                              lastDate: DateTime.now().add(
-                                                  const Duration(days: 20)),
-                                              builder: (context, child) =>
-                                                  Theme(
-                                                      data: lightTheme(),
-                                                      child: child!),
-                                            );
+                                                    context: context,
+                                                    initialDate: DateTime.now(),
+                                                    firstDate: DateTime.now(),
+                                                    lastDate: DateTime.now()
+                                                        .add(const Duration(
+                                                            days: 20)),
+                                                    builder: (context, child) {
+                                                      return Theme(
+                                                          data:
+                                                              Theme.of(context)
+                                                                  .copyWith(
+                                                            colorScheme:
+                                                                ColorScheme
+                                                                    .light(
+                                                              primary: Color
+                                                                  .fromRGBO(
+                                                                      65,
+                                                                      49,
+                                                                      42,
+                                                                      1),
+                                                              surface: Color
+                                                                  .fromRGBO(
+                                                                      65,
+                                                                      49,
+                                                                      42,
+                                                                      1),
+                                                            ),
+                                                            textTheme:
+                                                                TextTheme(
+                                                              bodySmall:Theme.of(context).textTheme.displayMedium!.copyWith(
+                                                                fontSize: 16.sp
+                                                              )
+                                                            ),
+                                                           datePickerTheme: DatePickerThemeData(
+                                                            headerHelpStyle: Theme.of(context).textTheme.displayMedium!.copyWith(
+                                                                fontSize: 16.sp
+                                                              ),
+                                                              ),
+                                                            textButtonTheme:
+                                                                TextButtonThemeData(
+                                                                    style: TextButton
+                                                                        .styleFrom(
+                                                                            //backgroundColor: Color.fromRGBO(78, 64, 57, 1),
+                                                                            textStyle:
+                                                                                Theme.of(context).textTheme.displayMedium)),
+                                                            // dialogBackgroundColor: Color.fromRGBO(65, 49, 42, 1),
+                                                          ),
+                                                          child: child!);
+                                                    });
                                             if (pickedDate != null) {
                                               cubit.changeDefualtDate(
                                                   DateFormat('yyyy-MM-dd')

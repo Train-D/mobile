@@ -28,18 +28,21 @@ Widget chooseSeatsAlertDialogContent({
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  !isBooked ? 
-                    TicketsComponents.priceRow(
-                      context: context,
-                      price: price,
-                    ):
-                  Text(
-                    "Already Booked",
-                    style: Theme.of(context).textTheme.displayMedium!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                  !isBooked
+                      ? TicketsComponents.priceRow(
+                          context: context,
+                          price: price,
+                        )
+                      : Text(
+                          "Already Booked",
+                          style: Theme.of(context)
+                              .textTheme
+                              .displayMedium!
+                              .copyWith(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                              ),
                         ),
-                  ),
                 ],
               ),
               const SizedBox(
@@ -60,11 +63,11 @@ Widget chooseSeatsAlertDialogContent({
                     bgColor: chooseSeatsCancelButtonBg,
                     cancel: true,
                   ),
-                  if(!isBooked)
+                  if (!isBooked)
                     SharedComponents.defaultButton(
                       context: context,
                       function: () {
-                        //cubit.bookSeat(seatNumber);
+                        Navigator.pop(context);
                         SharedComponents.navigateTo(
                           const PaymentScreen(),
                           context,
