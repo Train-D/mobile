@@ -7,5 +7,10 @@ class UserValidBookedTicketsLoadingState extends UserValidBookedTicketsState{}
 class UserValidBookedTicketsSuccessState extends UserValidBookedTicketsState{}
 class UserValidBookedTicketsFailureState extends UserValidBookedTicketsState{}
 
+class CancelUserTicketLoadingState extends UserValidBookedTicketsState {}
+class CancelUserTicketSuccessState extends UserValidBookedTicketsState {}
+class CancelUserTicketFailureState extends UserValidBookedTicketsState {}
+
+
 
 

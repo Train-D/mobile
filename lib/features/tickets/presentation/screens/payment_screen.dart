@@ -20,15 +20,21 @@ class PaymentScreen extends StatelessWidget {
       BookingCubit cubit = BookingCubit.get(context);
       if (state is GetPaymentCustomerDataSuccessState) {
         await cubit.getTicketData();
-        // ignore: use_build_context_synchronously
-        SharedComponents.navigateTo(
+        
+        int numberOfScreensToReplace = 3;
+
+        Navigator.popUntil(context, (route) {
+          return (numberOfScreensToReplace-- <= 0);
+        });
+        SharedComponents.navigateToReplace(
           TicketScreen(
             ticketInfoModel: cubit.ticketInfoModel,
           ),
           context,
         );
       }
-      if (state is GetPaymentCustomerDataFailureState || state is GetTicketDataFailureState) {
+      if (state is GetPaymentCustomerDataFailureState ||
+          state is GetTicketDataFailureState) {
         /*SharedComponents.showToast(
             text: cubit.thirdScreenErrorMessage, color: Colors.red);*/
         // ignore: use_build_context_synchronously
@@ -310,7 +316,8 @@ class PaymentScreen extends StatelessWidget {
                                     SizedBox(
                                       height: 4.h,
                                     ),
-                                    state is GetPaymentCustomerDataLoadingState || state is GetTicketDataLoadingState
+                                    state is GetPaymentCustomerDataLoadingState ||
+                                            state is GetTicketDataLoadingState
                                         ? const CircularProgressIndicator()
                                         : SharedComponents.defaultButton(
                                             context: context,
