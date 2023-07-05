@@ -184,8 +184,12 @@ Widget buildTicket({
         //width: 400.w,
         height: 24.h,
         decoration: BoxDecoration(
-          color: smallTicketColor,
           borderRadius: BorderRadius.circular(20.sp),
+           gradient: const LinearGradient(
+            colors: ticketColor,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 20.sp, horizontal: 10.sp),

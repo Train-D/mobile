@@ -75,7 +75,7 @@ class PaymentScreen extends StatelessWidget {
                       height: 75.h,
                       topRedius: 25.sp,
                       isLinearGradient: false,
-                      bgColor: ticketColor,
+                      bgColor: paymentBg,
                     ),
                   ),
                   SizedBox(
