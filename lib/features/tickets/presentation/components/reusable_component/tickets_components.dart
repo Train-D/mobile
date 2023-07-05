@@ -1,4 +1,3 @@
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
@@ -7,7 +6,6 @@ import '../../../../../core/global/theme/theme_data/theme_data_light.dart';
 import '../../../../../core/utils/app_sizes.dart';
 import '../../../../../core/utils/app_strings.dart';
 import '../../../../../core/utils/components.dart';
-import 'package:barcode/barcode.dart';
 
 class TicketsComponents {
   static Widget defaultDropDownButtonContainer(dynamic child) => Container(

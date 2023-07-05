@@ -1,5 +1,6 @@
-import '../../../../core/error/failure.dart';
 import 'package:dartz/dartz.dart';
+
+import '../../../../core/error/failure.dart';
 import '../../../../core/usecases/base_usecase.dart';
 import '../entities/all_stations_names_entity.dart';
 import '../repository/base_all_stations_repository.dart';

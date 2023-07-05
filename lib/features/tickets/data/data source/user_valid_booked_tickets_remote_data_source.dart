@@ -1,14 +1,17 @@
 import 'package:dio/dio.dart';
+import '../models/all%20tickets/cancel_ticket_response_model.dart';
 
-import 'package:traind_app/features/tickets/data/models/user_valid_booked_tickets_model.dart';
-import 'package:traind_app/features/tickets/domain/entities/user_valid_booked_tickets_entity.dart';
+import '../models/all%20tickets/user_valid_booked_tickets_model.dart';
+import '../../domain/entities/all%20tickets/user_valid_booked_tickets_entity.dart';
 
 import '../../../../core/network/local/cache_helper.dart';
 import '../../../../core/network/remote/api_constants.dart';
 import '../../../../core/services/api_service.dart';
+import '../../domain/entities/all tickets/cancel_ticket_response_entity.dart';
 
 abstract class UserValidBookedTicketsRemoteDataSource {
   Future<UserValidBookedTicketsEntity> getUserValidBookedTickets();
+  Future<CancelTicketResponseEntity> cancelTicket(String ticketId);
 }
 
 class UserValidBookedTicketsRemoteDataSourceImpl
@@ -25,5 +28,13 @@ class UserValidBookedTicketsRemoteDataSourceImpl
     UserValidBookedTicketsEntity userValidBookedTicketsEntity =
         UserValidBookedTicketsModel.fromJson(data);
     return userValidBookedTicketsEntity;
+  }
+
+  @override
+  Future<CancelTicketResponseEntity> cancelTicket(String ticketId) async {
+    var data = await apiService.delete(endPoint: ApiConstants.cancelUserTicket);
+    CancelTicketResponseEntity cancelTicketResponseEntity =
+        CancelTicketResponseModel.fromJson(data);
+    return cancelTicketResponseEntity;
   }
 }

@@ -1,9 +1,8 @@
-import '../models/third%20screen/credit_card_model.dart';
-import '../models/third%20screen/custome_id_model.dart';
-import '../../domain/entities/third%20screen/customer_id_entity.dart';
-
 import '../../../../core/network/remote/api_constants.dart';
 import '../../../../core/services/api_service.dart';
+import '../../domain/entities/third%20screen/customer_id_entity.dart';
+import '../models/third%20screen/credit_card_model.dart';
+import '../models/third%20screen/custome_id_model.dart';
 
 abstract class CreditCardRemoteDataSource {
   Future<CustomerIdEntity> creditCardInfo(CreditCardModel model);

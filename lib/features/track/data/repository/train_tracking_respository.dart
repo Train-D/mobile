@@ -1,10 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:dio/dio.dart';
 
-import 'package:traind_app/core/error/failure.dart';
-import 'package:traind_app/features/track/data/data%20source/train_tracking_remote_data_source.dart';
-import 'package:traind_app/features/track/domain/entities/train_tracking_entity.dart';
-import 'package:traind_app/features/track/domain/repository/base_train_tracking_repository.dart';
+import '../../../../core/error/failure.dart';
+import '../../domain/entities/train_tracking_entity.dart';
+import '../../domain/repository/base_train_tracking_repository.dart';
+import '../data%20source/train_tracking_remote_data_source.dart';
 
 class TrainTrackingRepository extends BaseTrainTrackingRepository {
   final TrainTrackingRemoteDataSource trackingRemoteDataSource;

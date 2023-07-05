@@ -1,4 +1,4 @@
-import 'package:traind_app/features/authentication/domain/entities/reset_password_entity.dart';
+import '../../domain/entities/reset_password_entity.dart';
 
 class ResetPasswordModel extends ResetPasswordEntity {
   ResetPasswordModel({required super.resetPassword});

@@ -15,4 +15,5 @@ class ApiConstants {
   static const String ProfileImageGetEndPoint = '';
   static const String ProfileImagePutEndPoint = '';
   static const String userBookedTickets = '/Ticket/myTickets';
+  static const String cancelUserTicket = '/Ticket/CancelTicket/';
 }

@@ -1,15 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:async';
 import 'dart:math';
+
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:traind_app/features/track/data/models/track_model.dart';
-
 import 'package:traind_app/features/track/domain/usecase/get_track_info_usecase.dart';
-import 'package:geolocator/geolocator.dart';
 
 part 'tracking_state.dart';
 

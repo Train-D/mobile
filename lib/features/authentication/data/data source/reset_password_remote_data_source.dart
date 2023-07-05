@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:traind_app/features/authentication/data/models/reset_password_model.dart';
-import 'package:traind_app/features/authentication/domain/entities/reset_password_entity.dart';
+import '../models/reset_password_model.dart';
+import '../../domain/entities/reset_password_entity.dart';
 
 import '../../../../core/network/remote/api_constants.dart';
 

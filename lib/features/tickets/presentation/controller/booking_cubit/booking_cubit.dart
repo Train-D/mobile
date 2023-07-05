@@ -1,5 +1,5 @@
-import 'dart:convert';
 import 'dart:typed_data';
+import 'dart:ui' as ui;
 
 import 'package:dio/dio.dart';
 import 'package:equatable/equatable.dart';
@@ -9,26 +9,24 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:screenshot/screenshot.dart';
+
 import '../../../../../core/error/exceptions.dart';
+import '../../../data/models/first screen/stations_model.dart';
+import '../../../data/models/first screen/trip_times_model.dart';
 import '../../../data/models/first%20screen/from_to_date_model.dart';
 import '../../../data/models/first%20screen/trip_info_model.dart';
 import '../../../data/models/fourth%20screen/booking_ticket_model.dart';
 import '../../../data/models/fourth%20screen/ticket_info_model.dart';
+import '../../../data/models/second screen/seat_model.dart';
 import '../../../data/models/third%20screen/credit_card_model.dart';
 import '../../../data/models/third%20screen/payment_model.dart';
-import '../../../domain/usecase/payment_usecase.dart';
-import '../../../domain/usecase/trip_times_usecase.dart.dart';
-
-import '../../../data/models/first screen/stations_model.dart';
-import '../../../data/models/second screen/seat_model.dart';
 import '../../../domain/entities/second screen/train_info_entity.dart';
 import '../../../domain/usecase/booking_ticket_usecase.dart';
 import '../../../domain/usecase/credit_card_usecase.dart';
+import '../../../domain/usecase/payment_usecase.dart';
 import '../../../domain/usecase/stations_usecase.dart';
-import '../../../data/models/first screen/trip_times_model.dart';
 import '../../../domain/usecase/train_info_usecase.dart';
-import 'dart:ui' as ui;
-import 'package:path_provider/path_provider.dart';
+import '../../../domain/usecase/trip_times_usecase.dart.dart';
 
 part 'booking_state.dart';
 
@@ -801,7 +799,7 @@ class BookingCubit extends Cubit<BookingState> {
         //print(failure);
         emit(GetPaymentCustomerDataFailureState());
       }, (paymentIdData) {
-        //print(paymentIdData);
+        print(paymentIdData);
         paymentID = paymentIdData.paymentId;
         emit(GetPaymentCustomerDataSuccessState());
       });
@@ -823,6 +821,8 @@ class BookingCubit extends Cubit<BookingState> {
       seatNumber: 0,
       price: 0,
       duration: '');
+
+      
   Future<void> getTicketData() async {
     emit(GetTicketDataLoadingState());
     var result = await bookingTicketUsecase.call(BookingTicketModel(

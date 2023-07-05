@@ -2,7 +2,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/core/network/local/cache_helper.dart';
+import '../../../../core/network/local/cache_helper.dart';
 import '../components/profile_components.dart';
 import 'display_profile_picture.dart';
 

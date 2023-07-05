@@ -15,20 +15,29 @@ class PaymentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<BookingCubit, BookingState>(listener: (context, state) {
+    return BlocConsumer<BookingCubit, BookingState>(
+        listener: (context, state) async {
       BookingCubit cubit = BookingCubit.get(context);
       if (state is GetPaymentCustomerDataSuccessState) {
-        cubit.getTicketData();
-        SharedComponents.navigateTo(const TicketScreen(), context);
+        await cubit.getTicketData();
+        // ignore: use_build_context_synchronously
+        SharedComponents.navigateTo(
+          TicketScreen(
+            ticketInfoModel: cubit.ticketInfoModel,
+          ),
+          context,
+        );
       }
-      if (state is GetPaymentCustomerDataFailureState) {
+      if (state is GetPaymentCustomerDataFailureState || state is GetTicketDataFailureState) {
         /*SharedComponents.showToast(
             text: cubit.thirdScreenErrorMessage, color: Colors.red);*/
+        // ignore: use_build_context_synchronously
         SharedComponents.showAlertDialog(
             context: context,
             title: 'Error!',
             message: cubit.thirdScreenErrorMessage,
             actions: [
+              // ignore: use_build_context_synchronously
               SharedComponents.defaultButton(
                   radius: 10.sp,
                   width: 20.w,
@@ -265,7 +274,7 @@ class PaymentScreen extends StatelessWidget {
                                               controller: cubit.cvvCode,
                                               type: TextInputType.number,
                                               validate: (value) {
-                                                if (value!.isEmpty ) {
+                                                if (value!.isEmpty) {
                                                   return 'This field is required';
                                                 }
                                                 if (value!.length != 3) {
@@ -301,7 +310,7 @@ class PaymentScreen extends StatelessWidget {
                                     SizedBox(
                                       height: 4.h,
                                     ),
-                                    state is GetPaymentCustomerDataLoadingState
+                                    state is GetPaymentCustomerDataLoadingState || state is GetTicketDataLoadingState
                                         ? const CircularProgressIndicator()
                                         : SharedComponents.defaultButton(
                                             context: context,

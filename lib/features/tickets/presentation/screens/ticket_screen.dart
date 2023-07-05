@@ -1,47 +1,56 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:screenshot/screenshot.dart';
-import '../controller/booking_cubit/booking_cubit.dart';
-import '../../../layout/presentation/screens/home_screen.dart';
+
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_sizes.dart';
-import '../../../../core/utils/components.dart';
-import '../components/reusable_component/tickets_components.dart';
 import '../../../../core/utils/app_strings.dart';
+import '../../../../core/utils/components.dart';
+import '../../../layout/presentation/screens/home_screen.dart';
+import '../../data/models/fourth screen/ticket_info_model.dart';
+import '../components/reusable_component/tickets_components.dart';
+import '../controller/booking_cubit/booking_cubit.dart';
 
 class TicketScreen extends StatelessWidget {
-  const TicketScreen({super.key});
+  final TicketInfoModel ticketInfoModel;
+  const TicketScreen({
+    Key? key,
+    required this.ticketInfoModel,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(child:
-        BlocBuilder<BookingCubit, BookingState>(builder: (context, state) {
+        BlocConsumer<BookingCubit, BookingState>(
+          listener: (context, state) {},
+          builder: (context, state) {
       BookingCubit cubit = BookingCubit.get(context);
       Widget ticketData = buildTicket(
           context: context,
-          startTime: cubit.ticketInfoModel.startTime,
-          endTime: cubit.ticketInfoModel.endTime,
-          idNumber: 'Ticket ID: ${cubit.ticketInfoModel.ticketId.toString()}',
-          name: cubit.ticketInfoModel.passengerName,
-          date: cubit.ticketInfoModel.date,
-          price: cubit.ticketInfoModel.price,
-          classs: cubit.ticketInfoModel.className,
-          seatNumber: cubit.ticketInfoModel.seatNumber,
-          coachNumber: cubit.ticketInfoModel.coachNumber,
-          time: cubit.ticketInfoModel.duration,
-          from: cubit.ticketInfoModel.from,
-          to: cubit.ticketInfoModel.to);
+          startTime: ticketInfoModel.startTime,
+          endTime: ticketInfoModel.endTime,
+          idNumber: 'Ticket ID: ${ticketInfoModel.ticketId.toString()}',
+          name: ticketInfoModel.passengerName,
+          date: ticketInfoModel.date,
+          price: ticketInfoModel.price,
+          classs: ticketInfoModel.className,
+          seatNumber: ticketInfoModel.seatNumber,
+          coachNumber: ticketInfoModel.coachNumber,
+          time: ticketInfoModel.duration,
+          from: ticketInfoModel.from,
+          to: ticketInfoModel.to);
       return SharedComponents.linearGradientBg(
           colors: profileBg,
           child: Screenshot(
               controller: cubit.screenshotCon,
               child: Scaffold(
                 backgroundColor: transparent,
-               //appBar: SharedComponents.defaultAppBar(context: context),
+                appBar: SharedComponents.defaultAppBar(context: context),
                 //appBar: SharedComponents.defaultAppBar(context: context),
                 body: state is GetTicketDataLoadingState
                     ? const Center(child: CircularProgressIndicator())

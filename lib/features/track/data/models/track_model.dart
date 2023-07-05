@@ -1,4 +1,4 @@
-import 'package:traind_app/features/track/domain/entities/track_entity.dart';
+import '../../domain/entities/track_entity.dart';
 
 class TrackModel extends TrackEntity {
   TrackModel({

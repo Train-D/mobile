@@ -1,4 +1,4 @@
-import 'package:traind_app/features/track/domain/entities/train_tracking_entity.dart';
+import '../../domain/entities/train_tracking_entity.dart';
 
 class TrainTrackingModel extends TrainTrackingEntity {
   TrainTrackingModel(

@@ -1,8 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:traind_app/features/tickets/data/models/user_valid_booked_tickets_model.dart';
-
+import 'package:traind_app/features/tickets/data/models/all%20tickets/user_valid_booked_tickets_model.dart';
 import 'package:traind_app/features/tickets/domain/usecase/user_valid_booked_tickets_usecase.dart';
 
 import '../../../../../core/usecases/base_usecase.dart';
