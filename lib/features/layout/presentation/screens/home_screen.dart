@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
+import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_sizes.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
-import '../../../../core/utils/app_images.dart';
+import '../../../stations/presentation/screens/stations_screen.dart';
+import '../../../tickets/presentation/screens/from_to_screen.dart';
 import '../../../tickets/presentation/screens/user_valid_booked_tickets_screen.dart';
+import '../../../track/presentation/screens/train_id_screen.dart';
 import '../component/layout.dart';
 import '../controller/home_cubit/home_cubit.dart';
 import '../controller/home_cubit/home_state.dart';
-import '../../../stations/presentation/screens/stations_screen.dart';
-import '../../../tickets/presentation/screens/from_to_screen.dart';
-import '../../../track/presentation/screens/train_id_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

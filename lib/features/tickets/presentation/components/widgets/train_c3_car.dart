@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../controller/booking_cubit/booking_cubit.dart';
 import '../../screens/choose_seats_screen.dart';
 import '../classes/train_default_car_custom_paint.dart';

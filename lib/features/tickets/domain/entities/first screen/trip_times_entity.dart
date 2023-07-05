@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import '../../../data/models/first%20screen/trip_times_model.dart';
 
 // ignore: must_be_immutable

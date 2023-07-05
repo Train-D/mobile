@@ -1,6 +1,5 @@
-import '../second%20screen/seat_model.dart';
 import '../../../domain/entities/second%20screen/train_info_entity.dart';
-
+import '../second%20screen/seat_model.dart';
 import 'class_model.dart';
 
 class TrainInfoModel extends TrainInfoEntity {

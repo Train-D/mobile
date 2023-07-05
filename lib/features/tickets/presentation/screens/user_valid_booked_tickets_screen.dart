@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/features/tickets/presentation/controller/userValidBookedTickets_cubit/userValidBookedTickets_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/screens/ticket_screen.dart';
+import '../controller/userValidBookedTickets_cubit/userValidBookedTickets_cubit.dart';
+import 'ticket_screen.dart';
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/services/services_locator.dart';
@@ -10,6 +10,7 @@ import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
 import '../../../../core/utils/app_strings.dart';
 import '../../../../core/utils/components.dart';
+import '../../data/models/fourth screen/ticket_info_model.dart';
 import '../components/reusable_component/tickets_components.dart';
 
 class UserValidBookedTicketsScreen extends StatelessWidget {
@@ -38,47 +39,66 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
                   appBar: SharedComponents.defaultAppBar(context: context),
                   body: state is UserValidBookedTicketsLoadingState
                       ? const Center(child: CircularProgressIndicator())
-                      : Column(
-                          children: [
-                            Text(
-                              'Your Tickets',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .displayLarge!
-                                  .copyWith(
-                                    color: trainUnAvailableSeatColor,
-                                    fontSize: 20,
+                      : cubit.userValidBookedTicketsModel.userValidBookedTickets
+                              .isEmpty
+                          ? Center(
+                              child: Text(
+                                'No Booked Tickets',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .displayLarge!
+                                    .copyWith(
+                                      color: trainUnAvailableSeatColor,
+                                      fontSize: 20,
+                                    ),
+                              ),
+                            )
+                          : Column(
+                              children: [
+                                Text(
+                                  'Your Tickets',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayLarge!
+                                      .copyWith(
+                                        color: trainUnAvailableSeatColor,
+                                        fontSize: 20,
+                                      ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Expanded(
+                                  child: ListView.builder(
+                                    itemCount: cubit.userValidBookedTicketsModel
+                                        .userValidBookedTickets.length,
+                                    itemBuilder: (context, index) => buildTicket(
+                                        context: context,
+                                        name: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]
+                                            ['passengerName'],
+                                        price: cubit.userValidBookedTicketsModel
+                                                .userValidBookedTickets[index]
+                                            ['price'],
+                                        duration: cubit
+                                                .userValidBookedTicketsModel
+                                                .userValidBookedTickets[index]
+                                            ['duration'],
+                                        startTime: cubit
+                                                .userValidBookedTicketsModel
+                                                .userValidBookedTickets[index]
+                                            ['startTime'],
+                                        endTime: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['endTime'],
+                                        idNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['ticketId'].toString(),
+                                        date: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['date'],
+                                        classs: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['className'],
+                                        seatNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['seatNumber'].toInt(),
+                                        coachNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['coachNumber'].toInt(),
+                                        from: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['from'],
+                                        to: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['to']),
                                   ),
+                                )
+                              ],
                             ),
-                            const SizedBox(
-                              height: 20,
-                            ),
-                            Expanded(
-                                child: ListView.builder(
-                                  itemCount: cubit.userValidBookedTicketsModel
-                                      .userValidBookedTickets.length,
-                                  itemBuilder: (context, index) => buildTicket(
-                                      context: context,
-                                      startTime: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]
-                                          ['startTime'],
-                                      endTime: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]
-                                          ['endTime'],
-                                      idNumber: cubit
-                                          .userValidBookedTicketsModel
-                                          .userValidBookedTickets[index]
-                                              ['ticketId']
-                                          .toString(),
-                                      date: cubit.userValidBookedTicketsModel
-                                          .userValidBookedTickets[index]['date'],
-                                      classs: cubit.userValidBookedTicketsModel
-                                          .userValidBookedTickets[index]['className'],
-                                      seatNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['seatNumber'].toInt(),
-                                      coachNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['coachNumber'].toInt(),
-                                      from: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['from'],
-                                      to: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['to']),
-                                ),)
-                          ],
-                        ),
                 ),
               ));
             }));
@@ -96,11 +116,17 @@ Widget buildTicket({
   required int coachNumber,
   required String from,
   required String to,
+  required String name,
+  required String duration,
+  required double price,
   //required Function viewFun,
   //required Function cancelFun
 }) =>
     Padding(
-      padding: EdgeInsets.symmetric(vertical: 10.sp, horizontal: 20.sp,),
+      padding: EdgeInsets.symmetric(
+        vertical: 10.sp,
+        horizontal: 20.sp,
+      ),
       child: Container(
         //width: 400.w,
         height: 25.h,
@@ -118,13 +144,13 @@ Widget buildTicket({
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     SizedBox(
-                    //width:  90,
-                    height: 5.h,
-                    child: TicketsComponents.twoText(
-                      context: context,
-                      title: from,
-                      label: startTime,
-                    )),
+                        //width:  90,
+                        height: 5.h,
+                        child: TicketsComponents.twoText(
+                          context: context,
+                          title: from,
+                          label: startTime,
+                        )),
                     Column(
                       //mainAxisAlignment:  MainAxisAlignment.center,
                       //crossAxisAlignment: CrossAxisAlignment.center,
@@ -134,7 +160,7 @@ Widget buildTicket({
                             '${AppConstants.vectorsUrl}$smallTicketShape',
                           ),
                         ),
-                         SizedBox(
+                        SizedBox(
                           height: 1.5.h,
                         ),
                         Text(
@@ -148,15 +174,15 @@ Widget buildTicket({
                               ),
                         ),
                       ],
-                    ),  SizedBox(
-                    //width:  90,
-                    height: 5.h,
-                    child:
-                    TicketsComponents.twoText(
-                      context: context,
-                      title: to,
-                      label: endTime,
-                    )),
+                    ),
+                    SizedBox(
+                        //width:  90,
+                        height: 5.h,
+                        child: TicketsComponents.twoText(
+                          context: context,
+                          title: to,
+                          label: endTime,
+                        )),
                   ],
                 ),
                 SizedBox(
@@ -170,7 +196,7 @@ Widget buildTicket({
                   ),
                 ),
                 Padding(
-                  padding:  EdgeInsetsDirectional.only(
+                  padding: EdgeInsetsDirectional.only(
                     top: 20.sp,
                   ),
                   child: Row(
@@ -228,7 +254,28 @@ Widget buildTicket({
                         children: [
                           SharedComponents.defaultButton(
                             context: context,
-                            function: () {},
+                            function: () {
+                              TicketInfoModel ticketDetailsModel =
+                                  TicketInfoModel(
+                                from: from,
+                                to: to,
+                                startTime: startTime,
+                                endTime: endTime,
+                                ticketId: idNumber,
+                                passengerName: name,
+                                date: date,
+                                className: classs,
+                                coachNumber: coachNumber,
+                                seatNumber: seatNumber,
+                                price: price,
+                                duration: duration,
+                              );
+                              SharedComponents.navigateTo(
+                                TicketScreen(
+                                    ticketInfoModel: ticketDetailsModel),
+                                context,
+                              );
+                            },
                             text: 'View',
                             width: 25.w,
                             radius: 10.sp,

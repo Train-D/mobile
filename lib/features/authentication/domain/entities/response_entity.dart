@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import '../../data/models/auth_response_model.dart';
 
 class ResponseEntity extends Equatable {

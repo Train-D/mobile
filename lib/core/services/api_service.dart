@@ -38,4 +38,15 @@ class ApiService {
     );
     return response.data;
   }
+
+
+  Future<Map<String, dynamic>> delete(
+      {required String endPoint}) async {
+    dio.options.headers['Authorization'] =
+        'Bearer ${CacheHelper.getData(key: "token")}';
+    var response = await dio.delete(
+      '${ApiConstants.baseUrl}$endPoint',
+    );
+    return response.data;
+  }
 }

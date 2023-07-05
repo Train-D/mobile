@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+
 import '../../../data/models/first%20screen/stations_model.dart';
 class StationsEntity extends Equatable {
   final Map<String, dynamic> stations;

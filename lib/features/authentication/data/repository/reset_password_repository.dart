@@ -1,11 +1,11 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
 
-import 'package:traind_app/core/error/failure.dart';
-import 'package:traind_app/features/authentication/data/data%20source/reset_password_remote_data_source.dart';
-import 'package:traind_app/features/authentication/data/models/reset_password_model.dart';
-import 'package:traind_app/features/authentication/domain/entities/reset_password_entity.dart';
-import 'package:traind_app/features/authentication/domain/repository/base_reset_password_respository.dart';
+import '../../../../core/error/failure.dart';
+import '../data%20source/reset_password_remote_data_source.dart';
+import '../models/reset_password_model.dart';
+import '../../domain/entities/reset_password_entity.dart';
+import '../../domain/repository/base_reset_password_respository.dart';
 
 class ResetPasswordRepository extends BaseResetPasswordRepository {
   final ResetPasswordRemoteDataSource resetPasswordRemoteDataSource;

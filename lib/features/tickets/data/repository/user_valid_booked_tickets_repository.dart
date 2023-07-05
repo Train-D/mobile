@@ -1,7 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:traind_app/core/error/failure.dart';
-import 'package:traind_app/features/tickets/domain/entities/user_valid_booked_tickets_entity.dart';
-import 'package:traind_app/features/tickets/domain/repository/base_user_valid_booked_tickets_repository.dart';
+import '../../../../core/error/failure.dart';
+import '../../domain/entities/all%20tickets/cancel_ticket_response_entity.dart';
+import '../../domain/entities/all%20tickets/user_valid_booked_tickets_entity.dart';
+import '../../domain/repository/base_user_valid_booked_tickets_repository.dart';
 
 import '../data source/user_valid_booked_tickets_remote_data_source.dart';
 
@@ -13,10 +14,23 @@ class UserValidBookedTicketsRepository
   UserValidBookedTicketsRepository(this.userValidBookedTicketsRemoteDataSource);
   @override
   Future<Either<Failure, UserValidBookedTicketsEntity>>
-      getUserValidBookedTickets() async{
+      getUserValidBookedTickets() async {
     try {
-      var userValidTickets = await userValidBookedTicketsRemoteDataSource.getUserValidBookedTickets();
+      var userValidTickets = await userValidBookedTicketsRemoteDataSource
+          .getUserValidBookedTickets();
       return Right(userValidTickets);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, CancelTicketResponseEntity>> cancelTicket(
+      String ticketId) async {
+    try {
+      var cancelTricketResp =
+          await userValidBookedTicketsRemoteDataSource.cancelTicket(ticketId);
+      return Right(cancelTricketResp);
     } catch (e) {
       return Left(ServerFailure(e.toString()));
     }

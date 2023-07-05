@@ -1,7 +1,7 @@
 import 'package:firebase_database/firebase_database.dart';
 
-import 'package:traind_app/features/track/data/models/train_tracking_model.dart';
-import 'package:traind_app/features/track/domain/entities/train_tracking_entity.dart';
+import '../models/train_tracking_model.dart';
+import '../../domain/entities/train_tracking_entity.dart';
 
 import '../../../../core/services/api_service.dart';
 

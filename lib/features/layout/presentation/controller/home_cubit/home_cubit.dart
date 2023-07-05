@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:traind_app/features/tickets/presentation/screens/user_valid_booked_tickets_screen.dart';
+import '../../../../tickets/presentation/screens/user_valid_booked_tickets_screen.dart';
 import '../../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../../core/utils/app_constants.dart';
 import '../../../../../core/utils/app_images.dart';
