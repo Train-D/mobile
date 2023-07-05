@@ -76,10 +76,10 @@ class TicketScreen extends StatelessWidget {
                               function: () async {
                                 final ticket = await cubit.screenshotCon
                                     .captureFromWidget(ticketData);
-                                await cubit.saveImage(ticket);
-                                cubit.showDialog = true;
+                                String s = await cubit.saveImage(ticket);
+                                //if(s != '') cubit.showDialog = true;
                                 //await cubit.captureWidget();
-                                showTicketAlertDialog(context: context);
+                                if(s != '') showTicketAlertDialog(context: context);
                               },
                               text: AppString.download,
                               width: AppSizes.width(context) / 2.5,
@@ -146,13 +146,6 @@ Widget cutsAndDivider({
         ),
         const Spacer(),
         Row(children: [
-          // TextButton(
-          //   onPressed: () {
-          //     print(wid);
-          //   },
-          //   child: Text('test'),
-          // ),
-          //for (int i = 0; i < (wid - 103) / 9; i++)
           Image(
             fit: BoxFit.fitWidth,
             image: AssetImage(
@@ -187,9 +180,14 @@ Widget buildTicket(
       width: 328,
       height: 610,
       decoration: BoxDecoration(
-        color: ticketColor,
         borderRadius: BorderRadius.circular(50),
+         gradient: const LinearGradient(
+            colors: ticketColor,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
       ),
+      
       child: Column(
         children: [
           Padding(

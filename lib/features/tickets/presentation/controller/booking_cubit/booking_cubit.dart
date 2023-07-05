@@ -76,21 +76,33 @@ class BookingCubit extends Cubit<BookingState> {
   final screenshotCon = ScreenshotController();
   Future<String> saveImage(Uint8List bytes) async {
     await [Permission.storage].request();
+    //PermissionStatus status = await Permission.storage.status;
+    // if (req.isNotEmpty) {
+    //   final time = DateTime.now().toString();
+    //   final name = 'ticket $time';
+    //   final result = await ImageGallerySaver.saveImage(
+    //     bytes,
+    //     name: name,
+    //   );
+    //   return result['filePath'];
+    // } else {
+    //   return '';
+    // }
 
-    final time = DateTime.now().toString();
-    final name = 'ticket $time';
-    final result = await ImageGallerySaver.saveImage(
-      bytes,
-      name: name,
-    );
-    return result['filePath'];
+     final time = DateTime.now().toString();
+      final name = 'ticket $time';
+      final result = await ImageGallerySaver.saveImage(
+        bytes,
+        name: name,
+      );
+      return result['filePath'];
   }
 
   final GlobalKey globalKey = GlobalKey();
 
   Future<void> captureWidget() async {
     try {
-       emit(DownloadWidgetLoadingState());
+      emit(DownloadWidgetLoadingState());
       final RenderRepaintBoundary boundary =
           globalKey.currentContext!.findRenderObject() as RenderRepaintBoundary;
 
@@ -100,7 +112,7 @@ class BookingCubit extends Cubit<BookingState> {
           await image.toByteData(format: ui.ImageByteFormat.png);
 
       final Uint8List pngBytes = byteData!.buffer.asUint8List();
-      
+
       //save the image to the gallery
       final result = await ImageGallerySaver.saveImage(pngBytes);
 
@@ -110,7 +122,7 @@ class BookingCubit extends Cubit<BookingState> {
         emit(DownloadWidgetErrorState());
       }
     } catch (e) {
-       emit(DownloadWidgetErrorState());
+      emit(DownloadWidgetErrorState());
       print(e.toString());
     }
   }
@@ -822,7 +834,6 @@ class BookingCubit extends Cubit<BookingState> {
       price: 0,
       duration: '');
 
-      
   Future<void> getTicketData() async {
     emit(GetTicketDataLoadingState());
     var result = await bookingTicketUsecase.call(BookingTicketModel(
