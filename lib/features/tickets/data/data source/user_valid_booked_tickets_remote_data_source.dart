@@ -32,7 +32,7 @@ class UserValidBookedTicketsRemoteDataSourceImpl
 
   @override
   Future<CancelTicketResponseEntity> cancelTicket(String ticketId) async {
-    var data = await apiService.delete(endPoint: ApiConstants.cancelUserTicket);
+    var data = await apiService.delete(endPoint: '${ApiConstants.cancelUserTicket}$ticketId');
     CancelTicketResponseEntity cancelTicketResponseEntity =
         CancelTicketResponseModel.fromJson(data);
     return cancelTicketResponseEntity;

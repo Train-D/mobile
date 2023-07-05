@@ -11,9 +11,9 @@ class CancelTicketUsecase
   final BaseUserValidBookedTicketsRepository
       baseUserValidBookedTicketsRepository;
 
-  CancelTicketUsecase({
-    required this.baseUserValidBookedTicketsRepository,
-  });
+  CancelTicketUsecase(
+    this.baseUserValidBookedTicketsRepository,
+  );
   
   @override
   Future<Either<Failure, CancelTicketResponseEntity>> call(String parameters) async{

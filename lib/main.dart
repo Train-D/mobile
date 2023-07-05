@@ -17,6 +17,7 @@ import 'package:traind_app/features/stations/presentation/controller/all_station
 import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/userValidBookedTickets_cubit/userValidBookedTickets_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/ticket_cubit/cubit/ticket_cubit.dart';
+import 'package:traind_app/features/tickets/presentation/screens/from_to_screen.dart';
 
 import 'core/bloc_observer/bloc_observer.dart';
 import 'features/authentication/presentation/controller/login_cubit/login_cubit.dart';
@@ -106,8 +107,7 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'TrainD',
             theme: lightTheme(),
-           /* initialRoute: '/',
-            routes: {
+            /*routes: {
               '/': (context) => HomeScreen(),
             },*/
             home: SplashScreen(

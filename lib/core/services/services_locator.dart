@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:traind_app/features/tickets/domain/usecase/cancel_ticket_usecase.dart';
 import '../../features/authentication/data/data%20source/reset_password_remote_data_source.dart';
 import '../../features/tickets/data/data%20source/user_valid_booked_tickets_remote_data_source.dart';
 import '../../features/tickets/data/repository/user_valid_booked_tickets_repository.dart';
@@ -164,18 +165,19 @@ class ServicesLocator {
         () => ResetPasswordRepository(resetPasswordRemoteDataSource: sl()));
     sl.registerLazySingleton(
         () => ResetPasswordUseCase(baseResetPasswordRepository: sl()));
+
     //User Valid Booked Tickets
     sl.registerLazySingleton<UserValidBookedTicketsRemoteDataSource>(
         () => UserValidBookedTicketsRemoteDataSourceImpl(apiService: sl()));
     sl.registerLazySingleton<BaseUserValidBookedTicketsRepository>(
         () => UserValidBookedTicketsRepository(sl()));
     sl.registerLazySingleton(() => UserValidBookedTicketsUseCase(sl()));
+    sl.registerLazySingleton(() => CancelTicketUsecase(sl()));
 
     //track
     sl.registerLazySingleton<TrackRemoteDataSource>(
         () => TrackRemoteDataSourceImpl(sl()));
-    sl.registerLazySingleton<BaseTrackRepository>(
-        () => TrackRepository(sl()));
+    sl.registerLazySingleton<BaseTrackRepository>(() => TrackRepository(sl()));
     sl.registerLazySingleton(() => GetTrackInfoUsecase(sl()));
 
     //train tracking
