@@ -18,7 +18,6 @@ import '../components/widgets/train_b2_car.dart';
 import '../components/widgets/train_c1_car.dart';
 import '../components/widgets/train_c2_car.dart';
 import '../components/widgets/train_c3_car.dart';
-import '../components/widgets/train_second_car.dart';
 import '../controller/booking_cubit/booking_cubit.dart';
 
 class ChooseSeatsScreen extends StatelessWidget {
@@ -152,9 +151,6 @@ class ChooseSeatsScreen extends StatelessWidget {
                                                       milliseconds: 150,
                                                     ),
                                                   ),
-                                                  // const SizedBox(
-                                                  //   height: 1,
-                                                  // ),
                                                   AnimatedCrossFade(
                                                     firstChild: ChooseSeatsComponents
                                                         .trainSmallCarWithSelectedContainer(
@@ -176,9 +172,6 @@ class ChooseSeatsScreen extends StatelessWidget {
                                                       milliseconds: 150,
                                                     ),
                                                   ),
-                                                  // const SizedBox(
-                                                  //   height: 15,
-                                                  // ),
                                                   AnimatedCrossFade(
                                                     firstChild: ChooseSeatsComponents
                                                         .trainSmallCarWithSelectedContainer(
@@ -200,9 +193,7 @@ class ChooseSeatsScreen extends StatelessWidget {
                                                       milliseconds: 150,
                                                     ),
                                                   ),
-                                                  // const SizedBox(
-                                                  //   height: 15,
-                                                  // ),
+                                                  
                                                   AnimatedCrossFade(
                                                     firstChild: ChooseSeatsComponents
                                                         .trainSmallCarWithSelectedContainer(
@@ -224,9 +215,7 @@ class ChooseSeatsScreen extends StatelessWidget {
                                                       milliseconds: 150,
                                                     ),
                                                   ),
-                                                  // const SizedBox(
-                                                  //   height: 15,
-                                                  // ),
+                                                  
                                                   AnimatedCrossFade(
                                                     firstChild: ChooseSeatsComponents
                                                         .trainSmallCarWithSelectedContainer(
@@ -248,9 +237,7 @@ class ChooseSeatsScreen extends StatelessWidget {
                                                       milliseconds: 150,
                                                     ),
                                                   ),
-                                                  //  const SizedBox(
-                                                  //   height: 15,
-                                                  // ),
+                                                  
                                                   AnimatedCrossFade(
                                                     firstChild: ChooseSeatsComponents
                                                         .trainSmallCarWithSelectedContainer(
@@ -272,9 +259,7 @@ class ChooseSeatsScreen extends StatelessWidget {
                                                       milliseconds: 150,
                                                     ),
                                                   ),
-                                                  //  const SizedBox(
-                                                  //   height: 15,
-                                                  // ),
+                                                  
                                                   AnimatedCrossFade(
                                                     firstChild: ChooseSeatsComponents
                                                         .trainSmallCarWithSelectedContainer(

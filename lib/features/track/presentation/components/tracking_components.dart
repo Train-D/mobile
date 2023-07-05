@@ -6,175 +6,155 @@ import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
 
 class TrackingComponents {
-  static Future bottomModelSheet(
+  static Container bottomModelSheet(
           BuildContext context,
-          String currTime,
-          String timeToArrive,
+          String arrivalTime,
+          String hours,
+          String mins,
           double fraction,
           String fromStation,
-          
-          ) =>
-      showModalBottomSheet(
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (context) => Container(
-          width: double.infinity,
-          height: 35.h,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(30.sp),
-                topRight: Radius.circular(30.sp)),
-            gradient: const LinearGradient(
-              colors: trackingBottomModelSheet,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: EdgeInsets.all(20.sp),
-              child: Column(children: [
-                SizedBox(
-                  height: 2.h,
-                ),
-                Image.asset('${AppConstants.imagesUrl}$bar'),
-                SizedBox(
-                  height: 3.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      timeToArrive,
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                    Text(
-                      currTime,
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 2.h,
-                ),
-                Stack(
-                  children: [
-                    Column(
-                      children: [
-                        SizedBox(
-                          height: 2.5.h,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 12.sp),
-                          child: Stack(
-                            children: [
-                              Container(
-                                height: 1.h,
-                                width: double.infinity,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.sp)),
-                                  color: cardTextCvvColor,
-                                ),
-                              ),
-                              FractionallySizedBox(
-                                widthFactor: fraction,
-                                child: Container(
-                                  height: 1.h,
-                                  decoration: BoxDecoration(
-                                      color: fractionalbox,
-                                      borderRadius: BorderRadius.all(
-                                          Radius.circular(10.sp))),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        SizedBox(
-                            height: 4.h,
-                            child: Image.asset(
-                                '${AppConstants.vectorsUrl}$currLocation')),
-                        SizedBox(
-                            height: 4.h,
-                            child: Image.asset(
-                                '${AppConstants.vectorsUrl}$train')),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 2.h,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      AppString.train,
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                    Text(
-                      fromStation,
-                      style: Theme.of(context).textTheme.displayMedium,
-                    )
-                  ],
-                ),
-                //SizedBox(height: 1.h,),
-                Center(
-                  child: Text(
-                    '00:45:10',
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayMedium!
-                        .copyWith(fontSize: 20.sp),
-                  ),
-                ),
-                Center(
-                  child: Text(
-                    'HOURS:MINUTES:SECONDS',
-                    style: Theme.of(context)
-                        .textTheme
-                        .displayMedium!
-                        .copyWith(fontSize: 12.sp),
-                  ),
-                )
-              ]),
-            ),
+          String currTime,
+          String distance) =>
+      Container(
+        width: double.infinity,
+        height: 35.h,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.sp),
+              topRight: Radius.circular(30.sp)),
+          gradient: const LinearGradient(
+            colors: trackingBottomModelSheet,
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
           ),
         ),
-      );
-  static Widget diaplayTime(BuildContext context, String time) => Positioned(
-        left: 40.sp,
-        top: 95.5.sp,
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(5.sp),
-          child: Container(
-            height: 6.h,
-            width: 40.w,
-            color: Colors.white,
-            child: FittedBox(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.all(20.sp),
+            child: Column(children: [
+              SizedBox(
+                height: 2.h,
+              ),
+              Image.asset('${AppConstants.imagesUrl}$bar'),
+              SizedBox(
+                height: 3.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    currTime,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  Text(
+                    arrivalTime,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Stack(
+                children: [
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 2.5.h,
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.sp),
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: 1.h,
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(10.sp)),
+                                color: cardTextCvvColor,
+                              ),
+                            ),
+                            Container(
+                              height: 1.h,
+                              width: 53.sp,
+                              decoration: BoxDecoration(
+                                  color: fractionalbox,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(10.sp))),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      SizedBox(
+                          height: 4.h,
+                          child: Image.asset(
+                              '${AppConstants.vectorsUrl}$currLocation')),
+                      SizedBox(
+                          height: 4.h,
+                          child:
+                              Image.asset('${AppConstants.vectorsUrl}$train')),
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 2.h,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    AppString.train,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  ),
+                  Text(
+                    distance,
+                    style: Theme.of(context)
+                        .textTheme
+                        .displayMedium!
+                        .copyWith(fontSize: 16.sp),
+                  ),
+                  Text(
+                    fromStation,
+                    style: Theme.of(context).textTheme.displayMedium,
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 4.h,
+              ),
+              SizedBox(
+                width: double.infinity,
+                child: Column(
                   children: [
-                    Text('Time to arrive: ',
-                        style: Theme.of(context)
-                            .textTheme
-                            .displayLarge!
-                            .copyWith(color: Colors.black)),
-                    Text(time,
+                    Center(
+                      child: Text(
+                        '$hours : $mins',
                         style: Theme.of(context)
                             .textTheme
                             .displayMedium!
-                            .copyWith(color: Colors.black)),
+                            .copyWith(fontSize: 20.sp),
+                      ),
+                    ),
+                    Center(
+                      child: Text(
+                        'HOURS : MINUTES',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayMedium!
+                            .copyWith(fontSize: 14.sp),
+                      ),
+                    )
                   ],
                 ),
-              ),
-            ),
+              )
+            ]),
           ),
         ),
       );
