@@ -37,6 +37,20 @@ class FromToScreen extends StatelessWidget {
                 SizedBox(
                   height: 3.h,
                 ),
+                (cubit.tripTimesModel.tripTimes.length == 0
+                    ? Padding(
+                        padding: EdgeInsets.all(30.sp),
+                        child: Center(
+                          child: Text(
+                            'Oops All train trips to this destination have ended for today, Try tomorrow ...',
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium!
+                                .copyWith(color: settingsTitleTextColor),
+                          ),
+                        ),
+                      )
+                    : Text('')),
                 Expanded(
                   child: ListView.builder(
                     itemCount: cubit.tripTimesModel.tripTimes.length,
@@ -283,17 +297,25 @@ class FromToScreen extends StatelessWidget {
                                                                       42,
                                                                       1),
                                                             ),
-                                                            textTheme:
-                                                                TextTheme(
-                                                              bodySmall:Theme.of(context).textTheme.displayMedium!.copyWith(
-                                                                fontSize: 16.sp
-                                                              )
+                                                            textTheme: TextTheme(
+                                                                bodySmall: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .displayMedium!
+                                                                    .copyWith(
+                                                                        fontSize:
+                                                                            16.sp)),
+                                                            datePickerTheme:
+                                                                DatePickerThemeData(
+                                                              headerHelpStyle: Theme
+                                                                      .of(
+                                                                          context)
+                                                                  .textTheme
+                                                                  .displayMedium!
+                                                                  .copyWith(
+                                                                      fontSize:
+                                                                          16.sp),
                                                             ),
-                                                           datePickerTheme: DatePickerThemeData(
-                                                            headerHelpStyle: Theme.of(context).textTheme.displayMedium!.copyWith(
-                                                                fontSize: 16.sp
-                                                              ),
-                                                              ),
                                                             textButtonTheme:
                                                                 TextButtonThemeData(
                                                                     style: TextButton

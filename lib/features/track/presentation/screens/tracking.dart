@@ -47,11 +47,16 @@ class TrackingScreen extends StatelessWidget {
                                   cubit.trackModel.longitude),
                               zoom: 8,
                             ),
+                            
                             markers: {
                               Marker(
                                   markerId: MarkerId('Souce'),
                                   position:
-                                      LatLng(cubit.sourceLat, cubit.sourceLng)),
+                                      LatLng(cubit.sourceLat, cubit.sourceLng),
+                                  
+                                      ),
+                              
+                                  
                               Marker(
                                   markerId: MarkerId('destination'),
                                   position: LatLng(cubit.trackModel.latitude,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/utils/components.dart';
 
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_sizes.dart';
@@ -29,31 +30,41 @@ class SettingsComponents {
           ),
         ),
       );
-  static Widget settingsDefualtContainer({
-    required IconData preIcon,
-    IconData suffIcon = Icons.arrow_forward_ios,
-    required String title,
-    String text ='',
-    required BuildContext context,
-  }) =>
+  static Widget settingsDefualtContainer(
+          {required dynamic preIcon,
+          IconData suffIcon = Icons.arrow_forward_ios,
+          required String title,
+          String text = '',
+          required BuildContext context,
+          }) =>
       Padding(
         padding: EdgeInsets.symmetric(vertical: 1.5.h, horizontal: 7.w),
-        child: InkWell(
-          onTap: () {
-            
-          },
-          child: Row(
-            children: [
-              Icon(preIcon, color: lightColor, size: 25.sp,),
-              SizedBox(width: 3.w,),
-              Text(title, style: Theme.of(context).textTheme.displayMedium,),
-              const Spacer(),
-              Text(text, style: Theme.of(context).textTheme.displayLarge!.copyWith(color: languageTextColor, fontSize: 16.sp),),
-              SizedBox(width: 2.w,),
-              Icon(suffIcon, color: lightColor,)
-              
-            ],
-          ),
+        child: Row(
+          children: [
+            preIcon,
+            SizedBox(
+              width: 3.w,
+            ),
+            Text(
+              title,
+              style: Theme.of(context).textTheme.displayMedium,
+            ),
+            const Spacer(),
+            Text(
+              text,
+              style: Theme.of(context)
+                  .textTheme
+                  .displayLarge!
+                  .copyWith(color: languageTextColor, fontSize: 16.sp),
+            ),
+            SizedBox(
+              width: 2.w,
+            ),
+            Icon(
+              suffIcon,
+              color: lightColor,
+            )
+          ],
         ),
       );
 }

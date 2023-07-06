@@ -1,4 +1,8 @@
 class AppString {
+  static const String changePassword = 'Change Password';
+  static const String newPassword = 'New password';
+  static const String currPassword = 'Current password';
+  static const String confirmPassword = 'Re-type new password';
   static const String onboardingOneTitle = 'Track Your Train';
   static const String onboardingOneSubtitle =
       'It allows you to track your train step by step and know the time and distance left to reach you';
@@ -8,6 +12,9 @@ class AppString {
   static const String appName = 'TrainD';
   static const String resetPasswordInstructions =
       'Enter the email associated with your account and we\'ll send an email with instructions to reset your password.';
+  static const String changePasswordInstructions =
+      'Your new password must be different from previous used password.';
+  
   static const String loginTitle = 'LOGIN';
   static const String errorMessage = 'Error Message!';
   static const String note = 'Note..';
@@ -65,4 +72,5 @@ class AppString {
   static const String available = 'Available';
   static const String unavailable = 'Unvailable';
   static const String cancel = 'Cancel';
+  static const String safety = 'Safety';
 }

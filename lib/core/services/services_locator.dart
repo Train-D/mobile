@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:traind_app/features/settings/data/data%20source/change_password_remote_data_source.dart';
+import 'package:traind_app/features/settings/data/repository/change_password_repository.dart';
+import 'package:traind_app/features/settings/domain/repository/base_change_password_repository.dart';
+import 'package:traind_app/features/settings/domain/usecase/change_password_usecase.dart';
 import 'package:traind_app/features/tickets/domain/usecase/cancel_ticket_usecase.dart';
 import '../../features/authentication/data/data%20source/reset_password_remote_data_source.dart';
 import '../../features/tickets/data/data%20source/user_valid_booked_tickets_remote_data_source.dart';
@@ -186,5 +190,12 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseTrainTrackingRepository>(
         () => TrainTrackingRepository(trackingRemoteDataSource: sl()));
     sl.registerLazySingleton(() => TrainTrackingUseCase(sl()));
+    
+    //change password
+    sl.registerLazySingleton<ChangePasswordRemoteDataSource>(
+        () => ChangePasswordRemoteDataSourceImpl(apiService: sl()));
+    sl.registerLazySingleton<BaseChangePasswordRepository>(
+        () => ChangePasswordRepository(sl()));
+    sl.registerLazySingleton(() => ChangePasswordUseCase(sl()));
   }
 }

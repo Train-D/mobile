@@ -12,8 +12,7 @@ class ApiConstants {
   static const String paymentEndPoint = '/Stripe/Payment/add';
   static const String bookingTicketEndPoint = '/Ticket/Book';
   static const String forgotPaswword = '/User/ForgotPassword';
-  static const String ProfileImageGetEndPoint = '';
-  static const String ProfileImagePutEndPoint = '';
   static const String userBookedTickets = '/Ticket/myTickets';
   static const String cancelUserTicket = '/Ticket/CancelTicket/';
+  static const String ChangePasswordEndPoint = '/User/change-password';
 }
