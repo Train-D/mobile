@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/features/settings/presentation/screens/change_password_screen.dart';
 import '../../../../core/network/local/cache_helper.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -58,7 +59,7 @@ class SettingsScreen extends StatelessWidget {
                           );
                         },
                         text: AppString.editProfile,
-                        width: 40.w,
+                        width: 45.w,
                         radius: 8.sp,
                         withIcon: true,
                         icon: Icons.arrow_forward_ios,
@@ -87,17 +88,38 @@ class SettingsScreen extends StatelessWidget {
                     children: [
                       SettingsComponents.titleContainer(
                         context: context,
-                        title: AppString.general,
+                        title: AppString.safety,
                       ),
-                      SettingsComponents.settingsDefualtContainer(
-                          preIcon: Icons.language,
-                          title: 'Language',
-                          context: context,
-                          text: 'English'),
-                      SettingsComponents.settingsDefualtContainer(
-                        preIcon: Icons.location_on_outlined,
-                        title: 'Location',
-                        context: context,
+                      InkWell(
+                        onTap: (){
+
+                        },
+                        child: SettingsComponents.settingsDefualtContainer(
+                            preIcon: Icon(
+                              Icons.language,
+                              color: Colors.white,
+                              size: 25.sp,
+                            ),
+                            title: 'Language',
+                            context: context,
+                            text: 'English',
+                            ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                              SharedComponents.navigateTo(
+                                  ChangePasswordScreen(), context);
+                            
+                        },
+                        child: SettingsComponents.settingsDefualtContainer(
+                            preIcon: ImageIcon(
+                              AssetImage('${AppConstants.vectorsUrl}safety.png'),
+                              color: Colors.white,
+                              size: 25.sp,
+                            ),
+                            title: 'Security & Password',
+                            context: context,
+                            ),
                       ),
                       SharedComponents.defaultButton(
                         context: context,
