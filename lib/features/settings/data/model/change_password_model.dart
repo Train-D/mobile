@@ -1,4 +1,4 @@
-import 'package:traind_app/features/settings/domain/entity/change_password_entity.dart';
+import '../../domain/entity/change_password_entity.dart';
 
 class ChangePasswordModel extends ChangePasswordEntity {
   ChangePasswordModel(

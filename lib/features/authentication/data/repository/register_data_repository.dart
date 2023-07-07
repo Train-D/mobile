@@ -1,5 +1,5 @@
 import 'package:dartz/dartz.dart';
-import 'package:traind_app/features/authentication/domain/entities/google_sign_in_response_entity.dart';
+import '../../domain/entities/google_sign_in_response_entity.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failure.dart';

@@ -1,15 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
-import 'package:traind_app/features/settings/data/data%20source/change_password_remote_data_source.dart';
-import 'package:traind_app/features/settings/data/repository/change_password_repository.dart';
-import 'package:traind_app/features/settings/domain/repository/base_change_password_repository.dart';
-import 'package:traind_app/features/settings/domain/usecase/change_password_usecase.dart';
-import 'package:traind_app/features/tickets/domain/usecase/cancel_ticket_usecase.dart';
+import '../../features/settings/data/data%20source/change_password_remote_data_source.dart';
+import '../../features/settings/data/repository/change_password_repository.dart';
+import '../../features/settings/domain/repository/base_change_password_repository.dart';
+import '../../features/settings/domain/usecase/change_password_usecase.dart';
+import '../../features/tickets/domain/usecase/cancel_ticket_usecase.dart';
 import '../../features/authentication/data/data%20source/reset_password_remote_data_source.dart';
 import '../../features/authentication/domain/usecase/google_sign_in_usecase.dart';
 import '../../features/tickets/data/data%20source/user_valid_booked_tickets_remote_data_source.dart';
 import '../../features/tickets/data/repository/user_valid_booked_tickets_repository.dart';
 import '../../features/tickets/domain/repository/base_user_valid_booked_tickets_repository.dart';
+import '../../features/tickets/domain/usecase/get_payment_id_usecase.dart';
+import '../../features/tickets/domain/usecase/return_ticket_price_usecase.dart';
 import '../../features/tickets/domain/usecase/user_valid_booked_tickets_usecase.dart';
 import '../../features/track/data/data%20source/track_remote_data_source.dart';
 import '../../features/track/data/data%20source/train_tracking_remote_data_source.dart';
@@ -180,6 +182,8 @@ class ServicesLocator {
         () => UserValidBookedTicketsRepository(sl()));
     sl.registerLazySingleton(() => UserValidBookedTicketsUseCase(sl()));
     sl.registerLazySingleton(() => CancelTicketUsecase(sl()));
+    sl.registerLazySingleton(() => GetPaymentIdUsecase(sl()));
+    sl.registerLazySingleton(() => (ReturnTicketPriceUsecase(sl())));
 
     //track
     sl.registerLazySingleton<TrackRemoteDataSource>(

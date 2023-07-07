@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
-import 'package:traind_app/features/settings/presentation/screens/change_password_screen.dart';
+import 'change_password_screen.dart';
 import '../../../../core/network/local/cache_helper.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';

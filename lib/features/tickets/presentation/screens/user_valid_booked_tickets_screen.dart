@@ -23,16 +23,19 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => UserValidBookedTicketsCubit(sl(), sl())
-              ..getUserValidBookedTickets(),
+            create: (context) =>
+                UserValidBookedTicketsCubit(sl(), sl(), sl(), sl())
+                  ..getUserValidBookedTickets(),
           ),
         ],
         child: BlocConsumer<UserValidBookedTicketsCubit,
             UserValidBookedTicketsState>(listener: (context, state) {
           UserValidBookedTicketsCubit cubit =
               UserValidBookedTicketsCubit.get(context);
-          if (state is CancelUserTicketFailureState) {
-            Navigator.pop(context);
+          if (state is CancelUserTicketFailureState ||
+              state is GetPaymentIdFailureState ||
+              state is ReturnTicketPriceToUserFailureState) {
+            //Navigator.pop(context);
             SharedComponents.showAlertDialog(
                 context: context,
                 title: 'Error!',
@@ -49,19 +52,29 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
                     text: 'Ok',
                   )
                 ]);
-          } else if (state is CancelUserTicketSuccessState) {
-            Navigator.pop(context);
-            if (cubit.cancelResponse == 'The reservation has been cancelled') {
-              SharedComponents.showToast(
-                text: cubit.cancelResponse,
-                color: Colors.green,
-              );
+          } else if (state is CancelUserTicketSuccessState){
+           // Navigator.pop(context);
+            if (cubit.cancelResponse == 'The reservation has been cancelled'){
               cubit.getUserValidBookedTickets();
-            } else {
-              SharedComponents.showToast(
-                text: cubit.cancelResponse,
-                color: Colors.red,
+              final snackBar = SnackBar(
+                content: Text(cubit.cancelResponse),
+                backgroundColor: lightDefualtColor,
               );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              // SharedComponents.showToast(
+              //   text: cubit.cancelResponse,
+              //   color: Colors.green,
+              // );
+            } else {
+              final snackBar = SnackBar(
+                content: Text(cubit.cancelResponse),
+                backgroundColor: Colors.red,
+              );
+              ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              // SharedComponents.showToast(
+              //   text: cubit.cancelResponse,
+              //   color: Colors.red,
+              // );
             }
           }
         }, builder: (context, state) {
@@ -73,7 +86,10 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
             child: Scaffold(
               backgroundColor: transparent,
               appBar: SharedComponents.defaultAppBar(context: context),
-              body: state is UserValidBookedTicketsLoadingState
+              body: state is UserValidBookedTicketsLoadingState ||
+                      state is GetPaymentIdLoadingState ||
+                      state is ReturnTicketPriceToUserLoadingState ||
+                      state is CancelUserTicketLoadingState
                   ? const Center(child: CircularProgressIndicator())
                   : cubit.userValidBookedTicketsModel.userValidBookedTickets
                           .isEmpty
@@ -90,8 +106,8 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
                           ),
                         )
                       : SingleChildScrollView(
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
+                          physics: const BouncingScrollPhysics(),
+                          child: Column(
                             children: [
                               Text(
                                 'Your Tickets',
@@ -106,9 +122,8 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
                               const SizedBox(
                                 height: 20,
                               ),
-                              Column(
-                                children: [
-                                  ListView.builder(
+                              Column(children: [
+                                ListView.builder(
                                   physics: const BouncingScrollPhysics(),
                                   shrinkWrap: true,
                                   itemCount: cubit.userValidBookedTicketsModel
@@ -119,28 +134,43 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
                                         showCancelTicketAlertDialog(
                                             context: context,
                                             cancel: () async {
-                                              await cubit.cancelUserTicket(cubit
+                                              Navigator.pop(context);
+                                              var ticketId = cubit
                                                   .userValidBookedTicketsModel
                                                   .userValidBookedTickets[index]
                                                       ['ticketId']
-                                                  .toString());
+                                                  .toString();
+                                              var price = cubit
+                                                  .userValidBookedTicketsModel
+                                                  .userValidBookedTickets[index]
+                                                      ['price']
+                                                  .toInt();
+                                              String? paymentId = await cubit
+                                                  .getPaymentId(ticketId);
+                                              if (paymentId != null) {
+                                                await cubit.returnTicketPrice(
+                                                    paymentId, price);
+                                                await cubit
+                                                    .cancelUserTicket(ticketId);
+                                              }
                                             });
-                                        //Navigator.pop(context);
-                                        //SharedComponents.navigateToReplace(UserValidBookedTicketsScreen(), context);
                                       },
-                                      name: cubit.userValidBookedTicketsModel
-                                              .userValidBookedTickets[index]
+                                      name: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]
                                           ['passengerName'],
                                       price: cubit.userValidBookedTicketsModel
-                                          .userValidBookedTickets[index]['price'],
-                                      duration: cubit.userValidBookedTicketsModel
+                                              .userValidBookedTickets[index]
+                                          ['price'],
+                                      duration: cubit
+                                              .userValidBookedTicketsModel
                                               .userValidBookedTickets[index]
                                           ['duration'],
-                                      startTime: cubit.userValidBookedTicketsModel
+                                      startTime: cubit
+                                              .userValidBookedTicketsModel
                                               .userValidBookedTickets[index]
                                           ['startTime'],
                                       endTime: cubit.userValidBookedTicketsModel
-                                          .userValidBookedTickets[index]['endTime'],
+                                              .userValidBookedTickets[index]
+                                          ['endTime'],
                                       idNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['ticketId'].toString(),
                                       date: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['date'],
                                       classs: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['className'],
@@ -149,10 +179,10 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
                                       from: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['from'],
                                       to: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['to']),
                                 ),
-                                                      ])
+                              ])
                             ],
                           ),
-                      ),
+                        ),
             ),
           ));
         }));
@@ -185,7 +215,7 @@ Widget buildTicket({
         height: 24.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20.sp),
-           gradient: const LinearGradient(
+          gradient: const LinearGradient(
             colors: ticketColor,
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,

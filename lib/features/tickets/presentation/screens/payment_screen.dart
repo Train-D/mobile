@@ -21,7 +21,7 @@ class PaymentScreen extends StatelessWidget {
       if (state is GetPaymentCustomerDataSuccessState) {
         await cubit.getTicketData();
         
-        int numberOfScreensToReplace = 3;
+        int numberOfScreensToReplace = 2;
 
         Navigator.popUntil(context, (route) {
           return (numberOfScreensToReplace-- <= 0);

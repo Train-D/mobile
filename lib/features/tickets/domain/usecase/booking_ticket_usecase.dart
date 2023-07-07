@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
+
 import '../../../../core/error/failure.dart';
+import '../../../../core/usecases/base_usecase.dart';
 import '../../data/models/fourth%20screen/booking_ticket_model.dart';
 import '../entities/fourth%20screen/ticket_info_entity.dart';
 import '../repository/base_booking_ticket_repository.dart';
-
-import '../../../../core/usecases/base_usecase.dart';
 
 class BookingTicketUsecase
     extends BaseUsecase<TicketInfoEntity, BookingTicketModel> {

@@ -35,22 +35,23 @@ class StationsScreen extends StatelessWidget {
                       SizedBox(
                         height: 20.sp,
                       ),
-                      SharedComponents.defaultTextField(
-                        controller: TextEditingController(),
-                        type: TextInputType.text,
-                        validate: (e) {
-                          return null;
-                        },
-                        label: 'Search',
-                        radius: 14.sp,
-                        bgColor: searchTextFieldBgColor,
-                        preIconFound: true,
-                        preIcon: Icons.search,
-                        prePressed: () {},
-                        suffIconFound: true,
-                        suffIcon: Icons.keyboard_voice,
-                        suffPressed: () {},
-                      ),
+                      // SharedComponents.defaultTextField(
+                      //   controller: TextEditingController(),
+                      //   type: TextInputType.text,
+                      //   validate: (e) {
+                      //     return null;
+                      //   },
+                      //   label: 'Search',
+                      //   radius: 14.sp,
+                      //   bgColor: searchTextFieldBgColor,
+                      //   preIconFound: true,
+                      //   preIcon: Icons.search,
+                      //   prePressed: () {},
+                      //   suffIconFound: true,
+                      //   suffIcon: Icons.keyboard_voice,
+                      //   suffPressed: () {},
+                      // ),
+                      
                       SizedBox(
                         height: 15.sp,
                       ),
