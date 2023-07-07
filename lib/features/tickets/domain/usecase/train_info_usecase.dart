@@ -1,6 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dartz/dartz.dart';
-
 import 'package:traind_app/core/error/failure.dart';
 import 'package:traind_app/core/usecases/base_usecase.dart';
 import 'package:traind_app/features/tickets/data/models/first%20screen/trip_info_model.dart';

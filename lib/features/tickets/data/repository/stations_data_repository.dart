@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
+
 import '../../../../core/error/failure.dart';
-import '../data%20source/get_remote_stations_data.dart';
 import '../../domain/entities/first%20screen/stations_entity.dart';
 import '../../domain/repository/base_stations_repository.dart';
-
 import '../data source/fromto_local_data_source.dart';
+import '../data%20source/get_remote_stations_data.dart';
 
 class StationsRepository extends BaseGetStationsRepository {
   final BaseGetRemoteStationsDataSource baseGetRemoteStationsDataSource;

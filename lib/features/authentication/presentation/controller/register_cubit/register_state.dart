@@ -19,3 +19,8 @@ class RegisterErrorState extends RegisterState {
   RegisterErrorState(this.message);
 }
 class RegisterClearDataState extends RegisterState{}
+
+class GetGoogleSignInTokenFromBackLoadingState extends RegisterState{}
+class GetGoogleSignInTokenFromBackSuccessState extends RegisterState{}
+class GetGoogleSignInTokenFromBackFailureState extends RegisterState{}
+

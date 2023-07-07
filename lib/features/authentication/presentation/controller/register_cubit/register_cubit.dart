@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -5,12 +6,16 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../../core/error/exceptions.dart';
 import '../../../data/models/auth_response_model.dart';
 import '../../../data/models/register_request_model.dart';
+import '../../../domain/usecase/google_sign_in_usecase.dart';
 import '../../../domain/usecase/register_usecase.dart';
 
 part 'register_state.dart';
 
 class RegisterCubit extends Cubit<RegisterState> {
-  RegisterCubit(this.postRegisterDataUseCase) : super(RegisterInitial());
+  RegisterCubit(
+    this.postRegisterDataUseCase,
+    this.googleSignInUsecase,
+  ) : super(RegisterInitial());
 
   static RegisterCubit get(context) => BlocProvider.of(context);
 
@@ -98,5 +103,19 @@ class RegisterCubit extends Cubit<RegisterState> {
     signUpLastNameCon.clear();
     signUpEmailCon.clear();
     emit(RegisterClearDataState());
+  }
+
+  GoogleSignInUsecase googleSignInUsecase;
+
+  Future<void> getGoogleSignInTokenFromBack(String idToken) async {
+    emit(GetGoogleSignInTokenFromBackLoadingState());
+    var result = await googleSignInUsecase.call(idToken);
+    result.fold((failure) {
+      emit(GetGoogleSignInTokenFromBackFailureState());
+      print(failure.toString());
+    }, (r) {
+      emit(GetGoogleSignInTokenFromBackSuccessState());
+      print(r.toString());
+    });
   }
 }

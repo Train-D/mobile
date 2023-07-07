@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
-import '../models/reset_password_model.dart';
-import '../../domain/entities/reset_password_entity.dart';
 
 import '../../../../core/network/remote/api_constants.dart';
+import '../../domain/entities/reset_password_entity.dart';
+import '../models/reset_password_model.dart';
 
 abstract class ResetPasswordRemoteDataSource {
   Future<ResetPasswordEntity> resetPassword(ResetPasswordModel model);

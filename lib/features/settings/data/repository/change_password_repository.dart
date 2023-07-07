@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
-import 'package:traind_app/core/error/failure.dart';
-import 'package:traind_app/features/settings/data/data%20source/change_password_remote_data_source.dart';
-import 'package:traind_app/features/settings/data/model/change_password_model.dart';
-import 'package:traind_app/features/settings/domain/repository/base_change_password_repository.dart';
+import '../../../../core/error/failure.dart';
+import '../data%20source/change_password_remote_data_source.dart';
+import '../model/change_password_model.dart';
+import '../../domain/repository/base_change_password_repository.dart';
 
 class ChangePasswordRepository extends BaseChangePasswordRepository {
   final ChangePasswordRemoteDataSource changePasswordRemoteDataSource;

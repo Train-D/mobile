@@ -1,6 +1,6 @@
-import 'package:traind_app/core/services/api_service.dart';
-import 'package:traind_app/features/settings/data/model/change_password_model.dart';
-import 'package:traind_app/features/settings/domain/entity/change_password_entity.dart';
+import '../../../../core/services/api_service.dart';
+import '../model/change_password_model.dart';
+import '../../domain/entity/change_password_entity.dart';
 
 import '../../../../core/network/remote/api_constants.dart';
 
