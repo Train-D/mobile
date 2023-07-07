@@ -15,4 +15,5 @@ class ApiConstants {
   static const String userBookedTickets = '/Ticket/myTickets';
   static const String cancelUserTicket = '/Ticket/CancelTicket/';
   static const String ChangePasswordEndPoint = '/User/change-password';
+  static const String settingUserDataEndPoint = '/Profile/GetUserNameAndPicture';
 }
