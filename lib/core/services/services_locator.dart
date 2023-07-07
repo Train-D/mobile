@@ -1,5 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
+import 'package:traind_app/features/settings/data/data%20source/setting_user_data_remote_data_source.dart';
+import 'package:traind_app/features/settings/data/repository/setting_user_data_repository.dart';
+import 'package:traind_app/features/settings/domain/repository/base_setting_user_data_repository.dart';
+import 'package:traind_app/features/settings/domain/usecase/setting_user_data_usecase.dart';
 import '../../features/settings/data/data%20source/change_password_remote_data_source.dart';
 import '../../features/settings/data/repository/change_password_repository.dart';
 import '../../features/settings/domain/repository/base_change_password_repository.dart';
@@ -204,5 +208,11 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseChangePasswordRepository>(
         () => ChangePasswordRepository(sl()));
     sl.registerLazySingleton(() => ChangePasswordUseCase(sl()));
+    //setting user data
+    sl.registerLazySingleton<SettingUserDataRemoteDataSource>(
+        () => SettingUserDataRemoteDataSourceImpl(apiService: sl()));
+    sl.registerLazySingleton<BaseSettingUserDataRepository>(
+        () => SettingUserDataRepository(settingUserDataRemoteDataSource: sl()));
+    sl.registerLazySingleton(() => SettingUserDataUseCase(sl()));
   }
 }
