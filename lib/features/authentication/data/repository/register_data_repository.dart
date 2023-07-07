@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:traind_app/features/authentication/domain/entities/google_sign_in_response_entity.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/error/failure.dart';
@@ -23,6 +24,18 @@ class RegisterRepository extends BaseRegisterRepository {
           failure.errorMessageModel.statusMessage,
         ),
       );
+    }
+  }
+
+  @override
+  Future<Either<Failure, GoogleSignInResponseEntity>> postGoogeSignInIdToken(
+      String idToken) async {
+    try {
+      var googleResp =
+          await baseRegisterDataSource.postGoogeSignInIdToken(idToken);
+      return Right(googleResp);
+    } catch (e) {
+      return Left(ServerFailure(e.toString()));
     }
   }
 }

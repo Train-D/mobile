@@ -1,7 +1,9 @@
 import 'package:basic_utils/basic_utils.dart';
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -38,7 +40,7 @@ class SignUpScreen extends StatelessWidget {
               message: cubit.authResponseModel.message,
               actions: [
                 SharedComponents.defaultButton(
-                  radius: 10.sp,
+                    radius: 10.sp,
                     width: 20.w,
                     context: context,
                     function: () {
@@ -51,12 +53,11 @@ class SignUpScreen extends StatelessWidget {
       builder: (context, state) {
         RegisterCubit cubit = RegisterCubit.get(context);
         return SafeArea(
-          child: GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        child:
-          SharedComponents.screenBg(
+            child: GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: SharedComponents.screenBg(
             imageUrl: '${AppConstants.imagesUrl}$signupBg',
             context: context,
             child: Scaffold(
@@ -85,7 +86,12 @@ class SignUpScreen extends StatelessWidget {
                         AuthComponents.signLogo(
                           raduis: AppSizes.socialLogoRaduis,
                           logoImage: google,
-                          function: () {},
+                          function: () async {
+                            var idToken = await AuthClass.googleSignIn(context);
+                            if (idToken != null) {
+                              cubit.getGoogleSignInTokenFromBack(idToken);
+                            }
+                          },
                         ),
                         SizedBox(
                           width: 5.w,
@@ -213,7 +219,7 @@ class SignUpScreen extends StatelessWidget {
                                 context: context,
                                 function: () async {
                                   FocusScope.of(context)
-                                            .requestFocus(new FocusNode());
+                                      .requestFocus(new FocusNode());
                                   if (cubit.registerFormKey.currentState!
                                       .validate()) {
                                     await cubit.userRegister(
@@ -252,9 +258,61 @@ class SignUpScreen extends StatelessWidget {
               // Colum
             ),
           ),
-        )
-        );
+        ));
       },
     );
+  }
+}
+
+class AuthClass {
+  static final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+    ],
+  );
+
+  static Future<String?> googleSignIn(BuildContext context) async {
+    String? id;
+    try {
+      GoogleSignInAccount? googleSignInAccount = await _googleSignIn.signIn();
+      GoogleSignInAuthentication googleSignInAuthentication =
+          await googleSignInAccount!.authentication;
+      AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleSignInAuthentication.accessToken,
+        idToken: googleSignInAuthentication.idToken,
+      );
+      if (googleSignInAccount != null) {
+        UserCredential userCredential =
+            await _auth.signInWithCredential(credential);
+        id = googleSignInAuthentication.idToken;
+        print('sssss${googleSignInAuthentication.idToken}');
+
+        final snackBar = SnackBar(
+          content: Text(
+            'sign with google successfully',
+          ),
+          backgroundColor: lightDefualtColor,
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+      }
+    } catch (e) {
+      print("error sign with google");
+      final snackBar = SnackBar(
+        content: Text('error sign with google'),
+        backgroundColor: lightDefualtColor,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+    return id;
+  }
+
+  void showSnackBar(BuildContext context, String text) {
+    final snackBar = SnackBar(content: Text(text));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  static Future<void> googleSignOut() async {
+    await _googleSignIn.signOut();
   }
 }

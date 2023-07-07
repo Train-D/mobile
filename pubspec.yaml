@@ -29,8 +29,6 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
-  geolocator: ^9.0.2
-  google_directions_api: ^0.9.1
   barcode: ^2.2.4
   barcode_widget: ^2.0.4
   basic_utils: ^5.5.3
@@ -38,20 +36,25 @@ dependencies:
   conditional_builder_null_safety: ^0.0.6
   connectivity_plus: ^4.0.1
   cupertino_icons: ^1.0.2
-  firebase_core: ^2.14.0
-  firebase_database: ^10.2.3
   dartz: ^0.10.1
   dio: ^5.1.1
   equatable: ^2.0.5
+  firebase_auth: ^4.6.3
+  firebase_core: ^2.14.0
+  firebase_database: ^10.2.3
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.2
   flutter_credit_card: ^3.0.6
   flutter_launcher_icons: ^0.13.1
   flutter_phoenix: ^1.1.0
+  flutter_polyline_points: ^1.0.0
   fluttertoast: ^8.2.1
+  geolocator: ^9.0.2
   get_it: ^7.2.0
+  google_directions_api: ^0.9.1
   google_maps_flutter: ^2.3.1
+  google_sign_in: ^6.1.4
   image_gallery_saver: ^1.7.1
   image_picker: ^0.8.7+5
   image_stack: ^2.1.1
@@ -65,7 +68,6 @@ dependencies:
   screenshot: ^2.1.0
   shared_preferences: ^2.1.1
   swipe: ^0.0.1
-  flutter_polyline_points: ^1.0.0
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:

@@ -6,6 +6,7 @@ import 'package:traind_app/features/settings/domain/repository/base_change_passw
 import 'package:traind_app/features/settings/domain/usecase/change_password_usecase.dart';
 import 'package:traind_app/features/tickets/domain/usecase/cancel_ticket_usecase.dart';
 import '../../features/authentication/data/data%20source/reset_password_remote_data_source.dart';
+import '../../features/authentication/domain/usecase/google_sign_in_usecase.dart';
 import '../../features/tickets/data/data%20source/user_valid_booked_tickets_remote_data_source.dart';
 import '../../features/tickets/data/repository/user_valid_booked_tickets_repository.dart';
 import '../../features/tickets/domain/repository/base_user_valid_booked_tickets_repository.dart';
@@ -77,12 +78,15 @@ final sl = GetIt.instance;
 
 class ServicesLocator {
   void init() {
+    sl.registerLazySingleton<ApiService>(() => ApiService(Dio()));
+
     //auth feature
     sl.registerLazySingleton<BaseRegisterRemoteDataSource>(
-        () => RegisterRemoteDataSource());
+        () => RegisterRemoteDataSource(sl()));
     sl.registerLazySingleton<BaseRegisterRepository>(
         () => RegisterRepository(sl()));
     sl.registerLazySingleton(() => PostRegisterDataUseCase(sl()));
+    sl.registerLazySingleton(() => GoogleSignInUsecase(sl()));
 
     // login
     sl.registerLazySingleton(() => LoginRemoteDataSource());
@@ -106,7 +110,6 @@ class ServicesLocator {
     sl.registerLazySingleton(() => TripTimesDataUsecase(sl()));
 
     // profile
-    sl.registerLazySingleton<ApiService>(() => ApiService(Dio()));
     sl.registerLazySingleton<ProfileRemoteDataSource>(
         () => ProfileRemoteDataSourceImpl(sl()));
     sl.registerLazySingleton<ProfileLocalDataSource>(
@@ -190,7 +193,7 @@ class ServicesLocator {
     sl.registerLazySingleton<BaseTrainTrackingRepository>(
         () => TrainTrackingRepository(trackingRemoteDataSource: sl()));
     sl.registerLazySingleton(() => TrainTrackingUseCase(sl()));
-    
+
     //change password
     sl.registerLazySingleton<ChangePasswordRemoteDataSource>(
         () => ChangePasswordRemoteDataSourceImpl(apiService: sl()));

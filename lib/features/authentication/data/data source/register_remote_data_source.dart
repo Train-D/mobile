@@ -1,4 +1,9 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:dio/dio.dart';
+
+import 'package:traind_app/core/services/api_service.dart';
+import 'package:traind_app/features/authentication/data/models/google_sign_in_response_model.dart';
+import 'package:traind_app/features/authentication/domain/entities/google_sign_in_response_entity.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/remote/api_constants.dart';
@@ -9,9 +14,15 @@ import '../models/register_request_model.dart';
 
 abstract class BaseRegisterRemoteDataSource {
   Future<ResponseEntity> postRegisterData(RegisterRequestModel model);
+  Future<GoogleSignInResponseEntity> postGoogeSignInIdToken(String idToken);
 }
 
 class RegisterRemoteDataSource extends BaseRegisterRemoteDataSource {
+  final ApiService apiService;
+  RegisterRemoteDataSource(
+    this.apiService,
+  );
+
   @override
   Future<ResponseEntity> postRegisterData(RegisterRequestModel model) async {
     final response = await Dio().post(
@@ -32,5 +43,16 @@ class RegisterRemoteDataSource extends BaseRegisterRemoteDataSource {
     throw ServerException(
       errorMessageModel: ErrorMessageModel.fromText(response.data),
     );
+  }
+
+  @override
+  Future<GoogleSignInResponseEntity> postGoogeSignInIdToken(
+      String idToken) async {
+    var data = await apiService.post(
+        endPoint: '/User/LoginWithGoogle/$idToken', data: '');
+    GoogleSignInResponseEntity googleSignInResponseEntity =
+        GoogleSignInResponseModel.fromJson(data);
+
+    return googleSignInResponseEntity;
   }
 }
