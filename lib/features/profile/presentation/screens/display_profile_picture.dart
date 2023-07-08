@@ -12,24 +12,22 @@ class DisplayProfilePicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: BlocBuilder<ProfileCubit, ProfileState>(
-        builder: (context, state) {
-          ProfileCubit cubit = ProfileCubit.get(context);
-          return SharedComponents.linearGradientBg(
-            colors: profileBg,
-            child: Scaffold(
-                backgroundColor: Colors.transparent,
-                appBar: SharedComponents.defaultAppBar(context: context),
-                body: Center(
-                  child: SizedBox(
-                      height: 50.h,
-                      width: double.infinity,
-                      child: cubit.base64ToImage(cubit.base64Image!)),
-                )),
-          );
-        },
-      ),
+    return BlocBuilder<ProfileCubit, ProfileState>(
+      builder: (context, state) {
+        ProfileCubit cubit = ProfileCubit.get(context);
+        return SharedComponents.linearGradientBg(
+          colors: profileBg,
+          child: Scaffold(
+              backgroundColor: Colors.transparent,
+              appBar: SharedComponents.defaultAppBar(context: context),
+              body: Center(
+                child: SizedBox(
+                    height: 50.h,
+                    width: double.infinity,
+                    child: cubit.base64ToImage(cubit.base64Image!)),
+              )),
+        );
+      },
     );
   }
 }

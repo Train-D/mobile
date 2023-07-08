@@ -14,16 +14,13 @@ import 'package:traind_app/features/authentication/presentation/controller/reset
 import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
 import 'package:traind_app/features/stations/presentation/controller/all_stations_cubit/all_stations_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/controller/userValidBookedTickets_cubit/userValidBookedTickets_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/controller/ticket_cubit/cubit/ticket_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/screens/from_to_screen.dart';
-
 import 'core/bloc_observer/bloc_observer.dart';
 import 'features/authentication/presentation/controller/login_cubit/login_cubit.dart';
 import 'features/authentication/presentation/controller/register_cubit/register_cubit.dart';
+import 'features/booking/presentation/controller/booking_cubit/booking_cubit.dart';
+import 'features/booking/presentation/controller/ticket_cubit/cubit/ticket_cubit.dart';
 import 'features/profile/presentation/controller/profile_cubit/profile_cubit.dart';
-import 'features/tickets/presentation/controller/booking_cubit/booking_cubit.dart';
+
 import 'features/track/presentation/controller/tracking_cubit/tracking_cubit.dart';
 
 void main() async {

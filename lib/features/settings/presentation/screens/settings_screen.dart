@@ -33,148 +33,146 @@ class SettingsScreen extends StatelessWidget {
           },
           builder: (context, state) {
             SettingUserDataCubit cubit = SettingUserDataCubit.get(context);
-            return SafeArea(
-              child: SharedComponents.linearGradientBg(
-                colors: profileBg,
-                child: Scaffold(
-                  backgroundColor: transparent,
-                  appBar: SharedComponents.defaultAppBar(context: context),
-                  body: state is SettingUserDataLoadingState
-                      ? Center(child: CircularProgressIndicator())
-                      : Column(
-                          children: [
-                            Center(
+            return SharedComponents.linearGradientBg(
+              colors: profileBg,
+              child: Scaffold(
+                backgroundColor: transparent,
+                appBar: SharedComponents.defaultAppBar(context: context),
+                body: state is SettingUserDataLoadingState
+                    ? Center(child: CircularProgressIndicator())
+                    : Column(
+                        children: [
+                          Center(
+                            child: Column(
+                              children: [
+                                CircleAvatar(
+                                  radius: 35.sp,
+                                  backgroundColor: cameraBG,
+                                  child: SharedComponents.profilePicture(
+                                    
+                                    image: 
+                                   cubit.image == ''
+                                        ? '${AppConstants.imagesUrl}$profileIntialImage'
+                                        : 
+                                        cubit.base64ToImage(cubit.image),
+                                    radius: 35.sp,
+                                    isProfileImage: cubit.image == '' ? false: true,
+                                    imgHeigh: 50.h,
+                                    imgWidth: 50.w,
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 1.h,
+                                ),
+                                Text(
+                                  cubit.userName,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .displayMedium,
+                                ),
+                                SizedBox(
+                                  height: 1.h,
+                                ),
+                                SharedComponents.defaultButton(
+                                    bgColor: settingsColor,
+                                    context: context,
+                                    function: () {
+                                      SharedComponents.navigateTo(
+                                        const ProfileScreen(),
+                                        context,
+                                      );
+                                    },
+                                    text: AppString.editProfile,
+                                    width: 45.w,
+                                    radius: 8.sp,
+                                    withIcon: true,
+                                    icon: Icons.arrow_forward_ios,
+                                    iconSize: 18.sp),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 4.h,
+                          ),
+                          Expanded(
+                            child: Container(
+                              width: AppSizes.width(context),
+                              decoration: BoxDecoration(
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: settingsContainerBgColor,
+                                ),
+                                borderRadius: BorderRadiusDirectional.only(
+                                  topStart: Radius.circular(20.sp),
+                                  topEnd: Radius.circular(20.sp),
+                                ),
+                              ),
                               child: Column(
                                 children: [
-                                  CircleAvatar(
-                                    radius: 35.sp,
-                                    backgroundColor: cameraBG,
-                                    child: SharedComponents.profilePicture(
-                                      
-                                      image: 
-                                     cubit.image == ''
-                                          ? '${AppConstants.imagesUrl}$profileIntialImage'
-                                          : 
-                                          cubit.base64ToImage(cubit.image),
-                                      radius: 35.sp,
-                                      isProfileImage: cubit.image == '' ? false: true,
-                                      imgHeigh: 50.h,
-                                      imgWidth: 50.w,
+                                  SettingsComponents.titleContainer(
+                                    context: context,
+                                    title: AppString.safety,
+                                  ),
+                                  InkWell(
+                                    onTap: () {},
+                                    child: SettingsComponents
+                                        .settingsDefualtContainer(
+                                      preIcon: Icon(
+                                        Icons.language,
+                                        color: Colors.white,
+                                        size: 25.sp,
+                                      ),
+                                      title: 'Language',
+                                      context: context,
+                                      text: 'English',
                                     ),
                                   ),
-                                  SizedBox(
-                                    height: 1.h,
-                                  ),
-                                  Text(
-                                    cubit.userName,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .displayMedium,
-                                  ),
-                                  SizedBox(
-                                    height: 1.h,
+                                  InkWell(
+                                    onTap: () {
+                                      SharedComponents.navigateTo(
+                                          ChangePasswordScreen(), context);
+                                    },
+                                    child: SettingsComponents
+                                        .settingsDefualtContainer(
+                                      preIcon: ImageIcon(
+                                        AssetImage(
+                                            '${AppConstants.vectorsUrl}safety.png'),
+                                        color: Colors.white,
+                                        size: 25.sp,
+                                      ),
+                                      title: 'Security & Password',
+                                      context: context,
+                                    ),
                                   ),
                                   SharedComponents.defaultButton(
-                                      bgColor: settingsColor,
-                                      context: context,
-                                      function: () {
-                                        SharedComponents.navigateTo(
-                                          const ProfileScreen(),
-                                          context,
-                                        );
-                                      },
-                                      text: AppString.editProfile,
-                                      width: 45.w,
-                                      radius: 8.sp,
-                                      withIcon: true,
-                                      icon: Icons.arrow_forward_ios,
-                                      iconSize: 18.sp),
+                                    context: context,
+                                    function: () async {
+                                      //CacheHelper.resetPreference();
+                                      await CacheHelper.removeData(
+                                          key: 'userData');
+                                      await CacheHelper.removeData(
+                                          key: 'token');
+                                      AppConstants.widget =
+                                          const LoginScreen();
+                                      // ignore: use_build_context_synchronously
+                                      Phoenix.rebirth(context);
+                                      // //Restart.restartApp(webOrigin: '${Uri.base}');
+                                      // SharedComponents.navigateToRemove(
+                                      //     context, const LoginScreen());
+                                    },
+                                    text: 'Logout',
+                                    radius: 10.sp,
+                                    icon: Icons.logout,
+                                    withIcon: true,
+                                    iconSize: 18.sp,
+                                  )
                                 ],
                               ),
                             ),
-                            SizedBox(
-                              height: 4.h,
-                            ),
-                            Expanded(
-                              child: Container(
-                                width: AppSizes.width(context),
-                                decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: settingsContainerBgColor,
-                                  ),
-                                  borderRadius: BorderRadiusDirectional.only(
-                                    topStart: Radius.circular(20.sp),
-                                    topEnd: Radius.circular(20.sp),
-                                  ),
-                                ),
-                                child: Column(
-                                  children: [
-                                    SettingsComponents.titleContainer(
-                                      context: context,
-                                      title: AppString.safety,
-                                    ),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: SettingsComponents
-                                          .settingsDefualtContainer(
-                                        preIcon: Icon(
-                                          Icons.language,
-                                          color: Colors.white,
-                                          size: 25.sp,
-                                        ),
-                                        title: 'Language',
-                                        context: context,
-                                        text: 'English',
-                                      ),
-                                    ),
-                                    InkWell(
-                                      onTap: () {
-                                        SharedComponents.navigateTo(
-                                            ChangePasswordScreen(), context);
-                                      },
-                                      child: SettingsComponents
-                                          .settingsDefualtContainer(
-                                        preIcon: ImageIcon(
-                                          AssetImage(
-                                              '${AppConstants.vectorsUrl}safety.png'),
-                                          color: Colors.white,
-                                          size: 25.sp,
-                                        ),
-                                        title: 'Security & Password',
-                                        context: context,
-                                      ),
-                                    ),
-                                    SharedComponents.defaultButton(
-                                      context: context,
-                                      function: () async {
-                                        //CacheHelper.resetPreference();
-                                        await CacheHelper.removeData(
-                                            key: 'userData');
-                                        await CacheHelper.removeData(
-                                            key: 'token');
-                                        AppConstants.widget =
-                                            const LoginScreen();
-                                        // ignore: use_build_context_synchronously
-                                        Phoenix.rebirth(context);
-                                        // //Restart.restartApp(webOrigin: '${Uri.base}');
-                                        // SharedComponents.navigateToRemove(
-                                        //     context, const LoginScreen());
-                                      },
-                                      text: 'Logout',
-                                      radius: 10.sp,
-                                      icon: Icons.logout,
-                                      withIcon: true,
-                                      iconSize: 18.sp,
-                                    )
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                ),
+                          ),
+                        ],
+                      ),
               ),
             );
           },

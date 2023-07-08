@@ -52,213 +52,204 @@ class SignUpScreen extends StatelessWidget {
       },
       builder: (context, state) {
         RegisterCubit cubit = RegisterCubit.get(context);
-        return SafeArea(
-            child: GestureDetector(
+        return GestureDetector(
           onTap: () {
-            FocusManager.instance.primaryFocus?.unfocus();
+        FocusManager.instance.primaryFocus?.unfocus();
           },
           child: SharedComponents.screenBg(
-            imageUrl: '${AppConstants.imagesUrl}$signupBg',
-            context: context,
-            child: Scaffold(
-              //resizeToAvoidBottomInset: false,
-              backgroundColor: transparent,
-              body: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      height: 21.h,
-                    ),
-                    Text(
-                      AppString.signUpTitle,
-                      style: Theme.of(context).textTheme.displayLarge!.copyWith(
-                            fontSize: 22.sp,
-                          ),
-                    ),
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        AuthComponents.signLogo(
-                          raduis: AppSizes.socialLogoRaduis,
-                          logoImage: google,
-                          function: () async {
-                            var idToken = await AuthClass.googleSignIn(context);
-                            if (idToken != null) {
-                              cubit.getGoogleSignInTokenFromBack(idToken);
-                            }
-                          },
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        AuthComponents.signLogo(
-                          raduis: AppSizes.socialLogoRaduis,
-                          logoImage: facebook,
-                          function: () {},
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 4.h,
-                    ),
-                    Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 30.sp),
-                      child: Form(
-                        key: cubit.registerFormKey,
-                        autovalidateMode: cubit.autoValidationMode,
-                        child: Column(
-                          children: [
-                            Row(
-                              children: [
-                                Flexible(
-                                  child: SharedComponents.defaultTextField(
-                                    controller: cubit.signUpFirstNameCon,
-                                    type: TextInputType.text,
-                                    validate: (String? value) {
-                                      if (value!.isEmpty) {
-                                        return 'This field must not be empty';
-                                      }
-                                      return null;
-                                    },
-                                    label: AppString.firstName,
-                                    radius: AppSizes.textFormFieldRadius,
-                                    bgColor: textFormBgColor,
-                                    textColor: textFormTextColor,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 2.w,
-                                ),
-                                Flexible(
-                                  child: SharedComponents.defaultTextField(
-                                    controller: cubit.signUpLastNameCon,
-                                    type: TextInputType.text,
-                                    validate: (String? value) {
-                                      if (value!.isEmpty) {
-                                        return 'This field must not be empty';
-                                      }
-                                      return null;
-                                    },
-                                    label: AppString.lasttName,
-                                    radius: AppSizes.textFormFieldRadius,
-                                    bgColor: textFormBgColor,
-                                    textColor: textFormTextColor,
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: AppSizes.spaceBetweenFields,
-                            ),
-                            SharedComponents.defaultTextField(
-                              controller: cubit.signUpEmailCon,
-                              type: TextInputType.emailAddress,
-                              validate: (String? value) {
-                                if (value!.isEmpty) {
-                                  return 'This field must not be empty';
-                                }
-                                return null;
-                              },
-                              label: AppString.email,
-                              radius: AppSizes.textFormFieldRadius,
-                              bgColor: textFormBgColor,
-                              textColor: textFormTextColor,
-                            ),
-                            SizedBox(
-                              height: AppSizes.spaceBetweenFields,
-                            ),
-                            SharedComponents.defaultTextField(
-                              controller: cubit.signUpUsernameCon,
-                              type: TextInputType.text,
-                              validate: (String? value) {
-                                if (value!.isEmpty) {
-                                  return 'This field must not be empty';
-                                }
-                                return null;
-                              },
-                              label: AppString.userName,
-                              radius: AppSizes.textFormFieldRadius,
-                              bgColor: textFormBgColor,
-                              textColor: textFormTextColor,
-                            ),
-                            SizedBox(
-                              height: AppSizes.spaceBetweenFields,
-                            ),
-                            SharedComponents.defaultTextField(
-                              controller: cubit.signUpPasswordCon,
-                              type: TextInputType.visiblePassword,
-                              validate: (String? value) {
-                                if (value!.isEmpty) {
-                                  return 'This field must not be empty';
-                                }
-                                return null;
-                              },
-                              label: AppString.passowrd,
-                              radius: AppSizes.textFormFieldRadius,
-                              bgColor: textFormBgColor,
-                              textColor: textFormTextColor,
-                              password: cubit.signUpPasswordShown,
-                              suffIconFound: true,
-                              suffIcon: cubit.signUpSuffIcon,
-                              suffPressed: () {
-                                cubit.changePasswordVisibility();
-                              },
-                            ),
-                            SizedBox(
-                              height: AppSizes.spaceBetweenFields,
-                            ),
-                            ConditionalBuilder(
-                              condition: state is! RegisterLoadingState,
-                              builder: (context) =>
-                                  SharedComponents.defaultButton(
-                                context: context,
-                                function: () async {
-                                  FocusScope.of(context)
-                                      .requestFocus(new FocusNode());
-                                  if (cubit.registerFormKey.currentState!
-                                      .validate()) {
-                                    await cubit.userRegister(
-                                      firstName: cubit.signUpFirstNameCon.text,
-                                      lastName: cubit.signUpLastNameCon.text,
-                                      password: cubit.signUpPasswordCon.text,
-                                      email: cubit.signUpEmailCon.text,
-                                      userName: cubit.signUpUsernameCon.text,
-                                    );
-                                    //cubit.changeToastColor();
-                                    /*SharedComponents.showToast(
-                                      text: cubit.authResponseModel.message,
-                                      color: cubit.toastColor,
-                                    );*/
-                                  } else {
-                                    cubit.changeAutoValidationMode();
-                                  }
-                                },
-                                text: StringUtils.capitalize(
-                                    AppString.signUpTitle),
-                                width: AppSizes.width(context) / 3,
-                                height: AppSizes.height(context) / 14,
-                                radius: AppSizes.defaultBottomRadius,
-                              ),
-                              fallback: (context) => const Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                            )
-                          ],
-                        ),
+        imageUrl: '${AppConstants.imagesUrl}$signupBg',
+        context: context,
+        child: Scaffold(
+          //resizeToAvoidBottomInset: false,
+          backgroundColor: transparent,
+          body: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: 23.h,
+                ),
+                Text(
+                  AppString.signUpTitle,
+                  style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                        fontSize: 22.sp,
                       ),
+                ),
+                SizedBox(
+                  height: 3.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    AuthComponents.signLogo(
+                      raduis: AppSizes.socialLogoRaduis,
+                      logoImage: google,
+                      function: () async {
+                        var idToken = await AuthClass.googleSignIn(context);
+                        if (idToken != null) {
+                          cubit.getGoogleSignInTokenFromBack(idToken);
+                        }
+                      },
+                    ),
+                    SizedBox(
+                      width: 5.w,
+                    ),
+                    AuthComponents.signLogo(
+                      raduis: AppSizes.socialLogoRaduis,
+                      logoImage: facebook,
+                      function: () {},
                     ),
                   ],
                 ),
-              ),
-              // Colum
+                SizedBox(
+                  height: 4.h,
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 30.sp),
+                  child: Form(
+                    key: cubit.registerFormKey,
+                    autovalidateMode: cubit.autoValidationMode,
+                    child: Column(
+                      children: [
+                        Row(
+                          children: [
+                            Flexible(
+                              child: SharedComponents.defaultTextField(
+                                controller: cubit.signUpFirstNameCon,
+                                type: TextInputType.text,
+                                validate: (String? value) {
+                                  if (value!.isEmpty) {
+                                    return 'This field must not be empty';
+                                  }
+                                  return null;
+                                },
+                                label: AppString.firstName,
+                                radius: AppSizes.textFormFieldRadius,
+                                bgColor: textFormBgColor,
+                                textColor: textFormTextColor,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 2.w,
+                            ),
+                            Flexible(
+                              child: SharedComponents.defaultTextField(
+                                controller: cubit.signUpLastNameCon,
+                                type: TextInputType.text,
+                                validate: (String? value) {
+                                  if (value!.isEmpty) {
+                                    return 'This field must not be empty';
+                                  }
+                                  return null;
+                                },
+                                label: AppString.lasttName,
+                                radius: AppSizes.textFormFieldRadius,
+                                bgColor: textFormBgColor,
+                                textColor: textFormTextColor,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: AppSizes.spaceBetweenFields,
+                        ),
+                        SharedComponents.defaultTextField(
+                          controller: cubit.signUpEmailCon,
+                          type: TextInputType.emailAddress,
+                          validate: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'This field must not be empty';
+                            }
+                            return null;
+                          },
+                          label: AppString.email,
+                          radius: AppSizes.textFormFieldRadius,
+                          bgColor: textFormBgColor,
+                          textColor: textFormTextColor,
+                        ),
+                        SizedBox(
+                          height: AppSizes.spaceBetweenFields,
+                        ),
+                        SharedComponents.defaultTextField(
+                          controller: cubit.signUpUsernameCon,
+                          type: TextInputType.text,
+                          validate: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'This field must not be empty';
+                            }
+                            return null;
+                          },
+                          label: AppString.userName,
+                          radius: AppSizes.textFormFieldRadius,
+                          bgColor: textFormBgColor,
+                          textColor: textFormTextColor,
+                        ),
+                        SizedBox(
+                          height: AppSizes.spaceBetweenFields,
+                        ),
+                        SharedComponents.defaultTextField(
+                          controller: cubit.signUpPasswordCon,
+                          type: TextInputType.visiblePassword,
+                          validate: (String? value) {
+                            if (value!.isEmpty) {
+                              return 'This field must not be empty';
+                            }
+                            return null;
+                          },
+                          label: AppString.passowrd,
+                          radius: AppSizes.textFormFieldRadius,
+                          bgColor: textFormBgColor,
+                          textColor: textFormTextColor,
+                          password: cubit.signUpPasswordShown,
+                          suffIconFound: true,
+                          suffIcon: cubit.signUpSuffIcon,
+                          suffPressed: () {
+                            cubit.changePasswordVisibility();
+                          },
+                        ),
+                        SizedBox(
+                          height: AppSizes.spaceBetweenFields,
+                        ),
+                              SharedComponents.defaultButton(
+                            context: context,
+                            function: () async {
+                              FocusScope.of(context)
+                                  .requestFocus(new FocusNode());
+                              if (cubit.registerFormKey.currentState!
+                                  .validate()) {
+                                await cubit.userRegister(
+                                  firstName: cubit.signUpFirstNameCon.text,
+                                  lastName: cubit.signUpLastNameCon.text,
+                                  password: cubit.signUpPasswordCon.text,
+                                  email: cubit.signUpEmailCon.text,
+                                  userName: cubit.signUpUsernameCon.text,
+                                );
+                                
+                              } else {
+                                cubit.changeAutoValidationMode();
+                              }
+                            },
+                            text:state is RegisterLoadingState? Center(child: CircularProgressIndicator()):
+                             StringUtils.capitalize(
+                                AppString.signUpTitle),
+                            width: AppSizes.width(context) / 3,
+                            height: AppSizes.height(context) / 14,
+                            radius: AppSizes.defaultBottomRadius,
+                            isLoading: state is RegisterLoadingState? true : false
+                          ),
+                         
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-        ));
+          // Colum
+        ),
+          ),
+        );
       },
     );
   }

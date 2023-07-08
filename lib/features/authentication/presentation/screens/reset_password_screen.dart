@@ -22,8 +22,8 @@ class ResetPasswordScreen extends StatelessWidget {
               message: cubit.message,
               actions: [
                 SharedComponents.defaultButton(
-                  radius: 10.sp,
-                  width: 20.w,
+                    radius: 10.sp,
+                    width: 20.w,
                     context: context,
                     function: () {
                       Navigator.pop(context);
@@ -32,31 +32,16 @@ class ResetPasswordScreen extends StatelessWidget {
               ]);
         }
         if (state is ResetPasswordSuccessState) {
-         SharedComponents.showAlertDialog(
-              context: context,
-              title: 'Note...',
-              message: cubit.message,
-              actions: [
-                SharedComponents.defaultButton(
-                  radius: 10.sp,
-                  width: 20.w,
-                    context: context,
-                    function: () {
-                      Navigator.pop(context);
-                    },
-                    text: 'Ok')
-              ]);
+          SharedComponents.showToast(text: cubit.message, color: Colors.green);
         }
       },
       builder: (context, state) {
         ResetPasswordCubit cubit = ResetPasswordCubit.get(context);
-        return SafeArea(
-          child: GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
-        child: 
-          SharedComponents.linearGradientBg(
+        return GestureDetector(
+          onTap: () {
+            FocusManager.instance.primaryFocus?.unfocus();
+          },
+          child: SharedComponents.linearGradientBg(
             colors: onBoardingBg,
             child: Scaffold(
               backgroundColor: transparent,
@@ -119,21 +104,21 @@ class ResetPasswordScreen extends StatelessWidget {
                       SizedBox(
                         height: 2.h,
                       ),
-                      state is ResetPasswordLoadingState
-                          ? Center(child: CircularProgressIndicator())
-                          : Center(
+                      Center(
                               child: SharedComponents.defaultButton(
                                   context: context,
                                   function: () {
-                                     FocusScope.of(context)
-                                            .requestFocus(new FocusNode());
-                                            
+                                    FocusScope.of(context)
+                                        .requestFocus(new FocusNode());
+
                                     cubit.resetPassword();
                                   },
-                                  text: AppString.sendInstructions,
+                                  text: state is ResetPasswordLoadingState?Center(child: CircularProgressIndicator()):
+                                  AppString.sendInstructions,
                                   radius: 10,
                                   //width: 50.w,
-                                  height: 6.5.h),
+                                  height: 6.5.h,
+                                  isLoading: state is ResetPasswordLoadingState? true : false),
                             )
                     ],
                   ),
@@ -141,7 +126,6 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
             ),
           ),
-        )
         );
       },
     );

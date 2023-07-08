@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 
-import '../../features/tickets/presentation/components/reusable_component/choose_seats_screen_components.dart';
+import '../../features/booking/presentation/components/reusable_component/choose_seats_screen_components.dart';
 import '../global/theme/app_color/app_color_light.dart';
 import 'app_sizes.dart';
 
@@ -23,8 +23,9 @@ class SharedComponents {
     double? textSize,
     required BuildContext context,
     required Function function,
-    required String text,
+    required dynamic text,
     bool cancel = false,
+    bool isLoading = false,
   }) =>
       Container(
         width: width,
@@ -44,6 +45,7 @@ class SharedComponents {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              isLoading? text:
               Text(
                 upper ? text.toUpperCase() : text,
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
