@@ -7,6 +7,8 @@ const Color lightDefualtIconColor = Colors.white;
 const Color textFormBgColor = Color.fromRGBO(217, 217, 217, 0.91);
 const Color textFormTextColor = Color.fromRGBO(69, 69, 69, 1);
 const Color lightColor = Colors.white;
+const Color signContainerColor = Color.fromRGBO(217, 217, 217, 0.15);
+const Color signLine = Color.fromRGBO(255, 255, 255, 0.5);
 const textButtonColor = Color(0xffE4A286);
 const Color fromToBgColor = Color.fromRGBO(111, 82, 70, 0.24);
 const Color fromToCardBgColor = Color.fromRGBO(255, 255, 255, 0.61);
@@ -30,6 +32,10 @@ const List<Color> fromToBottomSheetBg = [
 const List<Color> profileBg = [
   Color.fromRGBO(133, 132, 122, 1),
   Color.fromRGBO(151, 135, 126, 1),
+];
+const List<Color> trackingContainerBg = [
+  Color.fromRGBO(79, 65, 58, 0.53),
+  Color.fromRGBO(139, 112, 100, 1),
 ];
 
 const Color cameraBG = Color.fromRGBO(236, 236, 236, 1);

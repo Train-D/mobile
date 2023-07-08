@@ -93,7 +93,7 @@ class LoginScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       SizedBox(
-                        height: 24.h,
+                        height: 27.h,
                       ),
                       Text(
                         AppString.loginTitle,
@@ -103,7 +103,7 @@ class LoginScreen extends StatelessWidget {
                                 ),
                       ),
                       SizedBox(
-                        height: 3.h,
+                        height: 1.5.h,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -111,6 +111,8 @@ class LoginScreen extends StatelessWidget {
                           state is GetGoogleSignInTokenFromBackLoadingState
                               ? const CircularProgressIndicator()
                               : AuthComponents.signLogo(
+                                  content: 'Login With Google',
+                                  context: context,
                                   raduis: AppSizes.socialLogoRaduis,
                                   logoImage: google,
                                   function: () async {
@@ -130,8 +132,38 @@ class LoginScreen extends StatelessWidget {
                                 ),
                         ],
                       ),
+                      
                       SizedBox(
-                        height: 4.h,
+                        height: 1.h,
+                      ),
+                      SizedBox(
+                        height: 3.h,
+                        width: 65.w,
+                        child: Padding(
+                          padding:EdgeInsets.symmetric(horizontal: 20.sp),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: 22.w,
+                                height: 0.1.h,
+                                color: signLine,
+                              ),
+                              Text('OR', style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                                color: cardTextCvvColor ,
+                                fontSize: 16.sp
+                              ),),
+                              Container(
+                                width: 22.w,
+                                height: 0.1.h,
+                                color: signLine,
+                              ),
+                            ],
+                          ),
+                        )
+                      ),
+                      SizedBox(
+                        height: 1.h,
                       ),
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -157,7 +189,7 @@ class LoginScreen extends StatelessWidget {
                                 textColor: textFormTextColor,
                               ),
                               SizedBox(
-                                height: AppSizes.spaceBetweenFields,
+                                height: 1.5.h,
                               ),
                               SharedComponents.defaultTextField(
                                 controller: cubit.loginPasswordCon,
@@ -212,13 +244,13 @@ class LoginScreen extends StatelessWidget {
                                     }
                                   },
                                   text: state is LoginLoadingState
-                                      ? Center(
+                                      ? const Center(
                                           child: CircularProgressIndicator(),
                                         )
                                       : StringUtils.capitalize(
                                           AppString.loginTitle),
-                                  width: AppSizes.width(context) / 3,
-                                  height: AppSizes.height(context) / 14,
+                                  width: AppSizes.width(context) * 0.4,
+                                  height: AppSizes.height(context) * 0.066,
                                   radius: AppSizes.defaultBottomRadius,
                                   isLoading: state is LoginLoadingState
                                       ? true
@@ -231,14 +263,16 @@ class LoginScreen extends StatelessWidget {
                                       AppString.haveAccount,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .displayMedium!
+                                          .displayLarge!
                                           .copyWith(
                                             fontSize: 16.sp,
+                                            color: textButtonColor
                                           ),
                                     ),
                                   ),
                                   SharedComponents.defaultTextButton(
                                     function: () {
+                                      
                                       FocusScope.of(context)
                                           .requestFocus(new FocusNode());
                                       SharedComponents.navigateTo(
@@ -247,6 +281,7 @@ class LoginScreen extends StatelessWidget {
                                       );
                                       cubit.loginClearData();
                                     },
+                                    size: 17,
                                     text: AppString.signUpTitle,
                                     context: context,
                                   ),

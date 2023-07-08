@@ -107,7 +107,7 @@ class SignUpScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: 23.h,
+                          height: 25.h,
                         ),
                         Text(
                           AppString.signUpTitle,
@@ -119,7 +119,7 @@ class SignUpScreen extends StatelessWidget {
                               ),
                         ),
                         SizedBox(
-                          height: 3.h,
+                          height: 1.5.h,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -127,6 +127,8 @@ class SignUpScreen extends StatelessWidget {
                             state is GetGoogleSignInTokenFromBackLoadingState
                                 ? const CircularProgressIndicator()
                                 : AuthComponents.signLogo(
+                                  context: context,
+                                  content: 'Sign up With Google',
                                     raduis: AppSizes.socialLogoRaduis,
                                     logoImage: google,
                                     function: () async {
@@ -149,7 +151,36 @@ class SignUpScreen extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: 4.h,
+                          height: 1.h,
+                        ),
+                        SizedBox(
+                        height: 3.h,
+                        width: 65.w,
+                        child: Padding(
+                          padding:EdgeInsets.symmetric(horizontal: 20.sp),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Container(
+                                width: 22.w,
+                                height: 0.1.h,
+                                color: signLine,
+                              ),
+                              Text('OR', style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                                color: cardTextCvvColor ,
+                                fontSize: 16.sp
+                              ),),
+                              Container(
+                                width: 22.w,
+                                height: 0.1.h,
+                                color: signLine,
+                              ),
+                            ],
+                          ),
+                        )
+                      ),
+                        SizedBox(
+                          height: 1.h,
                         ),
                         Padding(
                           padding: EdgeInsets.symmetric(horizontal: 30.sp),
@@ -280,12 +311,12 @@ class SignUpScreen extends StatelessWidget {
                                       }
                                     },
                                     text: state is RegisterLoadingState
-                                        ? Center(
+                                        ? const Center(
                                             child: CircularProgressIndicator())
                                         : StringUtils.capitalize(
                                             AppString.signUpTitle),
-                                    width: AppSizes.width(context) / 3,
-                                    height: AppSizes.height(context) / 14,
+                                    width: AppSizes.width(context) * 0.4,
+                                    height: AppSizes.height(context)* 0.066,
                                     radius: AppSizes.defaultBottomRadius,
                                     isLoading: state is RegisterLoadingState
                                         ? true

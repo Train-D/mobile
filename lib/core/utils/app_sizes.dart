@@ -19,7 +19,7 @@ class AppSizes {
 
   static double socialLogoRaduis = 15.sp;
 
-  static double spaceBetweenFields = 3.h;
+  static double spaceBetweenFields = 1.5.h;
   
   static double defaultBottomRadius = 8.sp;
 }
