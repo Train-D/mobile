@@ -102,298 +102,293 @@ class FromToScreen extends StatelessWidget {
       }
     }, builder: (context, state) {
       BookingCubit cubit = BookingCubit.get(context);
-      return SafeArea(
-        child: SharedComponents.screenBg(
-          imageUrl: '${AppConstants.imagesUrl}$fromTo',
-          context: context,
-          child: Scaffold(
-            appBar: SharedComponents.defaultAppBar(
-              context: context,
-            ),
-            backgroundColor: fromToBgColor,
-            body: SingleChildScrollView(
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Center(
-                      child: SharedComponents.defaultBgContainer(
-                    isLinearGradient: false,
-                    bgColor: fromToCardBgColor,
-                    topRedius: 17.sp,
-                    bottomRedius: 17.sp,
-                    height: 40.h,
-                    width: 80.w,
-                    child: (state is FromToStationsLoadingState
-                        ? const Center(child: CircularProgressIndicator())
-                        : (state is FromToStationsErrorState
-                            ? RefreshIndicator(
-                                onRefresh: () async {
-                                  cubit.getStationsFromApi();
-                                },
-                                child: const Text(''),
-                              )
-                            : SingleChildScrollView(
-                                child: Padding(
-                                  padding: EdgeInsets.all(25.sp),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      SizedBox(
-                                          width: 65.w,
-                                          // height: 10.h,
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceBetween,
-                                            children: [
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  TicketsComponents.label(
-                                                      context, AppString.from),
-                                                  SizedBox(
-                                                    height: 1.h,
-                                                  ),
-                                                  TicketsComponents
-                                                      .defaultDropDownButtonContainer(
-                                                    DropdownButton(
-                                                        //underline: SizedBox(height: 0.5.h,),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    20.sp),
-                                                        onChanged: (value) {
-                                                          cubit
-                                                              .changeDropDownButtonValue(
-                                                                  1, value!);
-                                                          cubit
-                                                              .getToStationsData(
-                                                                  value);
-                                                        },
-                                                        menuMaxHeight: 30.h,
-                                                        value: cubit
-                                                            .fromDefaultValue,
-                                                        icon: const Icon(Icons
-                                                            .keyboard_arrow_down),
-                                                        items: cubit.allStations
-                                                            .map(
-                                                              (e) =>
-                                                                  DropdownMenuItem(
-                                                                value: e,
-                                                                child: Text(
-                                                                  e,
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .displayMedium!
-                                                                      .copyWith(
-                                                                          color:
-                                                                              fromToDropDownBgColor),
-                                                                ),
-                                                              ),
-                                                            )
-                                                            .toList()),
-                                                  ),
-                                                ],
-                                              ),
-                                              Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  TicketsComponents.label(
-                                                      context, AppString.to),
-                                                  SizedBox(
-                                                    height: 1.h,
-                                                  ),
-                                                  TicketsComponents
-                                                      .defaultDropDownButtonContainer(
-                                                    DropdownButton(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    20.sp),
-                                                        onChanged: (value) {
-                                                          cubit
-                                                              .changeDropDownButtonValue(
-                                                                  2, value!);
-                                                        },
-                                                        menuMaxHeight: 30.h,
-                                                        value: cubit
-                                                            .toDefaultValue,
-                                                        icon: const Icon(Icons
-                                                            .keyboard_arrow_down),
-                                                        items: cubit.toStations
-                                                            .map(
-                                                              (e) =>
-                                                                  DropdownMenuItem(
-                                                                value: e,
-                                                                child: Text(
-                                                                  e,
-                                                                  style: Theme.of(
-                                                                          context)
-                                                                      .textTheme
-                                                                      .displayMedium!
-                                                                      .copyWith(
-                                                                          color:
-                                                                              fromToDropDownBgColor),
-                                                                ),
-                                                              ),
-                                                            )
-                                                            .toList()),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          )),
-                                      SizedBox(height: 2.h),
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Text(
-                                          '${AppString.date}:',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .displayLarge!
-                                              .copyWith(
-                                                  fontWeight: FontWeight.w700,
-                                                  color: Colors.black),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 1.h,
-                                      ),
-                                      SizedBox(
+      return SharedComponents.screenBg(
+        imageUrl: '${AppConstants.imagesUrl}$fromTo',
+        context: context,
+        child: Scaffold(
+          appBar: SharedComponents.defaultAppBar(
+            context: context,
+          ),
+          backgroundColor: fromToBgColor,
+          body: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 20.h,
+                ),
+                Center(
+                    child: SharedComponents.defaultBgContainer(
+                  isLinearGradient: false,
+                  bgColor: fromToCardBgColor,
+                  topRedius: 17.sp,
+                  bottomRedius: 17.sp,
+                  height: 40.h,
+                  width: 80.w,
+                  child: (state is FromToStationsLoadingState
+                      ? const Center(child: CircularProgressIndicator())
+                      : (state is FromToStationsErrorState
+                          ? RefreshIndicator(
+                              onRefresh: () async {
+                                cubit.getStationsFromApi();
+                              },
+                              child: const Text(''),
+                            )
+                          : SingleChildScrollView(
+                              child: Padding(
+                                padding: EdgeInsets.all(25.sp),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
                                         width: 65.w,
-                                        child: InkWell(
-                                          onTap: () async {
-                                            DateTime? pickedDate =
-                                                await showDatePicker(
-                                                    context: context,
-                                                    initialDate: DateTime.now(),
-                                                    firstDate: DateTime.now(),
-                                                    lastDate: DateTime.now()
-                                                        .add(const Duration(
-                                                            days: 20)),
-                                                    builder: (context, child) {
-                                                      return Theme(
-                                                          data:
-                                                              Theme.of(context)
-                                                                  .copyWith(
-                                                            colorScheme:
-                                                                ColorScheme
-                                                                    .light(
-                                                              primary: Color
-                                                                  .fromRGBO(
-                                                                      65,
-                                                                      49,
-                                                                      42,
-                                                                      1),
-                                                              surface: Color
-                                                                  .fromRGBO(
-                                                                      65,
-                                                                      49,
-                                                                      42,
-                                                                      1),
-                                                            ),
-                                                            textTheme: TextTheme(
-                                                                bodySmall: Theme.of(
+                                        // height: 10.h,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                TicketsComponents.label(
+                                                    context, AppString.from),
+                                                SizedBox(
+                                                  height: 1.h,
+                                                ),
+                                                TicketsComponents
+                                                    .defaultDropDownButtonContainer(
+                                                  DropdownButton(
+                                                      //underline: SizedBox(height: 0.5.h,),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.sp),
+                                                      onChanged: (value) {
+                                                        cubit
+                                                            .changeDropDownButtonValue(
+                                                                1, value!);
+                                                        cubit.getToStationsData(
+                                                            value);
+                                                      },
+                                                      menuMaxHeight: 30.h,
+                                                      value: cubit
+                                                          .fromDefaultValue,
+                                                      icon: const Icon(Icons
+                                                          .keyboard_arrow_down),
+                                                      items: cubit.allStations
+                                                          .map(
+                                                            (e) =>
+                                                                DropdownMenuItem(
+                                                              value: e,
+                                                              child: Text(
+                                                                e,
+                                                                style: Theme.of(
                                                                         context)
                                                                     .textTheme
                                                                     .displayMedium!
                                                                     .copyWith(
-                                                                        fontSize:
-                                                                            16.sp)),
-                                                            datePickerTheme:
-                                                                DatePickerThemeData(
-                                                              headerHelpStyle: Theme
-                                                                      .of(
-                                                                          context)
+                                                                        color:
+                                                                            fromToDropDownBgColor),
+                                                              ),
+                                                            ),
+                                                          )
+                                                          .toList()),
+                                                ),
+                                              ],
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                TicketsComponents.label(
+                                                    context, AppString.to),
+                                                SizedBox(
+                                                  height: 1.h,
+                                                ),
+                                                TicketsComponents
+                                                    .defaultDropDownButtonContainer(
+                                                  DropdownButton(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20.sp),
+                                                      onChanged: (value) {
+                                                        cubit
+                                                            .changeDropDownButtonValue(
+                                                                2, value!);
+                                                      },
+                                                      menuMaxHeight: 30.h,
+                                                      value:
+                                                          cubit.toDefaultValue,
+                                                      icon: const Icon(Icons
+                                                          .keyboard_arrow_down),
+                                                      items: cubit.toStations
+                                                          .map(
+                                                            (e) =>
+                                                                DropdownMenuItem(
+                                                              value: e,
+                                                              child: Text(
+                                                                e,
+                                                                style: Theme.of(
+                                                                        context)
+                                                                    .textTheme
+                                                                    .displayMedium!
+                                                                    .copyWith(
+                                                                        color:
+                                                                            fromToDropDownBgColor),
+                                                              ),
+                                                            ),
+                                                          )
+                                                          .toList()),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        )),
+                                    SizedBox(height: 2.h),
+                                    Align(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        '${AppString.date}:',
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .displayLarge!
+                                            .copyWith(
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.black),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 1.h,
+                                    ),
+                                    SizedBox(
+                                      width: 65.w,
+                                      child: InkWell(
+                                        onTap: () async {
+                                          DateTime? pickedDate =
+                                              await showDatePicker(
+                                                  context: context,
+                                                  initialDate: DateTime.now(),
+                                                  firstDate: DateTime.now(),
+                                                  lastDate: DateTime.now().add(
+                                                      const Duration(days: 20)),
+                                                  builder: (context, child) {
+                                                    return Theme(
+                                                        data: Theme.of(context)
+                                                            .copyWith(
+                                                          colorScheme:
+                                                              ColorScheme.light(
+                                                            primary:
+                                                                Color.fromRGBO(
+                                                                    65,
+                                                                    49,
+                                                                    42,
+                                                                    1),
+                                                            surface:
+                                                                Color.fromRGBO(
+                                                                    65,
+                                                                    49,
+                                                                    42,
+                                                                    1),
+                                                          ),
+                                                          textTheme: TextTheme(
+                                                              bodySmall: Theme.of(
+                                                                      context)
                                                                   .textTheme
                                                                   .displayMedium!
                                                                   .copyWith(
                                                                       fontSize:
-                                                                          16.sp),
-                                                            ),
-                                                            textButtonTheme:
-                                                                TextButtonThemeData(
-                                                                    style: TextButton
-                                                                        .styleFrom(
-                                                                            //backgroundColor: Color.fromRGBO(78, 64, 57, 1),
-                                                                            textStyle:
-                                                                                Theme.of(context).textTheme.displayMedium)),
-                                                            // dialogBackgroundColor: Color.fromRGBO(65, 49, 42, 1),
+                                                                          16.sp)),
+                                                          datePickerTheme:
+                                                              DatePickerThemeData(
+                                                            headerHelpStyle: Theme
+                                                                    .of(context)
+                                                                .textTheme
+                                                                .displayMedium!
+                                                                .copyWith(
+                                                                    fontSize:
+                                                                        16.sp),
                                                           ),
-                                                          child: child!);
-                                                    });
-                                            if (pickedDate != null) {
-                                              cubit.changeDefualtDate(
-                                                  DateFormat('yyyy-MM-dd')
-                                                      .format(pickedDate));
-                                              //print(cubit.fromToDefaultDate);
-                                            }
-                                          },
-                                          child: Container(
-                                            width: 65.w,
-                                            height: 6.h,
-                                            decoration: BoxDecoration(
-                                              color: dateFieldColor,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(10.sp)),
-                                            ),
-                                            child: Row(
-                                              children: [
-                                                SizedBox(
-                                                  width: 3.w,
-                                                ),
-                                                Icon(
-                                                  Icons.calendar_month,
-                                                  size: 20.sp,
-                                                  color: Colors.grey,
-                                                ),
-                                                SizedBox(
-                                                  width: 1.w,
-                                                ),
-                                                Text(
-                                                  cubit.fromToDefaultDate,
-                                                  style: TextStyle(
-                                                      fontFamily: 'Inria Serif',
-                                                      color: Colors.grey,
-                                                      fontSize: 17.sp),
-                                                )
-                                              ],
-                                            ),
+                                                          textButtonTheme:
+                                                              TextButtonThemeData(
+                                                                  style: TextButton
+                                                                      .styleFrom(
+                                                                          //backgroundColor: Color.fromRGBO(78, 64, 57, 1),
+                                                                          textStyle: Theme.of(context)
+                                                                              .textTheme
+                                                                              .displayMedium)),
+                                                          // dialogBackgroundColor: Color.fromRGBO(65, 49, 42, 1),
+                                                        ),
+                                                        child: child!);
+                                                  });
+                                          if (pickedDate != null) {
+                                            cubit.changeDefualtDate(
+                                                DateFormat('yyyy-MM-dd')
+                                                    .format(pickedDate));
+                                            //print(cubit.fromToDefaultDate);
+                                          }
+                                        },
+                                        child: Container(
+                                          width: 65.w,
+                                          height: 6.h,
+                                          decoration: BoxDecoration(
+                                            color: dateFieldColor,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(10.sp)),
+                                          ),
+                                          child: Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 3.w,
+                                              ),
+                                              Icon(
+                                                Icons.calendar_month,
+                                                size: 20.sp,
+                                                color: Colors.grey,
+                                              ),
+                                              SizedBox(
+                                                width: 1.w,
+                                              ),
+                                              Text(
+                                                cubit.fromToDefaultDate,
+                                                style: TextStyle(
+                                                    fontFamily: 'Inria Serif',
+                                                    color: Colors.grey,
+                                                    fontSize: 17.sp),
+                                              )
+                                            ],
                                           ),
                                         ),
                                       ),
-                                      SizedBox(
-                                        height: 4.h,
-                                      ),
-                                      (state is GetTripsLoadingState
-                                          ? const CircularProgressIndicator()
-                                          : SizedBox(
-                                              width: 65.w,
-                                              height: 6.h,
-                                              child: SharedComponents
-                                                  .defaultButton(
-                                                      function: () async {
-                                                        await cubit
-                                                            .getTripTimes();
-                                                      },
-                                                      text: AppString.search,
-                                                      //size: 20.sp,
-                                                      context: context,
-                                                      radius: AppSizes
-                                                          .defaultBottomRadius,
-                                                      withIcon: false)))
-                                    ],
-                                  ),
+                                    ),
+                                    SizedBox(
+                                      height: 4.h,
+                                    ),
+                                    SizedBox(
+                                        width: 65.w,
+                                        height: 6.h,
+                                        child: SharedComponents.defaultButton(
+                                            function: () async {
+                                              await cubit.getTripTimes();
+                                            },
+                                            text: state is GetTripsLoadingState
+                                                ? Center(
+                                                    child:
+                                                        CircularProgressIndicator())
+                                                : AppString.search,
+                                            //size: 20.sp,
+                                            context: context,
+                                            radius:
+                                                AppSizes.defaultBottomRadius,
+                                            withIcon: false,
+                                            isLoading:
+                                                state is GetTripsLoadingState
+                                                    ? true
+                                                    : false))
+                                  ],
                                 ),
-                              ))),
-                  )),
-                ],
-              ),
+                              ),
+                            ))),
+                )),
+              ],
             ),
           ),
         ),

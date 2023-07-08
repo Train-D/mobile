@@ -26,7 +26,7 @@ class AppString {
   static const String skip = 'Skip';
   static const String train = 'Train';
   static const String booking = 'Booking';
-  static const String track = 'Track My Train';
+  static const String track = 'Track Your Train';
   static const String stations = 'Stations';
   static const String userName = 'Username';
   static const String passowrd = 'Password';
@@ -68,7 +68,7 @@ class AppString {
   static const String book = 'Book';
   static const String name = 'Name';
   static const String debitCard = 'Debit Card';
-  static const String chooseSeatsAppBarTitle = 'Choose Your Seats';
+  static const String chooseSeatsAppBarTitle = 'Choose Your Seat';
   static const String available = 'Available';
   static const String unavailable = 'Unvailable';
   static const String cancel = 'Cancel';

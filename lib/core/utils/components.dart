@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
@@ -23,8 +21,9 @@ class SharedComponents {
     double? textSize,
     required BuildContext context,
     required Function function,
-    required String text,
+    required dynamic text,
     bool cancel = false,
+    bool isLoading = false,
   }) =>
       Container(
         width: width,
@@ -44,6 +43,7 @@ class SharedComponents {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              isLoading? text:
               Text(
                 upper ? text.toUpperCase() : text,
                 style: Theme.of(context).textTheme.displayMedium!.copyWith(
@@ -67,7 +67,6 @@ class SharedComponents {
           ),
         ),
       );
-
   static Widget defaultTextButton({
     required Function function,
     required String text,

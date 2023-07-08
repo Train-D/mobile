@@ -34,325 +34,323 @@ class ChooseSeatsScreen extends StatelessWidget {
       trainC2Car(context: context),
       trainC3Car(context: context),
     ];
-    return SafeArea(
-        child: SharedComponents.linearGradientBg(
+    return SharedComponents.linearGradientBg(
       colors: profileBg,
       child: BlocProvider(
-        create: (context) => ChooseSeatsCubit()..initScrollCon(),
-        child:BlocConsumer<BookingCubit, BookingState>(
-            listener: (context, state) {},
-            builder: (context, state) {
-              return Scaffold(
-                backgroundColor: transparent,
-                appBar: SharedComponents.defaultAppBar(
-                  context: context,
-                  chooseSeatsScreenAppBar: true,
-                ),
-                body: state is GetTrainInfoLoadingState ||
-                        state is GetTrainInfoFailureState
-                    ? const Center(
-                        child: CircularProgressIndicator(),
-                      )
-                    : Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SingleChildScrollView(
-                            child: Column(
+    create: (context) => ChooseSeatsCubit()..initScrollCon(),
+    child:BlocConsumer<BookingCubit, BookingState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Scaffold(
+            backgroundColor: transparent,
+            appBar: SharedComponents.defaultAppBar(
+              context: context,
+              chooseSeatsScreenAppBar: true,
+            ),
+            body: state is GetTrainInfoLoadingState ||
+                    state is GetTrainInfoFailureState
+                ? const Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SingleChildScrollView(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 15.sp,
+                            ),
+                            ChooseSeatsComponents.buttonAndWordRow(
+                              context: context,
+                              isAvailable: true,
+                              text: AppString.available,
+                            ),
+                            ChooseSeatsComponents.buttonAndWordRow(
+                              context: context,
+                              isAvailable: false,
+                              text: AppString.unavailable,
+                            ),
+                            const SizedBox(
+                              height: 5,
+                            ),
+                            Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  height: 15.sp,
-                                ),
-                                ChooseSeatsComponents.buttonAndWordRow(
-                                  context: context,
-                                  isAvailable: true,
-                                  text: AppString.available,
-                                ),
-                                ChooseSeatsComponents.buttonAndWordRow(
-                                  context: context,
-                                  isAvailable: false,
-                                  text: AppString.unavailable,
+                                Column(
+                                  children: [
+                                    ChooseSeatsComponents.trainCarClassText(
+                                      context: context,
+                                      carClass: '1A',
+                                    ),
+                                    ChooseSeatsComponents.trainCarClassText(
+                                      context: context,
+                                      carClass: '2A',
+                                    ),
+                                    ChooseSeatsComponents.trainCarClassText(
+                                      context: context,
+                                      carClass: '1B',
+                                    ),
+                                    ChooseSeatsComponents.trainCarClassText(
+                                      context: context,
+                                      carClass: '2B',
+                                    ),
+                                     ChooseSeatsComponents.trainCarClassText(
+                                      context: context,
+                                      carClass: '1C',
+                                    ),
+                                     ChooseSeatsComponents.trainCarClassText(
+                                      context: context,
+                                      carClass: '2C',
+                                    ),
+                                     ChooseSeatsComponents.trainCarClassText(
+                                      context: context,
+                                      carClass: '3C',
+                                    ),
+                                  ],
                                 ),
                                 const SizedBox(
-                                  height: 5,
+                                  width: 10,
                                 ),
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                Stack(
+                                  alignment: Alignment.topCenter,
                                   children: [
-                                    Column(
-                                      children: [
-                                        ChooseSeatsComponents.trainCarClassText(
-                                          context: context,
-                                          carClass: '1A',
-                                        ),
-                                        ChooseSeatsComponents.trainCarClassText(
-                                          context: context,
-                                          carClass: '2A',
-                                        ),
-                                        ChooseSeatsComponents.trainCarClassText(
-                                          context: context,
-                                          carClass: '1B',
-                                        ),
-                                        ChooseSeatsComponents.trainCarClassText(
-                                          context: context,
-                                          carClass: '2B',
-                                        ),
-                                         ChooseSeatsComponents.trainCarClassText(
-                                          context: context,
-                                          carClass: '1C',
-                                        ),
-                                         ChooseSeatsComponents.trainCarClassText(
-                                          context: context,
-                                          carClass: '2C',
-                                        ),
-                                         ChooseSeatsComponents.trainCarClassText(
-                                          context: context,
-                                          carClass: '3C',
-                                        ),
-                                      ],
+                                    Image(
+                                      image: AssetImage(
+                                        '${AppConstants.vectorsUrl}$smallTrainLine',
+                                      ),
                                     ),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Stack(
-                                      alignment: Alignment.topCenter,
-                                      children: [
-                                        Image(
-                                          image: AssetImage(
-                                            '${AppConstants.vectorsUrl}$smallTrainLine',
-                                          ),
-                                        ),
-                                        BlocConsumer<ChooseSeatsCubit,
-                                                ChooseSeatsState>(
-                                            listener: (context, state) {},
-                                            builder: (context, state) {
-                                              ChooseSeatsCubit cubit =
-                                                  ChooseSeatsCubit.get(context);
-                                              return Column(
-                                                children: [
-                                                  AnimatedCrossFade(
-                                                    firstChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainFirstCar,
-                                                      showBorder:
-                                                          selectedTrainContainerColor,
-                                                    ),
-                                                    secondChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainFirstCar,
-                                                      showBorder: transparent,
-                                                    ),
-                                                    crossFadeState: cubit
-                                                                .firstIdx ==
-                                                            0
-                                                        ? CrossFadeState.showFirst
-                                                        : CrossFadeState.showSecond,
-                                                    duration: const Duration(
-                                                      milliseconds: 150,
-                                                    ),
-                                                  ),
-                                                  AnimatedCrossFade(
-                                                    firstChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder:
-                                                          selectedTrainContainerColor,
-                                                    ),
-                                                    secondChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder: transparent,
-                                                    ),
-                                                    crossFadeState: cubit
-                                                                .firstIdx ==
-                                                            1
-                                                        ? CrossFadeState.showFirst
-                                                        : CrossFadeState.showSecond,
-                                                    duration: const Duration(
-                                                      milliseconds: 150,
-                                                    ),
-                                                  ),
-                                                  AnimatedCrossFade(
-                                                    firstChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder:
-                                                          selectedTrainContainerColor,
-                                                    ),
-                                                    secondChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder: transparent,
-                                                    ),
-                                                    crossFadeState: cubit
-                                                                .firstIdx ==
-                                                            2
-                                                        ? CrossFadeState.showFirst
-                                                        : CrossFadeState.showSecond,
-                                                    duration: const Duration(
-                                                      milliseconds: 150,
-                                                    ),
-                                                  ),
-                                                  
-                                                  AnimatedCrossFade(
-                                                    firstChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder:
-                                                          selectedTrainContainerColor,
-                                                    ),
-                                                    secondChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder: transparent,
-                                                    ),
-                                                    crossFadeState: cubit
-                                                                .firstIdx ==
-                                                            3
-                                                        ? CrossFadeState.showFirst
-                                                        : CrossFadeState.showSecond,
-                                                    duration: const Duration(
-                                                      milliseconds: 150,
-                                                    ),
-                                                  ),
-                                                  
-                                                  AnimatedCrossFade(
-                                                    firstChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder:
-                                                          selectedTrainContainerColor,
-                                                    ),
-                                                    secondChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder: transparent,
-                                                    ),
-                                                    crossFadeState: cubit
-                                                                .firstIdx ==
-                                                            4
-                                                        ? CrossFadeState.showFirst
-                                                        : CrossFadeState.showSecond,
-                                                    duration: const Duration(
-                                                      milliseconds: 150,
-                                                    ),
-                                                  ),
-                                                  
-                                                  AnimatedCrossFade(
-                                                    firstChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder:
-                                                          selectedTrainContainerColor,
-                                                    ),
-                                                    secondChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder: transparent,
-                                                    ),
-                                                    crossFadeState: cubit
-                                                                .firstIdx ==
-                                                            5
-                                                        ? CrossFadeState.showFirst
-                                                        : CrossFadeState.showSecond,
-                                                    duration: const Duration(
-                                                      milliseconds: 150,
-                                                    ),
-                                                  ),
-                                                  
-                                                  AnimatedCrossFade(
-                                                    firstChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder:
-                                                          selectedTrainContainerColor,
-                                                    ),
-                                                    secondChild: ChooseSeatsComponents
-                                                        .trainSmallCarWithSelectedContainer(
-                                                      image: smallTrainDefaultCar,
-                                                      showBorder: transparent,
-                                                    ),
-                                                    crossFadeState: cubit
-                                                                .firstIdx ==
-                                                            6
-                                                        ? CrossFadeState.showFirst
-                                                        : CrossFadeState.showSecond,
-                                                    duration: const Duration(
-                                                      milliseconds: 150,
-                                                    ),
-                                                  ),
-                                                ],
-                                              );
-                                            }),
-                                      ],
-                                    ),
+                                    BlocConsumer<ChooseSeatsCubit,
+                                            ChooseSeatsState>(
+                                        listener: (context, state) {},
+                                        builder: (context, state) {
+                                          ChooseSeatsCubit cubit =
+                                              ChooseSeatsCubit.get(context);
+                                          return Column(
+                                            children: [
+                                              AnimatedCrossFade(
+                                                firstChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainFirstCar,
+                                                  showBorder:
+                                                      selectedTrainContainerColor,
+                                                ),
+                                                secondChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainFirstCar,
+                                                  showBorder: transparent,
+                                                ),
+                                                crossFadeState: cubit
+                                                            .firstIdx ==
+                                                        0
+                                                    ? CrossFadeState.showFirst
+                                                    : CrossFadeState.showSecond,
+                                                duration: const Duration(
+                                                  milliseconds: 150,
+                                                ),
+                                              ),
+                                              AnimatedCrossFade(
+                                                firstChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder:
+                                                      selectedTrainContainerColor,
+                                                ),
+                                                secondChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder: transparent,
+                                                ),
+                                                crossFadeState: cubit
+                                                            .firstIdx ==
+                                                        1
+                                                    ? CrossFadeState.showFirst
+                                                    : CrossFadeState.showSecond,
+                                                duration: const Duration(
+                                                  milliseconds: 150,
+                                                ),
+                                              ),
+                                              AnimatedCrossFade(
+                                                firstChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder:
+                                                      selectedTrainContainerColor,
+                                                ),
+                                                secondChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder: transparent,
+                                                ),
+                                                crossFadeState: cubit
+                                                            .firstIdx ==
+                                                        2
+                                                    ? CrossFadeState.showFirst
+                                                    : CrossFadeState.showSecond,
+                                                duration: const Duration(
+                                                  milliseconds: 150,
+                                                ),
+                                              ),
+                                              
+                                              AnimatedCrossFade(
+                                                firstChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder:
+                                                      selectedTrainContainerColor,
+                                                ),
+                                                secondChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder: transparent,
+                                                ),
+                                                crossFadeState: cubit
+                                                            .firstIdx ==
+                                                        3
+                                                    ? CrossFadeState.showFirst
+                                                    : CrossFadeState.showSecond,
+                                                duration: const Duration(
+                                                  milliseconds: 150,
+                                                ),
+                                              ),
+                                              
+                                              AnimatedCrossFade(
+                                                firstChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder:
+                                                      selectedTrainContainerColor,
+                                                ),
+                                                secondChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder: transparent,
+                                                ),
+                                                crossFadeState: cubit
+                                                            .firstIdx ==
+                                                        4
+                                                    ? CrossFadeState.showFirst
+                                                    : CrossFadeState.showSecond,
+                                                duration: const Duration(
+                                                  milliseconds: 150,
+                                                ),
+                                              ),
+                                              
+                                              AnimatedCrossFade(
+                                                firstChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder:
+                                                      selectedTrainContainerColor,
+                                                ),
+                                                secondChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder: transparent,
+                                                ),
+                                                crossFadeState: cubit
+                                                            .firstIdx ==
+                                                        5
+                                                    ? CrossFadeState.showFirst
+                                                    : CrossFadeState.showSecond,
+                                                duration: const Duration(
+                                                  milliseconds: 150,
+                                                ),
+                                              ),
+                                              
+                                              AnimatedCrossFade(
+                                                firstChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder:
+                                                      selectedTrainContainerColor,
+                                                ),
+                                                secondChild: ChooseSeatsComponents
+                                                    .trainSmallCarWithSelectedContainer(
+                                                  image: smallTrainDefaultCar,
+                                                  showBorder: transparent,
+                                                ),
+                                                crossFadeState: cubit
+                                                            .firstIdx ==
+                                                        6
+                                                    ? CrossFadeState.showFirst
+                                                    : CrossFadeState.showSecond,
+                                                duration: const Duration(
+                                                  milliseconds: 150,
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                        }),
                                   ],
                                 ),
                               ],
                             ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Stack(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsetsDirectional.only(
-                                  top: 20,
-                                ),
-                                child: Image(
-                                  width: 220,
-                                  fit: BoxFit.contain,
-                                  image: AssetImage(
-                                    '${AppConstants.vectorsUrl}$trainLines',
-                                  ),
-                                ),
+                          ],
+                        ),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsetsDirectional.only(
+                              top: 20,
+                            ),
+                            child: Image(
+                              width: 220,
+                              fit: BoxFit.contain,
+                              image: AssetImage(
+                                '${AppConstants.vectorsUrl}$trainLines',
                               ),
-                              BlocConsumer<ChooseSeatsCubit, ChooseSeatsState>(
-                                  listener: (context, state) {},
-                                  builder: (context, state) {
-                                    ChooseSeatsCubit cubit =
-                                        ChooseSeatsCubit.get(context);
-                                    return SingleChildScrollView(
-                                      physics: const BouncingScrollPhysics(),
-                                      controller: cubit.sc,
-                                      child: Padding(
-                                        padding: const EdgeInsetsDirectional.only(
-                                          top: 40,
-                                          end: 15,
-                                        ),
-                                        child: Column(
-                                          children: [
-                                            const SizedBox(
-                                              height: 50,
-                                            ),
-                                            SizedBox(
-                                              width: 220,
-                                              child: ListView.separated(
-                                                shrinkWrap: true,
-                                                physics:
-                                                    const NeverScrollableScrollPhysics(),
-                                                itemBuilder: (context, idx) =>
-                                                    trainCars[idx],
-                                                separatorBuilder: (context, idx) =>
-                                                    const SizedBox(height: 20),
-                                                itemCount: trainCars.length,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    );
-                                  }),
-                            ],
+                            ),
                           ),
+                          BlocConsumer<ChooseSeatsCubit, ChooseSeatsState>(
+                              listener: (context, state) {},
+                              builder: (context, state) {
+                                ChooseSeatsCubit cubit =
+                                    ChooseSeatsCubit.get(context);
+                                return SingleChildScrollView(
+                                  physics: const BouncingScrollPhysics(),
+                                  controller: cubit.sc,
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.only(
+                                      top: 40,
+                                      end: 15,
+                                    ),
+                                    child: Column(
+                                      children: [
+                                        const SizedBox(
+                                          height: 50,
+                                        ),
+                                        SizedBox(
+                                          width: 220,
+                                          child: ListView.separated(
+                                            shrinkWrap: true,
+                                            physics:
+                                                const NeverScrollableScrollPhysics(),
+                                            itemBuilder: (context, idx) =>
+                                                trainCars[idx],
+                                            separatorBuilder: (context, idx) =>
+                                                const SizedBox(height: 20),
+                                            itemCount: trainCars.length,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }),
                         ],
                       ),
-              );
-            },
-          )
-        )) 
-    );
+                    ],
+                  ),
+          );
+        },
+      )
+    ));
   }
 }
 

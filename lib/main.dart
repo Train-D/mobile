@@ -10,18 +10,13 @@ import 'package:traind_app/core/services/services_locator.dart';
 import 'package:traind_app/core/utils/app_constants.dart';
 import 'package:traind_app/features/app/presentation/screens/onboarding_one_screen.dart';
 import 'package:traind_app/features/app/presentation/screens/splash_screen.dart';
-import 'package:traind_app/features/authentication/presentation/controller/reset_password_cubit/reset_password_cubit.dart';
 import 'package:traind_app/features/layout/presentation/controller/home_cubit/home_cubit.dart';
 import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
 import 'package:traind_app/features/stations/presentation/controller/all_stations_cubit/all_stations_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/controller/choose_seats/choose_seats_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/controller/userValidBookedTickets_cubit/userValidBookedTickets_cubit.dart';
 import 'package:traind_app/features/tickets/presentation/controller/ticket_cubit/cubit/ticket_cubit.dart';
-import 'package:traind_app/features/tickets/presentation/screens/from_to_screen.dart';
 
 import 'core/bloc_observer/bloc_observer.dart';
-import 'features/authentication/presentation/controller/login_cubit/login_cubit.dart';
-import 'features/authentication/presentation/controller/register_cubit/register_cubit.dart';
+
 import 'features/profile/presentation/controller/profile_cubit/profile_cubit.dart';
 import 'features/tickets/presentation/controller/booking_cubit/booking_cubit.dart';
 import 'features/track/presentation/controller/tracking_cubit/tracking_cubit.dart';
@@ -64,22 +59,11 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(
-          create: (context) => LoginCubit(sl(), sl()),
-        ),
-        BlocProvider(
           create: (context) => BookingCubit(sl(), sl(), sl(), sl(), sl(), sl()),
         ),
-        BlocProvider(
-          create: (context) => RegisterCubit(sl(), sl()),
-        ),
-        //   BlocProvider(
-        //   create: (context) => ChooseSeatsCubit()..initScrollCon(),
-        // ),
+       
         BlocProvider(
           create: (context) => ProfileCubit(sl(), sl())..getProfileUserData(),
-        ),
-        BlocProvider(
-          create: (context) => ResetPasswordCubit(sl()),
         ),
         BlocProvider(
           create: (context) => HomeCubit(
@@ -93,9 +77,6 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => TicketCubit(),
         ),
-        // BlocProvider(
-        //   create: (context) => ChooseSeatsCubit()..initScrollCon(),
-        // ),
         BlocProvider(
           create: (context) =>
               AllStationsCubit(sl(), sl())..getAllStationsNames(),

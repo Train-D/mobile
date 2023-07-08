@@ -47,8 +47,7 @@ class ChangePasswordScreen extends StatelessWidget {
           },
           builder: (context, state) {
             ChangePasswordCubit cubit = ChangePasswordCubit.get(context);
-            return SafeArea(
-                child: GestureDetector(
+            return GestureDetector(
               onTap: () {
                 FocusManager.instance.primaryFocus?.unfocus();
               },
@@ -168,26 +167,30 @@ class ChangePasswordScreen extends StatelessWidget {
                             SizedBox(
                               height: 5.h,
                             ),
-                            state is ChangePasswordLoadingState
-                                ? Center(child: CircularProgressIndicator())
-                                : Center(
-                                    child: SharedComponents.defaultButton(
-                                        context: context,
-                                        function: () {
-                                          FocusScope.of(context)
-                                              .requestFocus(new FocusNode());
-                                          if (cubit.changePasswordFormKey
-                                              .currentState!
-                                              .validate()) {
-                                            cubit.changePassword();
-                                          }
-                                          //cubit.resetPassword();
-                                        },
-                                        text: AppString.changePassword,
-                                        radius: 10,
-                                        width: 60.w,
-                                        height: 6.5.h),
-                                  )
+                            Center(
+                              child: SharedComponents.defaultButton(
+                                  context: context,
+                                  function: () {
+                                    FocusScope.of(context)
+                                        .requestFocus(new FocusNode());
+                                    if (cubit
+                                        .changePasswordFormKey.currentState!
+                                        .validate()) {
+                                      cubit.changePassword();
+                                    }
+                                    //cubit.resetPassword();
+                                  },
+                                  text: state is ChangePasswordLoadingState
+                                      ? Center(
+                                          child: CircularProgressIndicator())
+                                      : AppString.changePassword,
+                                  radius: 10,
+                                  width: 60.w,
+                                  height: 6.5.h,
+                                  isLoading: state is ChangePasswordLoadingState
+                                      ? true
+                                      : false),
+                            )
                           ],
                         ),
                       ),
@@ -195,7 +198,7 @@ class ChangePasswordScreen extends StatelessWidget {
                   ),
                 ),
               ),
-            ));
+            );
           },
         ));
   }
