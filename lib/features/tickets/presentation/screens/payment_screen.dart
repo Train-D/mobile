@@ -20,7 +20,7 @@ class PaymentScreen extends StatelessWidget {
       BookingCubit cubit = BookingCubit.get(context);
       if (state is GetPaymentCustomerDataSuccessState) {
         await cubit.getTicketData();
-        
+
         int numberOfScreensToReplace = 2;
 
         Navigator.popUntil(context, (route) {
@@ -56,8 +56,7 @@ class PaymentScreen extends StatelessWidget {
       }
     }, builder: (context, state) {
       BookingCubit cubit = BookingCubit.get(context);
-      return SafeArea(
-          child: GestureDetector(
+      return GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
         },
@@ -316,26 +315,31 @@ class PaymentScreen extends StatelessWidget {
                                     SizedBox(
                                       height: 4.h,
                                     ),
-                                    state is GetPaymentCustomerDataLoadingState ||
-                                            state is GetTicketDataLoadingState
-                                        ? const CircularProgressIndicator()
-                                        : SharedComponents.defaultButton(
-                                            context: context,
-                                            function: () {
-                                              FocusScope.of(context)
-                                                  .requestFocus(
-                                                      new FocusNode());
-                                              if (cubit
-                                                  .paymentFormKey.currentState!
-                                                  .validate()) {
-                                                cubit.getPaymentCustomerData();
-                                              }
-                                              /*SharedComponents.navigateTo(
-                                          const TicketScreen(), context);*/
-                                            },
-                                            text: AppString.buyTicket,
-                                            radius: 7.sp,
-                                            width: 35.w)
+                                    SharedComponents.defaultButton(
+                                        context: context,
+                                        function: () {
+                                          FocusScope.of(context)
+                                              .requestFocus(new FocusNode());
+                                          if (cubit.paymentFormKey.currentState!
+                                              .validate()) {
+                                            cubit.getPaymentCustomerData();
+                                          }
+                                        },
+                                        text: state is GetPaymentCustomerDataLoadingState ||
+                                                state
+                                                    is GetTicketDataLoadingState
+                                            ? Center(
+                                                child:
+                                                    CircularProgressIndicator())
+                                            : AppString.buyTicket,
+                                        radius: 7.sp,
+                                        width: 35.w,
+                                        isLoading: state
+                                                    is GetPaymentCustomerDataLoadingState ||
+                                                state
+                                                    is GetTicketDataLoadingState
+                                            ? true
+                                            : false)
                                   ],
                                 ),
                               )
@@ -348,7 +352,7 @@ class PaymentScreen extends StatelessWidget {
                 ],
               ),
             )),
-      ));
+      );
     });
   }
 }

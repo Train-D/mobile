@@ -80,22 +80,36 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
         }, builder: (context, state) {
           UserValidBookedTicketsCubit cubit =
               UserValidBookedTicketsCubit.get(context);
-          return SafeArea(
-              child: SharedComponents.linearGradientBg(
+          return SharedComponents.linearGradientBg(
             colors: profileBg,
             child: Scaffold(
-              backgroundColor: transparent,
-              appBar: SharedComponents.defaultAppBar(context: context),
-              body: state is UserValidBookedTicketsLoadingState ||
-                      state is GetPaymentIdLoadingState ||
-                      state is ReturnTicketPriceToUserLoadingState ||
-                      state is CancelUserTicketLoadingState
-                  ? const Center(child: CircularProgressIndicator())
-                  : cubit.userValidBookedTicketsModel.userValidBookedTickets
-                          .isEmpty
-                      ? Center(
-                          child: Text(
-                            'No Booked Tickets',
+          backgroundColor: transparent,
+          appBar: SharedComponents.defaultAppBar(context: context),
+          body: state is UserValidBookedTicketsLoadingState ||
+                  state is GetPaymentIdLoadingState ||
+                  state is ReturnTicketPriceToUserLoadingState ||
+                  state is CancelUserTicketLoadingState
+              ? const Center(child: CircularProgressIndicator())
+              : cubit.userValidBookedTicketsModel.userValidBookedTickets
+                      .isEmpty
+                  ? Center(
+                      child: Text(
+                        'No Booked Tickets',
+                        style: Theme.of(context)
+                            .textTheme
+                            .displayLarge!
+                            .copyWith(
+                              color: trainUnAvailableSeatColor,
+                              fontSize: 20,
+                            ),
+                      ),
+                    )
+                  : SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
+                      child: Column(
+                        children: [
+                          Text(
+                            'Your Tickets',
                             style: Theme.of(context)
                                 .textTheme
                                 .displayLarge!
@@ -104,106 +118,91 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
                                   fontSize: 20,
                                 ),
                           ),
-                        )
-                      : SingleChildScrollView(
-                          physics: const BouncingScrollPhysics(),
-                          child: Column(
-                            children: [
-                              Text(
-                                'Your Tickets',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .displayLarge!
-                                    .copyWith(
-                                      color: trainUnAvailableSeatColor,
-                                      fontSize: 20,
-                                    ),
-                              ),
-                              const SizedBox(
-                                height: 20,
-                              ),
-                              Column(children: [
-                                ListView.builder(
-                                  physics: const BouncingScrollPhysics(),
-                                  shrinkWrap: true,
-                                  itemCount: cubit.userValidBookedTicketsModel
-                                      .userValidBookedTickets.length,
-                                  itemBuilder: (context, index) => buildTicket(
-                                      context: context,
-                                      cancel: () async {
-                                        var date = cubit
-                                                .userValidBookedTicketsModel
-                                                .userValidBookedTickets[index]
-                                            ['date'];
-                                        DateTime today = DateTime.now();
-                                        String d = date[0] + date[1];
-                                        if (date[0] == '0') d = date[1];
-                                        //print(d);
-                                        //print(today.day);
-                                        showCancelTicketAlertDialog(
-                                            context: context,
-                                            cancel: () async {
-                                              Navigator.pop(context);
-                                              if (d != today.day.toString()) {
-                                                var ticketId = cubit
-                                                    .userValidBookedTicketsModel
-                                                    .userValidBookedTickets[
-                                                        index]['ticketId']
-                                                    .toString();
-                                                var price = cubit
-                                                    .userValidBookedTicketsModel
-                                                    .userValidBookedTickets[
-                                                        index]['price']
-                                                    .toInt();
-                                                String? paymentId = await cubit
-                                                    .getPaymentId(ticketId);
-                                                if (paymentId != null) {
-                                                  await cubit.returnTicketPrice(
-                                                      paymentId, price);
-                                                  await cubit.cancelUserTicket(
-                                                      ticketId);
-                                                }
-                                              } else {
-                                                final snackBar = SnackBar(
-                                                  content: Text(
-                                                      'can\'t cancel a ticket if trip is today'),
-                                                  backgroundColor: Colors.red,
-                                                );
-                                                ScaffoldMessenger.of(context)
-                                                    .showSnackBar(snackBar);
-                                              }
-                                            });
-                                      },
-                                      name: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]
-                                          ['passengerName'],
-                                      price: cubit.userValidBookedTicketsModel
-                                              .userValidBookedTickets[index]
-                                          ['price'],
-                                      duration: cubit
-                                              .userValidBookedTicketsModel
-                                              .userValidBookedTickets[index]
-                                          ['duration'],
-                                      startTime: cubit
-                                              .userValidBookedTicketsModel
-                                              .userValidBookedTickets[index]
-                                          ['startTime'],
-                                      endTime: cubit.userValidBookedTicketsModel
-                                              .userValidBookedTickets[index]
-                                          ['endTime'],
-                                      idNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['ticketId'].toString(),
-                                      date: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['date'],
-                                      classs: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['className'],
-                                      seatNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['seatNumber'].toInt(),
-                                      coachNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['coachNumber'].toInt(),
-                                      from: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['from'],
-                                      to: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['to']),
-                                ),
-                              ])
-                            ],
+                          const SizedBox(
+                            height: 20,
                           ),
-                        ),
+                          Column(children: [
+                            ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: cubit.userValidBookedTicketsModel
+                                  .userValidBookedTickets.length,
+                              itemBuilder: (context, index) => buildTicket(
+                                  context: context,
+                                  cancel: () async {
+                                    var date = cubit
+                                            .userValidBookedTicketsModel
+                                            .userValidBookedTickets[index]
+                                        ['date'];
+                                    DateTime today = DateTime.now();
+                                    String d = date[0] + date[1];
+                                    if (date[0] == '0') d = date[1];
+                                    //print(d);
+                                    //print(today.day);
+                                    showCancelTicketAlertDialog(
+                                        context: context,
+                                        cancel: () async {
+                                          Navigator.pop(context);
+                                          if (d != today.day.toString()) {
+                                            var ticketId = cubit
+                                                .userValidBookedTicketsModel
+                                                .userValidBookedTickets[
+                                                    index]['ticketId']
+                                                .toString();
+                                            var price = cubit
+                                                .userValidBookedTicketsModel
+                                                .userValidBookedTickets[
+                                                    index]['price']
+                                                .toInt();
+                                            String? paymentId = await cubit
+                                                .getPaymentId(ticketId);
+                                            if (paymentId != null) {
+                                              await cubit.returnTicketPrice(
+                                                  paymentId, price);
+                                              await cubit.cancelUserTicket(
+                                                  ticketId);
+                                            }
+                                          } else {
+                                            final snackBar = SnackBar(
+                                              content: Text(
+                                                  'can\'t cancel a ticket if trip is today'),
+                                              backgroundColor: Colors.red,
+                                            );
+                                            ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar);
+                                          }
+                                        });
+                                  },
+                                  name: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]
+                                      ['passengerName'],
+                                  price: cubit.userValidBookedTicketsModel
+                                          .userValidBookedTickets[index]
+                                      ['price'],
+                                  duration: cubit
+                                          .userValidBookedTicketsModel
+                                          .userValidBookedTickets[index]
+                                      ['duration'],
+                                  startTime: cubit
+                                          .userValidBookedTicketsModel
+                                          .userValidBookedTickets[index]
+                                      ['startTime'],
+                                  endTime: cubit.userValidBookedTicketsModel
+                                          .userValidBookedTickets[index]
+                                      ['endTime'],
+                                  idNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['ticketId'].toString(),
+                                  date: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['date'],
+                                  classs: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['className'],
+                                  seatNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['seatNumber'].toInt(),
+                                  coachNumber: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['coachNumber'].toInt(),
+                                  from: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['from'],
+                                  to: cubit.userValidBookedTicketsModel.userValidBookedTickets[index]['to']),
+                            ),
+                          ])
+                        ],
+                      ),
+                    ),
             ),
-          ));
+          );
         }));
   }
 }

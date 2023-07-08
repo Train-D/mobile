@@ -19,9 +19,7 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: BlocConsumer<ProfileCubit, ProfileState>(
-            listener: (context, state) {
+    return BlocConsumer<ProfileCubit, ProfileState>(listener: (context, state) {
       if (state is ProfileFailureUserDataState ||
           State is ProfileFailurePostUserDataState) {
         SharedComponents.showAlertDialog(
@@ -261,45 +259,35 @@ class ProfileScreen extends StatelessWidget {
                                       SizedBox(
                                         height: 4.h,
                                       ),
-                                      ConditionalBuilder(
-                                          condition: state
-                                              is! ProfileLoadingPostUserDataState,
-                                          builder: (context) =>
-                                              SharedComponents.defaultButton(
-                                                context: context,
-                                                function: () async {
-                                                  FocusScope.of(context)
-                                                      .requestFocus(
-                                                          new FocusNode());
-                                                  await cubit
-                                                      .putProfileUserData(
-                                                    image:
-                                                        cubit.base64Image ?? '',
-                                                    firstName: cubit
-                                                        .profileFirstNameCon
-                                                        .text,
-                                                    lastName: cubit
-                                                        .profileLastNameCon
-                                                        .text,
-                                                    phoneNumber: cubit
-                                                        .profilePhoneCon.text,
-                                                    city: cubit
-                                                        .profileCityCon.text,
-                                                  );
-                                                },
-                                                text: AppString.save,
-                                                width:
-                                                    AppSizes.width(context) / 3,
-                                                height:
-                                                    AppSizes.height(context) /
-                                                        14,
-                                                radius: AppSizes
-                                                    .defaultBottomRadius,
-                                              ),
-                                          fallback: (context) => const Center(
-                                                child:
-                                                    CircularProgressIndicator(),
-                                              )),
+                                      SharedComponents.defaultButton(
+                                          context: context,
+                                          function: () async {
+                                            FocusScope.of(context)
+                                                .requestFocus(new FocusNode());
+                                            await cubit.putProfileUserData(
+                                              image: cubit.base64Image ?? '',
+                                              firstName: cubit
+                                                  .profileFirstNameCon.text,
+                                              lastName:
+                                                  cubit.profileLastNameCon.text,
+                                              phoneNumber:
+                                                  cubit.profilePhoneCon.text,
+                                              city: cubit.profileCityCon.text,
+                                            );
+                                          },
+                                          text: state
+                                                  is ProfileLoadingPostUserDataState
+                                              ? Center(
+                                                  child:
+                                                      CircularProgressIndicator())
+                                              : AppString.save,
+                                          width: AppSizes.width(context) / 3,
+                                          height: AppSizes.height(context) / 14,
+                                          radius: AppSizes.defaultBottomRadius,
+                                          isLoading: state
+                                                  is ProfileLoadingPostUserDataState
+                                              ? true
+                                              : false),
                                     ],
                                   ),
                                 ),
@@ -309,6 +297,6 @@ class ProfileScreen extends StatelessWidget {
                         ),
                       ),
               )));
-    }));
+    });
   }
 }

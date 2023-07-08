@@ -16,47 +16,45 @@ class OnboardingTwoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: SharedComponents.linearGradientBg(
-        colors: onBoardingBg,
-        child: Scaffold(
-          backgroundColor: transparent,
-          body: Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: 20.sp,
-            ),
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    onboarding(
-                      title: AppString.onboardingTwoTitle,
-                      body: AppString.onboardingTwoSubtitle,
-                      context: context,
-                      image: '${AppConstants.vectorsUrl}$onboardingVectorTwo',
-                    ),
-                    SharedComponents.defaultButton(
-                      function: () async {
-                        await CacheHelper.saveData(
-                          key: 'onBoarding',
-                          value: true,
-                        );
+    return SharedComponents.linearGradientBg(
+      colors: onBoardingBg,
+      child: Scaffold(
+        backgroundColor: transparent,
+        body: Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: 20.sp,
+          ),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  onboarding(
+                    title: AppString.onboardingTwoTitle,
+                    body: AppString.onboardingTwoSubtitle,
+                    context: context,
+                    image: '${AppConstants.vectorsUrl}$onboardingVectorTwo',
+                  ),
+                  SharedComponents.defaultButton(
+                    function: () async {
+                      await CacheHelper.saveData(
+                        key: 'onBoarding',
+                        value: true,
+                      );
 
-                        // ignore: use_build_context_synchronously
-                        SharedComponents.navigateToReplace(
-                          const LoginScreen(),
-                          context,
-                        );
-                      },
-                      text: AppString.getStarted,
-                      context: context,
-                      width: AppSizes.width(context) * 0.4,
-                      height: 6.h,
-                      withIcon: false,
-                      radius: AppSizes.defaultBottomRadius,
-                    )
-                  ],
-                ),
+                      // ignore: use_build_context_synchronously
+                      SharedComponents.navigateToReplace(
+                        const LoginScreen(),
+                        context,
+                      );
+                    },
+                    text: AppString.getStarted,
+                    context: context,
+                    width: AppSizes.width(context) * 0.4,
+                    height: 6.h,
+                    withIcon: false,
+                    radius: AppSizes.defaultBottomRadius,
+                  )
+                ],
               ),
             ),
           ),
