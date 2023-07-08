@@ -25,75 +25,80 @@ class TicketScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(child:
-        BlocConsumer<BookingCubit, BookingState>(
-          listener: (context, state) {},
-          builder: (context, state) {
-      BookingCubit cubit = BookingCubit.get(context);
-      Widget ticketData = buildTicket(
-          context: context,
-          startTime: ticketInfoModel.startTime,
-          endTime: ticketInfoModel.endTime,
-          idNumber: 'Ticket ID: ${ticketInfoModel.ticketId.toString()}',
-          name: ticketInfoModel.passengerName,
-          date: ticketInfoModel.date,
-          price: ticketInfoModel.price,
-          classs: ticketInfoModel.className,
-          seatNumber: ticketInfoModel.seatNumber,
-          coachNumber: ticketInfoModel.coachNumber,
-          time: ticketInfoModel.duration,
-          from: ticketInfoModel.from,
-          to: ticketInfoModel.to);
-      return SharedComponents.linearGradientBg(
-          colors: profileBg,
-          child: Screenshot(
-              controller: cubit.screenshotCon,
-              child: Scaffold(
-                backgroundColor: transparent,
-                appBar: SharedComponents.defaultAppBar(context: context),
-                //appBar: SharedComponents.defaultAppBar(context: context),
-                body: state is GetTicketDataLoadingState
-                    ? const Center(child: CircularProgressIndicator())
-                    : SingleChildScrollView(
-                        child: Center(
-                          child: Column(children: [
-                            SizedBox(
-                              height: 2.h,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 25,
+    return SafeArea(
+        child: BlocConsumer<BookingCubit, BookingState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              BookingCubit cubit = BookingCubit.get(context);
+              Widget ticketData = buildTicket(
+                  context: context,
+                  startTime: ticketInfoModel.startTime,
+                  endTime: ticketInfoModel.endTime,
+                  idNumber: 'Ticket ID: ${ticketInfoModel.ticketId.toString()}',
+                  name: ticketInfoModel.passengerName,
+                  date: ticketInfoModel.date,
+                  price: ticketInfoModel.price,
+                  classs: ticketInfoModel.className,
+                  seatNumber: ticketInfoModel.seatNumber,
+                  coachNumber: ticketInfoModel.coachNumber,
+                  time: ticketInfoModel.duration,
+                  from: ticketInfoModel.from,
+                  to: ticketInfoModel.to);
+              return SharedComponents.linearGradientBg(
+                  colors: profileBg,
+                  child: Screenshot(
+                      controller: cubit.screenshotCon,
+                      child: Scaffold(
+                        backgroundColor: transparent,
+                        appBar:
+                            SharedComponents.defaultAppBar(context: context),
+                        //appBar: SharedComponents.defaultAppBar(context: context),
+                        body: state is GetTicketDataLoadingState
+                            ? const Center(child: CircularProgressIndicator())
+                            : SingleChildScrollView(
+                                child: Center(
+                                  child: Column(children: [
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 25,
+                                      ),
+                                      child: Center(
+                                        child: ticketData,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 2.h,
+                                    ),
+                                    SharedComponents.defaultButton(
+                                      context: context,
+                                      function: () async {
+                                        final ticket = await cubit.screenshotCon
+                                            .captureFromWidget(ticketData);
+                                        //String s =
+                                            await cubit.saveImage(ticket);
+                                        //if(s != '') cubit.showDialog = true;
+                                        //await cubit.captureWidget();
+                                        //print('sssssssssssssssssss $s');
+                                        //if (s != '')
+                                          showTicketAlertDialog(
+                                              context: context);
+                                      },
+                                      text: AppString.download,
+                                      width: AppSizes.width(context) / 2.5,
+                                      height: AppSizes.height(context) / 14,
+                                      radius: AppSizes.defaultBottomRadius,
+                                      withIcon: true,
+                                      icon: Icons.arrow_downward_outlined,
+                                      iconSize: 18.sp,
+                                    ),
+                                  ]),
+                                ),
                               ),
-                              child: Center(
-                                child: ticketData,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 2.h,
-                            ),
-                            SharedComponents.defaultButton(
-                              context: context,
-                              function: () async {
-                                final ticket = await cubit.screenshotCon
-                                    .captureFromWidget(ticketData);
-                                String s = await cubit.saveImage(ticket);
-                                //if(s != '') cubit.showDialog = true;
-                                //await cubit.captureWidget();
-                                if(s != '') showTicketAlertDialog(context: context);
-                              },
-                              text: AppString.download,
-                              width: AppSizes.width(context) / 2.5,
-                              height: AppSizes.height(context) / 14,
-                              radius: AppSizes.defaultBottomRadius,
-                              withIcon: true,
-                              icon: Icons.arrow_downward_outlined,
-                              iconSize: 18.sp,
-                            ),
-                          ]),
-                        ),
-                      ),
-              )));
-    }));
+                      )));
+            }));
   }
 }
 
@@ -181,13 +186,12 @@ Widget buildTicket(
       height: 610,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50),
-         gradient: const LinearGradient(
-            colors: ticketColor,
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
+        gradient: const LinearGradient(
+          colors: ticketColor,
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
       ),
-      
       child: Column(
         children: [
           Padding(

@@ -14,7 +14,6 @@ class ResetPasswordScreen extends StatelessWidget {
     return BlocConsumer<ResetPasswordCubit, ResetPasswordState>(
       listener: (context, state) {
         ResetPasswordCubit cubit = ResetPasswordCubit.get(context);
-        // TODO: implement listener
         if (state is ResetPasswordFailureState) {
           SharedComponents.showAlertDialog(
               context: context,

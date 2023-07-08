@@ -2,6 +2,8 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:traind_app/features/authentication/data/models/google_sign_in_response_model.dart';
+import 'package:traind_app/features/authentication/domain/entities/response_entity.dart';
 
 import '../../../../../core/error/exceptions.dart';
 import '../../../data/models/auth_response_model.dart';
@@ -107,13 +109,17 @@ class RegisterCubit extends Cubit<RegisterState> {
 
   GoogleSignInUsecase googleSignInUsecase;
 
+  late ResponseEntity googleModel;
+
   Future<void> getGoogleSignInTokenFromBack(String idToken) async {
     emit(GetGoogleSignInTokenFromBackLoadingState());
-    var result = await googleSignInUsecase.call(idToken);
+    var result = await googleSignInUsecase
+        .call(GoogleSignInRequestModel(idToken: idToken));
     result.fold((failure) {
       emit(GetGoogleSignInTokenFromBackFailureState());
       print(failure.toString());
     }, (r) {
+      googleModel = r;
       emit(GetGoogleSignInTokenFromBackSuccessState());
       print(r.toString());
     });

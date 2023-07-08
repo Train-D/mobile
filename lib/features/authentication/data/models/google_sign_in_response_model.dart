@@ -1,9 +1,11 @@
-import '../../domain/entities/google_sign_in_response_entity.dart';
+import '../../domain/entities/google_sign_in_request_entity.dart';
 
-class GoogleSignInResponseModel extends GoogleSignInResponseEntity {
-  const GoogleSignInResponseModel({required super.message});
-
-  factory GoogleSignInResponseModel.fromJson(Map<String, dynamic> json) {
-    return GoogleSignInResponseModel(message: json['message']);
+class GoogleSignInRequestModel extends GoogleSignInRequestEntity {
+  const GoogleSignInRequestModel({required super.idToken});
+  
+  Map<String, dynamic> tojson() {
+    return {
+      "idToken": idToken,
+    };
   }
 }

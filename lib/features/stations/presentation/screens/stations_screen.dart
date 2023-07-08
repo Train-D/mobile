@@ -22,7 +22,24 @@ class StationsScreen extends StatelessWidget {
         child: SharedComponents.linearGradientBg(
           colors: stationsBgColor,
           child: BlocConsumer<AllStationsCubit, AllStationsState>(
-            listener: (context, state) {},
+            listener: (context, state) {
+              if(state is GetAllStationsNamesFailureState){
+                 SharedComponents.showAlertDialog(
+            context: context,
+            title: 'Error!',
+            message: 'Connection Error',
+            actions: [
+              SharedComponents.defaultButton(
+                  radius: 10.sp,
+                  width: 20.w,
+                  context: context,
+                  function: () {
+                    Navigator.pop(context);
+                  },
+                  text: 'Ok')
+            ]);
+              }
+            },
             builder: (context, state) {
               var cubit = AllStationsCubit.get(context);
               return Scaffold(
@@ -65,8 +82,7 @@ class StationsScreen extends StatelessWidget {
                                 topEnd: Radius.circular(20.sp),
                               ),
                             ),
-                            child: state is GetAllStationsNamesLoadingState ||
-                                    state is GetAllStationsNamesFailureState
+                            child: state is GetAllStationsNamesLoadingState
                                 ? const Center(
                                     child: CircularProgressIndicator(),
                                   )
