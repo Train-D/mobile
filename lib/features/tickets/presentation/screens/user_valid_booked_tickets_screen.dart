@@ -52,9 +52,9 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
                     text: 'Ok',
                   )
                 ]);
-          } else if (state is CancelUserTicketSuccessState){
-           // Navigator.pop(context);
-            if (cubit.cancelResponse == 'The reservation has been cancelled'){
+          } else if (state is CancelUserTicketSuccessState) {
+            // Navigator.pop(context);
+            if (cubit.cancelResponse == 'The reservation has been cancelled') {
               cubit.getUserValidBookedTickets();
               final snackBar = SnackBar(
                 content: Text(cubit.cancelResponse),
@@ -131,27 +131,46 @@ class UserValidBookedTicketsScreen extends StatelessWidget {
                                   itemBuilder: (context, index) => buildTicket(
                                       context: context,
                                       cancel: () async {
+                                        var date = cubit
+                                                .userValidBookedTicketsModel
+                                                .userValidBookedTickets[index]
+                                            ['date'];
+                                        DateTime today = DateTime.now();
+                                        String d = date[0] + date[1];
+                                        if (date[0] == '0') d = date[1];
+                                        //print(d);
+                                        //print(today.day);
                                         showCancelTicketAlertDialog(
                                             context: context,
                                             cancel: () async {
                                               Navigator.pop(context);
-                                              var ticketId = cubit
-                                                  .userValidBookedTicketsModel
-                                                  .userValidBookedTickets[index]
-                                                      ['ticketId']
-                                                  .toString();
-                                              var price = cubit
-                                                  .userValidBookedTicketsModel
-                                                  .userValidBookedTickets[index]
-                                                      ['price']
-                                                  .toInt();
-                                              String? paymentId = await cubit
-                                                  .getPaymentId(ticketId);
-                                              if (paymentId != null) {
-                                                await cubit.returnTicketPrice(
-                                                    paymentId, price);
-                                                await cubit
-                                                    .cancelUserTicket(ticketId);
+                                              if (d != today.day.toString()) {
+                                                var ticketId = cubit
+                                                    .userValidBookedTicketsModel
+                                                    .userValidBookedTickets[
+                                                        index]['ticketId']
+                                                    .toString();
+                                                var price = cubit
+                                                    .userValidBookedTicketsModel
+                                                    .userValidBookedTickets[
+                                                        index]['price']
+                                                    .toInt();
+                                                String? paymentId = await cubit
+                                                    .getPaymentId(ticketId);
+                                                if (paymentId != null) {
+                                                  await cubit.returnTicketPrice(
+                                                      paymentId, price);
+                                                  await cubit.cancelUserTicket(
+                                                      ticketId);
+                                                }
+                                              } else {
+                                                final snackBar = SnackBar(
+                                                  content: Text(
+                                                      'can\'t cancel a ticket if trip is today'),
+                                                  backgroundColor: Colors.red,
+                                                );
+                                                ScaffoldMessenger.of(context)
+                                                    .showSnackBar(snackBar);
                                               }
                                             });
                                       },

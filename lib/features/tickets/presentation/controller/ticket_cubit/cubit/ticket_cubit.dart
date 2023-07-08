@@ -13,9 +13,23 @@ class TicketCubit extends Cubit<TicketState> {
 
   final screenshotCon = ScreenshotController();
 
-  Future<String> saveImage(Uint8List bytes) async {
-    await [Permission.storage].request();
+  // Future<String> saveImage(Uint8List bytes) async {
+  //   await [Permission.storage].request();
 
+  //   final time = DateTime.now().toString();
+  //   final name = 'ticket $time';
+  //   final result = await ImageGallerySaver.saveImage(
+  //     bytes,
+  //     name: name,
+  //   );
+  //   return result['filePath'];
+  // }
+
+  Future<String?> saveImage(Uint8List bytes) async {
+    //await [Permission.storage].request();
+    //final PermissionStatus permissionStatus = await Permission.storage.status;
+
+    //if (permissionStatus.isGranted) {
     final time = DateTime.now().toString();
     final name = 'ticket $time';
     final result = await ImageGallerySaver.saveImage(
@@ -23,6 +37,10 @@ class TicketCubit extends Cubit<TicketState> {
       name: name,
     );
     return result['filePath'];
+    //}
+    //else {
+    //return null;
+    //}
   }
 
   bool showDialog = false;

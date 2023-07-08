@@ -2,7 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:traind_app/core/services/api_service.dart';
 import 'package:traind_app/features/authentication/data/models/google_sign_in_response_model.dart';
-import 'package:traind_app/features/authentication/domain/entities/google_sign_in_response_entity.dart';
+import 'package:traind_app/features/authentication/domain/entities/google_sign_in_request_entity.dart';
 
 import '../../../../core/error/exceptions.dart';
 import '../../../../core/network/remote/api_constants.dart';
@@ -13,7 +13,7 @@ import '../models/register_request_model.dart';
 
 abstract class BaseRegisterRemoteDataSource {
   Future<ResponseEntity> postRegisterData(RegisterRequestModel model);
-  Future<GoogleSignInResponseEntity> postGoogeSignInIdToken(String idToken);
+  Future<ResponseEntity> postGoogeSignInIdToken(GoogleSignInRequestModel model);
 }
 
 class RegisterRemoteDataSource extends BaseRegisterRemoteDataSource {
@@ -45,13 +45,12 @@ class RegisterRemoteDataSource extends BaseRegisterRemoteDataSource {
   }
 
   @override
-  Future<GoogleSignInResponseEntity> postGoogeSignInIdToken(
-      String idToken) async {
+  Future<ResponseEntity> postGoogeSignInIdToken(
+      GoogleSignInRequestModel model) async {
     var data = await apiService.post(
-        endPoint: '/User/LoginWithGoogle/$idToken', data: '');
-    GoogleSignInResponseEntity googleSignInResponseEntity =
-        GoogleSignInResponseModel.fromJson(data);
-
-    return googleSignInResponseEntity;
+        endPoint: '/User/LoginWithGoogle/', data: model.tojson());
+    var temp = AuthResponseModel.fromjson(data);
+    var loginEntity = ResponseEntity.toEntity(temp);
+    return loginEntity;
   }
 }

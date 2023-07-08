@@ -8,12 +8,16 @@ import 'package:traind_app/features/authentication/data/models/login_request_mod
 import 'package:traind_app/features/authentication/domain/usecase/login_usecase.dart';
 
 import '../../../data/models/auth_response_model.dart';
+import '../../../data/models/google_sign_in_response_model.dart';
+import '../../../domain/entities/response_entity.dart';
+import '../../../domain/usecase/google_sign_in_usecase.dart';
 
 part 'login_state.dart';
 
 class LoginCubit extends Cubit<LoginState> {
   LoginCubit(
     this.postLoginDataUseCase,
+    this.googleSignInUsecase,
   ) : super(LoginInitial());
 
   static LoginCubit get(context) => BlocProvider.of(context);
@@ -98,4 +102,24 @@ class LoginCubit extends Cubit<LoginState> {
     loginPasswordCon.clear();
     emit(LoginClearDataState());
   }
+
+ 
+  GoogleSignInUsecase googleSignInUsecase;
+
+  late ResponseEntity googleModel;
+  
+  Future<void> getGoogleSignInTokenFromBack(String idToken) async {
+    emit(GetGoogleSignInTokenFromBackLoadingState());
+    var result = await googleSignInUsecase
+        .call(GoogleSignInRequestModel(idToken: idToken));
+    result.fold((failure) {
+      emit(GetGoogleSignInTokenFromBackFailureState());
+      print(failure.toString());
+    }, (r) {
+      googleModel = r;
+      emit(GetGoogleSignInTokenFromBackSuccessState());
+      print(r.toString());
+    });
+  }
+
 }

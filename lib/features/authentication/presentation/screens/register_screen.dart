@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/network/local/cache_helper.dart';
+import 'package:traind_app/features/layout/presentation/screens/home_screen.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
 import '../../../../core/utils/app_images.dart';
@@ -33,11 +35,40 @@ class SignUpScreen extends StatelessWidget {
           );
           cubit.registerClearData();
         }
+        if (state is GetGoogleSignInTokenFromBackSuccessState) {
+        //if (cubit.googleModel.message == 'login successfully') {
+          CacheHelper.saveData(key: 'token', value: cubit.googleModel.token);
+          SharedComponents.navigateToReplace(
+            const HomeScreen(),
+            context,
+          );
+          SharedComponents.showToast(
+            text: 'Sign In Successfully',
+            color: Colors.green,
+          );
+          cubit.registerClearData();
+        }
         if (state is RegisterErrorState) {
           SharedComponents.showAlertDialog(
               context: context,
               title: 'Error!',
               message: cubit.authResponseModel.message,
+              actions: [
+                SharedComponents.defaultButton(
+                    radius: 10.sp,
+                    width: 20.w,
+                    context: context,
+                    function: () {
+                      Navigator.pop(context);
+                    },
+                    text: 'Ok')
+              ]);
+        }
+        if (state is GetGoogleSignInTokenFromBackFailureState) {
+          SharedComponents.showAlertDialog(
+              context: context,
+              title: 'Error!',
+              message: cubit.googleModel.message,
               actions: [
                 SharedComponents.defaultButton(
                     radius: 10.sp,
@@ -83,24 +114,35 @@ class SignUpScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        AuthComponents.signLogo(
-                          raduis: AppSizes.socialLogoRaduis,
-                          logoImage: google,
-                          function: () async {
-                            var idToken = await AuthClass.googleSignIn(context);
-                            if (idToken != null) {
-                              cubit.getGoogleSignInTokenFromBack(idToken);
-                            }
-                          },
-                        ),
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        AuthComponents.signLogo(
-                          raduis: AppSizes.socialLogoRaduis,
-                          logoImage: facebook,
-                          function: () {},
-                        ),
+                        state is GetGoogleSignInTokenFromBackLoadingState
+                            ? const CircularProgressIndicator()
+                            : AuthComponents.signLogo(
+                                raduis: AppSizes.socialLogoRaduis,
+                                logoImage: google,
+                                function: () async {
+                                  //await AuthClass.googleSignOut();
+                                  var idToken =
+                                      await AuthClass.googleSignIn(context);
+                                  if (idToken != null) {
+                                    await cubit
+                                        .getGoogleSignInTokenFromBack(idToken);
+                                    CacheHelper.saveData(
+                                        key: 'googleToken', value: idToken);
+                                    print('save google token to cache');
+                                    CacheHelper.saveData(
+                                        key: 'tempToken',
+                                        value: cubit.googleModel.token);
+                                  }
+                                },
+                              ),
+                        // SizedBox(
+                        //   width: 5.w,
+                        // ),
+                        // AuthComponents.signLogo(
+                        //   raduis: AppSizes.socialLogoRaduis,
+                        //   logoImage: facebook,
+                        //   function: () {},
+                        // ),
                       ],
                     ),
                     SizedBox(
@@ -288,13 +330,13 @@ class AuthClass {
         id = googleSignInAuthentication.idToken;
         print('sssss${googleSignInAuthentication.idToken}');
 
-        final snackBar = SnackBar(
-          content: Text(
-            'sign with google successfully',
-          ),
-          backgroundColor: lightDefualtColor,
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        // final snackBar = SnackBar(
+        //   content: Text(
+        //     'sign with google successfully',
+        //   ),
+        //   backgroundColor: lightDefualtColor,
+        // );
+        // ScaffoldMessenger.of(context).showSnackBar(snackBar);
       }
     } catch (e) {
       print("error sign with google");
@@ -314,5 +356,6 @@ class AuthClass {
 
   static Future<void> googleSignOut() async {
     await _googleSignIn.signOut();
+    print('google sign out');
   }
 }

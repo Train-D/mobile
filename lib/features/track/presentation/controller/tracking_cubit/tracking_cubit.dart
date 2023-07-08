@@ -44,15 +44,17 @@ class TrackingCubit extends Cubit<TrackingState> {
       trainId: 0,
       longitude: 0.0,
       latitude: 0.0);
+
+
   Future<void> getTrackInfo(String ticketId) async {
     emit(GetTrackInfoLoadingState());
     var result = await trackInfoUsecase.call(ticketId);
     result.fold((failure) {
-      print(failure.toString());
+      //print(failure.toString());
       message = failure.message.toString();
       emit(GetTrackInfoFailureState());
     }, (trackInfo) async {
-      print(trackInfo);
+      //print(trackInfo);
       trackModel = TrackModel(
           fromStation: trackInfo.fromStation,
           startTime: trackInfo.startTime,
@@ -62,8 +64,6 @@ class TrackingCubit extends Cubit<TrackingState> {
           latitude: trackInfo.latitude);
       mapController = Completer<GoogleMapController>();
 
-      //fetchPoints();
-      // emit(TrackingInitial());
       emit(GetTrackInfoSuccessState());
     });
   }
@@ -109,11 +109,10 @@ class TrackingCubit extends Cubit<TrackingState> {
   final DatabaseReference database = FirebaseDatabase.instance.ref();
   void fetchPoints() {
     database.onValue.listen((event) async {
-      final data = await event.snapshot.value;
+      final data = event.snapshot.value;
       if (data != null && data is Map) {
         final double latitude = double.parse(data['latitude']);
         final double longitude = double.parse(data['longitude']);
-        //await getPolyline(latitude, longitude);
         await getDrivingRoute(latitude, longitude);
         animatedCamera(latitude, longitude);
       }

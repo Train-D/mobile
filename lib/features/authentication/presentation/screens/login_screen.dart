@@ -3,6 +3,7 @@ import 'package:conditional_builder_null_safety/conditional_builder_null_safety.
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/core/network/local/cache_helper.dart';
 import 'reset_password_screen.dart';
 import '../../../../core/global/theme/app_color/app_color_light.dart';
 import '../../../../core/utils/app_constants.dart';
@@ -35,21 +36,50 @@ class LoginScreen extends StatelessWidget {
         );
         cubit.loginClearData();
       }
-      if(state is LoginErrorState){
+      if (state is GetGoogleSignInTokenFromBackSuccessState) {
+        //if (cubit.googleModel.message == 'login successfully') {
+          CacheHelper.saveData(key: 'token', value: cubit.googleModel.token);
+          SharedComponents.navigateToReplace(
+            const HomeScreen(),
+            context,
+          );
+          SharedComponents.showToast(
+            text: 'Login Successfully',
+            color: Colors.green,
+          );
+        } 
+      //}
+      if (state is LoginErrorState) {
         SharedComponents.showToast(
           text: cubit.authresponseModel.message,
           color: Colors.red,
         );
       }
+       if (state is GetGoogleSignInTokenFromBackFailureState) {
+          SharedComponents.showAlertDialog(
+              context: context,
+              title: 'Error!',
+              message: cubit.googleModel.message,
+              actions: [
+                SharedComponents.defaultButton(
+                    radius: 10.sp,
+                    width: 20.w,
+                    context: context,
+                    function: () {
+                      Navigator.pop(context);
+                    },
+                    text: 'Ok')
+              ]);
+        }
+      
     }, builder: (context, state) {
       LoginCubit cubit = LoginCubit.get(context);
       return SafeArea(
-        child: GestureDetector(
+          child: GestureDetector(
         onTap: () {
           FocusManager.instance.primaryFocus?.unfocus();
         },
-        child:
-        SharedComponents.screenBg(
+        child: SharedComponents.screenBg(
           imageUrl: '${AppConstants.imagesUrl}$loginBg',
           context: context,
           child: Scaffold(
@@ -72,19 +102,34 @@ class LoginScreen extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      AuthComponents.signLogo(
-                        raduis: AppSizes.socialLogoRaduis,
-                        logoImage: google,
-                        function: () {},
-                      ),
-                      SizedBox(
-                        width: 5.w,
-                      ),
-                      AuthComponents.signLogo(
-                        raduis: AppSizes.socialLogoRaduis,
-                        logoImage: facebook,
-                        function: () {},
-                      ),
+                      state is GetGoogleSignInTokenFromBackLoadingState
+                          ? const CircularProgressIndicator()
+                          : AuthComponents.signLogo(
+                              raduis: AppSizes.socialLogoRaduis,
+                              logoImage: google,
+                              function: () async {
+                                var idToken =
+                                    await AuthClass.googleSignIn(context);
+                                if (idToken != null) {
+                                  await cubit
+                                      .getGoogleSignInTokenFromBack(idToken);
+                                  CacheHelper.saveData(
+                                      key: 'googleToken', value: idToken);
+                                  print('save google token to cache');
+                                  CacheHelper.saveData(
+                                      key: 'tempToken',
+                                      value: cubit.googleModel.token);
+                                }
+                              },
+                            ),
+                      // SizedBox(
+                      //   width: 5.w,
+                      // ),
+                      // AuthComponents.signLogo(
+                      //   raduis: AppSizes.socialLogoRaduis,
+                      //   logoImage: facebook,
+                      //   function: () {},
+                      // ),
                     ],
                   ),
                   SizedBox(
@@ -146,7 +191,7 @@ class LoginScreen extends StatelessWidget {
                               context: context,
                               function: () async {
                                 FocusScope.of(context)
-                                            .requestFocus(new FocusNode());
+                                    .requestFocus(new FocusNode());
                                 if (cubit.loginFormKey.currentState!
                                     .validate()) {
                                   await cubit.login(
@@ -190,7 +235,7 @@ class LoginScreen extends StatelessWidget {
                               SharedComponents.defaultTextButton(
                                 function: () {
                                   FocusScope.of(context)
-                                            .requestFocus(new FocusNode());
+                                      .requestFocus(new FocusNode());
                                   SharedComponents.navigateTo(
                                     const SignUpScreen(),
                                     context,
@@ -208,7 +253,7 @@ class LoginScreen extends StatelessWidget {
                               SharedComponents.defaultTextButton(
                                   function: () {
                                     FocusScope.of(context)
-                                            .requestFocus(new FocusNode());
+                                        .requestFocus(new FocusNode());
                                     SharedComponents.navigateTo(
                                         ResetPasswordScreen(), context);
                                   },
@@ -227,8 +272,7 @@ class LoginScreen extends StatelessWidget {
             // Colum
           ),
         ),
-      )
-      );
+      ));
     });
   }
 }

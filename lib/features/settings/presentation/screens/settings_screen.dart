@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
+import 'package:traind_app/features/authentication/presentation/screens/register_screen.dart';
 import 'package:traind_app/features/settings/presentation/controller/setting_user_data_cubit/setting_user_data_cubit.dart';
 import '../../../../core/services/services_locator.dart';
 import 'change_password_screen.dart';
@@ -50,14 +51,12 @@ class SettingsScreen extends StatelessWidget {
                                     radius: 35.sp,
                                     backgroundColor: cameraBG,
                                     child: SharedComponents.profilePicture(
-                                      
-                                      image: 
-                                     cubit.image == ''
+                                      image: cubit.image == ''
                                           ? '${AppConstants.imagesUrl}$profileIntialImage'
-                                          : 
-                                          cubit.base64ToImage(cubit.image),
+                                          : cubit.base64ToImage(cubit.image),
                                       radius: 35.sp,
-                                      isProfileImage: cubit.image == '' ? false: true,
+                                      isProfileImage:
+                                          cubit.image == '' ? false : true,
                                       imgHeigh: 50.h,
                                       imgWidth: 50.w,
                                     ),
@@ -115,20 +114,21 @@ class SettingsScreen extends StatelessWidget {
                                       context: context,
                                       title: AppString.safety,
                                     ),
-                                    InkWell(
-                                      onTap: () {},
-                                      child: SettingsComponents
-                                          .settingsDefualtContainer(
-                                        preIcon: Icon(
-                                          Icons.language,
-                                          color: Colors.white,
-                                          size: 25.sp,
-                                        ),
-                                        title: 'Language',
-                                        context: context,
-                                        text: 'English',
-                                      ),
-                                    ),
+                                    // InkWell(
+                                    //   onTap: () {},
+                                    //   child: SettingsComponents
+                                    //       .settingsDefualtContainer(
+                                    //     preIcon: Icon(
+                                    //       Icons.language,
+                                    //       color: Colors.white,
+                                    //       size: 25.sp,
+                                    //     ),
+                                    //     title: 'Language',
+                                    //     context: context,
+                                    //     text: 'English',
+                                    //   ),
+                                    // ),
+                                    
                                     InkWell(
                                       onTap: () {
                                         SharedComponents.navigateTo(
@@ -142,7 +142,7 @@ class SettingsScreen extends StatelessWidget {
                                           color: Colors.white,
                                           size: 25.sp,
                                         ),
-                                        title: 'Security & Password',
+                                        title: 'Change Password',
                                         context: context,
                                       ),
                                     ),
@@ -154,6 +154,11 @@ class SettingsScreen extends StatelessWidget {
                                             key: 'userData');
                                         await CacheHelper.removeData(
                                             key: 'token');
+                                        await CacheHelper.removeData(
+                                            key: 'tempToken');
+                                        await CacheHelper.removeData(
+                                            key: 'googleToken');
+                                        AuthClass.googleSignOut();
                                         AppConstants.widget =
                                             const LoginScreen();
                                         // ignore: use_build_context_synchronously
