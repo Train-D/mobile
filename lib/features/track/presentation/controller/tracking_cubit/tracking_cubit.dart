@@ -45,7 +45,6 @@ class TrackingCubit extends Cubit<TrackingState> {
       longitude: 0.0,
       latitude: 0.0);
 
-
   Future<void> getTrackInfo(String ticketId) async {
     emit(GetTrackInfoLoadingState());
     var result = await trackInfoUsecase.call(ticketId);
@@ -121,18 +120,8 @@ class TrackingCubit extends Cubit<TrackingState> {
     emit(GetCoordinateState());
   }
 
-  String hoursToArrive = '';
-  String minsToArrive = '';
+  String TimeToArrive = '';
   String timeNow = '';
-  void changeTimeDistance(String hours, String mins, String distance) {
-    hoursToArrive = (hours.length == 1 ? '0${hours}' : hours);
-    print(hoursToArrive);
-    minsToArrive = (mins.length == 1 ? '0${mins}' : mins);
-    distanceToArrive = distance;
-    DateTime currTime  = DateTime.now();
-    timeNow = DateFormat('h.mm a').format(currTime);
-    emit(ChangeState());
-  }
 
   Future<void> getDrivingRoute(double lat, double lng) async {
     sourceLat = lat;
@@ -147,10 +136,13 @@ class TrackingCubit extends Cubit<TrackingState> {
       final routes = result['routes'];
       final legs = routes[0]['legs'];
       final duration = legs[0]['duration'];
-      final durationValue = duration['value'];
+      final durationValue = duration['text'];
+      print(durationValue);
+      TimeToArrive = durationValue;
+      distanceToArrive = legs[0]['distance']['text'];
       //
-      changeTimeDistance('${(durationValue ~/ 3600)}',
-          '${((durationValue % 3600) ~/ 60)}', legs[0]['distance']['text']);
+      /* changeTimeDistance('${(durationValue ~/ 3600)}',
+          '${((durationValue % 3600) ~/ 60)}', legs[0]['distance']['text']);*/
       //
       // Decode polyline to get the list of LatLng points
       final points = routes[0]['overview_polyline']['points'];

@@ -81,7 +81,7 @@ class LoginCubit extends Cubit<LoginState> {
   Color loginToastColor = Colors.green;
 
   void loginChangeToastColor() {
-     if (state is LoginSuccessState) {
+    if (state is LoginSuccessState) {
       loginToastColor = Colors.green;
     } else {
       loginToastColor = Colors.red;
@@ -103,11 +103,10 @@ class LoginCubit extends Cubit<LoginState> {
     emit(LoginClearDataState());
   }
 
- 
   GoogleSignInUsecase googleSignInUsecase;
 
   late ResponseEntity googleModel;
-  
+
   Future<void> getGoogleSignInTokenFromBack(String idToken) async {
     emit(GetGoogleSignInTokenFromBackLoadingState());
     var result = await googleSignInUsecase
@@ -117,9 +116,9 @@ class LoginCubit extends Cubit<LoginState> {
       print(failure.toString());
     }, (r) {
       googleModel = r;
+      print(r);
       emit(GetGoogleSignInTokenFromBackSuccessState());
       print(r.toString());
     });
   }
-
 }
