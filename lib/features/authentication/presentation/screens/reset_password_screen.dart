@@ -49,7 +49,7 @@ class ResetPasswordScreen extends StatelessWidget {
                 FocusManager.instance.primaryFocus?.unfocus();
               },
               child: SharedComponents.linearGradientBg(
-                colors: onBoardingBg,
+                colors:  profileBg,
                 child: Scaffold(
                   backgroundColor: transparent,
                   appBar: SharedComponents.defaultAppBar(context: context),
@@ -87,19 +87,7 @@ class ResetPasswordScreen extends StatelessWidget {
                           SizedBox(
                             height: 5.h,
                           ),
-                          Text(
-                            AppString.emailAdrress,
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayMedium!
-                                .copyWith(
-                                    //fontSize: 17.5.sp,
-                                    //fontWeight: FontWeight.bold,
-                                    color: cardTextCvvColor),
-                          ),
-                          SizedBox(
-                            height: 1.h,
-                          ),
+                         
                           SharedComponents.defaultTextField(
                               controller: cubit.userEmailAddressCon,
                               type: TextInputType.text,
@@ -109,9 +97,11 @@ class ResetPasswordScreen extends StatelessWidget {
                                 }
                                 return null;
                               },
+                              bgColor: textFormBgColor,
                               label: AppString.email,
-                              radius: 10,
-                              bgColor: trainIdSubTitleColor),
+                              radius: 25,
+                              textColor: resetFormTextColor
+                              ),
                           SizedBox(
                             height: 2.h,
                           ),
@@ -127,7 +117,7 @@ class ResetPasswordScreen extends StatelessWidget {
                                 text: state is ResetPasswordLoadingState
                                     ? Center(child: CircularProgressIndicator())
                                     : AppString.sendInstructions,
-                                radius: 10,
+                                radius: 5,
                                 //width: 50.w,
                                 height: 6.5.h,
                                 isLoading: state is ResetPasswordLoadingState

@@ -249,8 +249,8 @@ class LoginScreen extends StatelessWidget {
                                         )
                                       : StringUtils.capitalize(
                                           AppString.loginTitle),
-                                  width: AppSizes.width(context) * 0.4,
-                                  height: AppSizes.height(context) * 0.066,
+                                  width: AppSizes.width(context) * 0.35,
+                                  //height: AppSizes.height(context) * 0.066,
                                   radius: AppSizes.defaultBottomRadius,
                                   isLoading: state is LoginLoadingState
                                       ? true

@@ -315,8 +315,8 @@ class SignUpScreen extends StatelessWidget {
                                             child: CircularProgressIndicator())
                                         : StringUtils.capitalize(
                                             AppString.signUpTitle),
-                                    width: AppSizes.width(context) * 0.4,
-                                    height: AppSizes.height(context)* 0.066,
+                                    width: AppSizes.width(context) * 0.35,
+                                    //height: AppSizes.height(context)* 0.066,
                                     radius: AppSizes.defaultBottomRadius,
                                     isLoading: state is RegisterLoadingState
                                         ? true

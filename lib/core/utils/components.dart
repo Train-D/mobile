@@ -139,61 +139,58 @@ class SharedComponents {
     Color textColor = Colors.grey,
     bool focusedRadius = true,
   }) =>
-      SizedBox(
-        height: 5.5.h,
-        child: TextFormField(
-          readOnly: readOnly,
-          controller: controller,
-          keyboardType: type,
-          validator: validate,
-          onFieldSubmitted: (value) {
-            onSubmit!(value);
-          },
-          onChanged: (value) {
-            onChange!(value);
-          },
-          obscureText: password,
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 20.sp,
-              vertical: 0.sp,
+      TextFormField(
+        readOnly: readOnly,
+        controller: controller,
+        keyboardType: type,
+        validator: validate,
+        onFieldSubmitted: (value) {
+          onSubmit!(value);
+        },
+        onChanged: (value) {
+          onChange!(value);
+        },
+        obscureText: password,
+        decoration: InputDecoration(
+          contentPadding: EdgeInsets.symmetric(
+            horizontal: 20.sp,
+            vertical: 0.sp,
+          ),
+          errorStyle: const TextStyle(fontWeight: FontWeight.bold),
+          filled: true,
+          fillColor: bgColor,
+          labelText: label,
+          labelStyle: TextStyle(
+              fontFamily: 'Inria Serif', color: textColor, fontSize: 17.sp),
+          prefixIcon: preIconFound
+              ? IconButton(
+                  iconSize: 20.sp,
+                  icon: Icon(preIcon),
+                  onPressed: () {
+                    prePressed!();
+                  },
+                )
+              : null,
+          suffixIcon: suffIconFound
+              ? isSuffIconImage
+                  ? imageSuffIcon
+                  : IconButton(
+                      icon: Icon(suffIcon),
+                      onPressed: () {
+                        suffPressed!();
+                      },
+                    )
+              : null,
+          //border: InputBorder.none,
+          focusedBorder: UnderlineInputBorder(
+            borderRadius: BorderRadius.circular(radius),
+            borderSide: BorderSide(
+              color: (focusedRadius ? lightDefualtColor : bgColor),
             ),
-            errorStyle: const TextStyle(fontWeight: FontWeight.bold),
-            filled: true,
-            fillColor: bgColor,
-            labelText: label,
-            labelStyle: TextStyle(
-                fontFamily: 'Inria Serif', color: textColor, fontSize: 17.sp),
-            prefixIcon: preIconFound
-                ? IconButton(
-                    iconSize: 20.sp,
-                    icon: Icon(preIcon),
-                    onPressed: () {
-                      prePressed!();
-                    },
-                  )
-                : null,
-            suffixIcon: suffIconFound
-                ? isSuffIconImage
-                    ? imageSuffIcon
-                    : IconButton(
-                        icon: Icon(suffIcon),
-                        onPressed: () {
-                          suffPressed!();
-                        },
-                      )
-                : null,
-            //border: InputBorder.none,
-            focusedBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(radius),
-              borderSide: BorderSide(
-                color: (focusedRadius ? lightDefualtColor : bgColor),
-              ),
-            ),
-            border: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(radius),
-              borderSide: BorderSide.none,
-            ),
+          ),
+          border: UnderlineInputBorder(
+            borderRadius: BorderRadius.circular(radius),
+            borderSide: BorderSide.none,
           ),
         ),
       );

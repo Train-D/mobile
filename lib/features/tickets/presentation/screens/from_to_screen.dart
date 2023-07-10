@@ -102,7 +102,8 @@ class FromToScreen extends StatelessWidget {
       }
     }, builder: (context, state) {
       BookingCubit cubit = BookingCubit.get(context);
-      return SharedComponents.screenBg(
+      return 
+      SharedComponents.screenBg(
         imageUrl: '${AppConstants.imagesUrl}$fromTo',
         context: context,
         child: Scaffold(
@@ -110,7 +111,8 @@ class FromToScreen extends StatelessWidget {
             context: context,
           ),
           backgroundColor: fromToBgColor,
-          body: SingleChildScrollView(
+          body: 
+          SingleChildScrollView(
             child: Column(
               children: [
                 SizedBox(
@@ -382,17 +384,24 @@ class FromToScreen extends StatelessWidget {
                                             isLoading:
                                                 state is GetTripsLoadingState
                                                     ? true
-                                                    : false))
+                                                    : false)
+                                                    )
                                   ],
                                 ),
                               ),
-                            ))),
-                )),
+                            )
+                            )
+                            
+                            ),
+                )
+                ),
               ],
             ),
           ),
         ),
       );
-    });
+    
+    }
+    );
   }
 }
