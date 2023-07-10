@@ -4,6 +4,8 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:traind_app/features/authentication/presentation/screens/register_screen.dart';
 import 'package:traind_app/features/settings/presentation/controller/setting_user_data_cubit/setting_user_data_cubit.dart';
+import 'package:traind_app/features/settings/presentation/screens/about.dart';
+import 'package:traind_app/features/settings/presentation/screens/terms_of_service.dart';
 import '../../../../core/services/services_locator.dart';
 import 'change_password_screen.dart';
 import '../../../../core/network/local/cache_helper.dart';
@@ -111,23 +113,25 @@ class SettingsScreen extends StatelessWidget {
                                 children: [
                                   SettingsComponents.titleContainer(
                                     context: context,
-                                    title: AppString.safety,
+                                    title: AppString.general,
                                   ),
-                                  // InkWell(
-                                  //   onTap: () {},
-                                  //   child: SettingsComponents
-                                  //       .settingsDefualtContainer(
-                                  //     preIcon: Icon(
-                                  //       Icons.language,
-                                  //       color: Colors.white,
-                                  //       size: 25.sp,
-                                  //     ),
-                                  //     title: 'Language',
-                                  //     context: context,
-                                  //     text: 'English',
-                                  //   ),
-                                  // ),
-                                  
+                                  InkWell(
+                                    onTap: () {
+                                      SharedComponents.navigateTo(
+                                          AboutScreen(), context);
+                                    },
+                                    child: SettingsComponents
+                                        .settingsDefualtContainer(
+                                      preIcon: ImageIcon(
+                                        AssetImage(
+                                            '${AppConstants.vectorsUrl}about.png'),
+                                        color: Colors.white,
+                                        size: 25.sp,
+                                      ),
+                                      title: 'About',
+                                      context: context,
+                                    ),
+                                  ),
                                   InkWell(
                                     onTap: () {
                                       SharedComponents.navigateTo(
@@ -145,6 +149,25 @@ class SettingsScreen extends StatelessWidget {
                                       context: context,
                                     ),
                                   ),
+                                  InkWell(
+                                    onTap: () {
+                                      SharedComponents.navigateTo(
+                                          TermsOfServiceScreen(), context);
+                                    },
+                                    child: SettingsComponents
+                                        .settingsDefualtContainer(
+                                      preIcon:  ImageIcon(
+                                        AssetImage(
+                                            '${AppConstants.vectorsUrl}term.png'),
+                                        color: Colors.white,
+                                        size: 25.sp,
+                                      ),
+                                        
+                                      title: 'Terms of Services',
+                                      context: context,
+                                    ),
+                                  ),
+                                  Spacer(),
                                   SharedComponents.defaultButton(
                                     context: context,
                                     function: () async {
@@ -167,11 +190,14 @@ class SettingsScreen extends StatelessWidget {
                                       //     context, const LoginScreen());
                                     },
                                     text: 'Logout',
-                                    radius: 10.sp,
+                                    radius: 8.sp,
                                     icon: Icons.logout,
                                     withIcon: true,
                                     iconSize: 18.sp,
-                                  )
+                                    width: 35.w,
+                                    height: 6.h
+                                  ),
+                                  SizedBox(height: 8.h,)
                                 ],
                               ),
                             ),

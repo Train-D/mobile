@@ -6,19 +6,26 @@ const Color lightDefualtColor = Color.fromRGBO(65, 49, 42, 1);
 const Color lightDefualtIconColor = Colors.white;
 const Color textFormBgColor = Color.fromRGBO(217, 217, 217, 0.91);
 const Color textFormTextColor = Color.fromRGBO(69, 69, 69, 1);
+const Color resetFormTextColor = Color.fromRGBO(72, 71, 71, 0.88);
 const Color lightColor = Colors.white;
 const Color signContainerColor = Color.fromRGBO(217, 217, 217, 0.15);
 const Color signLine = Color.fromRGBO(255, 255, 255, 0.5);
 const textButtonColor = Color(0xffE4A286);
 const Color fromToBgColor = Color.fromRGBO(111, 82, 70, 0.24);
+
 const Color fromToCardBgColor = Color.fromRGBO(255, 255, 255, 0.61);
 const Color cardTextCvvColor = Color.fromRGBO(255, 255, 255, 0.83);
 const Color cardText = Color.fromRGBO(255, 255, 255, 0.9);
 const Color dateFieldColor = Color.fromRGBO(235, 234, 234, 1);
 const Color appBarBg = Color.fromRGBO(255, 255, 255, 0.79);
+const Color aboutContainerBg = Color.fromRGBO(85, 66, 58, 1);
 const List<Color> onBoardingBg = [
   Color.fromRGBO(112, 95, 83, 1),
   Color.fromRGBO(96, 88, 75, 1),
+];
+const List<Color> aboutBg = [
+  Color.fromRGBO(64, 66, 50, 0.52),
+  Color.fromRGBO(111, 82, 70, 0.63),
 ];
 const Color bottomBarBg = Color.fromRGBO(103, 79, 68, 1);
 const List<Color> homeBg = [

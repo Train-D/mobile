@@ -68,7 +68,7 @@ class TrainIdScreen extends StatelessWidget {
                     SizedBox(height: 6.h),
                     SharedComponents.defaultBgContainer(
                       width: 90.w,
-                      height: 31.h,
+                      height: 32.h,
                       topRedius: 20.sp,
                       bottomRedius: 20.sp,
                       isLinearGradient: false,
@@ -110,21 +110,18 @@ class TrainIdScreen extends StatelessWidget {
                             SizedBox(
                               height: 2.h,
                             ),
-                            SizedBox(
-                              height: 5.5.h,
-                              child: SharedComponents.defaultTextField(
-                                  controller: cubit.trainId,
-                                  bgColor: trainIdTextFieldColor,
-                                  validate: (String? value) {
-                                    if (value!.isEmpty) {
-                                      return 'This field is required';
-                                    }
-                                    return null;
-                                  },
-                                  textColor: trainIdTextColor,
-                                  type: TextInputType.text,
-                                  label: 'Ticket ID'),
-                            ),
+                            SharedComponents.defaultTextField(
+                                controller: cubit.trainId,
+                                bgColor: trainIdTextFieldColor,
+                                validate: (String? value) {
+                                  if (value!.isEmpty) {
+                                    return 'This field is required';
+                                  }
+                                  return null;
+                                },
+                                textColor: trainIdTextColor,
+                                type: TextInputType.text,
+                                label: 'Ticket ID'),
                             SizedBox(
                               height: 1.5.h,
                             ),

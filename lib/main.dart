@@ -88,9 +88,6 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             title: 'TrainD',
             theme: lightTheme(),
-            /*routes: {
-              '/': (context) => HomeScreen(),
-            },*/
             home: SplashScreen(
               nextScreen: AppConstants.widget,
             ),
